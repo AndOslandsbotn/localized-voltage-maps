@@ -1,1 +1,3 @@
 main.pdf
+__pycache__/
+.venv/
