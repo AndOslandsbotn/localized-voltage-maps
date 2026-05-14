@@ -1,12 +1,12 @@
-import sys
 from pathlib import Path
 
-_ROOT = Path(__file__).resolve().parents[1]
-if str(_ROOT) not in sys.path:
-    sys.path.insert(0, str(_ROOT))
-
-from examples.mnist import load_mnist
 from lvm.clustering import create_centroids
+from lvm.datasets import load_mnist
+
+try:
+    from lvm.viz import plot_flat_image_grid
+except ImportError:
+    plot_flat_image_grid = None
 
 
 def main() -> None:
@@ -17,6 +17,19 @@ def main() -> None:
     centroids = create_centroids(X, n, subset_size=3000, batch_size=2048)
     print("samples", X.shape[0], "dim", X.shape[1], "n_clusters", n)
     print("centroids", centroids.shape)
+
+    if plot_flat_image_grid is not None:
+        out = Path(__file__).resolve().parent / "output" / "centroids_mnist.png"
+        plot_flat_image_grid(
+            centroids,
+            (28, 28),
+            path=out,
+            show=False,
+            title="MNIST centroids (subset init + mini-batch k-means)",
+        )
+        print("wrote", out)
+    else:
+        print("Skipping centroid plot: install the viz extra with: pip install -e '.[viz]'")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-"""MNIST via direct download (IDX). Demo / example data only — not part of the lvm API."""
+"""MNIST via direct download (IDX). For demos, tests, and benchmarks — not core LVM numerics."""
 
 from __future__ import annotations
 

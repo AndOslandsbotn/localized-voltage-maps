@@ -1,10 +1,10 @@
 # Examples
 
-Small scripts that show how to use **`lvm`** (the library in the parent directory). They are **not** part of the installed package; keep them here for learning and experimentation.
+Scripts that demonstrate **`lvm`**. They live in the repository only (not shipped on the wheel); run them from a clone after installing the library.
 
 ## Setup
 
-From the **repository root** (parent of this folder):
+From the **repository root**:
 
 ```bash
 python3 -m venv .venv
@@ -13,27 +13,32 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-Installing with `-e .` puts **`lvm`** on your environment’s path. The example scripts still add the repo root to `sys.path` so you can also run them **without** `-e .` as long as dependencies are installed.
+Editable install (`-e .`) registers **`lvm`** on your environment’s import path so examples can use normal imports (`from lvm...`) from any working directory.
+
+For **plots** (centroid grids, `lvm.viz`), add the optional extra:
+
+```bash
+pip install -e ".[viz]"
+```
 
 ## Run
 
-From the **repository root**:
+With the virtualenv activated and the repo as current directory (or anywhere, after `pip install -e .`):
 
 ```bash
 python examples/clustering_demo.py
 ```
 
-Or as a module:
+Or as a module from the **repository root** (so the `examples` package resolves):
 
 ```bash
 python -m examples.clustering_demo
 ```
 
-**MNIST** files are cached under `~/.cache/localized-voltage-maps/mnist` (or `$XDG_CACHE_HOME/...`).
+**MNIST** files are cached under `~/.cache/localized-voltage-maps/mnist` (or `$XDG_CACHE_HOME/...`). The loader lives in **`lvm.datasets.mnist`** (`load_mnist`).
 
 ## Contents
 
 | Script | What it does |
 |--------|----------------|
-| `clustering_demo.py` | Downloads MNIST, builds centroids with `create_centroids`. |
-| `mnist.py` | IDX download + `load_mnist()` helper used by the demo. |
+| `clustering_demo.py` | Downloads MNIST via `lvm.datasets`, builds centroids with `create_centroids`. With `.[viz]` installed, writes `examples/output/centroids_mnist.png`. |

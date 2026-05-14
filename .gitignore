@@ -1,3 +1,4 @@
 main.pdf
 __pycache__/
 .venv/
+examples/output/
