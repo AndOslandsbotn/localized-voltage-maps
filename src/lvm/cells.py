@@ -3,12 +3,10 @@ from sklearn.cluster import MiniBatchKMeans, kmeans_plusplus
 
 
 def random_subset_indices(n_samples: int, subset_size: int, rng: np.random.Generator) -> np.ndarray:
-    """Uniform random sample of row indices without replacement."""
     m = min(subset_size, n_samples)
     return rng.choice(n_samples, size=m, replace=False)
 
-
-def create_centroids(
+def build_voroni_cells(
     X: np.ndarray,
     n_clusters: int,
     *,
@@ -51,10 +49,3 @@ def create_centroids(
     )
     mb.fit(X)
     return mb.cluster_centers_
-
-
-centroids_three_step = create_centroids
-
-
-def kmeans_centroids(X, n: int, random_state: int = 0, **kwargs):
-    return create_centroids(X, n, random_state=random_state, **kwargs)
