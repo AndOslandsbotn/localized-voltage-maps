@@ -11,16 +11,6 @@ Python package requirements are tracked in `requirements.txt` /
 system-level (not pip-installable) and are only needed for specific parts
 of the project:
 
-- **`libsuitesparse-dev`** — needed to build the `scikit-sparse` Python
-  package, which provides the CHOLMOD sparse Cholesky backend in
-  `lvm.voltage` (`method="cholmod"`). Without it, that one backend raises
-  an actionable `ImportError` at call time; everything else in `lvm`
-  works fine without it.
-  ```
-  sudo apt-get install -y libsuitesparse-dev
-  pip install scikit-sparse   # or: pip install -e ".[cholmod]"
-  ```
-
 - **`gfortran`** — needed to build LAPACK from source, which is a
   mandatory (non-optional) dependency of the `dlib` vcpkg port used by
   the `cpp/` build.

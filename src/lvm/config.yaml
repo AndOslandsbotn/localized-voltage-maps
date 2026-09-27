@@ -1,0 +1,85 @@
+# Localized Voltage Maps -- default configuration.
+#
+# Loaded by lvm.config.load_config(). A run's own YAML file only needs the
+# keys it changes; they are merged over these defaults.
+#
+# Pipeline, one level of the hierarchy (repeated inside each child region):
+#   sample points -> k-means cells + streamed masses -> mass-weighted graph
+#   -> per-node ground -> voltage maps -> threshold -> landmarks
+#   -> child regions -> recurse
+#
+# Sections that offer several methods use the same pattern:
+#   strategy: <name>     # which method to use
+#   <name>: {...}        # options for that method only
+
+compute:
+  device: cuda           # cuda | cpu -- torch device for the voltage solves
+  dtype: float64         # float64 | float32
+  seed: 0
+
+data:
+  path: null             # input file (CSV); must be set per run
+  format: csv
+  csv:
+    delimiter: ","
+    skip_header: 0       # number of header lines to skip
+  chunk_size: 100000     # rows read per chunk while streaming
+  shuffled: true         # input is pre-shuffled: the first points of a region are an i.i.d. sample,
+                         # so sampling stops early. false: reservoir sampling over the full scan
+
+cells:                   # Voronoi cells (k-means) for each region
+  n_cells: 1000          # m_v: number of cells = graph nodes; size to what the hardware can solve
+  sample_size: 50000     # points collected per region to fit k-means (>> n_cells)
+  kmeans:
+    batch_size: 1024
+    max_iter: 100
+    n_local_trials: 2    # k-means++ seeding
+  masses:                # cell masses p_i, estimated by streaming
+    rel_error: 0.05      # typical (1 std) relative error per cell: stop once every cell has
+                         # >= 1/rel_error^2 points (only with data.shuffled; else full scan)
+    max_points: null     # hard cap on points streamed per level (null = no cap)
+
+graph:
+  kernel:
+    strategy: radial     # radial: W_ij = p_i p_j * 1{d(c_i, c_j) <= r}
+  radius:                # kernel radius r, recomputed for every region
+    strategy: centroid_spacing
+    centroid_spacing:
+      multiplier: 3.0    # r = multiplier * median nearest-neighbour centroid distance
+  edge_weighting: mass   # mass: W_ij scaled by p_i p_j (Effective resistance paper, Def 11)
+
+ground:
+  weighting: mass        # mass: rho_i = rho_g * p_i (per node)
+
+sources:                 # which nodes are clamped to voltage 1 for a candidate landmark
+  strategy: single_node
+
+voltage:
+  solver: dense_inverse  # one Cholesky inverse per graph, shared by all landmarks
+  threshold: 1.0e-3      # tau: voltages below this are set to 0
+
+scaling:                 # chooses rho_g for each region
+  strategy: support_fraction
+  support_fraction:
+    target: 0.05         # rho_g chosen so a typical voltage map is nonzero on ~5% of cells
+    rho_g_bounds: [1.0e-6, 1.0e+6]   # search range for rho_g
+
+landmarks:
+  strategy: mutual_information
+  n_landmarks: 20
+  mutual_information:
+    noise_std: 0.01      # Gaussian noise added to voltages in the MI estimate
+
+partition:               # how cells are split into child regions
+  strategy: support      # argmax: disjoint, cell goes to its highest-voltage landmark
+                         # support: overlapping, cell goes to every landmark with v >= tau
+  uncovered:             # cells with v < tau for every landmark
+    strategy: highest_voltage   # assign to the landmark with the highest voltage
+
+stopping:
+  strategy: max_depth
+  max_depth:
+    depth: 3             # number of levels; level 0 is the whole dataset
+
+output:
+  dir: outputs

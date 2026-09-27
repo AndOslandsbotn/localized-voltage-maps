@@ -10,14 +10,12 @@ dependencies = [
     "numpy",
     "scipy",
     "scikit-learn",
+    "pyyaml",
 ]
 
 [project.optional-dependencies]
 viz = [
     "matplotlib>=3.7",
-]
-cholmod = [
-    "scikit-sparse",
 ]
 
 [tool.hatch.build.targets.wheel]

@@ -1,6 +1,6 @@
-from lvm.cells import build_voroni_cells, random_subset_indices
+from lvm.cells import assign_cells, fit_cells
 
 __all__ = [
-    "build_voroni_cells",
-    "random_subset_indices",
+    "assign_cells",
+    "fit_cells",
 ]

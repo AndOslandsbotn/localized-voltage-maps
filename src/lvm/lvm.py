@@ -1,4 +1,4 @@
-from .cells import build_voronoi_cells
+from .cells import fit_cells
 from .graph import build_graph, apply_ground_resistance
 from .voltage import solve_voltage_maps
 from .landmarks import select_landmark_indices
