@@ -1,4 +1,5 @@
 main.pdf
 __pycache__/
 .venv/
+.vscode/
 examples/output/
