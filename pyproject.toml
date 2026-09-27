@@ -8,6 +8,7 @@ version = "0.0.1"
 requires-python = ">=3.10"
 dependencies = [
     "numpy",
+    "scipy",
     "scikit-learn",
 ]
 
@@ -15,9 +16,12 @@ dependencies = [
 viz = [
     "matplotlib>=3.7",
 ]
+cholmod = [
+    "scikit-sparse",
+]
 
 [tool.hatch.build.targets.wheel]
-packages = ["lvm"]
+packages = ["src/lvm"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]

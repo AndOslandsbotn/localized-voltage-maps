@@ -1,6 +1,6 @@
-from lvm.clustering import create_centroids, random_subset_indices
+from lvm.cells import build_voroni_cells, random_subset_indices
 
 __all__ = [
-    "create_centroids",
+    "build_voroni_cells",
     "random_subset_indices",
 ]
