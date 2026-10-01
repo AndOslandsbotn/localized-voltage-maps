@@ -32,6 +32,7 @@ from typing import Callable, Sequence
 import numpy as np
 import scipy.sparse as sp
 import torch
+from array_api_compat import array_namespace
 
 from lvm.config import ExtensionConfig, SourcesConfig
 from lvm.graph import grounded_laplacian
@@ -186,7 +187,7 @@ def solve_grounded_voltage_maps(
     return V
 
 
-def support_mask(V: np.ndarray, tau: float) -> np.ndarray:
+def support_mask(V, tau: float):
     """Cells where each voltage map is at least ``tau`` (config ``voltage.threshold``).
 
     This is a map's effective support (Sec. 6.3 of the paper): outside it the
@@ -195,10 +196,10 @@ def support_mask(V: np.ndarray, tau: float) -> np.ndarray:
     """
     if not 0.0 <= tau < 1.0:
         raise ValueError(f"tau must be in [0, 1), got {tau}")
-    return np.asarray(V) >= tau
+    return _as_array(V) >= tau
 
 
-def threshold_voltages(V: np.ndarray, tau: float) -> np.ndarray:
+def threshold_voltages(V, tau: float):
     """Copy of ``V`` with every voltage below ``tau`` set to 0.
 
     Makes each map local: a cell outside a landmark's support no longer
@@ -206,12 +207,14 @@ def threshold_voltages(V: np.ndarray, tau: float) -> np.ndarray:
     affected since ``tau < 1``. Downstream, -log(v) of a zeroed entry is
     +inf, so consumers must treat 0 as "out of range" rather than take logs.
     """
-    return np.where(support_mask(V, tau), V, 0.0)
+    V = _as_array(V)
+    xp = array_namespace(V)
+    return xp.where(support_mask(V, tau), V, xp.zeros_like(V))
 
 
 def extend_voltages(
-    Kx: np.ndarray, V: np.ndarray, p: np.ndarray, *, config: ExtensionConfig, rho_g: float, nearest: np.ndarray
-) -> np.ndarray:
+    Kx, V, p, *, config: ExtensionConfig, rho_g: float, nearest
+):
     """Voltages at data points from the cells' voltage maps, with the strategy in ``config.strategy``.
 
     Config choice point ``extension``; see ``lvm.strategies``.
@@ -231,22 +234,22 @@ def extend_voltages(
         Each point's nearest cell (``cells.assign_cells``), the fallback for a
         point with no cell within the kernel's reach.
 
+    All array inputs are NumPy arrays (computed in float64) or torch tensors
+    on one device (computed there, in their dtype), so the per-point steps can
+    stay on the GPU.
+
     Returns
     -------
-    (L, m) ndarray
+    (L, m) array of the same kind as the inputs
     """
     strategy, options = resolve(_EXTENSION_STRATEGIES, config)
-    return strategy(
-        np.asarray(Kx, dtype=np.float64),
-        np.asarray(V, dtype=np.float64),
-        np.asarray(p, dtype=np.float64),
-        options=options,
-        rho_g=rho_g,
-        nearest=np.asarray(nearest, dtype=int),
-    )
+    if not isinstance(Kx, torch.Tensor):
+        Kx, V, p = (np.asarray(a, dtype=np.float64) for a in (Kx, V, p))
+        nearest = np.asarray(nearest, dtype=int)
+    return strategy(Kx, V, p, options=options, rho_g=rho_g, nearest=nearest)
 
 
-def _harmonic(Kx, V, p, *, options: None, rho_g: float, nearest: np.ndarray) -> np.ndarray:
+def _harmonic(Kx, V, p, *, options: None, rho_g: float, nearest):
     """A point is a zero-mass cell: v(x) = sum_i k(x,c_i) p_i v_i / (rho_g + sum_i k(x,c_i) p_i).
 
     The same fill-in ``solve_grounded_voltage_maps`` gives zero-mass cells, and
@@ -254,12 +257,17 @@ def _harmonic(Kx, V, p, *, options: None, rho_g: float, nearest: np.ndarray) -> 
     with no cell within reach would get v = 0 for every landmark, which says
     nothing about where it is, so it takes its nearest cell's voltages instead.
     """
+    xp = array_namespace(Kx, V, p)
     Wx = Kx * p[None, :]                              # (m, n)
-    total = Wx.sum(axis=1)
+    total = xp.sum(Wx, axis=1)
     out = (V @ Wx.T) / (rho_g + total)[None, :]       # (L, m)
     isolated = total == 0
-    out[:, isolated] = V[:, nearest[isolated]]
-    return out
+    return xp.where(isolated[None, :], xp.take(V, nearest, axis=1), out)
+
+
+def _as_array(x):
+    """Leave NumPy arrays and torch tensors alone; turn anything else (lists) into NumPy."""
+    return x if isinstance(x, (np.ndarray, torch.Tensor)) else np.asarray(x)
 
 
 _EXTENSION_STRATEGIES: dict[str, Callable[..., np.ndarray]] = {

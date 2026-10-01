@@ -1,6 +1,14 @@
-numpy==2.5.3
+# One environment for the library, GPU baselines, benchmarks and tests.
+# Verified together on Python 3.14, CUDA 13 (torch 2.14 cu130 + RAPIDS 26.08).
+# Install: pip install -r requirements.txt && pip install -e .
+numpy==2.4.6
 scipy==1.18.1
-scikit-learn==1.6.1
-matplotlib==3.11.2
-torch==2.14.0
+scikit-learn==1.9.1
 pyyaml==6.0.3
+torch==2.14.0
+cuml-cu13==26.8.0
+faiss-cpu==1.15.1
+array-api-compat==1.15.0
+umap-learn==0.5.12
+matplotlib==3.11.2
+pytest==9.1.1

@@ -42,7 +42,12 @@ def embed(method: str, X: np.ndarray, seed: int) -> tuple[np.ndarray, float, dic
         from lvm.pipeline import fit_level
         from lvm.stream import array_source
 
-        config = load_config(overrides={"compute": {"device": "cuda" if method == "lvm" else "cpu", "seed": seed}})
+        gpu = method == "lvm"
+        # Everything on one kind of hardware: the CPU run also uses a CPU k-means.
+        config = load_config(overrides={
+            "compute": {"device": "cuda" if gpu else "cpu", "seed": seed},
+            "cells": {"kmeans": {"strategy": "cuml" if gpu else "faiss"}},
+        })
         source = array_source(X, config.data.chunk_size)
         t0 = time.perf_counter()
         model = fit_level(source, config)
@@ -61,7 +66,7 @@ def embed(method: str, X: np.ndarray, seed: int) -> tuple[np.ndarray, float, dic
         # No random_state: fixing it makes UMAP single-threaded.
         Z = umap.UMAP(n_components=2, n_neighbors=15).fit_transform(X)
     elif method == "umap_gpu":
-        # RAPIDS cuML, run from the separate .venv-rapids (see run_all.PYTHON).
+        # RAPIDS cuML's GPU implementation of UMAP.
         from cuml.manifold import UMAP as CumlUMAP
 
         Z = CumlUMAP(n_components=2, n_neighbors=15).fit_transform(X.astype(np.float32))

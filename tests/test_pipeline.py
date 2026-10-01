@@ -56,3 +56,16 @@ def test_streamed_transform_matches_in_memory(strip_model):
     _, X, model = strip_model
     streamed = np.concatenate(list(model.transform_source(array_source(X[:2500], chunk_size=700))))
     assert np.allclose(streamed, model.transform(X[:2500]))
+
+
+def test_gpu_and_cpu_point_paths_agree(strip_model):
+    # Same fitted model; only where the per-point steps run differs.
+    import dataclasses
+
+    _, X, model = strip_model
+    cpu = dataclasses.replace(model, device="cpu")
+    gpu = dataclasses.replace(model, device="cuda")
+    Xs = X[:1000]
+    # float32 on both; an entry within rounding of tau may be zeroed on one side only.
+    np.testing.assert_allclose(gpu.voltages(Xs), cpu.voltages(Xs), rtol=1e-4, atol=2e-3)
+    np.testing.assert_allclose(gpu.transform(Xs), cpu.transform(Xs), rtol=1e-3, atol=1e-3)

@@ -30,15 +30,14 @@ LABELS = {
     "le": "Laplacian Eigenmaps (CPU)",
     "pca": "PCA",
 }
-# cuML lives in its own venv so its numba/numpy pins don't touch the main one.
-PYTHON = {"umap_gpu": str(HERE.parent / ".venv-rapids" / "bin" / "python")}
+
 # Largest n a method may run at. Laplacian Eigenmaps at 70k exhausts the 7 GB
 # of RAM and takes the whole machine down (40k already took 8 minutes).
 MAX_N = {"le": 40000}
 
 
 def run(method: str, n: int, timeout: float) -> dict:
-    cmd = [PYTHON.get(method, sys.executable), str(HERE / "run_one.py"), "--method", method, "--n", str(n)]
+    cmd = [sys.executable, str(HERE / "run_one.py"), "--method", method, "--n", str(n)]
     try:
         proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
     except subprocess.TimeoutExpired:
@@ -72,7 +71,8 @@ def plot(rows: list[dict], out: Path) -> None:
     methods = [m for m in LABELS if any(r["method"] == m for r in ok)]
     panels = [
         ("total_s", "time to embed all points [s]", True),
-        ("peak_rss_mb", "peak process memory [MB]", True),
+        ("peak_rss_mb", "peak process memory (RSS) [MB]", True),
+        ("gpu_peak_mb", "peak GPU memory [MB]", True),
         ("trustworthiness", "trustworthiness (k=10)", False),
         ("knn_accuracy", "5-NN label accuracy", False),
     ]

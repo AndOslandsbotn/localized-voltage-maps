@@ -1,120 +1,122 @@
-"""Voronoi cells of a region: k-means centroids fitted on the region's sample."""
+"""Voronoi cells of a region (k-means centroids) and point-to-cell distances.
+
+k-means is a configurable choice point (config ``cells.kmeans``; see
+``lvm.strategies``) backed by existing libraries: RAPIDS cuML on the GPU,
+FAISS or scikit-learn on the CPU. Distances and nearest-cell lookups also use
+library routines -- scikit-learn for NumPy arrays, ``torch.cdist`` for torch
+tensors -- so the per-point steps can run on whichever device holds the data.
+"""
 
 from __future__ import annotations
 
+from dataclasses import dataclass
+from typing import Callable
+
 import numpy as np
-import torch
+
+from lvm.config import CumlKMeansConfig, FaissKMeansConfig, KMeansConfig, SklearnKMeansConfig
+from lvm.strategies import resolve
 
 
-def sq_distances(X: np.ndarray, C: np.ndarray, *, dtype=np.float64) -> np.ndarray:
-    """Squared Euclidean distances (len(X), len(C)) as ||x||^2 - 2 x.c + ||c||^2.
+@dataclass(frozen=True)
+class Cells:
+    centroids: np.ndarray   # (k, d) float64
 
-    One matrix multiply (BLAS), which is >10x faster than scipy's cdist for
-    the point-to-cell distances the pipeline needs. Rounding can make a
-    distance slightly negative; those are clipped to 0. ``dtype=np.float32``
-    halves the time again and is accurate enough for kernels and nearest cells.
+
+# --- distances ------------------------------------------------------------
+
+def sq_distances(X, C, *, dtype=np.float64):
+    """Squared Euclidean distances (len(X), len(C)).
+
+    NumPy inputs use scikit-learn's ``euclidean_distances`` (BLAS-based, exact
+    zeros on the diagonal when X is C); torch tensors use ``torch.cdist`` on
+    their own device. ``dtype`` applies to NumPy inputs only; tensors keep theirs.
     """
+    if _is_torch(X):
+        return _torch().cdist(X, C).square()
+    from sklearn.metrics.pairwise import euclidean_distances
+
     X = np.asarray(X, dtype=dtype)
-    C = np.asarray(C, dtype=dtype)
-    d2 = X @ C.T
-    d2 *= -2.0
-    d2 += (X * X).sum(axis=1)[:, None]
-    d2 += (C * C).sum(axis=1)[None, :]
-    return np.maximum(d2, 0.0, out=d2)
+    C = X if C is X else np.asarray(C, dtype=dtype)
+    return euclidean_distances(X, C, squared=True)
 
 
-def assign_cells(X: np.ndarray, centroids: np.ndarray) -> np.ndarray:
-    """Index of the nearest centroid (Voronoi cell) for each row of X."""
-    # ||x - c||^2 = ||x||^2 - 2 x.c + ||c||^2; ||x||^2 is the same for every c, so skip it.
-    d2 = (centroids * centroids).sum(axis=1) - 2.0 * (X @ centroids.T)
-    return np.argmin(d2, axis=1)
+def assign_cells(X: np.ndarray, centroids: np.ndarray, *, device: str | None = None) -> np.ndarray:
+    """Index of the nearest centroid (Voronoi cell) for each row of X, as a NumPy array.
 
-
-def fit_cells(
-    sample: np.ndarray,
-    n_cells: int,
-    *,
-    max_iter: int = 30,
-    tol: float = 1e-4,
-    n_local_trials: int = 2,
-    init_sample_size: int | None = 20000,
-    seed: int | None = 0,
-    device: str = "cpu",
-) -> np.ndarray:
-    """Fit ``n_cells`` k-means centroids to one region's sample.
-
-    k-means++ seeding (with ``n_local_trials`` candidates per step, as in
-    scikit-learn) on a random subset of ``init_sample_size`` points (None: the
-    whole sample), followed by full-batch Lloyd iterations on the whole
-    sample, all in torch on ``device`` in float32. Seeding is sequential (one
-    centre per step), so seeding from a subset is what keeps it cheap; Lloyd
-    then refines the centres on every sample point. Lloyd stops after ``max_iter`` iterations or once
-    no centroid moves more than ``tol`` times the sample's spread. Depends on
-    nothing but its arguments, so regions can be fitted in parallel. A region
-    with fewer sample points than ``n_cells`` gets one cell per point.
-
-    Returns
-    -------
-    centroids : (min(n_cells, len(sample)), d) float64 ndarray
+    ``device=None`` or "cpu" uses scikit-learn's chunked
+    ``pairwise_distances_argmin``; another device (e.g. "cuda") copies the
+    chunk there and uses ``torch.cdist``.
     """
-    sample = np.asarray(sample)
-    k = min(n_cells, sample.shape[0])
-    if k == 0:
+    if device in (None, "cpu"):
+        from sklearn.metrics import pairwise_distances_argmin
+
+        return pairwise_distances_argmin(np.asarray(X, dtype=np.float32), np.asarray(centroids, dtype=np.float32))
+    torch = _torch()
+    Xt = torch.as_tensor(np.asarray(X), dtype=torch.float32, device=device)
+    Ct = torch.as_tensor(np.asarray(centroids), dtype=torch.float32, device=device)
+    return torch.cdist(Xt, Ct).argmin(dim=1).cpu().numpy()
+
+
+# --- k-means (config cells.kmeans) -----------------------------------------
+
+def fit_cells(sample: np.ndarray, *, config: KMeansConfig, n_cells: int, seed: int | None = 0) -> Cells:
+    """Fit ``n_cells`` k-means centroids to one region's sample, with the strategy in ``config.strategy``.
+
+    Depends on nothing but its arguments, so regions can be fitted in
+    parallel. A region with at most ``n_cells`` sample points gets one cell
+    per point.
+    """
+    sample = np.asarray(sample, dtype=np.float64)
+    if sample.shape[0] == 0:
         raise ValueError("cannot fit cells to an empty sample")
-    X = torch.as_tensor(sample, dtype=torch.float32, device=device)
-    gen = torch.Generator(device=device)
-    gen.manual_seed(0 if seed is None else seed)
-
-    x_sq = (X * X).sum(dim=1)
-    if init_sample_size is not None and init_sample_size < X.shape[0]:
-        init = torch.randperm(X.shape[0], generator=gen, device=device)[: max(init_sample_size, k)]
-        C = _kmeans_plus_plus(X[init], x_sq[init], k, n_local_trials, gen)
-    else:
-        C = _kmeans_plus_plus(X, x_sq, k, n_local_trials, gen)
-    scale = tol * float(X.var(dim=0).sum())
-    for _ in range(max_iter):
-        labels = _nearest(X, x_sq, C)
-        sums = torch.zeros_like(C).index_add_(0, labels, X)
-        counts = torch.bincount(labels, minlength=k).to(X.dtype)
-        # A cluster that lost all its points keeps its old centroid.
-        new_C = torch.where(counts[:, None] > 0, sums / counts.clamp(min=1)[:, None], C)
-        shift = float(((new_C - C) ** 2).sum(dim=1).max())
-        C = new_C
-        if shift <= scale:
-            break
-    return C.double().cpu().numpy()
+    if sample.shape[0] <= n_cells:
+        return Cells(sample.copy())
+    strategy, options = resolve(_KMEANS_STRATEGIES, config)
+    centroids = strategy(sample, options=options, n_cells=n_cells, seed=0 if seed is None else seed)
+    return Cells(np.asarray(centroids, dtype=np.float64))
 
 
-def _nearest(X: torch.Tensor, x_sq: torch.Tensor, C: torch.Tensor, chunk: int = 16384) -> torch.Tensor:
-    """Nearest centroid per row, in row chunks so the distance matrix stays small."""
-    c_sq = (C * C).sum(dim=1)
-    out = torch.empty(X.shape[0], dtype=torch.long, device=X.device)
-    for s in range(0, X.shape[0], chunk):
-        out[s : s + chunk] = (c_sq[None, :] - 2.0 * X[s : s + chunk] @ C.T).argmin(dim=1)
-    return out
+def _cuml(sample: np.ndarray, *, options: CumlKMeansConfig, n_cells: int, seed: int) -> np.ndarray:
+    """RAPIDS cuML k-means on the GPU (float32)."""
+    from cuml.cluster import KMeans
+
+    km = KMeans(n_clusters=n_cells, init=options.init, max_iter=options.max_iter, tol=options.tol,
+                n_init=1, random_state=seed)
+    return np.asarray(km.fit(sample.astype(np.float32)).cluster_centers_)
 
 
-def _kmeans_plus_plus(
-    X: torch.Tensor, x_sq: torch.Tensor, k: int, n_local_trials: int, gen: torch.Generator
-) -> torch.Tensor:
-    """k-means++ seeding with ``n_local_trials`` candidates per step (greedy k-means++).
+def _faiss(sample: np.ndarray, *, options: FaissKMeansConfig, n_cells: int, seed: int) -> np.ndarray:
+    """FAISS k-means on the CPU (float32, multi-threaded)."""
+    import faiss
 
-    Everything stays on the device: no Python ints are read back inside the
-    loop, so the GPU never waits for the host between steps.
-    """
-    n = X.shape[0]
-    C = torch.empty((k, X.shape[1]), dtype=X.dtype, device=X.device)
-    first = torch.randint(n, (1,), generator=gen, device=X.device)
-    C[0] = X[first[0]]
-    # Squared distance from every point to its nearest chosen centre.
-    closest = (x_sq - 2.0 * (X @ C[0]) + x_sq[first[0]]).clamp_(min=0.0)
-    for i in range(1, k):
-        # Candidates drawn with probability proportional to closest; keep the
-        # one that lowers the total potential the most.
-        cand = torch.multinomial(closest, n_local_trials, replacement=True, generator=gen)
-        d_cand = (x_sq[None, :] - 2.0 * (X[cand] @ X.T) + x_sq[cand][:, None]).clamp_(min=0.0)
-        new_closest = torch.minimum(closest[None, :], d_cand)
-        best = new_closest.sum(dim=1).argmin()
-        C[i] = X[cand[best]]
-        closest = new_closest[best]
-    return C
+    # max_points_per_centroid: train on the whole sample, don't let FAISS subsample it.
+    km = faiss.Kmeans(sample.shape[1], n_cells, niter=options.niter, seed=seed,
+                      max_points_per_centroid=sample.shape[0], verbose=False)
+    km.train(np.ascontiguousarray(sample, dtype=np.float32))
+    return km.centroids
+
+
+def _sklearn(sample: np.ndarray, *, options: SklearnKMeansConfig, n_cells: int, seed: int) -> np.ndarray:
+    """scikit-learn k-means (k-means++ init, Lloyd) on the CPU: the reference implementation."""
+    from sklearn.cluster import KMeans
+
+    km = KMeans(n_clusters=n_cells, n_init=1, max_iter=options.max_iter, tol=options.tol, random_state=seed)
+    return km.fit(sample.astype(np.float32)).cluster_centers_
+
+
+_KMEANS_STRATEGIES: dict[str, Callable[..., np.ndarray]] = {
+    "cuml": _cuml,
+    "faiss": _faiss,
+    "sklearn": _sklearn,
+}
+
+
+def _is_torch(x) -> bool:
+    return type(x).__module__.startswith("torch")
+
+
+def _torch():
+    import torch
+
+    return torch

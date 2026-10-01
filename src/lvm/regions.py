@@ -171,6 +171,7 @@ def estimate_masses(
     min_count: int,
     shuffled: bool,
     max_points: int | None = None,
+    device: str | None = None,
 ) -> dict[tuple[int, ...], CellMasses]:
     """One scan of the data: count points per cell for every frontier region.
 
@@ -178,6 +179,7 @@ def estimate_masses(
     the scan stops once every cell of every region has ``min_count`` points;
     otherwise it reads the whole dataset (a prefix of unshuffled data would give
     biased masses). ``max_points`` caps the points read in either case.
+    ``device`` is where the nearest-cell search runs (``cells.assign_cells``).
     """
     leaves = root.leaves()
     for leaf in leaves:
@@ -187,7 +189,7 @@ def estimate_masses(
     n_read = 0
     for chunk in source():
         for leaf, rows in route(chunk, root):
-            cell = assign_cells(chunk[rows], leaf.centroids)
+            cell = assign_cells(chunk[rows], leaf.centroids, device=device)
             counts[leaf.id] += np.bincount(cell, minlength=counts[leaf.id].size)
         n_read += chunk.shape[0]
         if shuffled and all(c.min() >= min_count for c in counts.values()):

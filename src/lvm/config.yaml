@@ -30,11 +30,19 @@ data:
 cells:                   # Voronoi cells (k-means) for each region
   n_cells: 1000          # m_v: number of cells = graph nodes; size to what the hardware can solve
   sample_size: 50000     # points collected per region to fit k-means (>> n_cells)
-  kmeans:                # k-means++ seeding + full-batch Lloyd, in torch on compute.device
-    max_iter: 30         # Lloyd iterations at most
-    tol: 1.0e-4          # stop once no centroid moves more than tol * (sample spread)
-    n_local_trials: 2    # k-means++ candidates per seeding step
-    init_sample_size: 20000   # seed from a random subset this big (null: whole sample); seeding is sequential
+  kmeans:
+    strategy: cuml       # cuml: RAPIDS k-means on the GPU (0.3 s for 50k x 784 -> 1000 cells)
+                         # faiss: FAISS k-means on the CPU, multi-threaded (~12 s)
+                         # sklearn: scikit-learn KMeans on the CPU, the reference implementation (~70 s)
+    cuml:
+      init: random       # random | k-means|| -- random: 0.3 s vs 4 s, inertia within 0.2%
+      max_iter: 30
+      tol: 1.0e-4
+    faiss:
+      niter: 25          # Lloyd iterations
+    sklearn:
+      max_iter: 30
+      tol: 1.0e-4
   masses:                # cell masses p_i, estimated by streaming
     rel_error: 0.05      # typical (1 std) relative error per cell: stop once every cell has
                          # >= 1/rel_error^2 points (only with data.shuffled; else full scan)

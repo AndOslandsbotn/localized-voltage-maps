@@ -23,8 +23,8 @@ from dataclasses import dataclass
 from typing import Callable
 
 import numpy as np
+from array_api_compat import array_namespace
 
-from lvm.cells import sq_distances
 from lvm.config import CentroidSpacingConfig, KernelConfig, KnnRadiusConfig, RadiusConfig
 from lvm.strategies import resolve
 
@@ -65,10 +65,7 @@ def _knn(centroids: np.ndarray, *, options: KnnRadiusConfig) -> Radius:
     if centroids.shape[0] < 2:
         return Radius(0.0)
     k = min(options.k, centroids.shape[0] - 1)
-    d2 = sq_distances(centroids, centroids)
-    np.fill_diagonal(d2, np.inf)
-    kth = np.partition(d2, k - 1, axis=1)[:, k - 1]
-    return Radius(float(np.sqrt(np.median(kth))))
+    return Radius(float(np.median(_neighbour_distances(centroids, k)[:, k - 1])))
 
 
 def _centroid_spacing(centroids: np.ndarray, *, options: CentroidSpacingConfig) -> Radius:
@@ -79,9 +76,16 @@ def _centroid_spacing(centroids: np.ndarray, *, options: CentroidSpacingConfig) 
     """
     if centroids.shape[0] < 2:
         return Radius(0.0)
-    d2 = sq_distances(centroids, centroids)
-    np.fill_diagonal(d2, np.inf)
-    return Radius(float(options.multiplier * np.sqrt(np.median(d2.min(axis=1)))))
+    return Radius(float(options.multiplier * np.median(_neighbour_distances(centroids, 1)[:, 0])))
+
+
+def _neighbour_distances(centroids: np.ndarray, k: int) -> np.ndarray:
+    """(n, k) distances from each centroid to its k nearest other centroids, ascending."""
+    from sklearn.neighbors import NearestNeighbors
+
+    # Ask for k + 1: each centroid's nearest neighbour in its own set is itself.
+    dist, _ = NearestNeighbors(n_neighbors=k + 1).fit(centroids).kneighbors(centroids)
+    return dist[:, 1:]
 
 
 _RADIUS_STRATEGIES: dict[str, Callable[..., Radius]] = {
@@ -95,7 +99,8 @@ _RADIUS_STRATEGIES: dict[str, Callable[..., Radius]] = {
 def choose_kernel(sq_dist: np.ndarray, *, r: float, config: KernelConfig, exclude_self: bool = False) -> Kernel:
     """Kernel from squared distances with the strategy named in ``config.strategy``.
 
-    ``sq_dist`` is (m, n), e.g. ``cells.sq_distances(points, centroids)`` from
+    ``sq_dist`` is an (m, n) NumPy array or torch tensor (the kernel comes back
+    as the same type, on the same device), e.g. ``cells.sq_distances(points, centroids)`` from
     data points to cells, or ``sq_distances(centroids, centroids)`` between
     cells. Taking distances rather than coordinates lets a caller compute them
     once and reuse them (the pipeline also needs each point's nearest cell).
@@ -104,17 +109,21 @@ def choose_kernel(sq_dist: np.ndarray, *, r: float, config: KernelConfig, exclud
     carries no current.
     """
     strategy, options = resolve(_KERNEL_STRATEGIES, config)
-    K = strategy(np.asarray(sq_dist), options=options, r=r)
+    K = strategy(sq_dist if hasattr(sq_dist, "shape") else np.asarray(sq_dist), options=options, r=r)
     if exclude_self:
         if K.shape[0] != K.shape[1]:
-            raise ValueError(f"exclude_self needs a square distance matrix, got {K.shape}")
-        np.fill_diagonal(K, 0.0)
+            raise ValueError(f"exclude_self needs a square distance matrix, got {tuple(K.shape)}")
+        if isinstance(K, np.ndarray):
+            np.fill_diagonal(K, 0.0)
+        else:
+            K.fill_diagonal_(0.0)
     return Kernel(K)
 
 
-def _radial(sq_dist: np.ndarray, *, options: None, r: float) -> np.ndarray:
-    """K_ij = 1{d_ij <= r}."""
-    return (sq_dist <= r * r).astype(np.float64)
+def _radial(sq_dist, *, options: None, r: float):
+    """K_ij = 1{d_ij <= r}, in the dtype and on the device of ``sq_dist`` (NumPy or torch)."""
+    xp = array_namespace(sq_dist)
+    return xp.astype(sq_dist <= r * r, sq_dist.dtype)
 
 
 _KERNEL_STRATEGIES: dict[str, Callable[..., np.ndarray]] = {

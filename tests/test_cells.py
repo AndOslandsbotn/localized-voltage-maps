@@ -4,32 +4,67 @@ import pytest
 from scipy.spatial.distance import cdist
 
 from lvm.cells import assign_cells, fit_cells, sq_distances
+from lvm.config import load_config
 from lvm.regions import Region, estimate_masses, min_count_for, route
 from lvm.stream import array_source, iter_array_chunks
 
 
-def test_fit_cells_finds_separated_blobs():
-    rng = np.random.default_rng(0)
-    centers = np.array([[0.0, 0.0], [10.0, 0.0], [0.0, 10.0]])
-    sample = np.vstack([c + 0.1 * rng.standard_normal((200, 2)) for c in centers])
-    centroids = fit_cells(sample, 3, seed=0)
-    matched = centroids[assign_cells(centers, centroids)]  # nearest centroid to each true centre
-    np.testing.assert_allclose(matched, centers, atol=0.05)
+STRATEGIES = ["cuml", "faiss", "sklearn"]
 
 
-def test_fit_cells_is_deterministic_for_a_seed():
-    sample = np.random.default_rng(1).random((500, 3))
-    np.testing.assert_array_equal(fit_cells(sample, 10, seed=3), fit_cells(sample, 10, seed=3))
+def _fit(sample, n_cells, strategy="sklearn", seed=0):
+    config = load_config(overrides={"cells": {"kmeans": {"strategy": strategy}}}).cells.kmeans
+    return fit_cells(sample, config=config, n_cells=n_cells, seed=seed).centroids
+
+
+def _blobs(n_blobs=8, per_blob=200, seed=0):
+    rng = np.random.default_rng(seed)
+    centers = rng.random((n_blobs, 5)) * 20
+    return centers, np.vstack([c + 0.1 * rng.standard_normal((per_blob, 5)) for c in centers])
+
+
+@pytest.mark.parametrize("strategy", STRATEGIES)
+def test_every_cluster_gets_cells_when_cells_outnumber_clusters(strategy):
+    # The regime LVM uses: many more cells than clusters. Random init
+    # (cuml, faiss) may split one blob more finely than another, but it
+    # must not leave a blob without a cell.
+    centers, sample = _blobs()
+    centroids = _fit(sample, 24, strategy)
+    assert centroids.shape == (24, 5) and centroids.dtype == np.float64
+    nearest = centroids[assign_cells(centers, centroids)]
+    assert np.all(np.linalg.norm(nearest - centers, axis=1) < 0.5)
+
+
+def test_sklearn_recovers_exactly_k_separated_blobs():
+    # With k = number of blobs only k-means++ (sklearn) guarantees one centroid
+    # per blob; random init (cuml, faiss) can put two in one blob.
+    centers, sample = _blobs()
+    centroids = _fit(sample, 8, "sklearn")
+    np.testing.assert_allclose(centroids[assign_cells(centers, centroids)], centers, atol=0.05)
+
+
+@pytest.mark.parametrize("strategy", STRATEGIES)
+def test_fit_cells_is_deterministic_for_a_seed(strategy):
+    sample = np.random.default_rng(1).random((2000, 3))
+    np.testing.assert_allclose(_fit(sample, 10, strategy, seed=3), _fit(sample, 10, strategy, seed=3), rtol=1e-5)
 
 
 def test_fit_cells_small_sample_gets_one_cell_per_point():
     sample = np.random.default_rng(2).random((5, 2))
-    assert fit_cells(sample, 10).shape == (5, 2)
+    np.testing.assert_array_equal(_fit(sample, 10), sample)
 
 
 def test_fit_cells_rejects_empty_sample():
     with pytest.raises(ValueError, match="empty sample"):
-        fit_cells(np.empty((0, 2)), 10)
+        _fit(np.empty((0, 2)), 10)
+
+
+@pytest.mark.parametrize("device", [None, "cuda"])
+def test_assign_cells_matches_brute_force_on_both_devices(device):
+    rng = np.random.default_rng(4)
+    X, C = rng.random((500, 6)), rng.random((30, 6))
+    expected = cdist(X, C).argmin(axis=1)
+    np.testing.assert_array_equal(assign_cells(X, C, device=device), expected)
 
 
 def test_min_count_for():
@@ -102,10 +137,10 @@ def test_sq_distances_are_never_negative():
     assert np.all(sq_distances(X, X) >= 0.0)
 
 
-@pytest.mark.parametrize("device", ["cpu", "cuda"])
-def test_fit_cells_on_both_devices_finds_the_blobs(device):
-    rng = np.random.default_rng(7)
-    centers = rng.random((8, 5)) * 20
-    sample = np.vstack([c + 0.1 * rng.standard_normal((100, 5)) for c in centers])
-    centroids = fit_cells(sample, 8, seed=0, device=device, init_sample_size=300)
-    np.testing.assert_allclose(centroids[assign_cells(centers, centroids)], centers, atol=0.05)
+def test_sq_distances_on_gpu_matches_numpy():
+    import torch
+
+    rng = np.random.default_rng(8)
+    X, C = rng.random((200, 10)), rng.random((25, 10))
+    gpu = sq_distances(torch.as_tensor(X, device="cuda"), torch.as_tensor(C, device="cuda")).cpu().numpy()
+    np.testing.assert_allclose(gpu, sq_distances(X, C), rtol=1e-9, atol=1e-9)

@@ -51,11 +51,29 @@ class DataConfig:
 
 
 @dataclass(frozen=True)
-class KMeansConfig:
+class CumlKMeansConfig:
+    init: Literal["random", "k-means||"]
     max_iter: int
     tol: float
-    n_local_trials: int
-    init_sample_size: int | None
+
+
+@dataclass(frozen=True)
+class FaissKMeansConfig:
+    niter: int
+
+
+@dataclass(frozen=True)
+class SklearnKMeansConfig:
+    max_iter: int
+    tol: float
+
+
+@dataclass(frozen=True)
+class KMeansConfig:
+    strategy: Literal["cuml", "faiss", "sklearn"]
+    cuml: CumlKMeansConfig
+    faiss: FaissKMeansConfig
+    sklearn: SklearnKMeansConfig
 
 
 @dataclass(frozen=True)

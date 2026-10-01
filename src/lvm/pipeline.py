@@ -15,9 +15,11 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass, field
+from functools import cached_property
 from typing import Iterator
 
 import numpy as np
+import torch
 
 from lvm.cells import fit_cells, sq_distances
 from lvm.config import Config
@@ -42,24 +44,43 @@ class LevelModel:
     landmark_cells: np.ndarray     # (L,) cell each landmark sits at
     V: np.ndarray                  # (L, n) landmarks' thresholded voltage maps over the cells
     embedding: LogMdsEmbedding
+    device: str = "cpu"            # where the per-point steps (voltages, transform) run
     timings: dict[str, float] = field(default_factory=dict)   # seconds per stage
+
+    @cached_property
+    def _on_device(self) -> tuple:
+        """Centroids, masses and landmark maps as float32 on ``device`` (copied once)."""
+        arrays = (self.centroids, self.masses.p, self.V)
+        if self.device == "cpu":
+            return tuple(np.asarray(a, dtype=np.float32) for a in arrays)
+        return tuple(torch.as_tensor(a, dtype=torch.float32, device=self.device) for a in arrays)
+
+    def _voltages(self, X):
+        """Thresholded landmark voltages (L, m) at points X, as an array on ``device``.
+
+        Every step runs where the data is: one distance computation serves
+        both the kernel and the nearest-cell fallback, then the extension and
+        threshold, all without leaving the device.
+        """
+        cfg = self.config
+        C, p, V = self._on_device
+        if self.device == "cpu":
+            X = np.asarray(X, dtype=np.float32)
+            d2 = sq_distances(X, C, dtype=np.float32)
+        else:
+            X = torch.as_tensor(np.asarray(X), dtype=torch.float32, device=self.device)
+            d2 = sq_distances(X, C)
+        Kx = choose_kernel(d2, r=self.r, config=cfg.graph.kernel).K
+        VX = extend_voltages(Kx, V, p, config=cfg.extension, rho_g=self.rho.rho_g, nearest=d2.argmin(1))
+        return threshold_voltages(VX, cfg.voltage.threshold)
 
     def voltages(self, X: np.ndarray) -> np.ndarray:
         """Landmark voltages at data points X (m, d) -> (L, m), thresholded."""
-        cfg = self.config
-        # One distance computation (float32 BLAS) serves both the kernel and
-        # the nearest-cell fallback.
-        d2 = sq_distances(X, self.centroids, dtype=np.float32)
-        Kx = choose_kernel(d2, r=self.r, config=cfg.graph.kernel).K
-        VX = extend_voltages(
-            Kx, self.V, self.masses.p,
-            config=cfg.extension, rho_g=self.rho.rho_g, nearest=d2.argmin(axis=1),
-        )
-        return threshold_voltages(VX, cfg.voltage.threshold)
+        return _to_numpy(self._voltages(X))
 
     def transform(self, X: np.ndarray) -> np.ndarray:
         """Embedding coordinates for data points X (m, d) -> (m, n_components)."""
-        return self.embedding.transform(self.voltages(np.asarray(X, dtype=np.float64)))
+        return _to_numpy(self.embedding.transform(self._voltages(X)))
 
     def transform_source(self, source: ChunkSource) -> Iterator[np.ndarray]:
         """Embed a whole stream, one chunk at a time."""
@@ -88,12 +109,9 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
     sample = sample_regions(source, root, cfg.cells.sample_size, shuffled=cfg.data.shuffled, seed=cfg.compute.seed)[()]
     lap("sample")
 
-    km = cfg.cells.kmeans
     root.centroids = fit_cells(
-        sample.points, cfg.cells.n_cells,
-        max_iter=km.max_iter, tol=km.tol, n_local_trials=km.n_local_trials,
-        init_sample_size=km.init_sample_size, seed=cfg.compute.seed, device=device,
-    )
+        sample.points, config=cfg.cells.kmeans, n_cells=cfg.cells.n_cells, seed=cfg.compute.seed
+    ).centroids
     lap("cells")
 
     masses = estimate_masses(
@@ -101,6 +119,7 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
         min_count=min_count_for(cfg.cells.masses.rel_error),
         shuffled=cfg.data.shuffled,
         max_points=cfg.cells.masses.max_points,
+        device=device,
     )[()]
     p = masses.p
     lap("masses")
@@ -134,5 +153,10 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
         landmark_cells=sources.cells[landmarks.indices],
         V=V,
         embedding=embedding,
+        device=device,
         timings=timings,
     )
+
+
+def _to_numpy(x) -> np.ndarray:
+    return x.cpu().numpy() if isinstance(x, torch.Tensor) else np.asarray(x)
