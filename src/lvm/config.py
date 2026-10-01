@@ -52,9 +52,10 @@ class DataConfig:
 
 @dataclass(frozen=True)
 class KMeansConfig:
-    batch_size: int
     max_iter: int
+    tol: float
     n_local_trials: int
+    init_sample_size: int | None
 
 
 @dataclass(frozen=True)
@@ -82,8 +83,14 @@ class CentroidSpacingConfig:
 
 
 @dataclass(frozen=True)
+class KnnRadiusConfig:
+    k: int
+
+
+@dataclass(frozen=True)
 class RadiusConfig:
-    strategy: Literal["centroid_spacing"]
+    strategy: Literal["knn", "centroid_spacing"]
+    knn: KnnRadiusConfig
     centroid_spacing: CentroidSpacingConfig
 
 
@@ -113,18 +120,33 @@ class VoltageConfig:
 @dataclass(frozen=True)
 class SupportFractionConfig:
     target: float
+    statistic: Literal["median", "mean"]
+    tolerance: float
+    max_iter: int
+    rho_g_bounds: tuple[float, float]
+
+
+@dataclass(frozen=True)
+class CoverageConfig:
+    overlap: float
+    statistic: Literal["median", "mean"]
+    tolerance: float
+    max_iter: int
     rho_g_bounds: tuple[float, float]
 
 
 @dataclass(frozen=True)
 class ScalingConfig:
-    strategy: Literal["support_fraction"]
+    strategy: Literal["coverage", "support_fraction"]
+    coverage: CoverageConfig
     support_fraction: SupportFractionConfig
 
 
 @dataclass(frozen=True)
 class MutualInformationConfig:
     noise_std: float
+    precision: Literal["float32", "float64"]
+    scratch_mb: int
 
 
 @dataclass(frozen=True)
@@ -132,6 +154,22 @@ class LandmarksConfig:
     strategy: Literal["mutual_information"]
     n_landmarks: int
     mutual_information: MutualInformationConfig
+
+
+@dataclass(frozen=True)
+class ExtensionConfig:
+    strategy: Literal["harmonic"]
+
+
+@dataclass(frozen=True)
+class LogMdsConfig:
+    n_components: int
+
+
+@dataclass(frozen=True)
+class EmbeddingConfig:
+    strategy: Literal["log_mds"]
+    log_mds: LogMdsConfig
 
 
 @dataclass(frozen=True)
@@ -172,6 +210,8 @@ class Config:
     voltage: VoltageConfig
     scaling: ScalingConfig
     landmarks: LandmarksConfig
+    extension: ExtensionConfig
+    embedding: EmbeddingConfig
     partition: PartitionConfig
     stopping: StoppingConfig
     output: OutputConfig

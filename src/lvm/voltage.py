@@ -1,7 +1,7 @@
 """Solve the grounded energy-minimizing voltage (EMV) system.
 
-Given a grounded graph Laplacian ``L_rho = L + rho*I`` (as produced by
-``graph.apply_ground_resistance``) and a set of source nodes S clamped to
+Given a grounded graph Laplacian ``L_rho`` (as produced by
+``graph.grounded_laplacian``) and a set of source nodes S clamped to
 voltage 1, this solves for the voltage at every node -- Definition 3 /
 Lemma 4 in Structure_from_Voltage.pdf.
 
@@ -13,8 +13,10 @@ sources, where current c is injected to hold them at 1:
     L_rho @ v = e_S @ c    =>    v = G[:, S] @ c,    with G = L_rho^-1,
 
 and v[S] = 1 fixes c through the small |S| x |S| system G[S, S] @ c = 1.
-L_rho is symmetric positive-definite because rho > 0, so G comes from one
-Cholesky factorization.
+L_rho is symmetric positive-definite when every node has a positive ground
+weight, so G comes from one Cholesky factorization.
+``solve_grounded_voltage_maps`` ensures this by leaving zero-mass cells out of
+the solve.
 
 L_rho is the same for every landmark on a graph -- only S changes -- so G is
 computed once and every voltage map is read off its columns. That costs
@@ -24,11 +26,42 @@ O(n^3) once instead of O(n^3) per landmark.
 from __future__ import annotations
 
 import time
-from typing import Sequence
+from dataclasses import dataclass
+from typing import Callable, Sequence
 
 import numpy as np
 import scipy.sparse as sp
 import torch
+
+from lvm.config import ExtensionConfig, SourcesConfig
+from lvm.graph import grounded_laplacian
+from lvm.strategies import resolve
+
+
+@dataclass(frozen=True)
+class Sources:
+    sets: list[list[int]]   # cells clamped to voltage 1, one set per candidate landmark
+    cells: np.ndarray       # (len(sets),) the cell each candidate is placed at
+
+
+def choose_sources(p: np.ndarray, *, config: SourcesConfig) -> Sources:
+    """Candidate landmarks' source sets with the strategy named in ``config.strategy``.
+
+    Config choice point ``sources``; see ``lvm.strategies``.
+    """
+    strategy, options = resolve(_SOURCE_STRATEGIES, config)
+    return strategy(np.asarray(p, dtype=np.float64), options=options)
+
+
+def _single_node(p: np.ndarray, *, options: None) -> Sources:
+    """Every cell with mass is a candidate, clamping only itself."""
+    cells = np.flatnonzero(p > 0)
+    return Sources(sets=[[int(i)] for i in cells], cells=cells)
+
+
+_SOURCE_STRATEGIES: dict[str, Callable[..., Sources]] = {
+    "single_node": _single_node,
+}
 
 
 def _node_indices(n: int, indices: Sequence[int]) -> np.ndarray:
@@ -53,7 +86,8 @@ def solve_voltage_maps(
     Parameters
     ----------
     L_rho : (n, n) dense ndarray or scipy.sparse matrix
-        Grounded Laplacian, e.g. from ``graph.apply_ground_resistance``.
+        Symmetric positive-definite grounded Laplacian, e.g. from
+        ``graph.grounded_laplacian`` restricted to cells with mass.
     source_sets : sequence of sequences of int
         Each entry holds the node indices held at voltage 1 for one landmark.
     device : {"cuda", "cpu"}
@@ -85,6 +119,152 @@ def solve_voltage_maps(
         V[rows] = torch.einsum("bm,bmn->bn", c, G[S])  # G symmetric: G[S] rows == G[:, S] columns
         V[rows[:, None], S] = 1.0  # exact, instead of 1 up to rounding
     return V.cpu().numpy()
+
+
+def solve_grounded_voltage_maps(
+    K: np.ndarray,
+    p: np.ndarray,
+    rho_g: float,
+    source_sets: Sequence[Sequence[int]],
+    *,
+    device: str = "cuda",
+) -> np.ndarray:
+    """Voltage maps on a region's mass-weighted grounded graph, for every cell.
+
+    Cells with p_i > 0 are solved exactly with ``solve_voltage_maps``. A cell
+    with p_i = 0 has no edges and no ground in L_rho (singular row), so it is
+    left out of the solve and then given the voltage the stationarity
+    condition assigns it:
+
+        v_i = sum_j K_ij p_j v_j / (rho_g + sum_j K_ij p_j),
+
+    the same mass-weighted average of its neighbours that every free cell
+    satisfies (the discrete form of Def. 10's extension). It is 0 for a cell
+    with no neighbours. So no cell is dropped and every cell gets a voltage.
+
+    Parameters
+    ----------
+    K : (n, n) ndarray
+        Kernel between cells, e.g. ``graph.choose_kernel(sq_distances(c, c), ..., exclude_self=True).K``.
+    p : (n,) ndarray
+        Cell masses (``CellMasses.p``).
+    rho_g : float
+        Ground scaling; node i's ground weight is ``rho_g * p[i]``.
+    source_sets : sequence of sequences of int
+        Cell indices held at voltage 1, one set per landmark. Sources must
+        have p > 0: a massless cell can't inject current into the graph.
+    device : {"cuda", "cpu"}
+
+    Returns
+    -------
+    V : (len(source_sets), n) ndarray
+    """
+    K = np.asarray(K, dtype=np.float64)
+    p = np.asarray(p, dtype=np.float64)
+    n = p.shape[0]
+    active = np.flatnonzero(p > 0)
+    if active.size == 0:
+        raise ValueError("every cell has zero mass")
+
+    local = np.full(n, -1)
+    local[active] = np.arange(active.size)
+    local_sets = []
+    for sources in source_sets:
+        idx = _node_indices(n, sources)
+        if np.any(local[idx] < 0):
+            raise ValueError(f"source cells must have mass > 0, got zero-mass cells {idx[local[idx] < 0].tolist()}")
+        local_sets.append(local[idx])
+
+    L_rho = grounded_laplacian(K[np.ix_(active, active)], p[active], rho_g)
+    V = np.zeros((len(source_sets), n))
+    V[:, active] = solve_voltage_maps(L_rho, local_sets, device=device)
+
+    empty = np.flatnonzero(p == 0)
+    if empty.size:
+        Kp = K[np.ix_(empty, active)] * p[active]  # (n_empty, n_active)
+        V[:, empty] = (V[:, active] @ Kp.T) / (rho_g + Kp.sum(axis=1))
+    return V
+
+
+def support_mask(V: np.ndarray, tau: float) -> np.ndarray:
+    """Cells where each voltage map is at least ``tau`` (config ``voltage.threshold``).
+
+    This is a map's effective support (Sec. 6.3 of the paper): outside it the
+    landmark's voltage is negligible. Used by the ``support`` partition
+    strategy and the ``support_fraction`` scaling strategy.
+    """
+    if not 0.0 <= tau < 1.0:
+        raise ValueError(f"tau must be in [0, 1), got {tau}")
+    return np.asarray(V) >= tau
+
+
+def threshold_voltages(V: np.ndarray, tau: float) -> np.ndarray:
+    """Copy of ``V`` with every voltage below ``tau`` set to 0.
+
+    Makes each map local: a cell outside a landmark's support no longer
+    carries its exponentially small voltage. Sources (v = 1) are never
+    affected since ``tau < 1``. Downstream, -log(v) of a zeroed entry is
+    +inf, so consumers must treat 0 as "out of range" rather than take logs.
+    """
+    return np.where(support_mask(V, tau), V, 0.0)
+
+
+def extend_voltages(
+    Kx: np.ndarray, V: np.ndarray, p: np.ndarray, *, config: ExtensionConfig, rho_g: float, nearest: np.ndarray
+) -> np.ndarray:
+    """Voltages at data points from the cells' voltage maps, with the strategy in ``config.strategy``.
+
+    Config choice point ``extension``; see ``lvm.strategies``.
+
+    Parameters
+    ----------
+    Kx : (m, n) ndarray
+        Kernel from m data points to the n cells, e.g.
+        ``graph.choose_kernel(cells.sq_distances(X, centroids), ...).K``.
+    V : (L, n) ndarray
+        Voltage maps over the cells (e.g. the landmarks' thresholded maps).
+    p : (n,) ndarray
+        Cell masses.
+    rho_g : float
+        The region's ground scaling.
+    nearest : (m,) ndarray of int
+        Each point's nearest cell (``cells.assign_cells``), the fallback for a
+        point with no cell within the kernel's reach.
+
+    Returns
+    -------
+    (L, m) ndarray
+    """
+    strategy, options = resolve(_EXTENSION_STRATEGIES, config)
+    return strategy(
+        np.asarray(Kx, dtype=np.float64),
+        np.asarray(V, dtype=np.float64),
+        np.asarray(p, dtype=np.float64),
+        options=options,
+        rho_g=rho_g,
+        nearest=np.asarray(nearest, dtype=int),
+    )
+
+
+def _harmonic(Kx, V, p, *, options: None, rho_g: float, nearest: np.ndarray) -> np.ndarray:
+    """A point is a zero-mass cell: v(x) = sum_i k(x,c_i) p_i v_i / (rho_g + sum_i k(x,c_i) p_i).
+
+    The same fill-in ``solve_grounded_voltage_maps`` gives zero-mass cells, and
+    the discrete form of Theorem 9's fixed point at a single point. A point
+    with no cell within reach would get v = 0 for every landmark, which says
+    nothing about where it is, so it takes its nearest cell's voltages instead.
+    """
+    Wx = Kx * p[None, :]                              # (m, n)
+    total = Wx.sum(axis=1)
+    out = (V @ Wx.T) / (rho_g + total)[None, :]       # (L, m)
+    isolated = total == 0
+    out[:, isolated] = V[:, nearest[isolated]]
+    return out
+
+
+_EXTENSION_STRATEGIES: dict[str, Callable[..., np.ndarray]] = {
+    "harmonic": _harmonic,
+}
 
 
 def benchmark_devices(

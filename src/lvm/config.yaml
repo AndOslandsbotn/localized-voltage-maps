@@ -23,17 +23,18 @@ data:
   csv:
     delimiter: ","
     skip_header: 0       # number of header lines to skip
-  chunk_size: 100000     # rows read per chunk while streaming
+  chunk_size: 10000      # rows read per chunk while streaming; per-chunk memory ~ chunk_size x n_cells
   shuffled: true         # input is pre-shuffled: the first points of a region are an i.i.d. sample,
                          # so sampling stops early. false: reservoir sampling over the full scan
 
 cells:                   # Voronoi cells (k-means) for each region
   n_cells: 1000          # m_v: number of cells = graph nodes; size to what the hardware can solve
   sample_size: 50000     # points collected per region to fit k-means (>> n_cells)
-  kmeans:
-    batch_size: 1024
-    max_iter: 100
-    n_local_trials: 2    # k-means++ seeding
+  kmeans:                # k-means++ seeding + full-batch Lloyd, in torch on compute.device
+    max_iter: 30         # Lloyd iterations at most
+    tol: 1.0e-4          # stop once no centroid moves more than tol * (sample spread)
+    n_local_trials: 2    # k-means++ candidates per seeding step
+    init_sample_size: 20000   # seed from a random subset this big (null: whole sample); seeding is sequential
   masses:                # cell masses p_i, estimated by streaming
     rel_error: 0.05      # typical (1 std) relative error per cell: stop once every cell has
                          # >= 1/rel_error^2 points (only with data.shuffled; else full scan)
@@ -43,7 +44,11 @@ graph:
   kernel:
     strategy: radial     # radial: W_ij = p_i p_j * 1{d(c_i, c_j) <= r}
   radius:                # kernel radius r, recomputed for every region
-    strategy: centroid_spacing
+    strategy: knn        # knn: a typical cell has ~k neighbours, in any dimension
+                         # centroid_spacing: multiple of the nearest-neighbour distance; fine in low
+                         #   dimensions, but connects almost every cell in high ones (distances concentrate)
+    knn:
+      k: 10              # r = median over cells of the distance to their k-th nearest centroid
     centroid_spacing:
       multiplier: 3.0    # r = multiplier * median nearest-neighbour centroid distance
   edge_weighting: mass   # mass: W_ij scaled by p_i p_j (Effective resistance paper, Def 11)
@@ -58,17 +63,40 @@ voltage:
   solver: dense_inverse  # one Cholesky inverse per graph, shared by all landmarks
   threshold: 1.0e-3      # tau: voltages below this are set to 0
 
-scaling:                 # chooses rho_g for each region
-  strategy: support_fraction
+scaling:                 # chooses rho_g for each region (bisection on log rho_g in both strategies)
+  strategy: coverage     # coverage: maps sized so the region's landmarks cover each cell ~overlap times
+                         # support_fraction: a typical map covers a fixed fraction `target` of the cells
+  coverage:
+    overlap: 2.0         # target support fraction = overlap / landmarks.n_landmarks (capped at 1)
+    statistic: median    # median | mean -- "typical" over the maps of all cells with mass
+    tolerance: 0.005     # stop once |typical fraction - target| <= tolerance
+    max_iter: 50         # bisection steps on log(rho_g) at most
+    rho_g_bounds: [1.0e-6, 1.0e+6]   # search range for rho_g
   support_fraction:
     target: 0.05         # rho_g chosen so a typical voltage map is nonzero on ~5% of cells
-    rho_g_bounds: [1.0e-6, 1.0e+6]   # search range for rho_g
+    statistic: median
+    tolerance: 0.005
+    max_iter: 50
+    rho_g_bounds: [1.0e-6, 1.0e+6]
 
 landmarks:
   strategy: mutual_information
   n_landmarks: 20
   mutual_information:
     noise_std: 0.01      # Gaussian noise added to voltages in the MI estimate
+    precision: float32   # float32 | float64 for the candidate scoring; consumer GPUs run float64
+                         # at a small fraction of float32 speed
+    scratch_mb: 128      # temporary memory per scoring chunk (a few chunk-sized tensors coexist)
+
+extension:               # voltages at individual data points (not just at cells)
+  strategy: harmonic     # harmonic: a point is a zero-mass cell,
+                         #   v(x) = sum_i k(x,c_i) p_i v_i / (rho_g + sum_i k(x,c_i) p_i);
+                         #   a point with no cell within r takes its nearest cell's voltages
+
+embedding:               # low-dimensional coordinates from the landmark voltage maps
+  strategy: log_mds      # log_mds: classical MDS (= mass-weighted PCA) on features -log(max(v, tau))
+  log_mds:
+    n_components: 2
 
 partition:               # how cells are split into child regions
   strategy: support      # argmax: disjoint, cell goes to its highest-voltage landmark

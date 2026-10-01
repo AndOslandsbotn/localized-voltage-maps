@@ -1,7 +1,9 @@
 import numpy as np
 import pytest
 
-from lvm.cells import assign_cells, fit_cells
+from scipy.spatial.distance import cdist
+
+from lvm.cells import assign_cells, fit_cells, sq_distances
 from lvm.regions import Region, estimate_masses, min_count_for, route
 from lvm.stream import array_source, iter_array_chunks
 
@@ -86,3 +88,24 @@ def test_max_points_caps_the_scan():
 def test_masses_require_cells():
     with pytest.raises(ValueError, match="no cells yet"):
         estimate_masses(array_source(np.zeros((3, 1)), 2), Region(), min_count=1, shuffled=True)
+
+
+@pytest.mark.parametrize("dtype, rtol", [(np.float64, 1e-10), (np.float32, 1e-4)])
+def test_sq_distances_match_cdist(dtype, rtol):
+    rng = np.random.default_rng(5)
+    X, C = rng.random((300, 20)), rng.random((40, 20))
+    np.testing.assert_allclose(sq_distances(X, C, dtype=dtype), cdist(X, C, "sqeuclidean"), rtol=rtol, atol=rtol)
+
+
+def test_sq_distances_are_never_negative():
+    X = np.full((5, 3), 1e4) + np.random.default_rng(6).random((5, 3)) * 1e-6  # near-identical rows
+    assert np.all(sq_distances(X, X) >= 0.0)
+
+
+@pytest.mark.parametrize("device", ["cpu", "cuda"])
+def test_fit_cells_on_both_devices_finds_the_blobs(device):
+    rng = np.random.default_rng(7)
+    centers = rng.random((8, 5)) * 20
+    sample = np.vstack([c + 0.1 * rng.standard_normal((100, 5)) for c in centers])
+    centroids = fit_cells(sample, 8, seed=0, device=device, init_sample_size=300)
+    np.testing.assert_allclose(centroids[assign_cells(centers, centroids)], centers, atol=0.05)
