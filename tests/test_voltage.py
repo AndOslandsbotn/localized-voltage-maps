@@ -223,3 +223,28 @@ def test_isolated_point_takes_its_nearest_cells_voltages():
     Kx = np.zeros((1, 3))  # no cell within reach
     v = extend_voltages(Kx, V, p, config=load_config().extension, rho_g=1.0, nearest=np.array([1]))
     assert v[0, 0] == 0.4
+
+
+def test_voltage_distances_are_minus_log_and_unknown_below_tau():
+    from lvm.voltage import voltage_distances
+
+    d = voltage_distances(np.array([[1.0, np.exp(-2.0), 1e-4]]), tau=1e-3)
+    assert d[0, 0] == 0.0 and d[0, 1] == pytest.approx(2.0) and np.isinf(d[0, 2])
+
+
+def test_chained_distances_fill_gaps_with_shortest_paths():
+    from lvm.voltage import chained_distances
+
+    inf = np.inf
+    D = np.array([[0.0, 1.0, inf], [1.0, 0.0, 2.0], [inf, 3.0, 0.0]])   # 0-2 unknown; 1-2 asymmetric
+    C = chained_distances(D)
+    assert np.allclose(C, C.T)
+    assert C[1, 2] == pytest.approx(2.5)        # mean of the two directions
+    assert C[0, 2] == pytest.approx(3.5)        # through 1
+
+
+def test_chained_distances_keep_disconnected_pairs_infinite():
+    from lvm.voltage import chained_distances
+
+    D = np.array([[0.0, np.inf], [np.inf, 0.0]])
+    assert np.isinf(chained_distances(D)[0, 1])

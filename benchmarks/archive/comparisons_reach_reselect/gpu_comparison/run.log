@@ -1,0 +1,16 @@
+lvm_gpu   n=  5000 seed=0     0.95s  rss  2326MB  gpu    64MB  trust 0.925  knn 0.777  dcorr 0.504
+lvm_gpu   n=  5000 seed=1     0.88s  rss  2325MB  gpu    64MB  trust 0.922  knn 0.809  dcorr 0.416
+lvm_gpu   n=  5000 seed=2     0.85s  rss  2326MB  gpu    64MB  trust 0.920  knn 0.781  dcorr 0.497
+lvm_gpu   n= 10000 seed=0     1.51s  rss  2446MB  gpu    94MB  trust 0.912  knn 0.794  dcorr 0.545
+lvm_gpu   n= 10000 seed=1     1.54s  rss  2447MB  gpu    94MB  trust 0.913  knn 0.804  dcorr 0.504
+lvm_gpu   n= 10000 seed=2     1.54s  rss  2446MB  gpu    94MB  trust 0.924  knn 0.792  dcorr 0.525
+lvm_gpu   n= 20000 seed=0     1.56s  rss  2618MB  gpu    94MB  trust 0.914  knn 0.805  dcorr 0.499
+lvm_gpu   n= 20000 seed=1     1.74s  rss  2619MB  gpu    94MB  trust 0.926  knn 0.810  dcorr 0.511
+lvm_gpu   n= 20000 seed=2     1.59s  rss  2619MB  gpu    94MB  trust 0.919  knn 0.808  dcorr 0.476
+lvm_gpu   n= 40000 seed=0     1.98s  rss  2956MB  gpu   142MB  trust 0.922  knn 0.823  dcorr 0.502
+lvm_gpu   n= 40000 seed=1     1.88s  rss  2956MB  gpu   142MB  trust 0.919  knn 0.809  dcorr 0.459
+lvm_gpu   n= 40000 seed=2     1.95s  rss  2955MB  gpu   142MB  trust 0.922  knn 0.829  dcorr 0.481
+lvm_gpu   n= 50000 seed=0     2.00s  rss  3219MB  gpu   172MB  trust 0.922  knn 0.827  dcorr 0.415
+lvm_gpu   n= 50000 seed=1     2.22s  rss  3219MB  gpu   172MB  trust 0.935  knn 0.845  dcorr 0.539
+lvm_gpu   n= 50000 seed=2     2.08s  rss  3219MB  gpu   172MB  trust 0.922  knn 0.825  dcorr 0.492
+[guard] peak memory 3729 MB (limit 5500 MB)

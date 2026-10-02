@@ -1,0 +1,30 @@
+same_graph seed=0 cuda  old rho 8.43e-03 (0.30s)  new_x1: rho 8.63e-03 rounds 3 overlap 14/14 (0.14s)  new_x0.1: rho 8.58e-03 rounds 3 overlap 14/14 (0.12s)  new_x10: rho 8.32e-03 rounds 3 overlap 14/14 (0.14s)
+same_graph seed=1 cuda  old rho 7.57e-03 (0.23s)  new_x1: rho 7.59e-03 rounds 2 overlap 14/14 (0.08s)  new_x0.1: rho 7.54e-03 rounds 3 overlap 14/14 (0.13s)  new_x10: rho 7.64e-03 rounds 2 overlap 13/14 (0.11s)
+same_graph seed=2 cuda  old rho 6.98e-03 (0.21s)  new_x1: rho 6.95e-03 rounds 3 overlap 14/14 (0.11s)  new_x0.1: rho 6.91e-03 rounds 2 overlap 14/14 (0.08s)  new_x10: rho 6.70e-03 rounds 3 overlap 14/14 (0.15s)
+same_graph seed=0 cpu   old rho 8.90e-03 (2.13s)  new_x1: rho 8.63e-03 rounds 3 overlap 10/14 (0.67s)  new_x0.1: rho 8.96e-03 rounds 3 overlap 14/14 (0.63s)  new_x10: rho 1.03e-02 rounds 2 overlap 8/14 (0.34s)
+same_graph seed=1 cpu   old rho 5.78e-03 (2.07s)  new_x1: rho 5.85e-03 rounds 2 overlap 14/14 (0.42s)  new_x0.1: rho 5.81e-03 rounds 2 overlap 14/14 (0.43s)  new_x10: rho 5.88e-03 rounds 3 overlap 14/14 (0.56s)
+same_graph seed=2 cpu   old rho 6.26e-03 (2.06s)  new_x1: rho 6.11e-03 rounds 2 overlap 14/14 (0.38s)  new_x0.1: rho 6.07e-03 rounds 3 overlap 14/14 (0.69s)  new_x10: rho 6.15e-03 rounds 3 overlap 14/14 (0.48s)
+lvm_gpu seed=0  ok  guard peak 2988 MB
+lvm_gpu seed=1  ok  guard peak 2978 MB
+lvm_gpu seed=2  ok  guard peak 3102 MB
+lvm_cpu seed=0  ok  guard peak 1681 MB
+lvm_cpu seed=1  ok  guard peak 1589 MB
+lvm_cpu seed=2  ok  guard peak 1598 MB
+
+Same graph (mean over seeds):
+device search        rho_g  vs old select overlap seconds
+cuda   old        7.66e-03    1.00   13.0            0.25
+cuda   new_x1     7.73e-03    1.01    2.7    14.0    0.11
+cuda   new_x0.1   7.68e-03    1.00    2.7    14.0    0.11
+cuda   new_x10    7.56e-03    0.99    2.7    13.7    0.14
+cpu    old        6.98e-03    1.00   13.0            2.09
+cpu    new_x1     6.86e-03    0.99    2.3    12.7    0.49
+cpu    new_x0.1   6.94e-03    0.99    2.7    14.0    0.59
+cpu    new_x10    7.45e-03    1.05    2.7    12.0    0.46
+
+End to end (mean over seeds; old = tuning/lvm/results.csv, GPU only):
+run           trust   cont    knn  dcorr  total scaling     rho_g
+old lvm_gpu   0.928  0.896  0.823  0.528   1.65   0.235  7.66e-03
+new lvm_gpu   0.927  0.896  0.826  0.528   1.39   0.151  7.73e-03
+new lvm_cpu   0.929  0.896  0.830  0.530   3.46   1.025  6.86e-03
+[guard] peak memory 3156 MB (limit 5500 MB)

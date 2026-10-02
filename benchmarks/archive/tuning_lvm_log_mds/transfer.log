@@ -1,0 +1,69 @@
+n=  5000 n_cells= 100 seed=0  trust 0.773
+n=  5000 n_cells= 100 seed=1  trust 0.774
+n=  5000 n_cells= 100 seed=2  trust 0.773
+n=  5000 n_cells= 150 seed=0  trust 0.823
+n=  5000 n_cells= 150 seed=1  trust 0.849
+n=  5000 n_cells= 150 seed=2  trust 0.829
+n=  5000 n_cells= 200 seed=0  trust 0.838
+n=  5000 n_cells= 200 seed=1  trust 0.821
+n=  5000 n_cells= 200 seed=2  trust 0.815
+n=  5000 n_cells= 300 seed=0  trust 0.826
+n=  5000 n_cells= 300 seed=1  trust 0.802
+n=  5000 n_cells= 300 seed=2  trust 0.810
+n=  5000 n_cells= 400 seed=0  trust 0.835
+n=  5000 n_cells= 400 seed=1  trust 0.819
+n=  5000 n_cells= 400 seed=2  trust 0.804
+n=  5000 n_cells= 600 seed=0  trust 0.786
+n=  5000 n_cells= 600 seed=1  trust 0.800
+n=  5000 n_cells= 600 seed=2  trust 0.797
+n=  5000 n_cells= 800 seed=0  trust 0.778
+n=  5000 n_cells= 800 seed=1  trust 0.787
+n=  5000 n_cells= 800 seed=2  trust 0.780
+n= 10000 n_cells= 100 seed=0  trust 0.798
+n= 10000 n_cells= 100 seed=1  trust 0.749
+n= 10000 n_cells= 100 seed=2  trust 0.774
+n= 10000 n_cells= 150 seed=0  trust 0.839
+n= 10000 n_cells= 150 seed=1  trust 0.814
+n= 10000 n_cells= 150 seed=2  trust 0.829
+n= 10000 n_cells= 200 seed=0  trust 0.843
+n= 10000 n_cells= 200 seed=1  trust 0.826
+n= 10000 n_cells= 200 seed=2  trust 0.849
+n= 10000 n_cells= 300 seed=0  trust 0.840
+n= 10000 n_cells= 300 seed=1  trust 0.831
+n= 10000 n_cells= 300 seed=2  trust 0.846
+n= 10000 n_cells= 400 seed=0  trust 0.842
+n= 10000 n_cells= 400 seed=1  trust 0.837
+n= 10000 n_cells= 400 seed=2  trust 0.812
+n= 10000 n_cells= 600 seed=0  trust 0.805
+n= 10000 n_cells= 600 seed=1  trust 0.824
+n= 10000 n_cells= 600 seed=2  trust 0.811
+n= 10000 n_cells= 800 seed=0  trust 0.809
+n= 10000 n_cells= 800 seed=1  trust 0.808
+n= 10000 n_cells= 800 seed=2  trust 0.813
+n= 20000 n_cells= 100 seed=0  trust 0.779
+n= 20000 n_cells= 100 seed=1  trust 0.796
+n= 20000 n_cells= 100 seed=2  trust 0.814
+n= 20000 n_cells= 150 seed=0  trust 0.862
+n= 20000 n_cells= 150 seed=1  trust 0.840
+n= 20000 n_cells= 150 seed=2  trust 0.880
+n= 20000 n_cells= 200 seed=0  trust 0.870
+n= 20000 n_cells= 200 seed=1  trust 0.865
+n= 20000 n_cells= 200 seed=2  trust 0.861
+n= 20000 n_cells= 300 seed=0  trust 0.853
+n= 20000 n_cells= 300 seed=1  trust 0.851
+n= 20000 n_cells= 300 seed=2  trust 0.838
+n= 20000 n_cells= 400 seed=0  trust 0.850
+n= 20000 n_cells= 400 seed=1  trust 0.829
+n= 20000 n_cells= 400 seed=2  trust 0.849
+n= 20000 n_cells= 600 seed=0  trust 0.815
+n= 20000 n_cells= 600 seed=1  trust 0.821
+n= 20000 n_cells= 600 seed=2  trust 0.825
+n= 20000 n_cells= 800 seed=0  trust 0.811
+n= 20000 n_cells= 800 seed=1  trust 0.811
+n= 20000 n_cells= 800 seed=2  trust 0.804
+
+     n best n_cells  points/cell   trust
+  5000          150           33   0.834
+ 10000          200           50   0.839
+ 20000          200          100   0.865
+plot: /home/andosl/workspace/git-repos/localized-voltage-maps/benchmarks/tuning/lvm/transfer.png

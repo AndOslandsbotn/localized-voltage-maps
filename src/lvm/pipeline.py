@@ -2,8 +2,8 @@
 
 One level of the hierarchy, run on the whole dataset (the root region):
 
-    sample -> k-means cells -> streamed masses -> radius -> kernel -> rho_g
-    -> candidate voltage maps -> threshold -> landmarks -> embedding
+    sample -> intrinsic dimension -> k-means cells -> streamed masses -> radius
+    -> kernel -> rho_g -> candidate voltage maps -> threshold -> landmarks -> embedding
 
 ``fit_level`` returns a ``LevelModel`` whose ``transform`` embeds any data
 points, streamed in chunks, so the dataset never has to fit in memory. Every
@@ -23,9 +23,10 @@ import torch
 
 from lvm.cells import fit_cells, sq_distances
 from lvm.config import Config
-from lvm.embedding import LogMdsEmbedding, fit_embedding
+from lvm.dimension import Dimension, choose_dimension
+from lvm.embedding import LandmarkMdsEmbedding, LogMdsEmbedding, fit_embedding
 from lvm.graph import choose_kernel, choose_radius
-from lvm.landmarks import LandmarkSelection, choose_landmarks
+from lvm.landmarks import LandmarkSelection, choose_landmarks, landmark_count
 from lvm.regions import CellMasses, Region, estimate_masses, min_count_for, sample_regions
 from lvm.scaling import RhoChoice, choose_rho_g
 from lvm.stream import ChunkSource
@@ -43,7 +44,8 @@ class LevelModel:
     landmarks: LandmarkSelection   # .indices are rows of the candidate maps
     landmark_cells: np.ndarray     # (L,) cell each landmark sits at
     V: np.ndarray                  # (L, n) landmarks' thresholded voltage maps over the cells
-    embedding: LogMdsEmbedding
+    embedding: LogMdsEmbedding | LandmarkMdsEmbedding
+    dimension: Dimension | None = None   # estimated intrinsic dimension of the data
     device: str = "cpu"            # where the per-point steps (voltages, transform) run
     timings: dict[str, float] = field(default_factory=dict)   # seconds per stage
 
@@ -109,6 +111,10 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
     sample = sample_regions(source, root, cfg.cells.sample_size, shuffled=cfg.data.shuffled, seed=cfg.compute.seed)[()]
     lap("sample")
 
+    dimension = choose_dimension(sample.points, config=cfg.dimension, seed=cfg.compute.seed)
+    n_landmarks = landmark_count(dimension.d, config=cfg.landmarks)
+    lap("dimension")
+
     root.centroids = fit_cells(
         sample.points, config=cfg.cells.kmeans, n_cells=cfg.cells.n_cells, seed=cfg.compute.seed
     ).centroids
@@ -128,18 +134,24 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
     K = choose_kernel(sq_distances(root.centroids, root.centroids), r=r, config=cfg.graph.kernel, exclude_self=True).K
     lap("graph")
 
-    rho = choose_rho_g(K, p, config=cfg.scaling, tau=tau, n_landmarks=cfg.landmarks.n_landmarks, device=device)
+    sources = choose_sources(p, config=cfg.sources)
+    rho = choose_rho_g(K, p, config=cfg.scaling, tau=tau, n_landmarks=n_landmarks, landmarks=cfg.landmarks,
+                       sources=sources, device=device)
     lap("scaling")
 
-    sources = choose_sources(p, config=cfg.sources)
     V_all = threshold_voltages(solve_grounded_voltage_maps(K, p, rho.rho_g, sources.sets, device=device), tau)
     lap("voltages")
 
-    landmarks = choose_landmarks(V_all, p, config=cfg.landmarks, device=device)
+    # reach chooses the landmarks together with rho_g; the other strategies leave it to this step.
+    landmarks = rho.landmarks
+    if landmarks is None:
+        landmarks = choose_landmarks(V_all, p, config=cfg.landmarks, n_landmarks=n_landmarks, cells=sources.cells,
+                                     tau=tau, device=device)
     V = V_all[landmarks.indices]
+    landmark_cells = sources.cells[landmarks.indices]
     lap("landmarks")
 
-    embedding = fit_embedding(V, p, config=cfg.embedding, tau=tau)
+    embedding = fit_embedding(V, p, config=cfg.embedding, tau=tau, landmark_cells=landmark_cells)
     lap("embedding")
 
     return LevelModel(
@@ -150,9 +162,10 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
         K=K,
         rho=rho,
         landmarks=landmarks,
-        landmark_cells=sources.cells[landmarks.indices],
+        landmark_cells=landmark_cells,
         V=V,
         embedding=embedding,
+        dimension=dimension,
         device=device,
         timings=timings,
     )

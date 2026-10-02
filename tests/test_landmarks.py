@@ -62,10 +62,10 @@ def test_greedy_selection_is_distinct_and_mi_never_decreases(device):
     sel = choose_landmarks(V, p, config=_landmarks_config(n_landmarks=15), device=device)
 
     assert len(set(sel.indices.tolist())) == 15
-    assert np.all(np.diff(sel.mi) >= -1e-12)
-    assert sel.mi[-1] <= _entropy(p) + 1e-9
+    assert np.all(np.diff(sel.scores) >= -1e-12)
+    assert sel.scores[-1] <= _entropy(p) + 1e-9
     # The reported MI is what the chosen maps actually give.
-    assert sel.mi[-1] == pytest.approx(mutual_information(V[sel.indices], p, 0.01))
+    assert sel.scores[-1] == pytest.approx(mutual_information(V[sel.indices], p, 0.01))
 
 
 def test_cpu_and_cuda_pick_the_same_landmarks():
@@ -108,7 +108,7 @@ def test_incremental_greedy_matches_brute_force(thresholded):
 
     assert sel.indices.tolist() == _brute_force_greedy(V, p, 5, noise_std)
     for k in range(1, 6):
-        assert sel.mi[k - 1] == pytest.approx(mutual_information(V[sel.indices[:k]], p, noise_std), rel=1e-9)
+        assert sel.scores[k - 1] == pytest.approx(mutual_information(V[sel.indices[:k]], p, noise_std), rel=1e-9)
 
 
 @pytest.mark.parametrize("device", ["cpu", "cuda"])
@@ -122,7 +122,7 @@ def test_float32_picks_the_same_landmarks_as_float64(device):
     sel64 = choose_landmarks(V, p, config=_landmarks_config("float64", n_landmarks=15), device=device)
     sel32 = choose_landmarks(V, p, config=_landmarks_config("float32", n_landmarks=15), device=device)
     assert np.array_equal(sel32.indices, sel64.indices)
-    np.testing.assert_allclose(sel32.mi, sel64.mi, rtol=1e-4)
+    np.testing.assert_allclose(sel32.scores, sel64.scores, rtol=1e-4)
 
 
 def test_scratch_budget_does_not_change_the_result():
@@ -130,3 +130,26 @@ def test_scratch_budget_does_not_change_the_result():
     small = choose_landmarks(V, p, config=_landmarks_config(n_landmarks=6, mutual_information={"scratch_mb": 1}), device="cpu")
     large = choose_landmarks(V, p, config=_landmarks_config(n_landmarks=6, mutual_information={"scratch_mb": 512}), device="cpu")
     assert np.array_equal(small.indices, large.indices)
+
+
+def _maxmin_config():
+    return load_config(overrides={"landmarks": {"strategy": "maxmin"}}).landmarks
+
+
+def test_maxmin_spreads_landmarks_along_a_line():
+    # On a chain of cells, farthest-point selection takes both ends first,
+    # then fills in the middle.
+    V, p = _line_maps(41)
+    sel = choose_landmarks(V, p, config=_maxmin_config(), n_landmarks=3, tau=1e-3, device="cpu")
+    assert set(sel.indices[:2].tolist()) == {0, 40}
+    assert 15 <= sel.indices[2] <= 25
+    assert np.all(np.diff(sel.scores[1:]) <= 1e-9)    # each new landmark is closer to the chosen set
+
+
+def test_maxmin_returns_distinct_landmarks_and_respects_the_count():
+    rng = np.random.default_rng(4)
+    centroids = rng.random((150, 3))
+    p = rng.dirichlet(np.ones(150))
+    V = threshold_voltages(solve_grounded_voltage_maps(region_kernel(centroids), p, 5e-3, [[i] for i in range(150)], device="cpu"), 1e-3)
+    sel = choose_landmarks(V, p, config=_maxmin_config(), n_landmarks=12, tau=1e-3, device="cpu")
+    assert len(sel.indices) == 12 == len(set(sel.indices.tolist()))

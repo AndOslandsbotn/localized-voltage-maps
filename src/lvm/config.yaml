@@ -71,11 +71,28 @@ voltage:
   solver: dense_inverse  # one Cholesky inverse per graph, shared by all landmarks
   threshold: 1.0e-3      # tau: voltages below this are set to 0
 
-scaling:                 # chooses rho_g for each region (bisection on log rho_g in both strategies)
-  strategy: coverage     # coverage: maps sized so the region's landmarks cover each cell ~overlap times
+scaling:                 # chooses rho_g for each region (bisection on log rho_g in every strategy)
+  strategy: reach        # coverage: maps sized so the region's landmarks cover each cell ~overlap times
                          # support_fraction: a typical map covers a fixed fraction `target` of the cells
+                         # reach: a typical data point is reached (v >= tau) by k of the chosen landmarks
+  reach:
+    k: null              # landmarks that must reach a typical point; null = all of them (d+1 with
+                         # landmarks.count: dimension -- enough to triangulate a d-dimensional position)
+    quantile: 0.1        # "typical": this mass-weighted quantile of the per-cell reach counts
+                         # (0.5 = median point; 0.1 = 90% of the data is reached by >= k landmarks)
+    rel_tolerance: 0.05  # stop when the bracket on rho_g is within this relative width
+    max_iter: 40
+    rho_g_bounds: [1.0e-6, 1.0e+6]
+                         # Landmarks depend on rho_g and reach on the landmarks, so rho_g and the landmarks
+                         # are found by alternation: select at rho_g, bisect rho_g with that set fixed, repeat
+    max_rounds: 5        # selections at most; usually 2-3
+    round_tolerance: 0.15  # stop once rho_g changes by at most this relative amount between rounds
+    start_max_iter: 6    # bisection steps for the start, where a typical candidate map covers
+                         # min(k / L, 1 - quantile) of the data (needs no landmarks)
+    start_factor: 1.0    # multiplies the start; only for checking that the result doesn't depend on it
   coverage:
-    overlap: 2.0         # target support fraction = overlap / landmarks.n_landmarks (capped at 1)
+    overlap: 8.0         # target support fraction = overlap / number of landmarks (capped at 1); Landmark MDS
+                         # needs landmarks to reach each other: on MNIST 2 -> 8 raised trust 0.87 -> 0.93
     statistic: median    # median | mean -- "typical" over the maps of all cells with mass
     tolerance: 0.005     # stop once |typical fraction - target| <= tolerance
     max_iter: 50         # bisection steps on log(rho_g) at most
@@ -87,9 +104,25 @@ scaling:                 # chooses rho_g for each region (bisection on log rho_g
     max_iter: 50
     rho_g_bounds: [1.0e-6, 1.0e+6]
 
+dimension:               # intrinsic dimension d of the region, estimated from its sample at fit time
+  strategy: mle          # mle: Levina-Bickel maximum likelihood; twonn: Facco et al. 2017 (both via
+                         #   scikit-dimension); fixed: use a given d
+  mle:
+    k: 20                # neighbours per point
+    sample_size: 10000   # points of the region's sample used (MNIST: d ~ 12 from 10k points, 0.6 s)
+  twonn:
+    sample_size: 10000
+  fixed:
+    d: 12.0
+
 landmarks:
-  strategy: mutual_information
-  n_landmarks: 20
+  strategy: mutual_information   # mutual_information: greedy MI between cell identity and voltages
+                                 # maxmin: farthest-point selection on voltage distance (spread)
+  count:                 # how many landmarks
+    strategy: dimension  # fixed: n_landmarks; dimension: ceil(multiplier * (d_hat + 1))
+    dimension:
+      multiplier: 1.0    # 1: the d+1 needed to triangulate a d-dimensional position; 2: redundancy
+  n_landmarks: 20        # used by count.strategy fixed
   mutual_information:
     noise_std: 0.01      # Gaussian noise added to voltages in the MI estimate
     precision: float32   # float32 | float64 for the candidate scoring; consumer GPUs run float64
@@ -102,9 +135,16 @@ extension:               # voltages at individual data points (not just at cells
                          #   a point with no cell within r takes its nearest cell's voltages
 
 embedding:               # low-dimensional coordinates from the landmark voltage maps
-  strategy: log_mds      # log_mds: classical MDS (= mass-weighted PCA) on features -log(max(v, tau))
+  strategy: landmark_mds # log_mds: classical MDS (= mass-weighted PCA) on features -log(max(v, tau))
+                         # landmark_mds: Landmark MDS (de Silva & Tenenbaum 2004) on voltage distances
+                         #   d = -log v: landmarks placed by classical MDS, points by triangulation
   log_mds:
     n_components: 2
+  landmark_mds:
+    n_components: 2
+    missing: chain       # distance where v < tau (outside a map's support) is unknown:
+                         # clip: use -log(tau), i.e. "at least this far"
+                         # chain: go through landmarks in reach, d(x,l) = min_j d(x,j) + d(j,l)
 
 partition:               # how cells are split into child regions
   strategy: support      # argmax: disjoint, cell goes to its highest-voltage landmark

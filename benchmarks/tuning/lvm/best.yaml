@@ -1,0 +1,26 @@
+params:
+  cells:
+    n_cells: 150
+  embedding:
+    landmark_mds:
+      missing: chain
+    strategy: landmark_mds
+  landmarks:
+    count:
+      dimension:
+        multiplier: 1.0
+      strategy: dimension
+    strategy: mutual_information
+  scaling:
+    reach:
+      k: null
+      quantile: 0.1
+    strategy: reach
+selected_by: highest mean trustworthiness on the 'tune' split (n=20000, seeds=[0,
+  1, 2])
+scores:
+  trustworthiness: 0.9285
+  continuity: 0.8961
+  knn_accuracy: 0.8228
+  distance_correlation: 0.5282
+  total_s: 1.6506

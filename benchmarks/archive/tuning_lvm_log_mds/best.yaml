@@ -1,0 +1,13 @@
+params:
+  cells:
+    n_cells: 200
+  landmarks:
+    n_landmarks: 10
+selected_by: highest mean trustworthiness on the 'tune' split (n=20000, seeds=[0,
+  1, 2])
+scores:
+  trustworthiness: 0.8654
+  continuity: 0.7923
+  knn_accuracy: 0.7507
+  distance_correlation: -0.0037
+  total_s: 0.6577

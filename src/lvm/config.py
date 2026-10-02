@@ -154,8 +154,22 @@ class CoverageConfig:
 
 
 @dataclass(frozen=True)
+class ReachConfig:
+    k: int | None
+    quantile: float
+    rel_tolerance: float
+    max_iter: int
+    rho_g_bounds: tuple[float, float]
+    max_rounds: int
+    round_tolerance: float
+    start_max_iter: int
+    start_factor: float
+
+
+@dataclass(frozen=True)
 class ScalingConfig:
-    strategy: Literal["coverage", "support_fraction"]
+    strategy: Literal["coverage", "support_fraction", "reach"]
+    reach: ReachConfig
     coverage: CoverageConfig
     support_fraction: SupportFractionConfig
 
@@ -168,10 +182,46 @@ class MutualInformationConfig:
 
 
 @dataclass(frozen=True)
+class DimensionMultiplierConfig:
+    multiplier: float
+
+
+@dataclass(frozen=True)
+class LandmarkCountConfig:
+    strategy: Literal["fixed", "dimension"]
+    dimension: DimensionMultiplierConfig
+
+
+@dataclass(frozen=True)
 class LandmarksConfig:
-    strategy: Literal["mutual_information"]
+    strategy: Literal["mutual_information", "maxmin"]
+    count: LandmarkCountConfig
     n_landmarks: int
     mutual_information: MutualInformationConfig
+
+
+@dataclass(frozen=True)
+class MleDimensionConfig:
+    k: int
+    sample_size: int
+
+
+@dataclass(frozen=True)
+class TwoNnDimensionConfig:
+    sample_size: int
+
+
+@dataclass(frozen=True)
+class FixedDimensionConfig:
+    d: float
+
+
+@dataclass(frozen=True)
+class DimensionConfig:
+    strategy: Literal["mle", "twonn", "fixed"]
+    mle: MleDimensionConfig
+    twonn: TwoNnDimensionConfig
+    fixed: FixedDimensionConfig
 
 
 @dataclass(frozen=True)
@@ -185,9 +235,16 @@ class LogMdsConfig:
 
 
 @dataclass(frozen=True)
+class LandmarkMdsConfig:
+    n_components: int
+    missing: Literal["clip", "chain"]
+
+
+@dataclass(frozen=True)
 class EmbeddingConfig:
-    strategy: Literal["log_mds"]
+    strategy: Literal["log_mds", "landmark_mds"]
     log_mds: LogMdsConfig
+    landmark_mds: LandmarkMdsConfig
 
 
 @dataclass(frozen=True)
@@ -227,6 +284,7 @@ class Config:
     sources: SourcesConfig
     voltage: VoltageConfig
     scaling: ScalingConfig
+    dimension: DimensionConfig
     landmarks: LandmarksConfig
     extension: ExtensionConfig
     embedding: EmbeddingConfig

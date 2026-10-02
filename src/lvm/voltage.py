@@ -265,6 +265,38 @@ def _harmonic(Kx, V, p, *, options: None, rho_g: float, nearest):
     return xp.where(isolated[None, :], xp.take(V, nearest, axis=1), out)
 
 
+def voltage_distances(V, tau: float):
+    """Distance d = -log v from voltages; +inf where v < tau (outside the map's support, unknown).
+
+    -log v grows roughly linearly with distance from the landmark (Theorem 12
+    bounds it between two linear functions), and is 0 at the landmark itself.
+    NumPy or torch.
+    """
+    V = _as_array(V)
+    xp = array_namespace(V)
+    return xp.where(V >= tau, -xp.log(xp.clip(V, min=tau)), xp.full_like(V, float("inf")))
+
+
+def chained_distances(D: np.ndarray) -> np.ndarray:
+    """Symmetric, complete distances from a square matrix with unknown (+inf) entries.
+
+    Symmetrises (mean of the two directions where both are known, the known
+    one otherwise), then fills unknown pairs with shortest paths through
+    known ones: d(a, b) = min over routes of the summed known distances. This
+    is the within-level form of chaining distances through landmarks. Pairs
+    in disconnected parts stay +inf.
+    """
+    from scipy.sparse.csgraph import shortest_path
+
+    D = np.asarray(D, dtype=np.float64)
+    Dt = D.T
+    both = np.isfinite(D) & np.isfinite(Dt)
+    S = np.where(both, 0.5 * (D + Dt), np.minimum(D, Dt))
+    np.fill_diagonal(S, 0.0)
+    # Dense csgraph input treats inf as "no edge" (and zero as well, which only the diagonal is).
+    return shortest_path(S, method="D", directed=False)
+
+
 def _as_array(x):
     """Leave NumPy arrays and torch tensors alone; turn anything else (lists) into NumPy."""
     return x if isinstance(x, (np.ndarray, torch.Tensor)) else np.asarray(x)

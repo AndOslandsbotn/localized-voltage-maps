@@ -17,8 +17,17 @@ voltages determine the cell. It needs only squared distances between cells'
 voltage vectors, and adding a landmark adds one term to each, so a greedy
 step scores all candidates at once.
 
-Configurable choice point ``landmarks``; see ``lvm.strategies`` for the
-convention shared by every choice point.
+A second strategy, ``maxmin``, picks landmarks for spread instead: each new
+landmark is the candidate farthest (in voltage distance) from all landmarks
+chosen so far. That is what triangulation needs (``embedding: landmark_mds``):
+landmarks surrounding the data, in general position.
+
+How many landmarks is its own choice point, ``landmarks.count``: a fixed
+number, or ceil(multiplier * (d + 1)) from the region's intrinsic dimension d,
+since d + 1 landmarks pin down a position in d dimensions.
+
+Configurable choice points ``landmarks`` and ``landmarks.count``; see
+``lvm.strategies`` for the convention shared by every choice point.
 """
 
 from __future__ import annotations
@@ -29,21 +38,57 @@ from typing import Callable
 import numpy as np
 import torch
 
-from lvm.config import LandmarksConfig, MutualInformationConfig
+from lvm.config import DimensionMultiplierConfig, LandmarkCountConfig, LandmarksConfig, MutualInformationConfig
 from lvm.strategies import resolve
-
+from lvm.voltage import chained_distances, voltage_distances
 
 
 @dataclass(frozen=True)
 class LandmarkSelection:
     indices: np.ndarray   # rows of V chosen, in the order they were added
-    mi: np.ndarray        # estimated I(J; Y) in nats after each addition
+    scores: np.ndarray    # after each addition: estimated I(J; Y) in nats (mutual_information),
+                          # or the new landmark's distance to the nearest earlier one (maxmin)
 
 
-def choose_landmarks(V: np.ndarray, p: np.ndarray, *, config: LandmarksConfig, device: str = "cuda") -> LandmarkSelection:
-    """Pick ``config.n_landmarks`` rows of ``V`` with the strategy in ``config.strategy``."""
+# --- how many landmarks (config landmarks.count) ---------------------------
+
+def landmark_count(d: float, *, config: LandmarksConfig) -> int:
+    """Number of landmarks for a region of intrinsic dimension ``d`` (strategy ``config.count.strategy``)."""
+    strategy, options = resolve(_COUNT_STRATEGIES, config.count)
+    return strategy(d, options=options, n_landmarks=config.n_landmarks)
+
+
+def _fixed_count(d: float, *, options: None, n_landmarks: int) -> int:
+    return n_landmarks
+
+
+def _dimension_count(d: float, *, options: DimensionMultiplierConfig, n_landmarks: int) -> int:
+    """ceil(multiplier * (d + 1)): d + 1 landmarks triangulate a position in d dimensions."""
+    return max(1, int(np.ceil(options.multiplier * (d + 1))))
+
+
+_COUNT_STRATEGIES: dict[str, Callable[..., int]] = {
+    "fixed": _fixed_count,
+    "dimension": _dimension_count,
+}
+
+
+# --- which landmarks (config landmarks.strategy) ---------------------------
+
+def choose_landmarks(
+    V: np.ndarray, p: np.ndarray, *, config: LandmarksConfig, n_landmarks: int | None = None,
+    cells: np.ndarray | None = None, tau: float = 1e-3, device: str = "cuda",
+) -> LandmarkSelection:
+    """Pick ``n_landmarks`` rows of ``V`` (candidates x cells) with the strategy in ``config.strategy``.
+
+    ``n_landmarks`` defaults to ``config.n_landmarks`` (see ``landmark_count``).
+    ``cells[i]`` is the cell candidate i sits at (default: candidate i is
+    cell i); ``tau`` is the voltage threshold below which a map has no reach.
+    """
     strategy, options = resolve(_STRATEGIES, config)
-    return strategy(V, p, options=options, n_landmarks=config.n_landmarks, device=device)
+    n = config.n_landmarks if n_landmarks is None else n_landmarks
+    cells = np.arange(np.asarray(V).shape[0]) if cells is None else np.asarray(cells)
+    return strategy(V, p, options=options, n_landmarks=n, cells=cells, tau=tau, device=device)
 
 
 def mutual_information(V: np.ndarray, p: np.ndarray, noise_std: float) -> float:
@@ -62,7 +107,8 @@ def mutual_information(V: np.ndarray, p: np.ndarray, noise_std: float) -> float:
 
 
 def _mutual_information(
-    V: np.ndarray, p: np.ndarray, *, options: MutualInformationConfig, n_landmarks: int, device: str
+    V: np.ndarray, p: np.ndarray, *, options: MutualInformationConfig, n_landmarks: int, cells: np.ndarray,
+    tau: float, device: str,
 ) -> LandmarkSelection:
     """Greedy forward selection maximizing I_hat, see the module docstring.
 
@@ -125,7 +171,7 @@ def _mutual_information(
         xb = X[best]
         E *= torch.exp(-(xb[:, None] - xb[None, :]).square() * inv_2var)
         S = E @ w  # recompute exactly so rounding doesn't accumulate
-    return LandmarkSelection(indices=np.array(chosen, dtype=int), mi=np.array(mis))
+    return LandmarkSelection(indices=np.array(chosen, dtype=int), scores=np.array(mis))
 
 
 def _chunks_by_support(
@@ -151,6 +197,41 @@ def _chunks_by_support(
     return chunks
 
 
+def _maxmin(
+    V: np.ndarray, p: np.ndarray, *, options: None, n_landmarks: int, cells: np.ndarray, tau: float, device: str,
+) -> LandmarkSelection:
+    """Farthest-point selection on voltage distance between candidates.
+
+    The distance from candidate a to candidate b is -log of a's voltage at
+    b's cell (symmetrised). Thresholded maps leave far pairs without a
+    voltage, so gaps are bridged by shortest paths through other candidates
+    (``voltage.chained_distances``). The first landmark is the candidate
+    farthest from the mass-weighted medoid; each next one maximises its
+    distance to the nearest landmark chosen so far. Candidates in a part of
+    the graph no map reaches (infinite distance) are taken first, so every
+    connected part gets a landmark.
+    """
+    V = np.asarray(V, dtype=np.float64)
+    D = chained_distances(voltage_distances(V[:, cells], tau))   # (candidates, candidates), symmetric
+    w = np.asarray(p, dtype=np.float64)[cells]
+    finite = np.where(np.isfinite(D), D, np.nan)
+    medoid = int(np.nanargmin(np.nansum(finite * w[None, :], axis=1)))
+    first = int(np.argmax(D[medoid]))
+    chosen = [first]
+    scores = [float(D[medoid, first])]
+    nearest = D[first].copy()                     # each candidate's distance to its nearest landmark
+    taken = np.zeros(V.shape[0], dtype=bool)
+    taken[first] = True
+    for _ in range(min(n_landmarks, V.shape[0]) - 1):
+        best = int(np.argmax(np.where(taken, -1.0, nearest)))
+        chosen.append(best)
+        scores.append(float(nearest[best]))
+        taken[best] = True
+        nearest = np.minimum(nearest, D[best])
+    return LandmarkSelection(indices=np.array(chosen, dtype=int), scores=np.array(scores))
+
+
 _STRATEGIES: dict[str, Callable[..., LandmarkSelection]] = {
     "mutual_information": _mutual_information,
+    "maxmin": _maxmin,
 }

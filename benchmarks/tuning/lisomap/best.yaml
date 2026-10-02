@@ -1,0 +1,11 @@
+params:
+  n_landmarks: 60
+  n_neighbors: 10
+selected_by: highest mean trustworthiness on the 'tune' split (n=20000, seeds=[0,
+  1, 2])
+scores:
+  trustworthiness: 0.7492
+  continuity: 0.9339
+  knn_accuracy: 0.4735
+  distance_correlation: 0.5695
+  total_s: 2.3389

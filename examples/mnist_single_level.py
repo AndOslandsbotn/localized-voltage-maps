@@ -62,7 +62,7 @@ def main() -> None:
     print(
         f"cells={model.centroids.shape[0]}  r={model.r:.3g}  avg degree={model.K.sum(1).mean():.1f}  "
         f"rho_g={model.rho.rho_g:.3g}  support={model.rho.support_fraction:.3f}  "
-        f"MI={model.landmarks.mi[-1]:.2f} nats"
+        f"MI={model.landmarks.scores[-1]:.2f} nats"
     )
 
     idx = np.random.default_rng(1).choice(X.shape[0], args.eval_size, replace=False)

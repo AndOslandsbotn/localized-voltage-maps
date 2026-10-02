@@ -1,0 +1,34 @@
+lvm_cpu   n=  5000 seed=0     3.68s  rss  1017MB  trust 0.907  knn 0.783  dcorr 0.538
+lvm_cpu   n=  5000 seed=1     3.71s  rss  1017MB  trust 0.924  knn 0.808  dcorr 0.507
+lvm_cpu   n=  5000 seed=2     5.57s  rss  1018MB  trust 0.913  knn 0.788  dcorr 0.493
+lvm_cpu   n= 10000 seed=0     5.10s  rss  1122MB  trust 0.931  knn 0.818  dcorr 0.518
+lvm_cpu   n= 10000 seed=1     6.53s  rss  1122MB  trust 0.921  knn 0.796  dcorr 0.502
+lvm_cpu   n= 10000 seed=2     4.93s  rss  1122MB  trust 0.924  knn 0.797  dcorr 0.510
+lvm_cpu   n= 20000 seed=0     5.37s  rss  1242MB  trust 0.929  knn 0.828  dcorr 0.528
+lvm_cpu   n= 20000 seed=1     6.02s  rss  1242MB  trust 0.915  knn 0.785  dcorr 0.387
+lvm_cpu   n= 20000 seed=2     5.73s  rss  1242MB  trust 0.927  knn 0.812  dcorr 0.510
+lvm_cpu   n= 40000 seed=0     6.48s  rss  1628MB  trust 0.923  knn 0.820  dcorr 0.483
+lvm_cpu   n= 40000 seed=1     7.15s  rss  1604MB  trust 0.918  knn 0.810  dcorr 0.507
+lvm_cpu   n= 40000 seed=2     7.96s  rss  1630MB  trust 0.912  knn 0.809  dcorr 0.479
+lvm_cpu   n= 50000 seed=0     7.48s  rss  1771MB  trust 0.914  knn 0.811  dcorr 0.489
+lvm_cpu   n= 50000 seed=1     7.34s  rss  1771MB  trust 0.921  knn 0.810  dcorr 0.370
+lvm_cpu   n= 50000 seed=2     7.73s  rss  1771MB  trust 0.921  knn 0.801  dcorr 0.448
+le_cpu    n= 50000  skipped (above max_n=40000)
+[guard] peak memory 2125 MB (limit 5500 MB)
+lvm_cpu   n=  5000 seed=0     2.51s  rss  1018MB  trust 0.921  knn 0.785  dcorr 0.581
+lvm_cpu   n=  5000 seed=1     2.33s  rss  1018MB  trust 0.926  knn 0.805  dcorr 0.478
+lvm_cpu   n=  5000 seed=2     1.50s  rss  1017MB  trust 0.915  knn 0.785  dcorr 0.492
+lvm_cpu   n= 10000 seed=0     3.52s  rss  1122MB  trust 0.923  knn 0.822  dcorr 0.391
+lvm_cpu   n= 10000 seed=1     3.51s  rss  1122MB  trust 0.921  knn 0.791  dcorr 0.493
+lvm_cpu   n= 10000 seed=2     2.97s  rss  1123MB  trust 0.922  knn 0.776  dcorr 0.476
+lvm_cpu   n= 20000 seed=0     3.33s  rss  1242MB  trust 0.929  knn 0.827  dcorr 0.528
+lvm_cpu   n= 20000 seed=1     3.05s  rss  1242MB  trust 0.915  knn 0.782  dcorr 0.387
+lvm_cpu   n= 20000 seed=2     3.21s  rss  1242MB  trust 0.929  knn 0.815  dcorr 0.504
+lvm_cpu   n= 40000 seed=0     4.42s  rss  1594MB  trust 0.924  knn 0.825  dcorr 0.483
+lvm_cpu   n= 40000 seed=1     5.66s  rss  1604MB  trust 0.921  knn 0.817  dcorr 0.508
+lvm_cpu   n= 40000 seed=2     4.86s  rss  1629MB  trust 0.914  knn 0.807  dcorr 0.478
+lvm_cpu   n= 50000 seed=0     6.17s  rss  1771MB  trust 0.915  knn 0.809  dcorr 0.489
+lvm_cpu   n= 50000 seed=1     5.26s  rss  1778MB  trust 0.920  knn 0.802  dcorr 0.392
+lvm_cpu   n= 50000 seed=2     5.23s  rss  1771MB  trust 0.921  knn 0.800  dcorr 0.451
+le_cpu    n= 50000  skipped (above max_n=40000)
+[guard] peak memory 2018 MB (limit 5500 MB)

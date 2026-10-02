@@ -1,0 +1,100 @@
+{
+  "written": "2026-10-02T18:33:56+00:00",
+  "git_commit": "a66feabda1ecd826da94c21e60071008fd480086",
+  "git_dirty": true,
+  "python": "3.14.4",
+  "cpu": "13th Gen Intel(R) Core(TM) i5-13450HX",
+  "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "versions": {
+    "torch": "2.14.0",
+    "cuml-cu13": "26.8.0",
+    "umap-learn": "0.5.12",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.4.6",
+    "scipy": "1.18.1",
+    "faiss-cpu": "1.15.1",
+    "pyamg": "5.3.0",
+    "numba": "0.64.0",
+    "array-api-compat": "1.15.0"
+  },
+  "settings": {
+    "split": "tune",
+    "n": 20000,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "base": {
+      "cells": {
+        "n_cells": 150
+      },
+      "embedding": {
+        "landmark_mds": {
+          "missing": "chain"
+        },
+        "strategy": "landmark_mds"
+      },
+      "landmarks": {
+        "count": {
+          "dimension": {
+            "multiplier": 1.0
+          },
+          "strategy": "dimension"
+        },
+        "strategy": "mutual_information"
+      },
+      "scaling": {
+        "coverage": {
+          "overlap": 8.0
+        }
+      }
+    },
+    "variants": {
+      "coverage overlap 8 (tuned)": {
+        "scaling": {
+          "strategy": "coverage",
+          "coverage": {
+            "overlap": 8.0
+          }
+        }
+      },
+      "reach k=all  q=0.5": {
+        "scaling": {
+          "strategy": "reach",
+          "reach": {
+            "k": null,
+            "quantile": 0.5
+          }
+        }
+      },
+      "reach k=all  q=0.25": {
+        "scaling": {
+          "strategy": "reach",
+          "reach": {
+            "k": null,
+            "quantile": 0.25
+          }
+        }
+      },
+      "reach k=all  q=0.1": {
+        "scaling": {
+          "strategy": "reach",
+          "reach": {
+            "k": null,
+            "quantile": 0.1
+          }
+        }
+      },
+      "reach k=8    q=0.5": {
+        "scaling": {
+          "strategy": "reach",
+          "reach": {
+            "k": 8,
+            "quantile": 0.5
+          }
+        }
+      }
+    }
+  }
+}

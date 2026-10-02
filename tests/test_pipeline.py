@@ -19,7 +19,7 @@ def _config(**overrides):
     base = {
         "compute": {"device": "cpu"},
         "cells": {"n_cells": 150, "sample_size": 3000, "masses": {"rel_error": 0.2}},
-        "landmarks": {"n_landmarks": 10},
+        "landmarks": {"n_landmarks": 10, "count": {"strategy": "fixed"}},
     }
     for key, value in overrides.items():
         base.setdefault(key, {}).update(value)
@@ -39,8 +39,9 @@ def test_fit_level_shapes(strip_model):
     assert model.K.shape == (n, n)
     assert model.V.shape == (10, n)
     assert len(set(model.landmark_cells.tolist())) == 10
+    assert model.rho.landmarks is model.landmarks       # reach chose them with rho_g; not chosen again
     assert model.embedding.cell_coords.shape == (n, 2)
-    assert set(model.timings) == {"sample", "cells", "masses", "graph", "scaling", "voltages", "landmarks", "embedding"}
+    assert set(model.timings) == {"sample", "dimension", "cells", "masses", "graph", "scaling", "voltages", "landmarks", "embedding"}
 
 
 def test_embedding_preserves_neighbourhoods_of_a_flat_strip(strip_model):
@@ -69,3 +70,25 @@ def test_gpu_and_cpu_point_paths_agree(strip_model):
     # float32 on both; an entry within rounding of tau may be zeroed on one side only.
     np.testing.assert_allclose(gpu.voltages(Xs), cpu.voltages(Xs), rtol=1e-4, atol=2e-3)
     np.testing.assert_allclose(gpu.transform(Xs), cpu.transform(Xs), rtol=1e-3, atol=1e-3)
+
+
+@pytest.mark.parametrize("landmarks_strategy", ["mutual_information", "maxmin"])
+@pytest.mark.parametrize("missing", ["clip", "chain"])
+def test_landmark_mds_pipeline_runs_and_embeds_the_strip(landmarks_strategy, missing):
+    Y, X = _strip_in_20d()
+    config = _config(
+        landmarks={"strategy": landmarks_strategy, "count": {"strategy": "dimension"}},
+        embedding={"strategy": "landmark_mds", "landmark_mds": {"missing": missing}},
+    )
+    model = fit_level(array_source(X, chunk_size=1000), config)
+    # The strip is 2-D but noisy in all 20 dimensions, so the estimate sits a bit above 2.
+    assert 1.5 < model.dimension.d < 5.0
+    assert model.V.shape[0] == int(np.ceil(model.dimension.d + 1))
+    Z = model.transform(X)
+    assert np.all(np.isfinite(Z))
+    assert np.abs(Z).max() < 1e3     # no blow-up from a degenerate landmark configuration
+    idx = np.random.default_rng(1).choice(X.shape[0], 2000, replace=False)
+    trust = trustworthiness(Y[idx], Z[idx], n_neighbors=10)
+    # Max-min spreads landmarks into general position, which triangulation needs; MI may
+    # place the few landmarks almost on a line, leaving only one usable component.
+    assert trust > (0.85 if landmarks_strategy == "maxmin" else 0.7)

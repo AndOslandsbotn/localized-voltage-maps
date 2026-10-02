@@ -1,0 +1,55 @@
+lmds clip  MI     2(d+1) overlap 2            seed=1  trust 0.786  cont 0.752  knn 0.589  dcorr 0.023
+lmds clip  MI     2(d+1) overlap 2            seed=2  trust 0.813  cont 0.769  knn 0.639  dcorr -0.044
+lmds clip  MI     2(d+1) overlap 4            seed=0  trust 0.905  cont 0.823  knn 0.775  dcorr 0.101
+lmds clip  MI     2(d+1) overlap 4            seed=1  trust 0.896  cont 0.812  knn 0.784  dcorr 0.080
+lmds clip  MI     2(d+1) overlap 4            seed=2  trust 0.897  cont 0.813  knn 0.773  dcorr 0.063
+lmds chain MI     2(d+1) overlap 2            seed=0  trust 0.838  cont 0.734  knn 0.671  dcorr 0.287
+lmds chain MI     2(d+1) overlap 2            seed=1  trust 0.780  cont 0.702  knn 0.590  dcorr 0.228
+lmds chain MI     2(d+1) overlap 2            seed=2  trust 0.822  cont 0.739  knn 0.648  dcorr 0.246
+lmds chain MI     2(d+1) overlap 4            seed=0  trust 0.927  cont 0.872  knn 0.810  dcorr 0.448
+lmds chain MI     2(d+1) overlap 4            seed=1  trust 0.913  cont 0.875  knn 0.790  dcorr 0.452
+lmds chain MI     2(d+1) overlap 4            seed=2  trust 0.905  cont 0.830  knn 0.784  dcorr 0.453
+lmds clip  maxmin 1(d+1) overlap 2            seed=0  trust 0.723  cont 0.732  knn 0.527  dcorr 0.214
+lmds clip  maxmin 1(d+1) overlap 2            seed=1  trust 0.643  cont 0.636  knn 0.290  dcorr 0.293
+lmds clip  maxmin 1(d+1) overlap 2            seed=2  trust 0.663  cont 0.646  knn 0.353  dcorr 0.288
+lmds clip  maxmin 1(d+1) overlap 4            seed=0  trust 0.822  cont 0.792  knn 0.643  dcorr 0.245
+lmds clip  maxmin 1(d+1) overlap 4            seed=1  trust 0.768  cont 0.732  knn 0.469  dcorr 0.316
+lmds clip  maxmin 1(d+1) overlap 4            seed=2  trust 0.802  cont 0.759  knn 0.576  dcorr 0.303
+lmds chain maxmin 1(d+1) overlap 2            seed=0  trust 0.746  cont 0.744  knn 0.536  dcorr 0.172
+lmds chain maxmin 1(d+1) overlap 2            seed=1  trust 0.679  cont 0.656  knn 0.346  dcorr 0.272
+lmds chain maxmin 1(d+1) overlap 2            seed=2  trust 0.723  cont 0.650  knn 0.352  dcorr 0.248
+lmds chain maxmin 1(d+1) overlap 4            seed=0  trust 0.828  cont 0.787  knn 0.654  dcorr 0.156
+lmds chain maxmin 1(d+1) overlap 4            seed=1  trust 0.806  cont 0.744  knn 0.528  dcorr 0.236
+lmds chain maxmin 1(d+1) overlap 4            seed=2  trust 0.818  cont 0.760  knn 0.588  dcorr 0.226
+lmds clip  maxmin 2(d+1) overlap 2            seed=0  trust 0.787  cont 0.698  knn 0.496  dcorr 0.250
+lmds clip  maxmin 2(d+1) overlap 2            seed=1  trust 0.719  cont 0.690  knn 0.397  dcorr 0.093
+lmds clip  maxmin 2(d+1) overlap 2            seed=2  trust 0.728  cont 0.698  knn 0.463  dcorr 0.146
+lmds clip  maxmin 2(d+1) overlap 4            seed=0  trust 0.822  cont 0.755  knn 0.685  dcorr 0.176
+lmds clip  maxmin 2(d+1) overlap 4            seed=1  trust 0.805  cont 0.750  knn 0.579  dcorr 0.200
+lmds clip  maxmin 2(d+1) overlap 4            seed=2  trust 0.827  cont 0.756  knn 0.622  dcorr 0.268
+lmds chain maxmin 2(d+1) overlap 2            seed=0  trust 0.759  cont 0.685  knn 0.475  dcorr 0.195
+lmds chain maxmin 2(d+1) overlap 2            seed=1  trust 0.734  cont 0.686  knn 0.416  dcorr 0.038
+lmds chain maxmin 2(d+1) overlap 2            seed=2  trust 0.750  cont 0.687  knn 0.470  dcorr 0.067
+lmds chain maxmin 2(d+1) overlap 4            seed=0  trust 0.820  cont 0.775  knn 0.675  dcorr 0.106
+lmds chain maxmin 2(d+1) overlap 4            seed=1  trust 0.830  cont 0.746  knn 0.619  dcorr 0.113
+lmds chain maxmin 2(d+1) overlap 4            seed=2  trust 0.835  cont 0.751  knn 0.619  dcorr 0.204
+
+variant                                        trust   cont    knn  dcorr   time
+lmds chain MI     1(d+1) overlap 4             0.916  0.860  0.800  0.486   1.63
+lmds chain MI     2(d+1) overlap 4             0.915  0.859  0.795  0.451   1.68
+lmds clip  MI     1(d+1) overlap 4             0.900  0.846  0.781  0.266   1.77
+lmds clip  MI     2(d+1) overlap 4             0.899  0.816  0.777  0.081   1.62
+lmds chain MI     1(d+1) overlap 2             0.882  0.814  0.754  0.371   1.71
+lmds clip  MI     1(d+1) overlap 2             0.872  0.806  0.732  0.032   1.48
+reference: log_mds, MI, 10 landmarks           0.865  0.792  0.751 -0.004   1.71
+lmds chain maxmin 1(d+1) overlap 4             0.817  0.764  0.590  0.206   1.52
+lmds clip  MI     2(d+1) overlap 2             0.810  0.763  0.629  0.011   1.66
+lmds clip  maxmin 1(d+1) overlap 4             0.798  0.761  0.563  0.288   1.57
+lmds chain maxmin 2(d+1) overlap 4             0.828  0.757  0.638  0.141   1.39
+lmds clip  maxmin 2(d+1) overlap 4             0.818  0.753  0.629  0.214   1.41
+lmds chain MI     2(d+1) overlap 2             0.813  0.725  0.636  0.254   1.56
+lmds clip  maxmin 2(d+1) overlap 2             0.744  0.695  0.452  0.163   1.43
+lmds chain maxmin 2(d+1) overlap 2             0.748  0.686  0.454  0.100   1.44
+lmds chain maxmin 1(d+1) overlap 2             0.716  0.683  0.411  0.231   1.48
+lmds clip  maxmin 1(d+1) overlap 2             0.676  0.671  0.390  0.265   1.57
+[guard] peak memory 3170 MB (limit 5500 MB)
