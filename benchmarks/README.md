@@ -1,35 +1,54 @@
-# Benchmarks: LVM vs UMAP vs Laplacian Eigenmaps
+# Benchmarks
 
-All experiments use MNIST (70,000 images), split once and for all into a
-**tuning split** (20,000 images, used only to choose hyperparameters) and a
-disjoint **evaluation split** (50,000 images, used for every reported result).
-See `common/data.py`.
-
-## Order
-
-1. `tuning/{lvm,umap,le}/tune.py`: tune each method on the tuning split; writes `best.yaml`.
-2. `gpu_comparison/run.py` and `cpu_comparison/run.py`: compare the methods at their tuned
-   settings on the evaluation split.
-3. `*/plot.py`: one figure per experiment (`figure.png`), drawn from its `results.csv`.
-
-## Fairness rules
-
-- Every method runs on GPU and on CPU, and each comparison is within one kind of hardware:
-  LVM (cuML k-means + torch | FAISS + torch), UMAP (cuML | umap-learn),
-  Laplacian Eigenmaps (cuML | scikit-learn with the AMG eigensolver).
-- Equal tuning effort: ~15 configurations per method over its most influential parameters,
-  selected by mean trustworthiness (no labels), 3 seeds each.
-- Each comparison run is its own process, with the same thread count (16) for every library.
-- GPU memory is sampled from the driver (NVML), so every allocator is counted the same way.
-- Quality on 5,000 embedded points: trustworthiness, continuity, 5-NN accuracy (labels: reported,
-  never used for selection), and global distance rank correlation on 1,500 points.
-- Each result folder has `metadata.json`: hardware, library versions, git commit, settings.
+LVM against UMAP, t-SNE, Laplacian Eigenmaps and Landmark Isomap, on several datasets. Every dataset folder is laid out the same way, and all code is shared through `common/`.
 
 ## Layout
 
-- `common/`: shared code (data split, metrics, method registry, runner, results I/O, plotting).
-- `tuning/<method>/`: tune.py, plot.py, results.csv, best.yaml, figure.png, metadata.json.
-- `gpu_comparison/`, `cpu_comparison/`: run.py, plot.py, results.csv, figure.png, metadata.json.
-- `diagnostics/`: exploratory analyses (tuning split only).
-- `archive/`: results and scripts from before this structure (2026-10-01), kept for reference.
-  They used the full 70k (no tuning/evaluation split) and older solvers (ARPACK for LE).
+```
+common/             shared code only; nothing dataset-specific
+  datasets.py       registry: mnist (tune/eval splits, labels), half_sphere (generated)
+  methods.py        every method (GPU and CPU versions), method_params() = tuned settings + fixed overrides
+  metrics.py        trustworthiness, continuity, 5-NN accuracy (if labels), global distance rank
+                    correlation, stacking (how piled up a picture is)
+  runner.py         one run in its own memory-guarded process; time, memory, quality
+  guard.py          memory guard for any heavy command (this machine has 7.8 GB of RAM)
+  tuning.py, comparison.py, gallery.py, plotting.py, results.py
+<dataset>/          mnist/, half_sphere/, ...; each with the subfolders it needs, always named:
+  tuning/<family>/  tune.py, plot.py -> results.csv, best.yaml, figure.png
+  gpu_comparison/   run.py, plot.py -> results.csv, figure.png (methods on the GPU, by data size)
+  cpu_comparison/   the same on the CPU
+  tradeoff/         local vs global quality across each method's tuning grid
+  gallery/          run.py -> every method's embedding side by side (figure.png)
+  diagnostics/      explorations that led to design decisions (tuning data only)
+  archive/          superseded results, kept for reference
+demonstrations/     one folder per problem -> fix, each with a README and pinned settings
+```
+
+A dataset folder holds only small scripts that name the dataset and the methods, plus the results. The logic lives in `common/`.
+
+## Protocol
+
+- **Tuning:** on the tuning split only (MNIST: 20k images), 3 seeds per configuration, about 15 configurations per method, selected by mean trustworthiness (no labels). Settings are tuned on MNIST and used unchanged on the other datasets.
+- **Reported results:** on the evaluation split (MNIST: 50k images, disjoint from tuning).
+- **Hardware:** every method has a GPU and a CPU version, and each comparison stays on one kind of hardware.
+- **Runs:**
+  - each run is its own process, with 16 threads for every library and a memory guard (5 GB);
+  - time is from raw data to coordinates for every point (`total_s`, fit plus transform), after a warm-up;
+  - GPU memory is sampled from the driver (NVML).
+- **Quality:**
+  - measured on 5,000 embedded points (the global correlation on 1,500);
+  - labels are only reported, never used for selection;
+  - the rank-based measures cannot see points piled onto one spot, so pictures also report `visible_share` from `metrics.stacking`.
+- **Metadata:** every result folder has `metadata.json`: hardware, library versions, git commit, settings.
+
+## Demonstrations
+
+Each `demonstrations/<problem>/` shows a problem we found and how it was fixed, before and after, on the data where it showed up.
+
+- **Pinned settings:** every case stores its complete settings (`settings*.yaml`), so later changes to the defaults can't change it.
+- **README:** states the problem, the cause with the evidence, the fix, and the status.
+
+## Adding a dataset
+
+1. Register it in `common/datasets.py`: loader, splits, colourings for pictures, and an optional reference view.
+2. Create `<dataset>/` with the subfolders above, each holding a small `run.py` that passes the dataset name to the shared code (see `half_sphere/gallery/run.py`).

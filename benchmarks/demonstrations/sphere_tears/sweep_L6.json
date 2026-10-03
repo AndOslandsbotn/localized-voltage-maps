@@ -1,0 +1,10 @@
+{
+ "landmarks": 6,
+ "torn_share": 0.0393,
+ "rho_g": 0.002174559276040982,
+ "trustworthiness": 0.9984486347677801,
+ "continuity": 0.994792986257398,
+ "knn_accuracy": NaN,
+ "distance_correlation": 0.948784965983343,
+ "geodesic_correlation": 0.948784965983343
+}

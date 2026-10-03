@@ -1,0 +1,27 @@
+{
+ "dataset": "mnist",
+ "split": "eval",
+ "n": 50000,
+ "seed": 0,
+ "method": "umap_gpu",
+ "label": "UMAP (GPU, cuML)",
+ "params": {
+  "min_dist": 0.0,
+  "n_neighbors": 30
+ },
+ "fit_s": 2.5218734120062436,
+ "total_s": 2.521884672001761,
+ "info": {},
+ "colourings": {
+  "digit": {
+   "cmap": "tab10",
+   "categorical": true
+  }
+ },
+ "trustworthiness": 0.953213072524827,
+ "continuity": 0.9574944768783228,
+ "knn_accuracy": 0.9592,
+ "distance_correlation": 0.2950518512109429,
+ "occupied_squares": 37582,
+ "visible_share": 0.75164
+}

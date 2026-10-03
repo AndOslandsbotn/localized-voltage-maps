@@ -1,0 +1,74 @@
+{
+ "dataset": "mnist",
+ "split": "eval",
+ "n": 50000,
+ "seed": 0,
+ "method": "lvm_pca_gpu",
+ "label": "LVM + local PCA (GPU)",
+ "params": {
+  "cells": {
+   "n_cells": 300
+  },
+  "embedding": {
+   "landmark_mds": {
+    "missing": "chain"
+   },
+   "strategy": "landmark_mds",
+   "local_scale": {
+    "strategy": "pca",
+    "pca": {
+     "fill": 0.35
+    }
+   }
+  },
+  "landmarks": {
+   "count": {
+    "dimension": {
+     "multiplier": 1.0
+    },
+    "strategy": "dimension"
+   },
+   "strategy": "mutual_information"
+  },
+  "scaling": {
+   "reach": {
+    "k": null,
+    "quantile": 0.1
+   },
+   "strategy": "reach"
+  }
+ },
+ "fit_s": 1.8060765359987272,
+ "total_s": 1.888600904996565,
+ "info": {
+  "stages": {
+   "sample": 0.308721585002786,
+   "dimension": 0.30190791199856903,
+   "cells": 0.3604428940016078,
+   "masses": 0.12940914600039832,
+   "graph": 0.06771997399482643,
+   "scaling": 0.41380281100282446,
+   "voltages": 0.0061335919963312335,
+   "landmarks": 9.146002412308007e-06,
+   "embedding": 0.0011044569982914254,
+   "local_scale": 0.21682076900469838
+  },
+  "rho_g": 0.0012910855084788749,
+  "reach": 14.0,
+  "rho_rounds": 2,
+  "n_landmarks": 14,
+  "dimension": 12.305518303898284
+ },
+ "colourings": {
+  "digit": {
+   "cmap": "tab10",
+   "categorical": true
+  }
+ },
+ "trustworthiness": 0.958154944327415,
+ "continuity": 0.899894420704183,
+ "knn_accuracy": 0.8978000000000002,
+ "distance_correlation": 0.43473009013950376,
+ "occupied_squares": 12420,
+ "visible_share": 0.2484
+}

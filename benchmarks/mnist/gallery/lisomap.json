@@ -1,0 +1,30 @@
+{
+ "dataset": "mnist",
+ "split": "eval",
+ "n": 50000,
+ "seed": 0,
+ "method": "lisomap_gpu",
+ "label": "Landmark Isomap (GPU, cuML + cuGraph)",
+ "params": {
+  "n_landmarks": 60,
+  "n_neighbors": 10
+ },
+ "fit_s": 5.388185659001465,
+ "total_s": 5.3883497909992,
+ "info": {
+  "usable_components": 2,
+  "unreached_points": 0
+ },
+ "colourings": {
+  "digit": {
+   "cmap": "tab10",
+   "categorical": true
+  }
+ },
+ "trustworthiness": 0.7409356164108737,
+ "continuity": 0.93265974922259,
+ "knn_accuracy": 0.37479999999999997,
+ "distance_correlation": 0.5418936871557967,
+ "occupied_squares": 45827,
+ "visible_share": 0.91654
+}

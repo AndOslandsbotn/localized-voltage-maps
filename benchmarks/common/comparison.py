@@ -1,6 +1,6 @@
 """Shared comparison protocol: methods at their tuned settings, on the evaluation split.
 
-* data: the ``eval`` split (50k images), never seen during tuning;
+* data: the ``eval`` split of the dataset (MNIST: 50k images), never seen during tuning;
 * sizes: random subsets of the split, the largest being the whole split;
 * each (method, size) runs with every seed, each in its own process
   (``runner.run_isolated``) with the same thread count;
@@ -25,7 +25,7 @@ SEEDS = (0, 1, 2)
 THREADS = 16
 
 
-def run_comparison(methods: list[str], folder: Path, *, max_n: dict[str, int] | None = None,
+def run_comparison(methods: list[str], folder: Path, *, dataset: str = "mnist", max_n: dict[str, int] | None = None,
                    sizes=SIZES, seeds=SEEDS, threads: int = THREADS, timeout: float = 1800.0) -> None:
     max_n = max_n or {}
     from common.methods import METHODS
@@ -34,7 +34,8 @@ def run_comparison(methods: list[str], folder: Path, *, max_n: dict[str, int] | 
     csv_path = folder / "results.csv"
     rows = read_rows(csv_path)
     done = {(r["method"], int(r["n"]), int(r["seed"])) for r in rows}
-    write_metadata(folder, {"methods": methods, "params": params, "split": SPLIT, "sizes": list(sizes),
+    write_metadata(folder, {"dataset": dataset, "methods": methods, "params": params, "split": SPLIT,
+                            "sizes": list(sizes),
                             "seeds": list(seeds), "threads": threads, "max_n": max_n, "timeout_s": timeout})
     for n in sizes:
         for method in methods:
@@ -45,7 +46,7 @@ def run_comparison(methods: list[str], folder: Path, *, max_n: dict[str, int] | 
                 if (method, n, seed) in done:
                     continue
                 row = run_isolated(method, split=SPLIT, n=n, seed=seed, params=params[method], threads=threads,
-                                   timeout=timeout)
+                                   dataset=dataset, timeout=timeout)
                 rows.append(row)
                 write_rows(csv_path, rows)
                 if row["status"] == "ok":

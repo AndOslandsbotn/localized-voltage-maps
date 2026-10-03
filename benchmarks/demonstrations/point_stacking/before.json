@@ -1,0 +1,10 @@
+{
+ "variant": "before",
+ "seconds": 0.8993493179950747,
+ "trustworthiness": 0.9329631778513392,
+ "continuity": 0.9105205657538369,
+ "knn_accuracy": 0.8273999999999999,
+ "distance_correlation": 0.5563806934819352,
+ "occupied_squares": 1254,
+ "share_in_fullest_squares": 0.071
+}

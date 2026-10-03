@@ -38,7 +38,7 @@ def _band(ax, xs, means, stds, **kw):
                     alpha=0.2, color=line.get_color())
 
 
-def plot_comparison(folder: Path, title: str) -> Path:
+def plot_comparison(folder: Path, title: str, dataset: str = "MNIST") -> Path:
     """Time, memory and quality against n, one line per method."""
     if not (folder / "results.csv").exists():
         raise SystemExit(f"no results yet: run {folder.name}/run.py first")
@@ -74,7 +74,7 @@ def plot_comparison(folder: Path, title: str) -> Path:
     for ax in list(axes.flat)[len(panels):]:
         ax.axis("off")
     axes.flat[0].legend(fontsize=8)
-    fig.suptitle(f"{title}  (MNIST evaluation split; mean ± 1 std over seeds)")
+    fig.suptitle(f"{title}  ({dataset} evaluation split; mean ± 1 std over seeds)")
     fig.tight_layout()
     out = folder / "figure.png"
     fig.savefig(out, dpi=150)

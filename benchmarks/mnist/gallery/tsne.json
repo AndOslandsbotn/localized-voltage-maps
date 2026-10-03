@@ -1,0 +1,27 @@
+{
+ "dataset": "mnist",
+ "split": "eval",
+ "n": 50000,
+ "seed": 0,
+ "method": "tsne_gpu",
+ "label": "t-SNE (GPU, cuML)",
+ "params": {
+  "late_exaggeration": 2.0,
+  "perplexity": 15
+ },
+ "fit_s": 3.0469746840026346,
+ "total_s": 3.0469859479999286,
+ "info": {},
+ "colourings": {
+  "digit": {
+   "cmap": "tab10",
+   "categorical": true
+  }
+ },
+ "trustworthiness": 0.9769250155481994,
+ "continuity": 0.9605580218677902,
+ "knn_accuracy": 0.9555999999999999,
+ "distance_correlation": 0.3362098048539954,
+ "occupied_squares": 44939,
+ "visible_share": 0.89878
+}

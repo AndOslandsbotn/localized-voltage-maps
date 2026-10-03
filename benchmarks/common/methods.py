@@ -41,7 +41,7 @@ from typing import Callable
 import numpy as np
 import yaml
 
-TUNING = Path(__file__).resolve().parents[1] / "tuning"
+BENCH = Path(__file__).resolve().parents[1]
 
 
 @dataclass(frozen=True)
@@ -214,15 +214,15 @@ METHODS: dict[str, Method] = {
 }
 
 
-def method_params(name: str) -> dict:
-    """The settings a method runs with: its family's tuned settings plus its fixed overrides."""
+def method_params(name: str, tuned_on: str = "mnist") -> dict:
+    """The settings a method runs with: its family's tuned settings (on ``tuned_on``) plus its fixed overrides."""
     m = METHODS[name]
-    return _merge(best_params(m.tuned_as or m.family), m.overrides)
+    return _merge(best_params(m.tuned_as or m.family, tuned_on), m.overrides)
 
 
-def best_params(family: str) -> dict:
-    """The tuned hyperparameters for a method family (``tuning/<family>/best.yaml``)."""
-    path = TUNING / family / "best.yaml"
+def best_params(family: str, tuned_on: str = "mnist") -> dict:
+    """The tuned hyperparameters for a method family (``<tuned_on>/tuning/<family>/best.yaml``)."""
+    path = BENCH / tuned_on / "tuning" / family / "best.yaml"
     if not path.exists():
-        raise FileNotFoundError(f"{path} not found: run tuning/{family}/tune.py first")
+        raise FileNotFoundError(f"{path} not found: run {tuned_on}/tuning/{family}/tune.py first")
     return yaml.safe_load(path.read_text())["params"]

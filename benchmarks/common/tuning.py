@@ -30,19 +30,20 @@ SEEDS = (0, 1, 2)
 CRITERION = "trustworthiness"
 
 
-def run_grid(method: str, grid: list[dict], folder: Path, *, threads: int = 16) -> dict:
+def run_grid(method: str, grid: list[dict], folder: Path, *, dataset: str = "mnist", threads: int = 16) -> dict:
     """Run every configuration in ``grid`` with every seed; write results and the best setting."""
     csv_path = folder / "results.csv"
     rows = read_rows(csv_path)
     done = {(r["params"], int(r["seed"])) for r in rows if r.get("status", "ok") == "ok"}
-    write_metadata(folder, {"method": method, "split": SPLIT, "n": N, "seeds": list(SEEDS), "criterion": CRITERION,
+    write_metadata(folder, {"dataset": dataset, "method": method, "split": SPLIT, "n": N, "seeds": list(SEEDS),
+                            "criterion": CRITERION,
                             "grid": grid, "threads": threads})
     for params in grid:
         for seed in SEEDS:
             key = json.dumps(params, sort_keys=True)
             if (key, seed) in done:
                 continue
-            row = run_isolated(method, split=SPLIT, n=N, seed=seed, params=params, threads=threads)
+            row = run_isolated(method, split=SPLIT, n=N, seed=seed, params=params, threads=threads, dataset=dataset)
             rows.append(row)
             write_rows(csv_path, rows)
             if row["status"] != "ok":

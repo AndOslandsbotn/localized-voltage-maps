@@ -1,0 +1,133 @@
+# Pinned LVM settings of the point-stacking demonstration, variant 'before', resolved 2026-10-03.
+# Do not edit: the demonstration must reproduce as it was.
+compute:
+  device: cuda
+  dtype: float64
+  seed: 0
+data:
+  path: null
+  format: csv
+  csv:
+    delimiter: ','
+    skip_header: 0
+  chunk_size: 10000
+  shuffled: true
+cells:
+  n_cells: 150
+  sample_size: 50000
+  kmeans:
+    strategy: cuml
+    cuml:
+      init: random
+      max_iter: 30
+      tol: 0.0001
+    faiss:
+      niter: 25
+    sklearn:
+      max_iter: 30
+      tol: 0.0001
+  masses:
+    rel_error: 0.05
+    max_points: null
+graph:
+  kernel:
+    strategy: radial
+    gaussian:
+      sigma: 0.3333
+      cutoff: 3.0
+  radius:
+    strategy: knn
+    knn:
+      k: 10
+    point_knn:
+      k: 10
+      sample_size: 5000
+    centroid_spacing:
+      multiplier: 3.0
+  edge_weighting: mass
+ground:
+  weighting: mass
+sources:
+  strategy: single_node
+voltage:
+  solver: dense_inverse
+  threshold: 0.001
+scaling:
+  strategy: reach
+  reach:
+    k: null
+    quantile: 0.1
+    rel_tolerance: 0.05
+    max_iter: 40
+    rho_g_bounds:
+    - 1.0e-06
+    - 1000000.0
+    max_rounds: 5
+    round_tolerance: 0.15
+    start_max_iter: 6
+    start_factor: 1.0
+  coverage:
+    overlap: 8.0
+    statistic: median
+    tolerance: 0.005
+    max_iter: 50
+    rho_g_bounds:
+    - 1.0e-06
+    - 1000000.0
+  support_fraction:
+    target: 0.05
+    statistic: median
+    tolerance: 0.005
+    max_iter: 50
+    rho_g_bounds:
+    - 1.0e-06
+    - 1000000.0
+dimension:
+  strategy: mle
+  mle:
+    k: 20
+    sample_size: 10000
+  twonn:
+    sample_size: 10000
+  fixed:
+    d: 12.0
+landmarks:
+  strategy: mutual_information
+  count:
+    strategy: dimension
+    dimension:
+      multiplier: 1.0
+  n_landmarks: 20
+  mutual_information:
+    noise_std: 0.01
+    precision: float32
+    scratch_mb: 128
+extension:
+  strategy: harmonic
+  kernel: graph
+  knn:
+    k: 3
+    sharpness: 16.0
+embedding:
+  strategy: landmark_mds
+  log_mds:
+    n_components: 2
+  landmark_mds:
+    n_components: 2
+    missing: chain
+  local_scale:
+    strategy: none
+    cell:
+      fill: 0.5
+    pca:
+      fill: 0.35
+partition:
+  strategy: support
+  uncovered:
+    strategy: highest_voltage
+stopping:
+  strategy: max_depth
+  max_depth:
+    depth: 3
+output:
+  dir: outputs

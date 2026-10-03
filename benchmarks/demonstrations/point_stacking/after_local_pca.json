@@ -1,0 +1,10 @@
+{
+ "variant": "after_local_pca",
+ "seconds": 0.9277750930050388,
+ "trustworthiness": 0.967245830073227,
+ "continuity": 0.9240458541478583,
+ "knn_accuracy": 0.8694,
+ "distance_correlation": 0.5717781474594053,
+ "occupied_squares": 9345,
+ "share_in_fullest_squares": 0.16255
+}

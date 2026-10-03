@@ -19,7 +19,8 @@ Measurements, identical for every method:
   before the baseline is taken.
 * the quality measures of ``metrics.quality``.
 
-    python benchmarks/common/runner.py --method umap_gpu --split eval --n 20000 --seed 0 --params '{"n_neighbors": 15}'
+    python benchmarks/common/runner.py --method umap_gpu [--dataset mnist] --split eval --n 20000 --seed 0 \
+        --params '{"n_neighbors": 15}'
 """
 
 from __future__ import annotations
@@ -46,7 +47,7 @@ def thread_env(threads: int) -> dict[str, str]:
     return {**os.environ, **{var: str(threads) for var in THREAD_VARS}}
 
 
-def run_isolated(method: str, *, split: str, n: int, seed: int, params: dict, threads: int,
+def run_isolated(method: str, *, split: str, n: int, seed: int, params: dict, threads: int, dataset: str = "mnist",
                  timeout: float = 1800.0, memory_limit_mb: float = MEMORY_LIMIT_MB) -> dict:
     """Run one configuration in a fresh process; returns the result row (with a ``status``).
 
@@ -58,10 +59,10 @@ def run_isolated(method: str, *, split: str, n: int, seed: int, params: dict, th
 
     import psutil
 
-    cmd = [sys.executable, str(HERE / "runner.py"), "--method", method, "--split", split, "--n", str(n),
-           "--seed", str(seed), "--params", json.dumps(params), "--threads", str(threads)]
-    base = {"method": method, "split": split, "n": n, "seed": seed, "params": json.dumps(params, sort_keys=True),
-            "memory_limit_mb": memory_limit_mb}
+    cmd = [sys.executable, str(HERE / "runner.py"), "--method", method, "--dataset", dataset, "--split", split,
+           "--n", str(n), "--seed", str(seed), "--params", json.dumps(params), "--threads", str(threads)]
+    base = {"dataset": dataset, "method": method, "split": split, "n": n, "seed": seed,
+            "params": json.dumps(params, sort_keys=True), "memory_limit_mb": memory_limit_mb}
     with tempfile.TemporaryFile("w+") as out, tempfile.TemporaryFile("w+") as err:
         proc = subprocess.Popen(cmd, stdout=out, stderr=err, text=True, env=thread_env(threads))
         handle = psutil.Process(proc.pid)
@@ -147,19 +148,19 @@ _warmed_up: set[str] = set()
 
 
 def measure(method: str, *, split: str, n: int, seed: int, params: dict, threads: int | None = None,
-            eval_size: int = 5000) -> dict:
+            eval_size: int = 5000, dataset: str = "mnist") -> dict:
     """Load data, run one method once, and return time, memory and quality."""
     sys.path.insert(0, str(BENCH))
-    from common.data import load
+    from common.datasets import DATASETS, load
     from common.methods import METHODS
     from common.metrics import quality
 
     m = METHODS[method]
-    if m.family == "lvm" and threads:
+    if m.family.startswith("lvm") and threads:
         import torch
 
         torch.set_num_threads(threads)
-    X, y = load(split, n=n, seed=seed)
+    X, y = load(split, n=n, seed=seed, dataset=dataset)
     if method not in _warmed_up:
         m.embed(X[:2000].copy(), params, seed)
         _warmed_up.add(method)
@@ -177,11 +178,12 @@ def measure(method: str, *, split: str, n: int, seed: int, params: dict, threads
     rss_peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024
 
     return {
-        "method": method, "family": m.family, "device": m.device, "split": split, "n": n, "seed": seed,
+        "dataset": dataset, "method": method, "family": m.family, "device": m.device, "split": split, "n": n,
+        "seed": seed,
         "params": json.dumps(params, sort_keys=True), "threads": threads,
         "fit_s": fit_s, "total_s": total_s,
         "peak_rss_mb": rss_peak, "extra_rss_mb": max(0.0, rss_peak - rss_before), "gpu_peak_mb": gpu_peak_mb,
-        **quality(X, Z, y, eval_size=eval_size, seed=seed),
+        **quality(X, Z, y, eval_size=eval_size, seed=seed, extra=DATASETS[dataset].extra_metrics),
         "info": json.dumps(info) if info else "",
     }
 
@@ -189,6 +191,7 @@ def measure(method: str, *, split: str, n: int, seed: int, params: dict, threads
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--method", required=True)
+    parser.add_argument("--dataset", default="mnist")
     parser.add_argument("--split", choices=["tune", "eval"], required=True)
     parser.add_argument("--n", type=int, required=True)
     parser.add_argument("--seed", type=int, default=0)
@@ -196,7 +199,7 @@ def main() -> None:
     parser.add_argument("--threads", type=int, default=None)
     args = parser.parse_args()
     row = measure(args.method, split=args.split, n=args.n, seed=args.seed, params=json.loads(args.params),
-                  threads=args.threads)
+                  threads=args.threads, dataset=args.dataset)
     print("RESULT " + json.dumps(row))
 
 

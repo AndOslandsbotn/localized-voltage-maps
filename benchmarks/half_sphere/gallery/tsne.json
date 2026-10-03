@@ -1,0 +1,31 @@
+{
+ "dataset": "half_sphere",
+ "split": "eval",
+ "n": 20000,
+ "seed": 0,
+ "method": "tsne_gpu",
+ "label": "t-SNE (GPU, cuML)",
+ "params": {
+  "late_exaggeration": 2.0,
+  "perplexity": 15
+ },
+ "fit_s": 0.857856841001194,
+ "total_s": 0.8578672719959286,
+ "info": {},
+ "colourings": {
+  "height": {
+   "cmap": "viridis",
+   "categorical": false
+  },
+  "angle": {
+   "cmap": "hsv",
+   "categorical": false
+  }
+ },
+ "trustworthiness": 0.9996378212458622,
+ "continuity": 0.9993071682214866,
+ "knn_accuracy": NaN,
+ "distance_correlation": 0.9837859722175363,
+ "occupied_squares": 17001,
+ "visible_share": 0.85005
+}

@@ -1,0 +1,26 @@
+{
+ "dataset": "mnist",
+ "split": "eval",
+ "n": 50000,
+ "seed": 0,
+ "method": "le_gpu",
+ "label": "Laplacian Eigenmaps (GPU, cuML)",
+ "params": {
+  "n_neighbors": 5
+ },
+ "fit_s": 2.400849257996015,
+ "total_s": 2.4008597419961006,
+ "info": {},
+ "colourings": {
+  "digit": {
+   "cmap": "tab10",
+   "categorical": true
+  }
+ },
+ "trustworthiness": 0.8401266486106931,
+ "continuity": 0.9436332470659043,
+ "knn_accuracy": 0.7777999999999999,
+ "distance_correlation": 0.21769820605612936,
+ "occupied_squares": 33123,
+ "visible_share": 0.66246
+}

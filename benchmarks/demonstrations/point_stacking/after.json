@@ -1,0 +1,10 @@
+{
+ "variant": "after",
+ "seconds": 0.9400421180034755,
+ "trustworthiness": 0.9642487952653225,
+ "continuity": 0.9225529702076437,
+ "knn_accuracy": 0.8573999999999999,
+ "distance_correlation": 0.5706234725326601,
+ "occupied_squares": 1473,
+ "share_in_fullest_squares": 0.1454
+}
