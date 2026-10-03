@@ -15,7 +15,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from common.methods import best_params
+from common.methods import method_params
 from common.results import read_rows, write_metadata, write_rows
 from common.runner import run_isolated
 
@@ -30,7 +30,7 @@ def run_comparison(methods: list[str], folder: Path, *, max_n: dict[str, int] | 
     max_n = max_n or {}
     from common.methods import METHODS
 
-    params = {m: best_params(METHODS[m].family) for m in methods}
+    params = {m: method_params(m) for m in methods}
     csv_path = folder / "results.csv"
     rows = read_rows(csv_path)
     done = {(r["method"], int(r["n"]), int(r["seed"])) for r in rows}

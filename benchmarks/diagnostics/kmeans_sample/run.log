@@ -1,0 +1,23 @@
+ppc=  10.0 seed=0  objective 29.78  trust 0.850  cont 0.807  knn 0.642  dcorr 0.520  cells 0.01s
+ppc=  10.0 seed=1  objective 29.73  trust 0.876  cont 0.845  knn 0.733  dcorr 0.532  cells 0.01s
+ppc=  10.0 seed=2  objective 29.89  trust 0.882  cont 0.805  knn 0.719  dcorr 0.455  cells 0.01s
+ppc=  25.0 seed=0  objective 27.89  trust 0.915  cont 0.841  knn 0.774  dcorr 0.503  cells 0.02s
+ppc=  25.0 seed=1  objective 27.89  trust 0.904  cont 0.826  knn 0.776  dcorr 0.265  cells 0.02s
+ppc=  25.0 seed=2  objective 27.84  trust 0.913  cont 0.857  knn 0.771  dcorr 0.519  cells 0.02s
+ppc=  39.0 seed=0  objective 27.32  trust 0.914  cont 0.847  knn 0.782  dcorr 0.513  cells 0.04s
+ppc=  39.0 seed=1  objective 27.25  trust 0.923  cont 0.829  knn 0.822  dcorr 0.489  cells 0.04s
+ppc=  39.0 seed=2  objective 27.37  trust 0.913  cont 0.868  knn 0.784  dcorr 0.506  cells 0.04s
+ppc=  64.0 seed=0  objective 26.71  trust 0.928  cont 0.885  knn 0.822  dcorr 0.532  cells 0.06s
+ppc=  64.0 seed=1  objective 26.73  trust 0.921  cont 0.868  knn 0.807  dcorr 0.470  cells 0.05s
+ppc=  64.0 seed=2  objective 26.76  trust 0.919  cont 0.882  knn 0.817  dcorr 0.545  cells 0.05s
+ppc= 133.3 seed=0  objective 26.21  trust 0.933  cont 0.911  knn 0.827  dcorr 0.556  cells 0.10s
+ppc= 133.3 seed=1  objective 26.28  trust 0.930  cont 0.905  knn 0.834  dcorr 0.469  cells 0.11s
+ppc= 133.3 seed=2  objective 26.25  trust 0.919  cont 0.873  knn 0.817  dcorr 0.560  cells 0.11s
+
+   ppc sample objective  (rel)  trust   cont    knn  dcorr
+    10   1500     29.80  1.135  0.869  0.819  0.698  0.502
+    25   3750     27.87  1.062  0.910  0.841  0.773  0.429
+    39   5850     27.31  1.041  0.917  0.848  0.796  0.503
+    64   9600     26.73  1.018  0.923  0.879  0.815  0.516
+   133  20000     26.25  1.000  0.927  0.896  0.826  0.528
+[guard] peak memory 2980 MB (limit 5500 MB)

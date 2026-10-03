@@ -1,6 +1,6 @@
 {
-  "written": "2026-10-01T20:15:43+00:00",
-  "git_commit": "a66feabda1ecd826da94c21e60071008fd480086",
+  "written": "2026-10-02T21:21:02+00:00",
+  "git_commit": "bef40ea069cb0f42a7aad9364127dbb765168d61",
   "git_dirty": true,
   "python": "3.14.4",
   "cpu": "13th Gen Intel(R) Core(TM) i5-13450HX",
@@ -41,18 +41,6 @@
         "min_dist": 0.5
       },
       {
-        "n_neighbors": 10,
-        "min_dist": 0.0
-      },
-      {
-        "n_neighbors": 10,
-        "min_dist": 0.1
-      },
-      {
-        "n_neighbors": 10,
-        "min_dist": 0.5
-      },
-      {
         "n_neighbors": 15,
         "min_dist": 0.0
       },
@@ -77,15 +65,27 @@
         "min_dist": 0.5
       },
       {
-        "n_neighbors": 50,
+        "n_neighbors": 100,
         "min_dist": 0.0
       },
       {
-        "n_neighbors": 50,
+        "n_neighbors": 100,
         "min_dist": 0.1
       },
       {
-        "n_neighbors": 50,
+        "n_neighbors": 100,
+        "min_dist": 0.5
+      },
+      {
+        "n_neighbors": 200,
+        "min_dist": 0.0
+      },
+      {
+        "n_neighbors": 200,
+        "min_dist": 0.1
+      },
+      {
+        "n_neighbors": 200,
         "min_dist": 0.5
       }
     ],

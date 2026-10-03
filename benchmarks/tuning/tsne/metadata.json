@@ -1,0 +1,94 @@
+{
+  "written": "2026-10-02T20:41:54+00:00",
+  "git_commit": "bef40ea069cb0f42a7aad9364127dbb765168d61",
+  "git_dirty": true,
+  "python": "3.14.4",
+  "cpu": "13th Gen Intel(R) Core(TM) i5-13450HX",
+  "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "versions": {
+    "torch": "2.14.0",
+    "cuml-cu13": "26.8.0",
+    "umap-learn": "0.5.12",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.4.6",
+    "scipy": "1.18.1",
+    "faiss-cpu": "1.15.1",
+    "pyamg": "5.3.0",
+    "numba": "0.64.0",
+    "array-api-compat": "1.15.0"
+  },
+  "settings": {
+    "method": "tsne_gpu",
+    "split": "tune",
+    "n": 20000,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "criterion": "trustworthiness",
+    "grid": [
+      {
+        "perplexity": 5,
+        "late_exaggeration": 1.0
+      },
+      {
+        "perplexity": 5,
+        "late_exaggeration": 2.0
+      },
+      {
+        "perplexity": 5,
+        "late_exaggeration": 4.0
+      },
+      {
+        "perplexity": 15,
+        "late_exaggeration": 1.0
+      },
+      {
+        "perplexity": 15,
+        "late_exaggeration": 2.0
+      },
+      {
+        "perplexity": 15,
+        "late_exaggeration": 4.0
+      },
+      {
+        "perplexity": 30,
+        "late_exaggeration": 1.0
+      },
+      {
+        "perplexity": 30,
+        "late_exaggeration": 2.0
+      },
+      {
+        "perplexity": 30,
+        "late_exaggeration": 4.0
+      },
+      {
+        "perplexity": 50,
+        "late_exaggeration": 1.0
+      },
+      {
+        "perplexity": 50,
+        "late_exaggeration": 2.0
+      },
+      {
+        "perplexity": 50,
+        "late_exaggeration": 4.0
+      },
+      {
+        "perplexity": 100,
+        "late_exaggeration": 1.0
+      },
+      {
+        "perplexity": 100,
+        "late_exaggeration": 2.0
+      },
+      {
+        "perplexity": 100,
+        "late_exaggeration": 4.0
+      }
+    ],
+    "threads": 16
+  }
+}

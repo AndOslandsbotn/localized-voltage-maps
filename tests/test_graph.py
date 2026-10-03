@@ -115,3 +115,47 @@ def test_kernel_to_points_keeps_every_entry():
 def test_exclude_self_needs_a_square_matrix():
     with pytest.raises(ValueError, match="square"):
         choose_kernel(np.zeros((2, 3)), r=1.0, config=load_config().graph.kernel, exclude_self=True)
+
+
+@pytest.mark.parametrize("strategy", ["tapered", "gaussian"])
+@pytest.mark.parametrize("device", ["cpu", "cuda"])
+def test_smooth_kernels_fall_with_distance_and_end_at_r(strategy, device):
+    import torch
+
+    d = np.array([[0.0, 0.25, 0.5, 0.75, 0.99, 1.01, 2.0]])
+    sq = d**2 if device == "cpu" else torch.as_tensor(d**2, device=device)
+    config = load_config(overrides={"graph": {"kernel": {"strategy": strategy}}}).graph.kernel
+    K = choose_kernel(sq, r=1.0, config=config).K
+    K = K if device == "cpu" else K.cpu().numpy()
+    assert K[0, 0] == pytest.approx(1.0)
+    assert np.all(np.diff(K[0, :5]) < 0)              # strictly falling inside r
+    assert np.all(K[0, 5:] == 0.0)                    # nothing beyond r (gaussian: cutoff 3 * r/3)
+
+
+def test_adaptive_knn_kernel_weights_each_points_k_nearest_cells():
+    import torch
+
+    from lvm.graph import adaptive_knn_kernel
+
+    rng = np.random.default_rng(0)
+    sq = rng.random((50, 30)) * 10 + 5.0                  # every point far from all cells (a "shell")
+    K = adaptive_knn_kernel(sq, k=6)
+    assert np.all((K > 0).sum(axis=1) == 6)
+    nearest = sq.argmin(axis=1)
+    assert np.allclose(K[np.arange(50), nearest], 1.0)    # nearest cell gets weight 1
+    row = sq[0][K[0] > 0], K[0][K[0] > 0]
+    assert np.all(np.diff(row[1][np.argsort(row[0])]) < 0)   # weights fall with distance
+    Kt = adaptive_knn_kernel(torch.as_tensor(sq, device="cuda"), k=6).cpu().numpy()
+    assert np.allclose(K, Kt)
+
+
+def test_point_knn_radius_gives_a_typical_point_k_cells():
+    rng = np.random.default_rng(0)
+    centroids = rng.normal(size=(200, 20))
+    points = centroids[rng.integers(0, 200, 3000)] + rng.normal(size=(3000, 20))   # points scattered around cells
+    config = load_config(overrides={"graph": {"radius": {"strategy": "point_knn"}}}).graph.radius
+    r = choose_radius(centroids, config=config, points=points).r
+    within = (np.sqrt(((points[:, None, :] - centroids[None]) ** 2).sum(-1)) <= r).sum(axis=1)
+    assert np.median(within) == pytest.approx(10, abs=1)
+    with pytest.raises(ValueError, match="sample points"):
+        choose_radius(centroids, config=config)

@@ -1,0 +1,91 @@
+{
+  "written": "2026-10-02T21:08:21+00:00",
+  "git_commit": "bef40ea069cb0f42a7aad9364127dbb765168d61",
+  "git_dirty": true,
+  "python": "3.14.4",
+  "cpu": "13th Gen Intel(R) Core(TM) i5-13450HX",
+  "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "versions": {
+    "torch": "2.14.0",
+    "cuml-cu13": "26.8.0",
+    "umap-learn": "0.5.12",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.4.6",
+    "scipy": "1.18.1",
+    "faiss-cpu": "1.15.1",
+    "pyamg": "5.3.0",
+    "numba": "0.64.0",
+    "array-api-compat": "1.15.0"
+  },
+  "settings": {
+    "methods": [
+      "lvm_cpu",
+      "umap_cpu",
+      "le_cpu",
+      "lisomap_cpu",
+      "tsne_cpu"
+    ],
+    "params": {
+      "lvm_cpu": {
+        "cells": {
+          "n_cells": 150
+        },
+        "embedding": {
+          "landmark_mds": {
+            "missing": "chain"
+          },
+          "strategy": "landmark_mds"
+        },
+        "landmarks": {
+          "count": {
+            "dimension": {
+              "multiplier": 1.0
+            },
+            "strategy": "dimension"
+          },
+          "strategy": "mutual_information"
+        },
+        "scaling": {
+          "reach": {
+            "k": null,
+            "quantile": 0.1
+          },
+          "strategy": "reach"
+        }
+      },
+      "umap_cpu": {
+        "min_dist": 0.0,
+        "n_neighbors": 10
+      },
+      "le_cpu": {
+        "n_neighbors": 5
+      },
+      "lisomap_cpu": {
+        "n_landmarks": 60,
+        "n_neighbors": 10
+      },
+      "tsne_cpu": {
+        "late_exaggeration": 2.0,
+        "perplexity": 15
+      }
+    },
+    "split": "eval",
+    "sizes": [
+      5000,
+      10000,
+      20000,
+      40000,
+      50000
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "threads": 16,
+    "max_n": {
+      "le_cpu": 40000
+    },
+    "timeout_s": 1800.0
+  }
+}

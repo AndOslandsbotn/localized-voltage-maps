@@ -19,9 +19,10 @@ from dataclasses import dataclass
 from typing import Callable
 
 import numpy as np
+import torch
 from array_api_compat import array_namespace, device
 
-from lvm.config import EmbeddingConfig, LandmarkMdsConfig, LogMdsConfig
+from lvm.config import EmbeddingConfig, LandmarkMdsConfig, LocalScaleConfig, LogMdsConfig
 from lvm.strategies import resolve
 from lvm.voltage import chained_distances, voltage_distances
 
@@ -65,6 +66,148 @@ class LandmarkMdsEmbedding:
         d = point_landmark_distances(V, self.landmark_D, tau=self.tau, missing=self.missing)   # (m, L)
         placement = LandmarkPlacement(self.delta_mean, self.pinv, self.eigenvalues, self.usable)
         return placement.triangulate(d)
+
+
+@dataclass(frozen=True)
+class LocalScale:
+    """A second, local scale per cell: z' = anchors[c] + alpha[c] * (z - anchors[c]) for a point of cell c.
+
+    Scaling a cell's points by a positive factor about their mean keeps their
+    order, and so what they say about which points are near which.
+    """
+    anchors: np.ndarray   # (n_cells, n_components) mean embedded position of each cell's points
+    alpha: np.ndarray     # (n_cells,) scale factor; 1 for cells with fewer than 2 points
+
+    def apply(self, Z: np.ndarray, cell: np.ndarray, X: np.ndarray | None = None) -> np.ndarray:
+        Z, cell = _numpy(Z), _numpy(cell)
+        a = self.anchors[cell]
+        return a + self.alpha[cell, None] * (Z - a)
+
+
+@dataclass(frozen=True)
+class LocalPca:
+    """Points placed within their cell by the cell's own 2-D PCA of the raw features (torch, on one device).
+
+    z = anchors[c] + scale[c] * ((x - mean_c) @ B_c) @ rotations[c]. The cells
+    keep LVM's global layout; within a cell the two main directions of
+    variation of its points give local coordinates, turned to agree with the
+    LVM offsets. Cells with fewer than 3 points keep their LVM positions.
+    """
+    anchors: "torch.Tensor"      # (n_cells, 2)
+    bases: "torch.Tensor"        # (d, 2 n_cells): columns 2c, 2c+1 are cell c's directions
+    mean_proj: "torch.Tensor"    # (n_cells, 2) each cell's mean projected on its directions
+    rotations: "torch.Tensor"    # (n_cells, 2, 2)
+    scale: "torch.Tensor"        # (n_cells,)
+    valid: "torch.Tensor"        # (n_cells,) bool
+
+    def project(self, X, cell):
+        """(m, 2) coordinates of points X along their own cell's two directions (one matmul for all cells)."""
+        m, n = X.shape[0], self.anchors.shape[0]
+        P = (X @ self.bases).view(m, n, 2)
+        return P[torch.arange(m, device=X.device), cell] - self.mean_proj[cell]
+
+    def apply(self, Z, cell, X):
+        import torch
+
+        dev = self.anchors.device
+        Z = torch.as_tensor(Z, device=dev, dtype=self.anchors.dtype)
+        cell = torch.as_tensor(cell, device=dev, dtype=torch.long)
+        X = torch.as_tensor(X, device=dev, dtype=self.bases.dtype)
+        u = self.project(X, cell).to(self.anchors.dtype)
+        placed = self.anchors[cell] + self.scale[cell, None] * torch.einsum("mk,mkj->mj", u, self.rotations[cell])
+        return torch.where(self.valid[cell, None], placed, Z)
+
+
+def fit_local_scale(
+    Z: np.ndarray, cell: np.ndarray, n_cells: int, *, config: LocalScaleConfig, X: np.ndarray | None = None,
+) -> LocalScale | LocalPca | None:
+    """Local scale from embedded sample points ``Z``, their cells (and raw features ``X`` for pca).
+
+    Strategy ``config.strategy``; none -> None.
+    """
+    if config.strategy == "none":
+        return None
+    if config.strategy == "pca":
+        return _fit_local_pca(Z, cell, n_cells, X, fill=config.pca.fill)
+    Z, cell = np.asarray(Z, dtype=np.float64), np.asarray(cell)
+    counts = np.bincount(cell, minlength=n_cells)
+    anchors = np.zeros((n_cells, Z.shape[1]))
+    np.add.at(anchors, cell, Z)
+    occupied = counts >= 2
+    anchors[counts > 0] /= counts[counts > 0, None]
+    sq = np.zeros(n_cells)
+    np.add.at(sq, cell, ((Z - anchors[cell]) ** 2).sum(axis=1))
+    spread = np.sqrt(sq / np.maximum(counts, 1))
+    alpha = np.ones(n_cells)
+    if occupied.sum() >= 2:
+        from scipy.spatial.distance import cdist
+
+        D = cdist(anchors[occupied], anchors[occupied])
+        np.fill_diagonal(D, np.inf)
+        target = config.cell.fill * D.min(axis=1)
+        s = spread[occupied]
+        alpha[occupied] = np.where(s > 0, target / np.where(s > 0, s, 1.0), 1.0)
+    return LocalScale(anchors, alpha)
+
+
+def _fit_local_pca(Z, cell, n_cells: int, X, *, fill: float, max_points: int = 256) -> LocalPca:
+    """Fit ``LocalPca`` on torch tensors Z (m, 2), cell (m,), X (m, d), all on one device.
+
+    Each cell's two directions come from at most ``max_points`` of its points
+    (two directions need few; this bounds memory): their Gram matrices are
+    built and eigendecomposed in one batch.
+    """
+    import torch
+
+    dev, m, d = X.device, X.shape[0], X.shape[1]
+    Z = Z.to(torch.float64)
+    counts = torch.bincount(cell, minlength=n_cells)
+    safe = counts.clamp(min=1).to(torch.float64)
+    anchors = torch.zeros(n_cells, 2, dtype=torch.float64, device=dev).index_add_(0, cell, Z) / safe[:, None]
+    means = torch.zeros(n_cells, d, dtype=X.dtype, device=dev).index_add_(0, cell, X) / safe[:, None].to(X.dtype)
+
+    # Each cell's first max_points points, centred, in a padded (n_cells, max_points, d) tensor.
+    order = torch.argsort(cell, stable=True)
+    sorted_cell = cell[order]
+    first = torch.cumsum(counts, 0) - counts
+    rank = torch.arange(m, device=dev) - first[sorted_cell]
+    keep = rank < max_points
+    P = torch.zeros(n_cells, max_points, d, dtype=X.dtype, device=dev)
+    rows = order[keep]
+    P[sorted_cell[keep], rank[keep]] = X[rows] - means[sorted_cell[keep]]
+    evals, evecs = torch.linalg.eigh(P @ P.transpose(1, 2))          # ascending; padded rows add zeros
+    V = P.transpose(1, 2) @ evecs[:, :, -2:].flip(-1)                  # (n_cells, d, 2), largest first
+    norms = V.norm(dim=1)
+    valid = (counts >= 3) & (norms > 0).all(dim=1)
+    V = V / norms.clamp(min=1e-12)[:, None, :]
+    bases = V.permute(1, 0, 2).reshape(d, 2 * n_cells)
+    mean_proj = torch.einsum("nd,ndk->nk", means, V)
+
+    local = LocalPca(anchors, bases, mean_proj, torch.eye(2, dtype=torch.float64, device=dev).repeat(n_cells, 1, 1),
+                     torch.ones(n_cells, dtype=torch.float64, device=dev), valid)
+    u = torch.cat([local.project(X[s:s + 10000], cell[s:s + 10000]) for s in range(0, m, 10000)]).to(torch.float64)
+    # Orthogonal Procrustes per cell: the rotation/reflection that best maps u onto the LVM offsets.
+    M = torch.zeros(n_cells, 2, 2, dtype=torch.float64, device=dev).index_add_(
+        0, cell, u[:, :, None] * (Z - anchors[cell])[:, None, :])
+    a, _, bt = torch.linalg.svd(M)
+    rotations = a @ bt
+    # Median distance from the cell mean in these coordinates, per cell (sort by cell, then by radius).
+    radius = u.norm(dim=1)
+    by = torch.argsort(cell.to(torch.float64) * (radius.max() + 1) + radius)
+    median = torch.zeros(n_cells, dtype=torch.float64, device=dev)
+    occupied = counts > 0
+    median[occupied] = radius[by][(first + counts // 2)[occupied]]
+    D = torch.cdist(anchors[occupied], anchors[occupied])
+    D.fill_diagonal_(float("inf"))
+    nearest = torch.full((n_cells,), float("inf"), dtype=torch.float64, device=dev)
+    nearest[occupied] = D.min(dim=1).values
+    valid = valid & torch.isfinite(nearest) & (median > 0)
+    scale = torch.where(valid, fill * nearest / median.clamp(min=1e-12), torch.ones_like(median))
+    return LocalPca(anchors, bases, mean_proj, rotations, scale, valid)
+
+
+def _numpy(x) -> np.ndarray:
+    return x.cpu().numpy() if hasattr(x, "cpu") else np.asarray(x)
 
 
 def fit_embedding(

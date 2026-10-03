@@ -1,0 +1,143 @@
+radial 0 {'trustworthiness': 0.933, 'continuity': 0.9105, 'knn_accuracy': 0.8274, 'distance_correlation': 0.5564, 'occupied_squares': 1254, 'share_in_150_fullest': 0.5668, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.9052}
+radial 1 {'trustworthiness': 0.9303, 'continuity': 0.9052, 'knn_accuracy': 0.834, 'distance_correlation': 0.469, 'occupied_squares': 1235, 'share_in_150_fullest': 0.6018, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 1.0263}
+radial 2 {'trustworthiness': 0.9191, 'continuity': 0.8732, 'knn_accuracy': 0.8166, 'distance_correlation': 0.5595, 'occupied_squares': 1463, 'share_in_150_fullest': 0.5219, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 1.0145}
+A 0 {'trustworthiness': 0.8762, 'continuity': 0.8376, 'knn_accuracy': 0.7152, 'distance_correlation': 0.495, 'occupied_squares': 5873, 'share_in_150_fullest': 0.479, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.8889}
+A 1 {'trustworthiness': 0.88, 'continuity': 0.849, 'knn_accuracy': 0.7586, 'distance_correlation': 0.4052, 'occupied_squares': 5627, 'share_in_150_fullest': 0.5133, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.826}
+A 2 {'trustworthiness': 0.8361, 'continuity': 0.7869, 'knn_accuracy': 0.6464, 'distance_correlation': 0.4815, 'occupied_squares': 7935, 'share_in_150_fullest': 0.428, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.8662}
+B 0 {'trustworthiness': 0.8637, 'continuity': 0.8386, 'knn_accuracy': 0.7262, 'distance_correlation': 0.4675, 'occupied_squares': 4659, 'share_in_150_fullest': 0.5591, 'no_cell_within_r': 0.4355, 'rho_g': 0.0007, 'seconds': 0.788}
+B 1 {'trustworthiness': 0.8821, 'continuity': 0.8657, 'knn_accuracy': 0.7786, 'distance_correlation': 0.4684, 'occupied_squares': 4206, 'share_in_150_fullest': 0.5396, 'no_cell_within_r': 0.4471, 'rho_g': 0.001, 'seconds': 0.9052}
+B 2 {'trustworthiness': 0.8804, 'continuity': 0.8737, 'knn_accuracy': 0.721, 'distance_correlation': 0.5427, 'occupied_squares': 5674, 'share_in_150_fullest': 0.4541, 'no_cell_within_r': 0.3976, 'rho_g': 0.0011, 'seconds': 0.7998}
+C 0 {'trustworthiness': 0.88, 'continuity': 0.8679, 'knn_accuracy': 0.7508, 'distance_correlation': 0.4998, 'occupied_squares': 6040, 'share_in_150_fullest': 0.4777, 'no_cell_within_r': 0.4355, 'rho_g': 0.0002, 'seconds': 0.7467}
+C 1 {'trustworthiness': 0.8848, 'continuity': 0.8769, 'knn_accuracy': 0.7632, 'distance_correlation': 0.475, 'occupied_squares': 6059, 'share_in_150_fullest': 0.4958, 'no_cell_within_r': 0.4471, 'rho_g': 0.0002, 'seconds': 0.9729}
+C 2 {'trustworthiness': 0.8543, 'continuity': 0.8259, 'knn_accuracy': 0.6936, 'distance_correlation': 0.499, 'occupied_squares': 7173, 'share_in_150_fullest': 0.4434, 'no_cell_within_r': 0.3976, 'rho_g': 0.0001, 'seconds': 0.8637}
+
+variant   trust   cont    knn  dcorr  squares  top150 no cell    rho_g  time
+radial    0.927  0.896  0.826  0.528     1317   56.4%   42.7% 7.73e-03  0.98
+A         0.864  0.825  0.707  0.461     6478   47.3%   42.7% 7.73e-03  0.86
+B         0.875  0.859  0.742  0.493     4846   51.8%   42.7% 9.05e-04  0.83
+C         0.873  0.857  0.736  0.491     6424   47.2%   42.7% 1.63e-04  0.86
+[guard] peak memory 3337 MB (limit 5500 MB)
+D 0 {'trustworthiness': 0.8296, 'continuity': 0.9188, 'knn_accuracy': 0.6334, 'distance_correlation': 0.5815, 'occupied_squares': 13946, 'share_in_150_fullest': 0.0881, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.9321}
+D 1 {'trustworthiness': 0.8137, 'continuity': 0.9022, 'knn_accuracy': 0.648, 'distance_correlation': 0.4905, 'occupied_squares': 14629, 'share_in_150_fullest': 0.0832, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.8376}
+D 2 {'trustworthiness': 0.7953, 'continuity': 0.9131, 'knn_accuracy': 0.5598, 'distance_correlation': 0.6114, 'occupied_squares': 15291, 'share_in_150_fullest': 0.0693, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.9519}
+E 0 {'trustworthiness': 0.7405, 'continuity': 0.7859, 'knn_accuracy': 0.4742, 'distance_correlation': 0.1566, 'occupied_squares': 10850, 'share_in_150_fullest': 0.3421, 'no_cell_within_r': 0.0238, 'rho_g': 0.5015, 'seconds': 0.8928}
+E 1 {'trustworthiness': 0.7529, 'continuity': 0.7752, 'knn_accuracy': 0.4982, 'distance_correlation': 0.1744, 'occupied_squares': 10020, 'share_in_150_fullest': 0.3596, 'no_cell_within_r': 0.0253, 'rho_g': 0.4802, 'seconds': 0.7948}
+E 2 {'trustworthiness': 0.7517, 'continuity': 0.7894, 'knn_accuracy': 0.506, 'distance_correlation': 0.2013, 'occupied_squares': 10359, 'share_in_150_fullest': 0.3617, 'no_cell_within_r': 0.0232, 'rho_g': 0.5015, 'seconds': 0.9513}
+
+variant   trust   cont    knn  dcorr  squares  top150 no cell    rho_g  time
+radial    0.927  0.896  0.826  0.528     1317   56.4%   42.7% 7.73e-03  0.98
+A         0.864  0.825  0.707  0.461     6478   47.3%   42.7% 7.73e-03  0.86
+B         0.875  0.859  0.742  0.493     4846   51.8%   42.7% 9.05e-04  0.83
+C         0.873  0.857  0.736  0.491     6424   47.2%   42.7% 1.63e-04  0.86
+D         0.813  0.911  0.614  0.561    14622    8.0%   42.7% 7.73e-03  0.91
+E         0.748  0.783  0.493  0.177    10410   35.4%    2.4% 4.94e-01  0.88
+[guard] peak memory 3301 MB (limit 5500 MB)
+D_k3_s1 0 {'trustworthiness': 0.8702, 'continuity': 0.9342, 'knn_accuracy': 0.7394, 'distance_correlation': 0.5687, 'occupied_squares': 10255, 'share_in_150_fullest': 0.1421, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.9481}
+D_k3_s1 1 {'trustworthiness': 0.8668, 'continuity': 0.9326, 'knn_accuracy': 0.754, 'distance_correlation': 0.5004, 'occupied_squares': 10328, 'share_in_150_fullest': 0.1444, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.982}
+D_k3_s1 2 {'trustworthiness': 0.8316, 'continuity': 0.925, 'knn_accuracy': 0.682, 'distance_correlation': 0.5685, 'occupied_squares': 11709, 'share_in_150_fullest': 0.1124, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.9336}
+D_k3_s4 0 {'trustworthiness': 0.9096, 'continuity': 0.9279, 'knn_accuracy': 0.7888, 'distance_correlation': 0.5749, 'occupied_squares': 8492, 'share_in_150_fullest': 0.2044, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.8635}
+D_k3_s4 1 {'trustworthiness': 0.898, 'continuity': 0.9292, 'knn_accuracy': 0.8028, 'distance_correlation': 0.4931, 'occupied_squares': 8341, 'share_in_150_fullest': 0.1873, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.8134}
+D_k3_s4 2 {'trustworthiness': 0.8698, 'continuity': 0.9016, 'knn_accuracy': 0.7476, 'distance_correlation': 0.5493, 'occupied_squares': 10244, 'share_in_150_fullest': 0.133, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.9335}
+D_k3_s16 0 {'trustworthiness': 0.9642, 'continuity': 0.9226, 'knn_accuracy': 0.8574, 'distance_correlation': 0.5706, 'occupied_squares': 1472, 'share_in_150_fullest': 0.8811, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.8286}
+D_k3_s16 1 {'trustworthiness': 0.9641, 'continuity': 0.9232, 'knn_accuracy': 0.8718, 'distance_correlation': 0.4888, 'occupied_squares': 1519, 'share_in_150_fullest': 0.8641, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.8071}
+D_k3_s16 2 {'trustworthiness': 0.9588, 'continuity': 0.8956, 'knn_accuracy': 0.864, 'distance_correlation': 0.5415, 'occupied_squares': 1790, 'share_in_150_fullest': 0.8448, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.9206}
+D_k5_s1 0 {'trustworthiness': 0.8566, 'continuity': 0.9355, 'knn_accuracy': 0.6948, 'distance_correlation': 0.5772, 'occupied_squares': 12130, 'share_in_150_fullest': 0.1356, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.9013}
+D_k5_s1 1 {'trustworthiness': 0.8528, 'continuity': 0.9263, 'knn_accuracy': 0.7204, 'distance_correlation': 0.4969, 'occupied_squares': 12819, 'share_in_150_fullest': 0.125, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.8224}
+D_k5_s1 2 {'trustworthiness': 0.826, 'continuity': 0.9282, 'knn_accuracy': 0.631, 'distance_correlation': 0.5887, 'occupied_squares': 14236, 'share_in_150_fullest': 0.0965, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.869}
+D_k5_s4 0 {'trustworthiness': 0.8683, 'continuity': 0.9312, 'knn_accuracy': 0.7328, 'distance_correlation': 0.574, 'occupied_squares': 12180, 'share_in_150_fullest': 0.1013, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 1.0192}
+D_k5_s4 1 {'trustworthiness': 0.8548, 'continuity': 0.9333, 'knn_accuracy': 0.7418, 'distance_correlation': 0.4968, 'occupied_squares': 12081, 'share_in_150_fullest': 0.1145, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.846}
+D_k5_s4 2 {'trustworthiness': 0.8062, 'continuity': 0.9165, 'knn_accuracy': 0.631, 'distance_correlation': 0.5632, 'occupied_squares': 13995, 'share_in_150_fullest': 0.0704, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.8451}
+D_k5_s16 0 {'trustworthiness': 0.9511, 'continuity': 0.9231, 'knn_accuracy': 0.8402, 'distance_correlation': 0.5712, 'occupied_squares': 3726, 'share_in_150_fullest': 0.6105, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.946}
+D_k5_s16 1 {'trustworthiness': 0.9525, 'continuity': 0.925, 'knn_accuracy': 0.8586, 'distance_correlation': 0.4877, 'occupied_squares': 3704, 'share_in_150_fullest': 0.598, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.8922}
+D_k5_s16 2 {'trustworthiness': 0.9372, 'continuity': 0.894, 'knn_accuracy': 0.831, 'distance_correlation': 0.544, 'occupied_squares': 4578, 'share_in_150_fullest': 0.529, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.8867}
+D_k10_s1 0 {'trustworthiness': 0.8296, 'continuity': 0.9188, 'knn_accuracy': 0.6334, 'distance_correlation': 0.5815, 'occupied_squares': 13946, 'share_in_150_fullest': 0.0881, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.9551}
+D_k10_s1 1 {'trustworthiness': 0.8137, 'continuity': 0.9022, 'knn_accuracy': 0.648, 'distance_correlation': 0.4905, 'occupied_squares': 14629, 'share_in_150_fullest': 0.0832, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.9031}
+D_k10_s1 2 {'trustworthiness': 0.7953, 'continuity': 0.9131, 'knn_accuracy': 0.5598, 'distance_correlation': 0.6114, 'occupied_squares': 15291, 'share_in_150_fullest': 0.0693, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.8555}
+D_k10_s4 0 {'trustworthiness': 0.8364, 'continuity': 0.9345, 'knn_accuracy': 0.684, 'distance_correlation': 0.5813, 'occupied_squares': 13402, 'share_in_150_fullest': 0.0905, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.8842}
+D_k10_s4 1 {'trustworthiness': 0.8258, 'continuity': 0.9263, 'knn_accuracy': 0.7064, 'distance_correlation': 0.4987, 'occupied_squares': 14178, 'share_in_150_fullest': 0.0862, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.8501}
+D_k10_s4 2 {'trustworthiness': 0.7925, 'continuity': 0.9263, 'knn_accuracy': 0.5784, 'distance_correlation': 0.5974, 'occupied_squares': 15280, 'share_in_150_fullest': 0.0631, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 1.0006}
+D_k10_s16 0 {'trustworthiness': 0.9259, 'continuity': 0.9238, 'knn_accuracy': 0.808, 'distance_correlation': 0.5726, 'occupied_squares': 7109, 'share_in_150_fullest': 0.2918, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.9507}
+D_k10_s16 1 {'trustworthiness': 0.9206, 'continuity': 0.9277, 'knn_accuracy': 0.8224, 'distance_correlation': 0.4895, 'occupied_squares': 7027, 'share_in_150_fullest': 0.2779, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.9157}
+D_k10_s16 2 {'trustworthiness': 0.8925, 'continuity': 0.8944, 'knn_accuracy': 0.7678, 'distance_correlation': 0.5487, 'occupied_squares': 8869, 'share_in_150_fullest': 0.2074, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.9011}
+
+variant   trust   cont    knn  dcorr  squares  top150 no cell    rho_g  time
+radial    0.927  0.896  0.826  0.528     1317   56.4%   42.7% 7.73e-03  0.98
+A         0.864  0.825  0.707  0.461     6478   47.3%   42.7% 7.73e-03  0.86
+B         0.875  0.859  0.742  0.493     4846   51.8%   42.7% 9.05e-04  0.83
+C         0.873  0.857  0.736  0.491     6424   47.2%   42.7% 1.63e-04  0.86
+D         0.813  0.911  0.614  0.561    14622    8.0%   42.7% 7.73e-03  0.91
+E         0.748  0.783  0.493  0.177    10410   35.4%    2.4% 4.94e-01  0.88
+D_k3_s1   0.856  0.931  0.725  0.546    10764   13.3%   42.7% 7.73e-03  0.95
+D_k3_s4   0.892  0.920  0.780  0.539     9026   17.5%   42.7% 7.73e-03  0.87
+D_k3_s16  0.962  0.914  0.864  0.534     1594   86.3%   42.7% 7.73e-03  0.85
+D_k5_s1   0.845  0.930  0.682  0.554    13062   11.9%   42.7% 7.73e-03  0.86
+D_k5_s4   0.843  0.927  0.702  0.545    12752    9.5%   42.7% 7.73e-03  0.90
+D_k5_s16  0.947  0.914  0.843  0.534     4003   57.9%   42.7% 7.73e-03  0.91
+D_k10_s1  0.813  0.911  0.614  0.561    14622    8.0%   42.7% 7.73e-03  0.90
+D_k10_s4  0.818  0.929  0.656  0.559    14287    8.0%   42.7% 7.73e-03  0.91
+D_k10_s16  0.913  0.915  0.799  0.537     7668   25.9%   42.7% 7.73e-03  0.92
+[guard] peak memory 3385 MB (limit 5500 MB)
+L_s4_f0.25 0 {'trustworthiness': 0.967, 'continuity': 0.9283, 'knn_accuracy': 0.8646, 'distance_correlation': 0.5724, 'occupied_squares': 4134, 'share_in_150_fullest': 0.4521, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.975}
+L_s4_f0.25 1 {'trustworthiness': 0.9675, 'continuity': 0.927, 'knn_accuracy': 0.8752, 'distance_correlation': 0.4826, 'occupied_squares': 3822, 'share_in_150_fullest': 0.4734, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.8585}
+L_s4_f0.25 2 {'trustworthiness': 0.9669, 'continuity': 0.9096, 'knn_accuracy': 0.8774, 'distance_correlation': 0.5451, 'occupied_squares': 4256, 'share_in_150_fullest': 0.4452, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.8186}
+L_s4_f0.5 0 {'trustworthiness': 0.9562, 'continuity': 0.9292, 'knn_accuracy': 0.8528, 'distance_correlation': 0.5734, 'occupied_squares': 5998, 'share_in_150_fullest': 0.3574, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.7954}
+L_s4_f0.5 1 {'trustworthiness': 0.9576, 'continuity': 0.9281, 'knn_accuracy': 0.8686, 'distance_correlation': 0.4837, 'occupied_squares': 5574, 'share_in_150_fullest': 0.3772, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.7371}
+L_s4_f0.5 2 {'trustworthiness': 0.9528, 'continuity': 0.9102, 'knn_accuracy': 0.8614, 'distance_correlation': 0.5468, 'occupied_squares': 6323, 'share_in_150_fullest': 0.331, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.8206}
+L_s16_f0.25 0 {'trustworthiness': 0.9647, 'continuity': 0.9227, 'knn_accuracy': 0.8586, 'distance_correlation': 0.5709, 'occupied_squares': 1503, 'share_in_150_fullest': 0.8729, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.8774}
+L_s16_f0.25 1 {'trustworthiness': 0.9654, 'continuity': 0.9234, 'knn_accuracy': 0.873, 'distance_correlation': 0.4883, 'occupied_squares': 1479, 'share_in_150_fullest': 0.8722, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.7586}
+L_s16_f0.25 2 {'trustworthiness': 0.9628, 'continuity': 0.8986, 'knn_accuracy': 0.8696, 'distance_correlation': 0.5421, 'occupied_squares': 1599, 'share_in_150_fullest': 0.8638, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.8741}
+L_s16_f0.5 0 {'trustworthiness': 0.963, 'continuity': 0.922, 'knn_accuracy': 0.8558, 'distance_correlation': 0.5708, 'occupied_squares': 1861, 'share_in_150_fullest': 0.853, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 0.9728}
+L_s16_f0.5 1 {'trustworthiness': 0.9626, 'continuity': 0.9224, 'knn_accuracy': 0.8708, 'distance_correlation': 0.488, 'occupied_squares': 1782, 'share_in_150_fullest': 0.8498, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 0.9635}
+L_s16_f0.5 2 {'trustworthiness': 0.9597, 'continuity': 0.8977, 'knn_accuracy': 0.8658, 'distance_correlation': 0.5421, 'occupied_squares': 1965, 'share_in_150_fullest': 0.8249, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 0.8741}
+
+variant   trust   cont    knn  dcorr  squares  top150 no cell    rho_g  time
+radial    0.927  0.896  0.826  0.528     1317   56.4%   42.7% 7.73e-03  0.98
+A         0.864  0.825  0.707  0.461     6478   47.3%   42.7% 7.73e-03  0.86
+B         0.875  0.859  0.742  0.493     4846   51.8%   42.7% 9.05e-04  0.83
+C         0.873  0.857  0.736  0.491     6424   47.2%   42.7% 1.63e-04  0.86
+D         0.813  0.911  0.614  0.561    14622    8.0%   42.7% 7.73e-03  0.91
+E         0.748  0.783  0.493  0.177    10410   35.4%    2.4% 4.94e-01  0.88
+D_k3_s1   0.856  0.931  0.725  0.546    10764   13.3%   42.7% 7.73e-03  0.95
+D_k3_s4   0.892  0.920  0.780  0.539     9026   17.5%   42.7% 7.73e-03  0.87
+D_k3_s16  0.962  0.914  0.864  0.534     1594   86.3%   42.7% 7.73e-03  0.85
+D_k5_s1   0.845  0.930  0.682  0.554    13062   11.9%   42.7% 7.73e-03  0.86
+D_k5_s4   0.843  0.927  0.702  0.545    12752    9.5%   42.7% 7.73e-03  0.90
+D_k5_s16  0.947  0.914  0.843  0.534     4003   57.9%   42.7% 7.73e-03  0.91
+D_k10_s1  0.813  0.911  0.614  0.561    14622    8.0%   42.7% 7.73e-03  0.90
+D_k10_s4  0.818  0.929  0.656  0.559    14287    8.0%   42.7% 7.73e-03  0.91
+D_k10_s16  0.913  0.915  0.799  0.537     7668   25.9%   42.7% 7.73e-03  0.92
+L_s4_f0.25  0.967  0.922  0.872  0.533     4071   45.7%   42.7% 7.73e-03  0.88
+L_s4_f0.5  0.956  0.923  0.861  0.535     5965   35.5%   42.7% 7.73e-03  0.78
+L_s16_f0.25  0.964  0.915  0.867  0.534     1527   87.0%   42.7% 7.73e-03  0.84
+L_s16_f0.5  0.962  0.914  0.864  0.534     1869   84.3%   42.7% 7.73e-03  0.94
+[guard] peak memory 3404 MB (limit 5500 MB)
+P_f0.35 0 {'trustworthiness': 0.9671, 'continuity': 0.924, 'knn_accuracy': 0.8692, 'distance_correlation': 0.5718, 'occupied_squares': 9356, 'share_in_150_fullest': 0.2055, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 2.5613}
+P_f0.35 1 {'trustworthiness': 0.9694, 'continuity': 0.9247, 'knn_accuracy': 0.885, 'distance_correlation': 0.4873, 'occupied_squares': 8931, 'share_in_150_fullest': 0.1983, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 2.5837}
+P_f0.35 2 {'trustworthiness': 0.9629, 'continuity': 0.9, 'knn_accuracy': 0.877, 'distance_correlation': 0.5422, 'occupied_squares': 10672, 'share_in_150_fullest': 0.1336, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 3.0091}
+P_f0.5 0 {'trustworthiness': 0.9355, 'continuity': 0.9239, 'knn_accuracy': 0.83, 'distance_correlation': 0.5719, 'occupied_squares': 10450, 'share_in_150_fullest': 0.1741, 'no_cell_within_r': 0.4355, 'rho_g': 0.0086, 'seconds': 2.4393}
+P_f0.5 1 {'trustworthiness': 0.934, 'continuity': 0.9247, 'knn_accuracy': 0.844, 'distance_correlation': 0.4865, 'occupied_squares': 10072, 'share_in_150_fullest': 0.17, 'no_cell_within_r': 0.4471, 'rho_g': 0.0076, 'seconds': 2.9107}
+P_f0.5 2 {'trustworthiness': 0.9168, 'continuity': 0.9, 'knn_accuracy': 0.8178, 'distance_correlation': 0.5421, 'occupied_squares': 12082, 'share_in_150_fullest': 0.1078, 'no_cell_within_r': 0.3976, 'rho_g': 0.007, 'seconds': 2.8543}
+
+variant   trust   cont    knn  dcorr  squares  top150 no cell    rho_g  time
+radial    0.927  0.896  0.826  0.528     1317   56.4%   42.7% 7.73e-03  0.98
+A         0.864  0.825  0.707  0.461     6478   47.3%   42.7% 7.73e-03  0.86
+B         0.875  0.859  0.742  0.493     4846   51.8%   42.7% 9.05e-04  0.83
+C         0.873  0.857  0.736  0.491     6424   47.2%   42.7% 1.63e-04  0.86
+D         0.813  0.911  0.614  0.561    14622    8.0%   42.7% 7.73e-03  0.91
+E         0.748  0.783  0.493  0.177    10410   35.4%    2.4% 4.94e-01  0.88
+D_k3_s1   0.856  0.931  0.725  0.546    10764   13.3%   42.7% 7.73e-03  0.95
+D_k3_s4   0.892  0.920  0.780  0.539     9026   17.5%   42.7% 7.73e-03  0.87
+D_k3_s16  0.962  0.914  0.864  0.534     1594   86.3%   42.7% 7.73e-03  0.85
+D_k5_s1   0.845  0.930  0.682  0.554    13062   11.9%   42.7% 7.73e-03  0.86
+D_k5_s4   0.843  0.927  0.702  0.545    12752    9.5%   42.7% 7.73e-03  0.90
+D_k5_s16  0.947  0.914  0.843  0.534     4003   57.9%   42.7% 7.73e-03  0.91
+D_k10_s1  0.813  0.911  0.614  0.561    14622    8.0%   42.7% 7.73e-03  0.90
+D_k10_s4  0.818  0.929  0.656  0.559    14287    8.0%   42.7% 7.73e-03  0.91
+D_k10_s16  0.913  0.915  0.799  0.537     7668   25.9%   42.7% 7.73e-03  0.92
+L_s4_f0.25  0.967  0.922  0.872  0.533     4071   45.7%   42.7% 7.73e-03  0.88
+L_s4_f0.5  0.956  0.923  0.861  0.535     5965   35.5%   42.7% 7.73e-03  0.78
+L_s16_f0.25  0.964  0.915  0.867  0.534     1527   87.0%   42.7% 7.73e-03  0.84
+L_s16_f0.5  0.962  0.914  0.864  0.534     1869   84.3%   42.7% 7.73e-03  0.94
+P_f0.35   0.966  0.916  0.877  0.534     9653   17.9%   42.7% 7.73e-03  2.72
+P_f0.5    0.929  0.916  0.831  0.533    10868   15.1%   42.7% 7.73e-03  2.73
+[guard] peak memory 3409 MB (limit 5500 MB)

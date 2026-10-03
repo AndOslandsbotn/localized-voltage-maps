@@ -1,0 +1,13 @@
+{
+ "method": "lisomap_gpu",
+ "label": "Landmark Isomap (GPU, cuML + cuGraph)",
+ "params": {
+  "n_landmarks": 60,
+  "n_neighbors": 10
+ },
+ "fit_s": 7.873079483000765,
+ "trustworthiness": 0.7409356164108737,
+ "continuity": 0.93265974922259,
+ "knn_accuracy": 0.37479999999999997,
+ "distance_correlation": 0.5418936871557967
+}

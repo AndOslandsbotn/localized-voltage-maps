@@ -1,6 +1,6 @@
 params:
   cells:
-    n_cells: 150
+    n_cells: 300
   embedding:
     landmark_mds:
       missing: chain
@@ -19,8 +19,8 @@ params:
 selected_by: highest mean trustworthiness on the 'tune' split (n=20000, seeds=[0,
   1, 2])
 scores:
-  trustworthiness: 0.9285
-  continuity: 0.8961
-  knn_accuracy: 0.8228
-  distance_correlation: 0.5282
-  total_s: 1.6506
+  trustworthiness: 0.9682
+  continuity: 0.9178
+  knn_accuracy: 0.8908
+  distance_correlation: 0.5019
+  total_s: 1.3277

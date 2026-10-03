@@ -1,4 +1,5 @@
-"""Every benchmarked method, in one place: LVM, UMAP and Laplacian Eigenmaps, each on GPU and CPU.
+"""Every benchmarked method, in one place: LVM, UMAP, Laplacian Eigenmaps, Landmark Isomap and t-SNE,
+each on GPU and CPU.
 
 A method maps (X, params, seed) to (Z, fit seconds, info). ``params`` are the
 method's hyperparameters, normally read from ``tuning/<family>/best.yaml``:
@@ -7,6 +8,7 @@ method's hyperparameters, normally read from ``tuning/<family>/best.yaml``:
 * umap: {"n_neighbors": ..., "min_dist": ...}
 * le:   {"n_neighbors": ...}
 * lisomap: {"n_neighbors": ..., "n_landmarks": ...}
+* tsne: {"perplexity": ..., "late_exaggeration": ...}
 
 GPU and CPU versions of a family share hyperparameters (tuned once, on GPU).
 Each pair runs the same algorithm on one kind of hardware:
@@ -21,12 +23,18 @@ Each pair runs the same algorithm on one kind of hardware:
         It differs from LVM only in its distances (shortest paths vs grounded voltages),
         so it is the ablation for what voltage distances add.
         GPU = cuML kNN + cuGraph shortest paths;  CPU = scikit-learn kNN + SciPy Dijkstra.
+* t-SNE: GPU = cuML TSNE (FFT);  CPU = openTSNE (FFT-accelerated, FIt-SNE).
+        Same schedule on both: PCA init, early exaggeration 12 for 250 iterations, then 500
+        iterations at the tuned late exaggeration, 3 x perplexity neighbours. Learning rate:
+        openTSNE's "auto" (n / exaggeration); cuML n/3 with its adaptive mode off, which would
+        otherwise override the neighbour count and so the perplexity
+        (diagnostics/tsne_optimizer: n/3 gives cuML's lowest KL divergence).
 """
 
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable
 
@@ -38,10 +46,12 @@ TUNING = Path(__file__).resolve().parents[1] / "tuning"
 
 @dataclass(frozen=True)
 class Method:
-    family: str          # lvm | umap | le -- shares tuned hyperparameters
+    family: str          # lvm | lvm_pca | umap | le | lisomap | tsne -- shares hyperparameters and a colour
     device: str          # gpu | cpu
     label: str
     embed: Callable[[np.ndarray, dict, int], tuple[np.ndarray, float, dict]]
+    tuned_as: str | None = None                          # family whose tuned settings it uses (default: its own)
+    overrides: dict = field(default_factory=dict)        # fixed settings on top of those
 
 
 def _merge(base: dict, update: dict) -> dict:
@@ -110,6 +120,30 @@ def _le(gpu: bool):
     return embed
 
 
+def _tsne(gpu: bool):
+    def embed(X: np.ndarray, params: dict, seed: int):
+        perplexity = float(params.get("perplexity", 30.0))
+        late = float(params.get("late_exaggeration", 1.0))
+        n = X.shape[0]
+        t0 = time.perf_counter()
+        if gpu:
+            from cuml.manifold import TSNE
+
+            Z = TSNE(n_components=2, perplexity=perplexity, n_neighbors=min(int(3 * perplexity), n - 1),
+                     early_exaggeration=12.0, late_exaggeration=late, exaggeration_iter=250, max_iter=750,
+                     learning_rate_method="none", learning_rate=n / 3.0, init="pca", method="fft",
+                     random_state=seed).fit_transform(X.astype(np.float32))
+            Z = np.asarray(Z, dtype=np.float64)
+        else:
+            from openTSNE import TSNE
+
+            Z = np.asarray(TSNE(n_components=2, perplexity=perplexity, early_exaggeration=12,
+                                early_exaggeration_iter=250, n_iter=500, exaggeration=late, initialization="pca",
+                                negative_gradient_method="fft", n_jobs=-1, random_state=seed).fit(X))
+        return Z, time.perf_counter() - t0, {}
+    return embed
+
+
 def _lisomap(gpu: bool):
     def embed(X: np.ndarray, params: dict, seed: int):
         from lvm.embedding import place_landmarks
@@ -158,6 +192,8 @@ def _lisomap_distances_gpu(X: np.ndarray, n_neighbors: int, landmarks: np.ndarra
     return D
 
 
+LOCAL_PCA = {"embedding": {"local_scale": {"strategy": "pca", "pca": {"fill": 0.35}}}}
+
 METHODS: dict[str, Method] = {
     "lvm_gpu": Method("lvm", "gpu", "LVM (GPU)", _lvm(True)),
     "umap_gpu": Method("umap", "gpu", "UMAP (GPU, cuML)", _umap(True)),
@@ -167,7 +203,21 @@ METHODS: dict[str, Method] = {
     "le_cpu": Method("le", "cpu", "Laplacian Eigenmaps (CPU, sklearn + AMG)", _le(False)),
     "lisomap_gpu": Method("lisomap", "gpu", "Landmark Isomap (GPU, cuML + cuGraph)", _lisomap(True)),
     "lisomap_cpu": Method("lisomap", "cpu", "Landmark Isomap (CPU, sklearn + SciPy)", _lisomap(False)),
+    "tsne_gpu": Method("tsne", "gpu", "t-SNE (GPU, cuML)", _tsne(True)),
+    "tsne_cpu": Method("tsne", "cpu", "t-SNE (CPU, openTSNE)", _tsne(False)),
+    # LVM plus a local chart per cell: its points placed by the cell's own 2-D PCA (fill 0.35, chosen in
+    # diagnostics/kernels). The single-level stand-in for zooming into each region; uses LVM's tuning.
+    "lvm_pca_gpu": Method("lvm_pca", "gpu", "LVM + local PCA (GPU)", _lvm(True), tuned_as="lvm",
+                          overrides=LOCAL_PCA),
+    "lvm_pca_cpu": Method("lvm_pca", "cpu", "LVM + local PCA (CPU)", _lvm(False), tuned_as="lvm",
+                          overrides=LOCAL_PCA),
 }
+
+
+def method_params(name: str) -> dict:
+    """The settings a method runs with: its family's tuned settings plus its fixed overrides."""
+    m = METHODS[name]
+    return _merge(best_params(m.tuned_as or m.family), m.overrides)
 
 
 def best_params(family: str) -> dict:

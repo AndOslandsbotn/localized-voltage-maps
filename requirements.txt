@@ -11,8 +11,10 @@ cugraph-cu13==26.8.0
 faiss-cpu==1.15.1
 array-api-compat==1.15.0
 pyamg==5.3.0
+scikit-dimension==0.3.7
 nvidia-ml-py==13.615.71
 psutil==7.2.2
 umap-learn==0.5.12
+openTSNE==1.0.4
 matplotlib==3.11.2
 pytest==9.1.1

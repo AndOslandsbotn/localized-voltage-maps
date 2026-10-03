@@ -1,0 +1,11 @@
+params:
+  late_exaggeration: 2.0
+  perplexity: 15
+selected_by: highest mean trustworthiness on the 'tune' split (n=20000, seeds=[0,
+  1, 2])
+scores:
+  trustworthiness: 0.9779
+  continuity: 0.9613
+  knn_accuracy: 0.9483
+  distance_correlation: 0.3224
+  total_s: 1.0818

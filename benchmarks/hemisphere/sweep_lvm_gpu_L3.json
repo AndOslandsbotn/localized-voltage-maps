@@ -1,0 +1,9 @@
+{
+ "method": "lvm_gpu",
+ "landmarks": 3,
+ "torn_share": 0.06765,
+ "rho_g": 0.0029449089617215735,
+ "trustworthiness": 0.9983663757648711,
+ "continuity": 0.9917646945531147,
+ "geodesic_correlation": 0.891123302538426
+}

@@ -92,3 +92,26 @@ def test_landmark_mds_pipeline_runs_and_embeds_the_strip(landmarks_strategy, mis
     # Max-min spreads landmarks into general position, which triangulation needs; MI may
     # place the few landmarks almost on a line, leaving only one usable component.
     assert trust > (0.85 if landmarks_strategy == "maxmin" else 0.7)
+
+
+def test_local_scale_pipeline_spreads_points_and_streams():
+    Y, X = _strip_in_20d(n=3000, seed=1)
+    config = _config(extension={"kernel": "knn", "knn": {"k": 3, "sharpness": 16.0}},
+                     embedding={"local_scale": {"strategy": "cell", "cell": {"fill": 0.5}}})
+    model = fit_level(array_source(X, chunk_size=1000), config)
+    assert model.local_scale is not None and "local_scale" in model.timings
+    Z = np.concatenate(list(model.transform_source(array_source(X, chunk_size=700))))
+    assert np.allclose(Z, model.transform(X))
+    assert len(np.unique(np.round(Z, 6), axis=0)) > 0.9 * len(Z)       # points no longer piled up
+
+
+@pytest.mark.parametrize("device", ["cpu", "cuda"])
+def test_local_pca_pipeline_runs_on_its_device_and_streams(device):
+    Y, X = _strip_in_20d(n=3000, seed=2)
+    config = _config(compute={"device": device},
+                     embedding={"local_scale": {"strategy": "pca", "pca": {"fill": 0.35}}})
+    model = fit_level(array_source(X, chunk_size=1000), config)
+    assert model.local_scale.bases.device.type == device
+    Z = np.concatenate(list(model.transform_source(array_source(X, chunk_size=700))))
+    assert np.allclose(Z, model.transform(X), atol=1e-5)
+    assert len(np.unique(np.round(Z, 5), axis=0)) > 0.9 * len(Z)

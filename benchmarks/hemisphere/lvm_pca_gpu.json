@@ -1,0 +1,62 @@
+{
+ "method": "lvm_pca_gpu",
+ "label": "LVM + local PCA (GPU)",
+ "n": 20000,
+ "seed": 0,
+ "params": {
+  "cells": {
+   "n_cells": 300
+  },
+  "embedding": {
+   "landmark_mds": {
+    "missing": "chain"
+   },
+   "strategy": "landmark_mds",
+   "local_scale": {
+    "strategy": "pca",
+    "pca": {
+     "fill": 0.35
+    }
+   }
+  },
+  "landmarks": {
+   "count": {
+    "dimension": {
+     "multiplier": 1.0
+    },
+    "strategy": "dimension"
+   },
+   "strategy": "mutual_information"
+  },
+  "scaling": {
+   "reach": {
+    "k": null,
+    "quantile": 0.1
+   },
+   "strategy": "reach"
+  }
+ },
+ "fit_s": 0.38182267700176453,
+ "info": {
+  "stages": {
+   "sample": 0.0017650079971645027,
+   "dimension": 0.06576222599687753,
+   "cells": 0.009043903999554459,
+   "masses": 0.0030086500046309084,
+   "graph": 0.0018401119959889911,
+   "scaling": 0.18053824399976293,
+   "voltages": 0.006129366003733594,
+   "landmarks": 9.123999916482717e-06,
+   "embedding": 0.0007883709986344911,
+   "local_scale": 0.11293329400359653
+  },
+  "rho_g": 0.002820054483103209,
+  "reach": 3.0,
+  "rho_rounds": 2,
+  "n_landmarks": 3,
+  "dimension": 1.9876383158844446
+ },
+ "trustworthiness": 0.9987538088073027,
+ "continuity": 0.9937978894573177,
+ "geodesic_correlation": 0.8867824591566794
+}

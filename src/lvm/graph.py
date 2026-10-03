@@ -25,7 +25,9 @@ from typing import Callable
 import numpy as np
 from array_api_compat import array_namespace
 
-from lvm.config import CentroidSpacingConfig, KernelConfig, KnnRadiusConfig, RadiusConfig
+from lvm.config import (
+    CentroidSpacingConfig, GaussianKernelConfig, KernelConfig, KnnRadiusConfig, PointKnnRadiusConfig, RadiusConfig,
+)
 from lvm.strategies import resolve
 
 
@@ -41,17 +43,18 @@ class Kernel:
 
 # --- kernel radius (config graph.radius) ------------------------------------
 
-def choose_radius(centroids: np.ndarray, *, config: RadiusConfig) -> Radius:
+def choose_radius(centroids: np.ndarray, *, config: RadiusConfig, points: np.ndarray | None = None) -> Radius:
     """Kernel radius r for a region with the strategy named in ``config.strategy``.
 
-    Every strategy returns r = 0.0 for a region with a single cell (it has no
-    neighbours to reach).
+    ``points`` are data points of the region (its sample), needed by
+    ``point_knn``. Every strategy returns r = 0.0 for a region with a single
+    cell (it has no neighbours to reach).
     """
     strategy, options = resolve(_RADIUS_STRATEGIES, config)
-    return strategy(np.asarray(centroids, dtype=np.float64), options=options)
+    return strategy(np.asarray(centroids, dtype=np.float64), options=options, points=points)
 
 
-def _knn(centroids: np.ndarray, *, options: KnnRadiusConfig) -> Radius:
+def _knn(centroids: np.ndarray, *, options: KnnRadiusConfig, points=None) -> Radius:
     """r = median over cells of the distance to their k-th nearest centroid.
 
     A cell at the median then has about k neighbours within r, whatever the
@@ -68,7 +71,29 @@ def _knn(centroids: np.ndarray, *, options: KnnRadiusConfig) -> Radius:
     return Radius(float(np.median(_neighbour_distances(centroids, k)[:, k - 1])))
 
 
-def _centroid_spacing(centroids: np.ndarray, *, options: CentroidSpacingConfig) -> Radius:
+def _point_knn(centroids: np.ndarray, *, options: PointKnnRadiusConfig, points=None) -> Radius:
+    """r = median over data points of the distance to their k-th nearest centroid.
+
+    A typical point then has about k cells within r. In high dimensions a
+    point sits farther from every centroid than centroids sit from each other
+    (averaging removes each point's own deviation), so ``_knn``'s r leaves
+    about half of the points with no cell within reach; this one doesn't.
+    """
+    if points is None:
+        raise ValueError("the point_knn radius needs the region's sample points")
+    if centroids.shape[0] < 2:
+        return Radius(0.0)
+    from sklearn.neighbors import NearestNeighbors
+
+    points = np.asarray(points, dtype=np.float64)
+    if points.shape[0] > options.sample_size:
+        points = points[np.random.default_rng(0).choice(points.shape[0], options.sample_size, replace=False)]
+    k = min(options.k, centroids.shape[0])
+    dist, _ = NearestNeighbors(n_neighbors=k).fit(centroids).kneighbors(points)
+    return Radius(float(np.median(dist[:, k - 1])))
+
+
+def _centroid_spacing(centroids: np.ndarray, *, options: CentroidSpacingConfig, points=None) -> Radius:
     """r = multiplier * median nearest-neighbour centroid distance.
 
     Fine in low dimensions; in high ones it connects almost every cell, see
@@ -90,6 +115,7 @@ def _neighbour_distances(centroids: np.ndarray, k: int) -> np.ndarray:
 
 _RADIUS_STRATEGIES: dict[str, Callable[..., Radius]] = {
     "knn": _knn,
+    "point_knn": _point_knn,
     "centroid_spacing": _centroid_spacing,
 }
 
@@ -126,9 +152,54 @@ def _radial(sq_dist, *, options: None, r: float):
     return xp.astype(sq_dist <= r * r, sq_dist.dtype)
 
 
+def _tapered(sq_dist, *, options: None, r: float):
+    """K_ij = (1 - d_ij^2 / r^2)_+: falls smoothly to 0 at r, with the radial kernel's support."""
+    xp = array_namespace(sq_dist)
+    return xp.clip(1.0 - sq_dist / (r * r), 0.0, None)
+
+
+def _gaussian(sq_dist, *, options: GaussianKernelConfig, r: float):
+    """K_ij = exp(-d_ij^2 / (2 s^2)) with s = sigma * r, set to 0 beyond cutoff * s."""
+    xp = array_namespace(sq_dist)
+    s2 = (options.sigma * r) ** 2
+    inside = xp.astype(sq_dist <= options.cutoff**2 * s2, sq_dist.dtype)
+    return xp.exp(-sq_dist / (2.0 * s2)) * inside
+
+
 _KERNEL_STRATEGIES: dict[str, Callable[..., np.ndarray]] = {
     "radial": _radial,
+    "tapered": _tapered,
+    "gaussian": _gaussian,
 }
+
+
+def adaptive_knn_kernel(sq_dist, *, k: int, sharpness: float = 1.0):
+    """Points to cells: weights on each point's k nearest cells, 0 elsewhere (NumPy or torch).
+
+    w_i = exp(-sharpness (d_i^2 - d_1^2) / (2 s^2)) over the point's k nearest
+    cells, with d_1 its nearest and s^2 the mean of d_i^2 - d_1^2 over those k. In
+    high dimensions every point is about equally far from all nearby
+    centroids (its own deviation from the cell mean adds to every distance);
+    subtracting d_1^2 removes that shared part, leaving how much closer the
+    point is to one cell than another. The nearest cell gets weight 1.
+    """
+    k = min(k, sq_dist.shape[1])
+    if isinstance(sq_dist, np.ndarray):
+        idx = np.argpartition(sq_dist, k - 1, axis=1)[:, :k]
+        d2 = np.take_along_axis(sq_dist, idx, axis=1)
+        excess = d2 - d2.min(axis=1, keepdims=True)
+        s2 = excess.mean(axis=1, keepdims=True)
+        w = np.exp(-sharpness * excess / (2.0 * np.where(s2 > 0, s2, 1.0)))
+        K = np.zeros_like(sq_dist)
+        np.put_along_axis(K, idx, w, axis=1)
+        return K
+    import torch
+
+    d2, idx = torch.topk(sq_dist, k, dim=1, largest=False)
+    excess = d2 - d2[:, :1]
+    s2 = excess.mean(dim=1, keepdim=True)
+    w = torch.exp(-sharpness * excess / (2.0 * torch.where(s2 > 0, s2, torch.ones_like(s2))))
+    return torch.zeros_like(sq_dist).scatter_(1, idx, w)
 
 
 # --- grounded Laplacian -----------------------------------------------------

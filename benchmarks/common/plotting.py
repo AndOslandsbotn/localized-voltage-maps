@@ -24,7 +24,8 @@ QUALITY = [
     ("knn_accuracy", "5-NN label accuracy"),
     ("distance_correlation", "global: distance rank correlation"),
 ]
-COLORS = {"lvm": "tab:blue", "umap": "tab:orange", "le": "tab:green", "lisomap": "tab:purple"}
+COLORS = {"lvm": "tab:blue", "lvm_pca": "tab:cyan", "umap": "tab:orange", "le": "tab:green", "lisomap": "tab:purple",
+          "tsne": "tab:red"}
 
 
 def _mean_std(values: list[float]) -> tuple[float, float]:

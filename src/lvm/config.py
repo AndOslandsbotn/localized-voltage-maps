@@ -91,8 +91,15 @@ class CellsConfig:
 
 
 @dataclass(frozen=True)
+class GaussianKernelConfig:
+    sigma: float
+    cutoff: float
+
+
+@dataclass(frozen=True)
 class KernelConfig:
-    strategy: Literal["radial"]
+    strategy: Literal["radial", "tapered", "gaussian"]
+    gaussian: GaussianKernelConfig
 
 
 @dataclass(frozen=True)
@@ -106,9 +113,16 @@ class KnnRadiusConfig:
 
 
 @dataclass(frozen=True)
+class PointKnnRadiusConfig:
+    k: int
+    sample_size: int
+
+
+@dataclass(frozen=True)
 class RadiusConfig:
-    strategy: Literal["knn", "centroid_spacing"]
+    strategy: Literal["knn", "point_knn", "centroid_spacing"]
     knn: KnnRadiusConfig
+    point_knn: PointKnnRadiusConfig
     centroid_spacing: CentroidSpacingConfig
 
 
@@ -225,8 +239,16 @@ class DimensionConfig:
 
 
 @dataclass(frozen=True)
+class KnnExtensionConfig:
+    k: int
+    sharpness: float
+
+
+@dataclass(frozen=True)
 class ExtensionConfig:
     strategy: Literal["harmonic"]
+    kernel: Literal["graph", "radial", "tapered", "gaussian", "knn"]
+    knn: KnnExtensionConfig
 
 
 @dataclass(frozen=True)
@@ -241,10 +263,28 @@ class LandmarkMdsConfig:
 
 
 @dataclass(frozen=True)
+class CellLocalScaleConfig:
+    fill: float
+
+
+@dataclass(frozen=True)
+class PcaLocalScaleConfig:
+    fill: float
+
+
+@dataclass(frozen=True)
+class LocalScaleConfig:
+    strategy: Literal["none", "cell", "pca"]
+    cell: CellLocalScaleConfig
+    pca: PcaLocalScaleConfig
+
+
+@dataclass(frozen=True)
 class EmbeddingConfig:
     strategy: Literal["log_mds", "landmark_mds"]
     log_mds: LogMdsConfig
     landmark_mds: LandmarkMdsConfig
+    local_scale: LocalScaleConfig
 
 
 @dataclass(frozen=True)

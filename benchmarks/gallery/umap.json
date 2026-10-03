@@ -1,0 +1,13 @@
+{
+ "method": "umap_gpu",
+ "label": "UMAP (GPU, cuML)",
+ "params": {
+  "min_dist": 0.0,
+  "n_neighbors": 30
+ },
+ "fit_s": 4.765180450998741,
+ "trustworthiness": 0.9538332751529742,
+ "continuity": 0.9574824395626442,
+ "knn_accuracy": 0.96,
+ "distance_correlation": 0.29592873697210437
+}

@@ -50,13 +50,21 @@ cells:                   # Voronoi cells (k-means) for each region
 
 graph:
   kernel:
-    strategy: radial     # radial: W_ij = p_i p_j * 1{d(c_i, c_j) <= r}
+    strategy: radial     # radial: k = 1{d <= r} (the disk kernel of the paper's shape theorems)
+                         # tapered: k = (1 - d^2/r^2)_+, smooth but still zero beyond r
+                         # gaussian: k = exp(-d^2 / (2 (sigma r)^2)), cut to 0 beyond cutoff * sigma * r
+    gaussian:
+      sigma: 0.3333      # width as a fraction of r
+      cutoff: 3.0        # in widths: 3 * r/3 = r, the same support as the other two
   radius:                # kernel radius r, recomputed for every region
     strategy: knn        # knn: a typical cell has ~k neighbours, in any dimension
                          # centroid_spacing: multiple of the nearest-neighbour distance; fine in low
                          #   dimensions, but connects almost every cell in high ones (distances concentrate)
     knn:
       k: 10              # r = median over cells of the distance to their k-th nearest centroid
+    point_knn:           # point_knn: a typical *data point* has ~k cells within r. In high dimensions
+      k: 10              #   points sit on a shell around the centroids, farther out than the centroid
+      sample_size: 5000  #   spacing, so this r is larger than knn's (Def. 10 / Thm 11 assume cells << r)
     centroid_spacing:
       multiplier: 3.0    # r = multiplier * median nearest-neighbour centroid distance
   edge_weighting: mass   # mass: W_ij scaled by p_i p_j (Effective resistance paper, Def 11)
@@ -109,7 +117,7 @@ dimension:               # intrinsic dimension d of the region, estimated from i
                          #   scikit-dimension); fixed: use a given d
   mle:
     k: 20                # neighbours per point
-    sample_size: 10000   # points of the region's sample used (MNIST: d ~ 12 from 10k points, 0.6 s)
+    sample_size: 10000   # points of the region's sample used (MNIST 10k: d ~ 12.3; kNN 0.1 s GPU, 0.75 s CPU)
   twonn:
     sample_size: 10000
   fixed:
@@ -133,6 +141,15 @@ extension:               # voltages at individual data points (not just at cells
   strategy: harmonic     # harmonic: a point is a zero-mass cell,
                          #   v(x) = sum_i k(x,c_i) p_i v_i / (rho_g + sum_i k(x,c_i) p_i);
                          #   a point with no cell within r takes its nearest cell's voltages
+  kernel: knn            # k(x, c_i) above: graph = graph.kernel; or radial | tapered | gaussian (with
+                         #   graph.kernel's gaussian options). With radial, every point near the same
+                         #   cells gets the same voltages, so points pile up on ~1500 spots (MNIST 50k)
+                         # knn: each point's k nearest cells, w_i = exp(-(d_i^2 - d_1^2) / (2 s^2)) with s^2
+                         #   the point's mean excess d_i^2 - d_1^2 (adapts to each point; no fallback needed)
+  knn:                   # MNIST tuning split (diagnostics/kernels): k 3, sharpness 16 gave trust 0.962,
+    k: 3                 #   5-NN 0.864 vs the radial kernel's 0.927, 0.826
+    sharpness: 16.0      # divides s^2: larger keeps a point closer to its nearest cell (less mixing
+                         #   across clusters), smaller spreads it over its k cells (less piling up)
 
 embedding:               # low-dimensional coordinates from the landmark voltage maps
   strategy: landmark_mds # log_mds: classical MDS (= mass-weighted PCA) on features -log(max(v, tau))
@@ -145,6 +162,15 @@ embedding:               # low-dimensional coordinates from the landmark voltage
     missing: chain       # distance where v < tau (outside a map's support) is unknown:
                          # clip: use -log(tau), i.e. "at least this far"
                          # chain: go through landmarks in reach, d(x,l) = min_j d(x,j) + d(j,l)
+  local_scale:           # a second, local scale for the points of each cell (the global layout of the
+    strategy: none       #   cells is kept): none | cell. Differences in -log v within a cell are tiny next
+                         #   to those between cells, so a cell's points are correctly ordered but squeezed
+                         #   onto a spot. cell: z' = a_c + alpha_c (z - a_c) around the mean a_c of the
+                         #   cell's points, with alpha_c = fill * (distance to the nearest other a) / spread
+    cell:
+      fill: 0.5          # a cell's points spread over this share of the distance to its nearest neighbour
+    pca:                 # pca: within each cell, the 2 main directions of its points' raw features
+      fill: 0.35         #   (rotated to match the cell's LVM offsets), median point at fill * nearest-cell distance
 
 partition:               # how cells are split into child regions
   strategy: support      # argmax: disjoint, cell goes to its highest-voltage landmark

@@ -100,3 +100,53 @@ def test_landmark_mds_transform_on_gpu_matches_numpy():
     emb = fit_embedding(V, np.full(100, 0.01), config=_lmds_config("chain"), tau=1e-3, landmark_cells=landmarks)
     gpu = emb.transform(torch.as_tensor(V, device="cuda")).cpu().numpy()
     np.testing.assert_allclose(gpu, emb.transform(V), rtol=1e-8, atol=1e-8)
+
+
+def test_local_scale_spreads_each_cell_to_its_share_and_keeps_its_order():
+    from lvm.config import load_config
+    from lvm.embedding import fit_local_scale
+
+    rng = np.random.default_rng(0)
+    centres = np.array([[0.0, 0.0], [10.0, 0.0], [0.0, 4.0]])
+    cell = rng.integers(0, 3, 600)
+    Z = centres[cell] + 1e-3 * rng.normal(size=(600, 2))          # each cell squeezed onto a spot
+    config = load_config(overrides={"embedding": {"local_scale": {"strategy": "cell", "cell": {"fill": 0.5}}}})
+    local = fit_local_scale(Z, cell, 3, config=config.embedding.local_scale)
+    Zs = local.apply(Z, cell)
+    for c, nearest in ((0, 4.0), (1, 10.0), (2, 4.0)):
+        pts = Zs[cell == c]
+        rms = np.sqrt(((pts - pts.mean(0)) ** 2).sum(1).mean())
+        assert rms == pytest.approx(0.5 * nearest, rel=1e-3)
+        # order within the cell is unchanged: same nearest neighbour for every point
+        from scipy.spatial.distance import cdist
+
+        before, after = cdist(Z[cell == c], Z[cell == c]), cdist(pts, pts)
+        np.fill_diagonal(before, np.inf), np.fill_diagonal(after, np.inf)
+        assert np.array_equal(before.argmin(1), after.argmin(1))
+    none = load_config().embedding.local_scale
+    assert fit_local_scale(Z, cell, 3, config=none) is None
+
+
+@pytest.mark.parametrize("device", ["cpu", "cuda"])
+def test_local_pca_directions_match_each_cells_exact_pca(device):
+    import torch
+
+    from lvm.embedding import _fit_local_pca
+
+    rng = np.random.default_rng(1)
+    n_cells, d = 4, 30
+    cell = rng.integers(0, n_cells, 2000)
+    # Each cell varies mostly in its own random 2-D plane.
+    planes = [np.linalg.qr(rng.normal(size=(d, 2)))[0] for _ in range(n_cells)]
+    X = np.stack([planes[c] @ (rng.normal(size=2) * [3.0, 2.0]) for c in cell]) + 0.05 * rng.normal(size=(2000, d))
+    Z = rng.normal(size=(2000, 2))
+    t = lambda a, dt: torch.as_tensor(a, dtype=dt, device=device)
+    local = _fit_local_pca(t(Z, torch.float64), t(cell, torch.long), n_cells, t(X, torch.float32), fill=0.5)
+    B = local.bases.cpu().numpy().reshape(d, n_cells, 2)
+    for c in range(n_cells):
+        Xc = X[cell == c][:256]                       # the fit uses at most 256 points per cell
+        _, _, vt = np.linalg.svd(Xc - X[cell == c].mean(0), full_matrices=False)
+        # Same 2-D subspace: projecting the exact directions onto ours loses (almost) nothing.
+        overlap = np.linalg.svd(vt[:2] @ B[:, c, :], compute_uv=False)
+        assert np.all(overlap > 0.999)
+    assert local.valid.all() and local.anchors.device.type == device

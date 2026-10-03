@@ -1,0 +1,13 @@
+{
+ "method": "tsne_gpu",
+ "label": "t-SNE (GPU, cuML)",
+ "params": {
+  "late_exaggeration": 2.0,
+  "perplexity": 15
+ },
+ "fit_s": 4.332133235002402,
+ "trustworthiness": 0.9769250155481994,
+ "continuity": 0.9605580218677902,
+ "knn_accuracy": 0.9555999999999999,
+ "distance_correlation": 0.3362098048539954
+}

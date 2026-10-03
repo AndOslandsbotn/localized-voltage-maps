@@ -14,7 +14,7 @@ The recursive, hierarchical driver will run this same sequence per region.
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from functools import cached_property
 from typing import Iterator
 
@@ -22,10 +22,10 @@ import numpy as np
 import torch
 
 from lvm.cells import fit_cells, sq_distances
-from lvm.config import Config
+from lvm.config import Config, KernelConfig
 from lvm.dimension import Dimension, choose_dimension
-from lvm.embedding import LandmarkMdsEmbedding, LogMdsEmbedding, fit_embedding
-from lvm.graph import choose_kernel, choose_radius
+from lvm.embedding import LandmarkMdsEmbedding, LocalPca, LocalScale, LogMdsEmbedding, fit_embedding, fit_local_scale
+from lvm.graph import adaptive_knn_kernel, choose_kernel, choose_radius
 from lvm.landmarks import LandmarkSelection, choose_landmarks, landmark_count
 from lvm.regions import CellMasses, Region, estimate_masses, min_count_for, sample_regions
 from lvm.scaling import RhoChoice, choose_rho_g
@@ -48,6 +48,7 @@ class LevelModel:
     dimension: Dimension | None = None   # estimated intrinsic dimension of the data
     device: str = "cpu"            # where the per-point steps (voltages, transform) run
     timings: dict[str, float] = field(default_factory=dict)   # seconds per stage
+    local_scale: LocalScale | LocalPca | None = None   # embedding.local_scale: a second scale per cell
 
     @cached_property
     def _on_device(self) -> tuple:
@@ -57,8 +58,19 @@ class LevelModel:
             return tuple(np.asarray(a, dtype=np.float32) for a in arrays)
         return tuple(torch.as_tensor(a, dtype=torch.float32, device=self.device) for a in arrays)
 
+    @property
+    def _point_kernel(self) -> KernelConfig:
+        """Kernel from data points to cells: ``extension.kernel``, or the graph's when that is "graph"."""
+        kernel = self.config.graph.kernel
+        name = self.config.extension.kernel
+        return kernel if name in ("graph", "knn") else replace(kernel, strategy=name)
+
     def _voltages(self, X):
-        """Thresholded landmark voltages (L, m) at points X, as an array on ``device``.
+        """Thresholded landmark voltages (L, m) at points X, as an array on ``device``."""
+        return self._voltages_and_cells(X)[0]
+
+    def _voltages_and_cells(self, X):
+        """Thresholded landmark voltages (L, m) at points X, each point's nearest cell, and X, on ``device``.
 
         Every step runs where the data is: one distance computation serves
         both the kernel and the nearest-cell fallback, then the extension and
@@ -72,9 +84,13 @@ class LevelModel:
         else:
             X = torch.as_tensor(np.asarray(X), dtype=torch.float32, device=self.device)
             d2 = sq_distances(X, C)
-        Kx = choose_kernel(d2, r=self.r, config=cfg.graph.kernel).K
-        VX = extend_voltages(Kx, V, p, config=cfg.extension, rho_g=self.rho.rho_g, nearest=d2.argmin(1))
-        return threshold_voltages(VX, cfg.voltage.threshold)
+        if cfg.extension.kernel == "knn":
+            Kx = adaptive_knn_kernel(d2, k=cfg.extension.knn.k, sharpness=cfg.extension.knn.sharpness)
+        else:
+            Kx = choose_kernel(d2, r=self.r, config=self._point_kernel).K
+        nearest = d2.argmin(1)
+        VX = extend_voltages(Kx, V, p, config=cfg.extension, rho_g=self.rho.rho_g, nearest=nearest)
+        return threshold_voltages(VX, cfg.voltage.threshold), nearest, X
 
     def voltages(self, X: np.ndarray) -> np.ndarray:
         """Landmark voltages at data points X (m, d) -> (L, m), thresholded."""
@@ -82,7 +98,13 @@ class LevelModel:
 
     def transform(self, X: np.ndarray) -> np.ndarray:
         """Embedding coordinates for data points X (m, d) -> (m, n_components)."""
-        return _to_numpy(self.embedding.transform(self._voltages(X)))
+        Z, cell, Xd = self._embed_on_device(X)
+        return _to_numpy(Z if self.local_scale is None else self.local_scale.apply(Z, cell, Xd))
+
+    def _embed_on_device(self, X: np.ndarray):
+        """Coordinates before the local scale, each point's nearest cell, and X, all on ``device``."""
+        VX, nearest, Xd = self._voltages_and_cells(X)
+        return self.embedding.transform(VX), nearest, Xd
 
     def transform_source(self, source: ChunkSource) -> Iterator[np.ndarray]:
         """Embed a whole stream, one chunk at a time."""
@@ -111,7 +133,7 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
     sample = sample_regions(source, root, cfg.cells.sample_size, shuffled=cfg.data.shuffled, seed=cfg.compute.seed)[()]
     lap("sample")
 
-    dimension = choose_dimension(sample.points, config=cfg.dimension, seed=cfg.compute.seed)
+    dimension = choose_dimension(sample.points, config=cfg.dimension, seed=cfg.compute.seed, device=device)
     n_landmarks = landmark_count(dimension.d, config=cfg.landmarks)
     lap("dimension")
 
@@ -130,7 +152,7 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
     p = masses.p
     lap("masses")
 
-    r = choose_radius(root.centroids, config=cfg.graph.radius).r
+    r = choose_radius(root.centroids, config=cfg.graph.radius, points=sample.points).r
     K = choose_kernel(sq_distances(root.centroids, root.centroids), r=r, config=cfg.graph.kernel, exclude_self=True).K
     lap("graph")
 
@@ -154,7 +176,7 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
     embedding = fit_embedding(V, p, config=cfg.embedding, tau=tau, landmark_cells=landmark_cells)
     lap("embedding")
 
-    return LevelModel(
+    model = LevelModel(
         config=cfg,
         centroids=root.centroids,
         masses=masses,
@@ -169,6 +191,16 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
         device=device,
         timings=timings,
     )
+    if cfg.embedding.local_scale.strategy != "none":
+        # The cells' points are needed to measure each cell's spread: embed the sample once.
+        chunk = cfg.data.chunk_size
+        parts = [model._embed_on_device(sample.points[s:s + chunk]) for s in range(0, len(sample.points), chunk)]
+        torch_device = "cpu" if device == "cpu" else device
+        Z, cell, Xd = (torch.cat([torch.as_tensor(part[i], device=torch_device) for part in parts]) for i in range(3))
+        local = fit_local_scale(Z, cell.to(torch.long), root.centroids.shape[0], config=cfg.embedding.local_scale, X=Xd)
+        model = replace(model, local_scale=local)
+        lap("local_scale")
+    return model
 
 
 def _to_numpy(x) -> np.ndarray:

@@ -22,7 +22,7 @@ from common.tuning import run_grid  # noqa: E402
 METHOD = "umap_gpu"   # tuned on GPU; the CPU version reuses the same settings
 GRID = [
     {"n_neighbors": n_neighbors, "min_dist": min_dist}
-    for n_neighbors, min_dist in itertools.product([5, 10, 15, 30, 50], [0.0, 0.1, 0.5])
+    for n_neighbors, min_dist in itertools.product([5, 15, 30, 100, 200], [0.0, 0.1, 0.5])
 ]
 
 

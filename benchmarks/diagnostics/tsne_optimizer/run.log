@@ -1,0 +1,20 @@
+{"variant": "cuml_adaptive", "seed": 0, "seconds": 1.276410702999783, "kl": 0.41152942180633545, "trustworthiness": 0.9678491002106531, "continuity": 0.9609401665162002, "knn_accuracy": 0.9266, "distance_correlation": 0.4546934629422512}
+[guard] peak memory 1787 MB (limit 4500 MB)
+{"variant": "cuml_adaptive", "seed": 1, "seconds": 1.3354828749997978, "kl": 0.41483959555625916, "trustworthiness": 0.970094966395827, "continuity": 0.9626089517504263, "knn_accuracy": 0.9248000000000001, "distance_correlation": 0.4068825913687499}
+[guard] peak memory 1901 MB (limit 4500 MB)
+{"variant": "cuml_none_n12", "seed": 0, "seconds": 1.397399592000511, "kl": 0.470144122838974, "trustworthiness": 0.9674052603069515, "continuity": 0.9617819319891664, "knn_accuracy": 0.9282, "distance_correlation": 0.4028332268898683}
+[guard] peak memory 1882 MB (limit 4500 MB)
+{"variant": "cuml_none_n12", "seed": 1, "seconds": 1.4675312819999817, "kl": 0.46449950337409973, "trustworthiness": 0.9687339953856957, "continuity": 0.9630140034105727, "knn_accuracy": 0.9236000000000001, "distance_correlation": 0.35621446458064776}
+[guard] peak memory 1756 MB (limit 4500 MB)
+{"variant": "cuml_none_n6", "seed": 0, "seconds": 1.3467028779996326, "kl": 0.4400506317615509, "trustworthiness": 0.9669536884341459, "continuity": 0.9619521035209149, "knn_accuracy": 0.9241999999999999, "distance_correlation": 0.3909498187163403}
+[guard] peak memory 1899 MB (limit 4500 MB)
+{"variant": "cuml_none_n6", "seed": 1, "seconds": 1.4655324760005897, "kl": 0.4365216791629791, "trustworthiness": 0.9696753014344468, "continuity": 0.9632161179656936, "knn_accuracy": 0.9228, "distance_correlation": 0.3465617777324942}
+[guard] peak memory 1756 MB (limit 4500 MB)
+{"variant": "cuml_none_n3", "seed": 0, "seconds": 1.3902291989998048, "kl": 0.40749606490135193, "trustworthiness": 0.9656280589828469, "continuity": 0.961561412378373, "knn_accuracy": 0.9270000000000002, "distance_correlation": 0.38583862064119256}
+[guard] peak memory 1774 MB (limit 4500 MB)
+{"variant": "cuml_none_n3", "seed": 1, "seconds": 1.3477177579989075, "kl": 0.3995153307914734, "trustworthiness": 0.9687471762463638, "continuity": 0.9630327455110843, "knn_accuracy": 0.9236000000000001, "distance_correlation": 0.3414883169145791}
+[guard] peak memory 1917 MB (limit 4500 MB)
+{"variant": "opentsne_auto", "seed": 0, "seconds": 38.05420810600117, "kl": 2.1662910028056235, "trustworthiness": 0.9726677139131307, "continuity": 0.9577567418998897, "knn_accuracy": 0.9481999999999999, "distance_correlation": 0.3330999700208532}
+[guard] peak memory 1063 MB (limit 4500 MB)
+{"variant": "opentsne_auto", "seed": 1, "seconds": 37.99680362500112, "kl": 2.1666939337998787, "trustworthiness": 0.9730344387601565, "continuity": 0.959749988965794, "knn_accuracy": 0.9456, "distance_correlation": 0.2802400534447491}
+[guard] peak memory 1143 MB (limit 4500 MB)
