@@ -21,9 +21,10 @@ COUNTS = (3, 6, 9, 12, 20)
 
 
 def main() -> None:
+    variant = sys.argv[1] if len(sys.argv) > 1 else "before"
     fig = plt.figure(figsize=(4.4 * len(COUNTS), 9))
     for col, L in enumerate(COUNTS):
-        name = f"sweep_L{L}"
+        name = f"sweep_L{L}" if variant == "before" else f"sweep_{variant}_L{L}"
         data, info = np.load(HERE / f"{name}.npz"), json.loads((HERE / f"{name}.json").read_text())
         X, Z, torn, lm = data["X"], data["Z"], data["torn"], data["landmarks"]
         angle = np.arctan2(X[:, 1], X[:, 0])
@@ -45,10 +46,11 @@ def main() -> None:
         ax3.set_box_aspect((1, 1, 0.5))
         ax3.set_xticks([]), ax3.set_yticks([]), ax3.set_zticks([])
         ax3.set_title("on the half sphere: torn points red, landmarks ★", fontsize=9)
-    fig.suptitle("Sphere tears (pinned settings.yaml): LVM on the half sphere (n = 20000) by number of landmarks; "
+    title = {"before": "before (settings.yaml)", "fix_A": "fix A, distances read down to 1e-10 (settings_fix_A.yaml)"}
+    fig.suptitle(f"Sphere tears, {title[variant]}: LVM on the half sphere (n = 20000) by number of landmarks; "
                  "torn = a sphere neighbour placed > 10% of the embedding's width away", fontsize=11)
     fig.tight_layout()
-    out = HERE / "figure.png"
+    out = HERE / ("figure.png" if variant == "before" else f"figure_{variant}.png")
     fig.savefig(out, dpi=110)
     plt.close(fig)
     print(out)

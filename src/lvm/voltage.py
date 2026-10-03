@@ -249,7 +249,7 @@ def extend_voltages(
     return strategy(Kx, V, p, options=options, rho_g=rho_g, nearest=nearest)
 
 
-def _harmonic(Kx, V, p, *, options: None, rho_g: float, nearest):
+def _grounded(Kx, V, p, *, options: None, rho_g: float, nearest):
     """A point is a zero-mass cell: v(x) = sum_i k(x,c_i) p_i v_i / (rho_g + sum_i k(x,c_i) p_i).
 
     The same fill-in ``solve_grounded_voltage_maps`` gives zero-mass cells, and
@@ -302,8 +302,26 @@ def _as_array(x):
     return x if isinstance(x, (np.ndarray, torch.Tensor)) else np.asarray(x)
 
 
+def _average(Kx, V, p, *, options: None, rho_g: float, nearest):
+    """Def. 10 of the paper as printed: v(x) = sum_i k(x,c_i) p_i v_i / sum_i k(x,c_i) p_i, no ground term.
+
+    A point is not a node of the network but a location between nodes, so it
+    interpolates its cells' voltages. ``_grounded`` instead treats it as a
+    zero-mass node with its own ground: with only a few cells attached (e.g. the
+    sharp ``knn`` point kernel), that ground term rivals their mass and roughly
+    halves the point's voltage relative to its cells'. ``rho_g`` is unused.
+    """
+    xp = array_namespace(Kx, V, p)
+    Wx = Kx * p[None, :]                              # (m, n)
+    total = xp.sum(Wx, axis=1)
+    isolated = total == 0
+    out = (V @ Wx.T) / xp.where(isolated, xp.ones_like(total), total)[None, :]
+    return xp.where(isolated[None, :], xp.take(V, nearest, axis=1), out)
+
+
 _EXTENSION_STRATEGIES: dict[str, Callable[..., np.ndarray]] = {
-    "harmonic": _harmonic,
+    "grounded": _grounded,
+    "average": _average,
 }
 
 

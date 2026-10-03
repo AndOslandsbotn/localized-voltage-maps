@@ -9,6 +9,7 @@ Points uniform on the upper half of the unit sphere in 3-D (z ≥ 0), generated 
 |---|---|
 | `gallery/` | LVM, LVM + local PCA and t-SNE on 20k points, next to the truth (`run.py`) |
 | `diagnostics/landmarks/` | Landmark count and selection (mutual information vs max-min) on the half sphere. Its results were made with the pre-reorganisation scripts; see git history. |
+| `diagnostics/point_extension/` | Point voltages: grounded vs average (Def. 10, no ground). Average gives points exactly their cells' voltages (ratio 1.00 instead of 0.55), 2.5–4× fewer point pairs below τ, fewer tears, slightly better on every measure |
 | `archive/` | superseded results |
 
 The tears seen with few landmarks are a demonstration: `../demonstrations/sphere_tears/`.

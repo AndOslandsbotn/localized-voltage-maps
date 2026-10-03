@@ -1,0 +1,13 @@
+{
+ "variant": "fix_A",
+ "landmarks": 9,
+ "torn_share": 0.0003,
+ "rho_g": 0.002174559276040982,
+ "distance_floor": 1e-10,
+ "chained_point_pairs": 0.0,
+ "chained_landmark_pairs": 0,
+ "trustworthiness": 0.9985142541879828,
+ "continuity": 0.9961160718226502,
+ "knn_accuracy": NaN,
+ "distance_correlation": 0.9754687934750517
+}

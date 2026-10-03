@@ -246,7 +246,7 @@ class KnnExtensionConfig:
 
 @dataclass(frozen=True)
 class ExtensionConfig:
-    strategy: Literal["harmonic"]
+    strategy: Literal["grounded", "average"]
     kernel: Literal["graph", "radial", "tapered", "gaussian", "knn"]
     knn: KnnExtensionConfig
 
@@ -285,6 +285,7 @@ class EmbeddingConfig:
     log_mds: LogMdsConfig
     landmark_mds: LandmarkMdsConfig
     local_scale: LocalScaleConfig
+    distance_floor: float | None
 
 
 @dataclass(frozen=True)

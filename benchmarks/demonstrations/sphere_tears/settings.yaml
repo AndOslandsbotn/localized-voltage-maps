@@ -104,12 +104,13 @@ landmarks:
     precision: float32
     scratch_mb: 128
 extension:
-  strategy: harmonic
+  strategy: grounded
   kernel: knn
   knn:
     k: 3
     sharpness: 16.0
 embedding:
+  distance_floor: null
   strategy: landmark_mds
   log_mds:
     n_components: 2

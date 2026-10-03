@@ -1,5 +1,6 @@
-# Pinned LVM settings of the point-stacking demonstration, variant 'before', resolved 2026-10-03.
-# Do not edit: the demonstration must reproduce as it was.
+# Pinned settings of the sphere-tears fix A: the 'before' settings (settings.yaml) with one change,
+# embedding.distance_floor = 1e-10: distances are read from voltages down to 1e-10 instead of switching to
+# chaining below tau = 1e-3. tau keeps its roles (support, reach -> rho_g, landmark selection). Do not edit.
 compute:
   device: cuda
   dtype: float64
@@ -13,7 +14,7 @@ data:
   chunk_size: 10000
   shuffled: true
 cells:
-  n_cells: 150
+  n_cells: 300
   sample_size: 50000
   kmeans:
     strategy: cuml
@@ -94,22 +95,21 @@ dimension:
 landmarks:
   strategy: mutual_information
   count:
-    strategy: dimension
+    strategy: fixed
     dimension:
       multiplier: 1.0
-  n_landmarks: 20
+  n_landmarks: 3
   mutual_information:
     noise_std: 0.01
     precision: float32
     scratch_mb: 128
 extension:
   strategy: grounded
-  kernel: graph
+  kernel: knn
   knn:
     k: 3
     sharpness: 16.0
 embedding:
-  distance_floor: null
   strategy: landmark_mds
   log_mds:
     n_components: 2
@@ -122,6 +122,7 @@ embedding:
       fill: 0.5
     pca:
       fill: 0.35
+  distance_floor: 1.0e-10
 partition:
   strategy: support
   uncovered:

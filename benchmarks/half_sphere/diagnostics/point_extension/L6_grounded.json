@@ -1,0 +1,10 @@
+{
+ "landmarks": 6,
+ "strategy": "grounded",
+ "torn": 0.00055,
+ "point_over_cell_voltage": 0.6168064348652827,
+ "point_pairs_below_tau": 0.05445833333333333,
+ "trustworthiness": 0.9984734035510081,
+ "continuity": 0.9959295335540175,
+ "distance_correlation": 0.9716563228365445
+}

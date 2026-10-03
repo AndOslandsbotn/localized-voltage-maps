@@ -115,3 +115,34 @@ def test_local_pca_pipeline_runs_on_its_device_and_streams(device):
     Z = np.concatenate(list(model.transform_source(array_source(X, chunk_size=700))))
     assert np.allclose(Z, model.transform(X), atol=1e-5)
     assert len(np.unique(np.round(Z, 5), axis=0)) > 0.9 * len(Z)
+
+
+def test_distance_floor_reads_voltages_below_tau_and_keeps_tau_elsewhere():
+    from lvm.embedding import point_landmark_distances
+
+    Y, X = _strip_in_20d(n=3000, seed=3)
+    model = fit_level(array_source(X, chunk_size=1000), _config(embedding={"distance_floor": 1e-10}))
+    tau, eps = model.config.voltage.threshold, model.distance_floor
+    assert eps == 1e-10 and model.embedding.tau == eps
+    # Support (tau) path and distance (epsilon) path of the same model.
+    v_tau = model.voltages(X)
+    v_eps = model._voltages_and_cells(X, for_distances=True)[0]
+    v_eps = v_eps.cpu().numpy() if hasattr(v_eps, "cpu") else np.asarray(v_eps)
+    reached = v_tau >= tau
+    assert (~reached).any()                                            # tau leaves gaps here
+    # Cutting cells below tau can only lower a point's voltage, so the distance path is never below the tau path;
+    # where all of a point's cells are reached (nearly everywhere) the two agree.
+    assert np.all(v_eps >= v_tau * (1 - 1e-5) - 1e-12)
+    assert np.mean(np.isclose(v_eps[reached], v_tau[reached], rtol=1e-5)) > 0.95
+    assert np.all(v_eps[~reached] > 0)                                 # where it doesn't, a voltage is read, not unknown
+    assert np.mean(v_eps < eps) < 0.5 * np.mean(~reached)              # far fewer pairs left to chain
+    d = point_landmark_distances(v_eps, model.embedding.landmark_D, tau=eps, missing="chain")
+    assert np.isfinite(d).all()
+    # The stored support maps are still thresholded at tau; the distance maps only at epsilon.
+    assert np.all((model.V == 0) | (model.V >= tau)) and np.all((model.V_dist == 0) | (model.V_dist >= eps))
+
+
+def test_distance_floor_must_not_exceed_tau():
+    Y, X = _strip_in_20d(n=1000, seed=4)
+    with pytest.raises(ValueError, match="distance_floor"):
+        fit_level(array_source(X, chunk_size=500), _config(embedding={"distance_floor": 0.5}))

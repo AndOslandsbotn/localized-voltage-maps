@@ -43,17 +43,18 @@ class LevelModel:
     rho: RhoChoice                 # chosen ground scaling
     landmarks: LandmarkSelection   # .indices are rows of the candidate maps
     landmark_cells: np.ndarray     # (L,) cell each landmark sits at
-    V: np.ndarray                  # (L, n) landmarks' thresholded voltage maps over the cells
+    V: np.ndarray                  # (L, n) landmarks' voltage maps over the cells, thresholded at tau
     embedding: LogMdsEmbedding | LandmarkMdsEmbedding
     dimension: Dimension | None = None   # estimated intrinsic dimension of the data
     device: str = "cpu"            # where the per-point steps (voltages, transform) run
     timings: dict[str, float] = field(default_factory=dict)   # seconds per stage
     local_scale: LocalScale | LocalPca | None = None   # embedding.local_scale: a second scale per cell
+    V_dist: np.ndarray | None = None   # the same maps thresholded at embedding.distance_floor (None: = V)
 
     @cached_property
     def _on_device(self) -> tuple:
         """Centroids, masses and landmark maps as float32 on ``device`` (copied once)."""
-        arrays = (self.centroids, self.masses.p, self.V)
+        arrays = (self.centroids, self.masses.p, self.V, self.V if self.V_dist is None else self.V_dist)
         if self.device == "cpu":
             return tuple(np.asarray(a, dtype=np.float32) for a in arrays)
         return tuple(torch.as_tensor(a, dtype=torch.float32, device=self.device) for a in arrays)
@@ -65,19 +66,28 @@ class LevelModel:
         name = self.config.extension.kernel
         return kernel if name in ("graph", "knn") else replace(kernel, strategy=name)
 
+    @property
+    def distance_floor(self) -> float:
+        """epsilon: voltages are read as distances down to this (``embedding.distance_floor``, default tau)."""
+        floor = self.config.embedding.distance_floor
+        return self.config.voltage.threshold if floor is None else floor
+
     def _voltages(self, X):
-        """Thresholded landmark voltages (L, m) at points X, as an array on ``device``."""
+        """Landmark voltages (L, m) at points X, thresholded at tau, as an array on ``device``."""
         return self._voltages_and_cells(X)[0]
 
-    def _voltages_and_cells(self, X):
-        """Thresholded landmark voltages (L, m) at points X, each point's nearest cell, and X, on ``device``.
+    def _voltages_and_cells(self, X, *, for_distances: bool = False):
+        """Landmark voltages (L, m) at points X, each point's nearest cell, and X, on ``device``.
 
-        Every step runs where the data is: one distance computation serves
-        both the kernel and the nearest-cell fallback, then the extension and
-        threshold, all without leaving the device.
+        Thresholded at tau (support), or with ``for_distances`` at the distance
+        floor epsilon, from the maps thresholded the same way. Every step runs
+        where the data is: one distance computation serves both the kernel and
+        the nearest-cell fallback, then the extension and threshold, all
+        without leaving the device.
         """
         cfg = self.config
-        C, p, V = self._on_device
+        C, p, V_tau, V_eps = self._on_device
+        V, threshold = (V_eps, self.distance_floor) if for_distances else (V_tau, cfg.voltage.threshold)
         if self.device == "cpu":
             X = np.asarray(X, dtype=np.float32)
             d2 = sq_distances(X, C, dtype=np.float32)
@@ -90,7 +100,7 @@ class LevelModel:
             Kx = choose_kernel(d2, r=self.r, config=self._point_kernel).K
         nearest = d2.argmin(1)
         VX = extend_voltages(Kx, V, p, config=cfg.extension, rho_g=self.rho.rho_g, nearest=nearest)
-        return threshold_voltages(VX, cfg.voltage.threshold), nearest, X
+        return threshold_voltages(VX, threshold), nearest, X
 
     def voltages(self, X: np.ndarray) -> np.ndarray:
         """Landmark voltages at data points X (m, d) -> (L, m), thresholded."""
@@ -103,7 +113,7 @@ class LevelModel:
 
     def _embed_on_device(self, X: np.ndarray):
         """Coordinates before the local scale, each point's nearest cell, and X, all on ``device``."""
-        VX, nearest, Xd = self._voltages_and_cells(X)
+        VX, nearest, Xd = self._voltages_and_cells(X, for_distances=True)
         return self.embedding.transform(VX), nearest, Xd
 
     def transform_source(self, source: ChunkSource) -> Iterator[np.ndarray]:
@@ -161,7 +171,11 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
                        sources=sources, device=device)
     lap("scaling")
 
-    V_all = threshold_voltages(solve_grounded_voltage_maps(K, p, rho.rho_g, sources.sets, device=device), tau)
+    V_raw = solve_grounded_voltage_maps(K, p, rho.rho_g, sources.sets, device=device)
+    V_all = threshold_voltages(V_raw, tau)
+    floor = tau if cfg.embedding.distance_floor is None else cfg.embedding.distance_floor
+    if not 0.0 < floor <= tau:
+        raise ValueError(f"embedding.distance_floor must be in (0, voltage.threshold], got {floor}")
     lap("voltages")
 
     # reach chooses the landmarks together with rho_g; the other strategies leave it to this step.
@@ -173,7 +187,9 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
     landmark_cells = sources.cells[landmarks.indices]
     lap("landmarks")
 
-    embedding = fit_embedding(V, p, config=cfg.embedding, tau=tau, landmark_cells=landmark_cells)
+    # Distances are read from the maps down to the distance floor (tau keeps the support and reach roles).
+    V_dist = V if floor == tau else threshold_voltages(V_raw[landmarks.indices], floor)
+    embedding = fit_embedding(V_dist, p, config=cfg.embedding, tau=floor, landmark_cells=landmark_cells)
     lap("embedding")
 
     model = LevelModel(
@@ -186,6 +202,7 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
         landmarks=landmarks,
         landmark_cells=landmark_cells,
         V=V,
+        V_dist=None if floor == tau else V_dist,
         embedding=embedding,
         dimension=dimension,
         device=device,

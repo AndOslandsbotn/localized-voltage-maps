@@ -1,0 +1,31 @@
+{
+ "landmarks": 3,
+ "missing": "clip",
+ "torn_share": 0.00465,
+ "jump_at_edge_median": 0.11189126968383789,
+ "jump_at_edge_p90": 0.26625195145606995,
+ "neighbour_diff_inside_median": 0.00024700164794921875,
+ "neighbour_diff_inside_p90": 0.1898808479309082,
+ "line": {
+  "slope": 3.079936455834531,
+  "intercept": 1.4753493818063599,
+  "r2_where_measured": 0.966062110735381
+ },
+ "torn_by_reach_count": {
+  "1": [
+   136,
+   0.0
+  ],
+  "2": [
+   6409,
+   0.0
+  ],
+  "3": [
+   13455,
+   0.0069119286510590855
+  ]
+ },
+ "torn_next_to_edge": 0.0,
+ "torn_away_from_edge": 0.00499489768516032,
+ "share_next_to_edge": 0.06905
+}

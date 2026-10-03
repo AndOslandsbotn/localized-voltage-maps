@@ -1,10 +1,13 @@
 {
+ "variant": "before",
  "landmarks": 3,
- "torn_share": 0.0629,
+ "torn_share": 0.06145,
  "rho_g": 0.002820054483103209,
- "trustworthiness": 0.9983856555321496,
- "continuity": 0.9916503159795366,
+ "distance_floor": 0.001,
+ "chained_point_pairs": 0.09048333333333333,
+ "chained_landmark_pairs": 0,
+ "trustworthiness": 0.9983181261911926,
+ "continuity": 0.9915516782024275,
  "knn_accuracy": NaN,
- "distance_correlation": 0.8825376811311954,
- "geodesic_correlation": 0.8825376811311954
+ "distance_correlation": 0.8843082777485063
 }

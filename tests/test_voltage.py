@@ -200,7 +200,7 @@ def test_single_node_sources_are_the_cells_with_mass():
     assert np.array_equal(sources.cells, [0, 2, 3])
 
 
-def test_harmonic_extension_matches_zero_mass_fill_in():
+def test_grounded_extension_matches_zero_mass_fill_in():
     # A data point is a zero-mass cell: placing one exactly where a zero-mass
     # cell sits must give that cell's fill-in voltage.
     rng = np.random.default_rng(20)
@@ -212,7 +212,7 @@ def test_harmonic_extension_matches_zero_mass_fill_in():
     V = solve_grounded_voltage_maps(K, p, rho_g, [[0], [12]], device="cpu")
 
     Kx = kernel(points, r=0.3)[[7]]  # row 7: cell 7 to every cell, zero on itself
-    v = extend_voltages(Kx, V, p, config=load_config().extension, rho_g=rho_g, nearest=np.array([7]))
+    v = extend_voltages(Kx, V, p, config=load_config(overrides={"extension": {"strategy": "grounded"}}).extension, rho_g=rho_g, nearest=np.array([7]))
 
     assert np.allclose(v[:, 0], V[:, 7], atol=1e-12)
 
@@ -221,7 +221,7 @@ def test_isolated_point_takes_its_nearest_cells_voltages():
     V = np.array([[1.0, 0.4, 0.1]])
     p = np.full(3, 1 / 3)
     Kx = np.zeros((1, 3))  # no cell within reach
-    v = extend_voltages(Kx, V, p, config=load_config().extension, rho_g=1.0, nearest=np.array([1]))
+    v = extend_voltages(Kx, V, p, config=load_config(overrides={"extension": {"strategy": "grounded"}}).extension, rho_g=1.0, nearest=np.array([1]))
     assert v[0, 0] == 0.4
 
 
@@ -248,3 +248,26 @@ def test_chained_distances_keep_disconnected_pairs_infinite():
 
     D = np.array([[0.0, np.inf], [np.inf, 0.0]])
     assert np.isinf(chained_distances(D)[0, 1])
+
+
+@pytest.mark.parametrize("device", ["cpu", "cuda"])
+def test_average_extension_interpolates_cell_voltages_without_ground(device):
+    import torch
+
+    from lvm.config import load_config
+    from lvm.voltage import extend_voltages
+
+    V = np.array([[1.0, 0.5, 0.2]])                     # one landmark map over 3 cells
+    p = np.array([0.2, 0.3, 0.5])
+    Kx = np.array([[1.0, 0.0, 0.0],                     # a point sitting on cell 0 only
+                   [0.0, 1.0, 1.0],                     # a point between cells 1 and 2
+                   [0.0, 0.0, 0.0]])                    # an isolated point (nearest cell 2)
+    nearest = np.array([0, 1, 2])
+    config = load_config(overrides={"extension": {"strategy": "average"}}).extension
+    t = (lambda a: torch.as_tensor(a, device=device)) if device == "cuda" else (lambda a: a)
+    out = extend_voltages(t(Kx), t(V), t(p), config=config, rho_g=0.5, nearest=t(nearest))
+    out = out.cpu().numpy() if device == "cuda" else out
+    assert np.allclose(out[0], [1.0, (0.3 * 0.5 + 0.5 * 0.2) / 0.8, 0.2])   # no ground: no halving
+    grounded = load_config(overrides={"extension": {"strategy": "grounded"}}).extension
+    h = extend_voltages(Kx, V, p, config=grounded, rho_g=0.5, nearest=nearest)
+    assert h[0, 0] < out[0, 0]                                               # the ground lowers it

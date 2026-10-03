@@ -1,0 +1,14 @@
+{
+ "tau (chain below 1e-3)": {
+  "chained_point_pairs": 0.012782142857142857,
+  "chained_landmark_pairs": 0,
+  "landmark_pairs": 91,
+  "min_point_voltage": 0.0
+ },
+ "floor 1e-10": {
+  "chained_point_pairs": 0.0,
+  "chained_landmark_pairs": 0,
+  "landmark_pairs": 91,
+  "min_point_voltage": 5.228177002436496e-09
+ }
+}

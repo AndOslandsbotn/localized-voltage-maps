@@ -1,0 +1,10 @@
+{
+ "landmarks": 3,
+ "strategy": "average",
+ "torn": 0.00025,
+ "point_over_cell_voltage": 1.0000001926739457,
+ "point_pairs_below_tau": 0.033633333333333335,
+ "trustworthiness": 0.998593696459023,
+ "continuity": 0.995925629451299,
+ "distance_correlation": 0.9682553238878987
+}

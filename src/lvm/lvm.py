@@ -8,6 +8,7 @@ class LocalizedVoltageMaps:
         pass
 
     def fit(self, stream):
+        
         centroids =self.build_voroni_cells(stream)
         graph = self.build_graph(centroids)
         grounded_graph = self.apply_ground_resistance(graph)

@@ -138,9 +138,12 @@ landmarks:
     scratch_mb: 128      # temporary memory per scoring chunk (a few chunk-sized tensors coexist)
 
 extension:               # voltages at individual data points (not just at cells)
-  strategy: harmonic     # harmonic: a point is a zero-mass cell,
+  strategy: average      # grounded: a point is a zero-mass node of the network, with its own ground,
                          #   v(x) = sum_i k(x,c_i) p_i v_i / (rho_g + sum_i k(x,c_i) p_i);
-                         #   a point with no cell within r takes its nearest cell's voltages
+                         # average: Def. 10 of the paper as printed, no ground term,
+                         #   v(x) = sum_i k(x,c_i) p_i v_i / sum_i k(x,c_i) p_i (a point interpolates
+                         #   between cells; with few cells attached, grounded's rho_g roughly halves it)
+                         # either way, a point with no cell within reach takes its nearest cell's voltages
   kernel: knn            # k(x, c_i) above: graph = graph.kernel; or radial | tapered | gaussian (with
                          #   graph.kernel's gaussian options). With radial, every point near the same
                          #   cells gets the same voltages, so points pile up on ~1500 spots (MNIST 50k)
@@ -162,6 +165,11 @@ embedding:               # low-dimensional coordinates from the landmark voltage
     missing: chain       # distance where v < tau (outside a map's support) is unknown:
                          # clip: use -log(tau), i.e. "at least this far"
                          # chain: go through landmarks in reach, d(x,l) = min_j d(x,j) + d(j,l)
+  distance_floor: 1.0e-10  # epsilon: distances d = -log v are read from voltages down to epsilon; below it a
+                         #   distance is unknown (chained or clipped). null = voltage.threshold (tau). tau keeps
+                         #   its other roles (support, reach -> rho_g, landmark selection). Chaining overestimates
+                         #   (a detour through another landmark), so switching to it where v falls below tau tears
+                         #   embeddings along the map edges (demonstrations/sphere_tears)
   local_scale:           # a second, local scale for the points of each cell (the global layout of the
     strategy: none       #   cells is kept): none | cell. Differences in -log v within a cell are tiny next
                          #   to those between cells, so a cell's points are correctly ordered but squeezed
