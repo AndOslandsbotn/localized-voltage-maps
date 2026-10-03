@@ -54,6 +54,11 @@ class Method:
     overrides: dict = field(default_factory=dict)        # fixed settings on top of those
 
 
+def _f32(X: np.ndarray) -> np.ndarray:
+    """X as float32 for the GPU libraries, without a copy when it already is (large data must not be doubled)."""
+    return np.asarray(X, dtype=np.float32)
+
+
 def _merge(base: dict, update: dict) -> dict:
     out = dict(base)
     for key, value in update.items():
@@ -87,12 +92,13 @@ def _lvm(gpu: bool):
 
 def _umap(gpu: bool):
     def embed(X: np.ndarray, params: dict, seed: int):
-        kw = {"n_components": 2, "n_neighbors": params.get("n_neighbors", 15), "min_dist": params.get("min_dist", 0.1)}
+        kw = {"n_components": params.get("n_components", 2), "n_neighbors": params.get("n_neighbors", 15),
+              "min_dist": params.get("min_dist", 0.1)}
         t0 = time.perf_counter()
         if gpu:
             from cuml.manifold import UMAP
 
-            Z = np.asarray(UMAP(**kw).fit_transform(X.astype(np.float32)), dtype=np.float64)
+            Z = np.asarray(UMAP(**kw).fit_transform(_f32(X)), dtype=np.float64)
         else:
             import umap
 
@@ -109,7 +115,7 @@ def _le(gpu: bool):
         if gpu:
             from cuml.manifold import SpectralEmbedding
 
-            Z = SpectralEmbedding(n_components=2, n_neighbors=n_neighbors, random_state=seed).fit_transform(X.astype(np.float32))
+            Z = SpectralEmbedding(n_components=2, n_neighbors=n_neighbors, random_state=seed).fit_transform(_f32(X))
             Z = np.asarray(Z, dtype=np.float64)
         else:
             from sklearn.manifold import SpectralEmbedding
@@ -132,7 +138,7 @@ def _tsne(gpu: bool):
             Z = TSNE(n_components=2, perplexity=perplexity, n_neighbors=min(int(3 * perplexity), n - 1),
                      early_exaggeration=12.0, late_exaggeration=late, exaggeration_iter=250, max_iter=750,
                      learning_rate_method="none", learning_rate=n / 3.0, init="pca", method="fft",
-                     random_state=seed).fit_transform(X.astype(np.float32))
+                     random_state=seed).fit_transform(_f32(X))
             Z = np.asarray(Z, dtype=np.float64)
         else:
             from openTSNE import TSNE
@@ -178,7 +184,8 @@ def _lisomap_distances_gpu(X: np.ndarray, n_neighbors: int, landmarks: np.ndarra
     from cuml.neighbors import NearestNeighbors
 
     n = X.shape[0]
-    dist, idx = NearestNeighbors(n_neighbors=n_neighbors + 1).fit(X.astype(np.float32)).kneighbors(X.astype(np.float32))
+    X32 = _f32(X)
+    dist, idx = NearestNeighbors(n_neighbors=n_neighbors + 1).fit(X32).kneighbors(X32)
     dist, idx = cp.asarray(dist)[:, 1:], cp.asarray(idx)[:, 1:]          # drop each point itself
     edges = cudf.DataFrame({"src": cp.repeat(cp.arange(n, dtype=cp.int32), n_neighbors),
                             "dst": idx.ravel().astype(cp.int32), "w": dist.ravel().astype(cp.float32)})

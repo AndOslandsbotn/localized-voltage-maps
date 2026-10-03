@@ -145,6 +145,11 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
 
     dimension = choose_dimension(sample.points, config=cfg.dimension, seed=cfg.compute.seed, device=device)
     n_landmarks = landmark_count(dimension.d, config=cfg.landmarks)
+    # Landmark MDS gives at most L - 1 coordinates (log-MDS at most L), so k dimensions need enough landmarks.
+    if cfg.embedding.strategy == "landmark_mds":
+        n_landmarks = max(n_landmarks, cfg.embedding.landmark_mds.n_components + 1)
+    else:
+        n_landmarks = max(n_landmarks, cfg.embedding.log_mds.n_components)
     lap("dimension")
 
     root.centroids = fit_cells(

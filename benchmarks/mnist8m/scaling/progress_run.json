@@ -1,0 +1,1 @@
+{"run": "lisomap_gpu n=8,100,000 (fit on 200,000)", "stage": "scoring (5000 random points)", "done": null, "total": null, "elapsed_s": 1226.7960587749985}

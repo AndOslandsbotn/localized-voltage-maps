@@ -1,0 +1,55 @@
+{
+ "method": "lvm_gpu",
+ "label": "LVM (GPU)",
+ "params": {
+  "cells": {
+   "n_cells": 300
+  },
+  "embedding": {
+   "landmark_mds": {
+    "missing": "chain",
+    "n_components": 3
+   },
+   "strategy": "landmark_mds"
+  },
+  "landmarks": {
+   "count": {
+    "dimension": {
+     "multiplier": 1.0
+    },
+    "strategy": "fixed"
+   },
+   "strategy": "mutual_information",
+   "n_landmarks": 12
+  },
+  "scaling": {
+   "reach": {
+    "k": null,
+    "quantile": 0.1
+   },
+   "strategy": "reach"
+  }
+ },
+ "seconds": 0.7671733480092371,
+ "info": {
+  "stages": {
+   "sample": 0.0016083649970823899,
+   "dimension": 0.0660796590091195,
+   "cells": 0.008109671995043755,
+   "masses": 0.002070071001071483,
+   "graph": 0.0017816280014812946,
+   "scaling": 0.6689148449950153,
+   "voltages": 0.006198663002578542,
+   "landmarks": 1.1344993254169822e-05,
+   "embedding": 0.0009460120054427534
+  },
+  "rho_g": 0.0019123697864061617,
+  "reach": 12.0,
+  "rho_rounds": 5,
+  "n_landmarks": 12,
+  "dimension": 1.9703093272003918
+ },
+ "trustworthiness": 0.9986014685525127,
+ "continuity": 0.9968386317584512,
+ "distance_correlation": 0.9881248022074649
+}

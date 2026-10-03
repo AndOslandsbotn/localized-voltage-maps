@@ -13,7 +13,7 @@ common/             shared code only; nothing dataset-specific
   runner.py         one run in its own memory-guarded process; time, memory, quality
   guard.py          memory guard for any heavy command (this machine has 7.8 GB of RAM)
   tuning.py, comparison.py, gallery.py, plotting.py, results.py
-<dataset>/          mnist/, half_sphere/, ...; each with the subfolders it needs, always named:
+<dataset>/          mnist/, half_sphere/, mnist8m/, ...; each with the subfolders it needs, always named:
   tuning/<family>/  tune.py, plot.py -> results.csv, best.yaml, figure.png
   gpu_comparison/   run.py, plot.py -> results.csv, figure.png (methods on the GPU, by data size)
   cpu_comparison/   the same on the CPU

@@ -146,3 +146,15 @@ def test_distance_floor_must_not_exceed_tau():
     Y, X = _strip_in_20d(n=1000, seed=4)
     with pytest.raises(ValueError, match="distance_floor"):
         fit_level(array_source(X, chunk_size=500), _config(embedding={"distance_floor": 0.5}))
+
+
+def test_three_dimensional_landmark_mds_gets_enough_landmarks():
+    rng = np.random.default_rng(5)
+    Y = rng.normal(size=(3000, 3))
+    X = Y / np.linalg.norm(Y, axis=1, keepdims=True)                 # the unit sphere: d ~ 2, so d + 1 = 3 landmarks
+    config = load_config(overrides={"compute": {"device": "cpu"}, "cells": {"n_cells": 100, "sample_size": 3000},
+                                    "embedding": {"landmark_mds": {"n_components": 3}}})
+    model = fit_level(array_source(X, chunk_size=1000), config)
+    assert model.V.shape[0] >= 4                                     # 3 coordinates need at least 4 landmarks
+    Z = model.transform(X)
+    assert Z.shape == (3000, 3) and np.isfinite(Z).all()
