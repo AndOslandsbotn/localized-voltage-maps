@@ -31,13 +31,25 @@ of the project:
 
 ## Python setup
 
+One environment for the library, the GPU baselines, the benchmarks and the tests (Python 3.14, CUDA 13):
+
 ```
 python3 -m venv .venv
-.venv/bin/pip install -e ".[viz]"
+.venv/bin/pip install -r requirements.txt && .venv/bin/pip install -e .
+git config core.hooksPath .githooks      # once per clone: refuses commits of large files
 ```
 
-Add `.[cholmod]` instead of (or alongside) `.[viz]` if you've installed
-`libsuitesparse-dev` and want the CHOLMOD backend available too.
+Add `.[cholmod]` if you've installed `libsuitesparse-dev` and want the CHOLMOD backend.
+
+## Reproducing the experiments
+
+Datasets are never stored in git. MNIST is downloaded from OpenML on first use, cached in `data/` (ignored) and checked against fingerprints, so every reproduction uses exactly the same images; the other datasets are generated. To fetch them up front:
+
+```
+.venv/bin/python benchmarks/common/datasets.py --download
+```
+
+Embeddings (`*.npz`) are not in git either: the experiment scripts regenerate them. See `benchmarks/README.md` for the layout and the order to run things in.
 
 ## C++ setup
 

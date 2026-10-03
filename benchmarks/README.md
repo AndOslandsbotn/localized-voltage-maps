@@ -48,6 +48,16 @@ Each `demonstrations/<problem>/` shows a problem we found and how it was fixed, 
 - **Pinned settings:** every case stores its complete settings (`settings*.yaml`), so later changes to the defaults can't change it.
 - **README:** states the problem, the cause with the evidence, the fix, and the status.
 
+## Data and results in git
+
+- **Datasets are never committed.**
+  - `common/datasets.py` downloads MNIST on first use, or up front with `python benchmarks/common/datasets.py --download`.
+  - It checks the cache against SHA-256 fingerprints of the arrays every result was made with.
+  - Generated datasets need no files.
+- **Committed:** results (`results.csv`, `*.json`, `metadata.json`) and figures.
+- **Not committed:** embeddings (`*.npz`). The scripts regenerate them.
+- **Guard:** `.githooks/pre-commit` refuses staged files over 2 MB. Enable it once per clone with `git config core.hooksPath .githooks`.
+
 ## Adding a dataset
 
 1. Register it in `common/datasets.py`: loader, splits, colourings for pictures, and an optional reference view.

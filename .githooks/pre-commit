@@ -1,0 +1,17 @@
+#!/bin/sh
+# Refuse to commit large files (datasets, embeddings, big outputs). Enable once per clone:
+#     git config core.hooksPath .githooks
+# Override for a deliberate exception:  ALLOW_LARGE_FILES=1 git commit ...
+LIMIT_KB=2048
+[ "$ALLOW_LARGE_FILES" = "1" ] && exit 0
+status=0
+for f in $(git diff --cached --name-only --diff-filter=AM); do
+    [ -f "$f" ] || continue
+    kb=$(( $(git cat-file -s ":$f") / 1024 ))
+    if [ "$kb" -gt "$LIMIT_KB" ]; then
+        echo "pre-commit: $f is ${kb} KB (limit ${LIMIT_KB} KB). Datasets and embeddings do not belong in git." >&2
+        status=1
+    fi
+done
+[ $status -ne 0 ] && echo "Override for a deliberate exception: ALLOW_LARGE_FILES=1 git commit ..." >&2
+exit $status
