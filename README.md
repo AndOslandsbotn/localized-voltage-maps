@@ -1,13 +1,22 @@
 # Localized Voltage Maps
 
 Implementation of the algorithm described in `Structure_from_Voltage.pdf`
-(included in this repo). A Python proof of concept lives in `src/lvm/`; a
+(included in this repo). A Python proof of concept lives in `python/`; a
 C++ port is being built alongside it in `cpp/`.
+
+## Layout
+
+```
+python/          the Python library: pyproject.toml, src/lvm/, tests/, examples/
+cpp/             the C++ port
+experiments/     experiments for the papers: common/ (shared tools), sfv/ (Structure from Voltage)
+data/            downloaded datasets (not in git)
+```
 
 ## System requirements
 
 Python package requirements are tracked in `requirements.txt` /
-`pyproject.toml` and installed normally via pip. The pieces below are
+`python/pyproject.toml` and installed normally via pip. The pieces below are
 system-level (not pip-installable) and are only needed for specific parts
 of the project:
 
@@ -35,21 +44,21 @@ One environment for the library, the GPU baselines, the benchmarks and the tests
 
 ```
 python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt && .venv/bin/pip install -e .
+.venv/bin/pip install -r requirements.txt && .venv/bin/pip install -e python/
 git config core.hooksPath .githooks      # once per clone: refuses commits of large files
 ```
 
-Add `.[cholmod]` if you've installed `libsuitesparse-dev` and want the CHOLMOD backend.
+Add `python/[cholmod]` if you've installed `libsuitesparse-dev` and want the CHOLMOD backend.
 
 ## Reproducing the experiments
 
 Datasets are never stored in git. MNIST is downloaded from OpenML on first use, cached in `data/` (ignored) and checked against fingerprints, so every reproduction uses exactly the same images; the other datasets are generated. To fetch them up front:
 
 ```
-.venv/bin/python benchmarks/common/datasets.py --download
+.venv/bin/python experiments/common/datasets.py --download
 ```
 
-Embeddings (`*.npz`) are not in git either: the experiment scripts regenerate them. See `benchmarks/README.md` for the layout and the order to run things in.
+Embeddings (`*.npz`) are not in git either: the experiment scripts regenerate them. See `experiments/README.md` for the layout and the order to run things in.
 
 ## C++ setup
 

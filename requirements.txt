@@ -1,6 +1,6 @@
 # One environment for the library, GPU baselines, benchmarks and tests.
 # Verified together on Python 3.14, CUDA 13 (torch 2.14 cu130 + RAPIDS 26.08).
-# Install: pip install -r requirements.txt && pip install -e .
+# Install: pip install -r requirements.txt && pip install -e python/
 numpy==2.4.6
 scipy==1.18.1
 scikit-learn==1.9.1
