@@ -5,7 +5,7 @@ from typing import Any
 
 import numpy as np
 
-from lvm_new.cells import cell_masses, fit_cells
+from lvm_new.cells import cell_masses, fit_cells, refine_cells
 from lvm_new.config import Config
 from lvm_new.dimension import estimate_dimension
 from lvm_new.embedding import fit_chart, fit_embedding
@@ -41,7 +41,9 @@ def fit_region(chunks, config: Config, *, device: str, region_id: tuple[int, ...
     """Fit one region to its data: the method's nine steps, in order."""
     sample = sample_region(chunks, config=config.sample, seed=seed)
     dimension = estimate_dimension(sample, config=config.dimension, device=device, seed=seed)
-    centroids = fit_cells(sample, chunks, config, device=device, seed=seed)
+    centroids = fit_cells(sample, config=config.cells, device=device, seed=seed)
+    centroids = refine_cells(chunks, sample, centroids, config=config.cells.refine, device=device,
+                             skip=len(sample) if config.sample.strategy == "prefix" else 0)
     masses = cell_masses(chunks, centroids, config, device=device)
     graph = build_graph(centroids, config)
     rho_g, landmarks = choose_scaling(graph, masses, dimension, config, device=device)

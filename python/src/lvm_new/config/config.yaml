@@ -27,6 +27,23 @@ dimension:               # the region's intrinsic dimension d̂, estimated from 
 
 cells:
   n_cells: 1000          # number of cells (graph nodes) per region
+  kmeans:                # k-means on the sample
+    strategy: auto       # auto: cuml on cuda, faiss on cpu | cuml (GPU) | faiss (CPU) | sklearn (CPU, reference)
+    cuml:
+      init: random       # random | k-means||
+      max_iter: 30
+      tol: 1.0e-4
+    faiss:
+      niter: 25
+    sklearn:
+      max_iter: 30
+      tol: 1.0e-4
+  refine:                # after k-means on the sample: the centroids fitted to the whole stream
+    strategy: none       # none | stream: mini-batch k-means over the data, chunk by chunk (one chunk + centroids
+                         #   in memory, for any size of data)
+    stream:
+      passes: 1          # scans of the data
+      max_points: null   # points streamed per pass at most (null = all)
 
 embedding:
   landmark_mds:

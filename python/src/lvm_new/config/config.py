@@ -52,8 +52,42 @@ class DimensionConfig(_Choice):
     fixed: FixedDimensionOptions
 
 
+class CumlKMeansOptions(_Section):
+    init: Literal["random", "k-means||"]
+    max_iter: int = Field(ge=1)
+    tol: float = Field(ge=0)
+
+
+class FaissKMeansOptions(_Section):
+    niter: int = Field(ge=1)
+
+
+class SklearnKMeansOptions(_Section):
+    max_iter: int = Field(ge=1)
+    tol: float = Field(ge=0)
+
+
+class KMeansConfig(_Choice):
+    strategy: Literal["auto", "cuml", "faiss", "sklearn"]
+    cuml: CumlKMeansOptions
+    faiss: FaissKMeansOptions
+    sklearn: SklearnKMeansOptions
+
+
+class StreamRefineOptions(_Section):
+    passes: int = Field(ge=1)
+    max_points: int | None = Field(ge=1)
+
+
+class RefineConfig(_Choice):
+    strategy: Literal["none", "stream"]
+    stream: StreamRefineOptions
+
+
 class CellsConfig(_Section):
     n_cells: int = Field(ge=2)
+    kmeans: KMeansConfig
+    refine: RefineConfig
 
 
 class LandmarkMdsConfig(_Section):
