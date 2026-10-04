@@ -1,42 +1,58 @@
 from __future__ import annotations
 
-import numbers
 from pathlib import Path
 from typing import Iterator
 
 import numpy as np
+import torch
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.utils.validation import check_is_fitted
 
-from lvm.config import Config
-from lvm_new.data import DataLike
+from lvm_new.config import Config, load_config
+from lvm_new.data import DataLike, as_chunks
+from lvm_new.region import fit_region
+
+
+# Each direct argument of LocalizedVoltageMaps and the setting it stands for.
+_SETTINGS = {
+    "n_components": ("embedding", "landmark_mds", "n_components"),
+    "n_cells": ("cells", "n_cells"),
+    "device": ("compute", "device"),
+    "random_state": ("compute", "seed"),
+    "local_chart": ("embedding", "local_chart"),
+    "chunk_size": ("data", "chunk_size"),
+    "levels": ("hierarchy", "levels"),
+}
 
 
 class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
     """Localized Voltage Maps: a streaming embedding of data into ``n_components`` dimensions.
 
+    Every direct argument is a setting (lvm_new/config/config.yaml). None means "not given": the value then comes from
+    the ``config`` YAML if it sets it, else from the package defaults. A given argument wins over both.
+
     Parameters
     ----------
-    n_components : int, default 2
+    n_components : int or None (setting embedding.landmark_mds.n_components, default 2)
         Dimension of the embedding.
-    n_cells : int, default 1000
+    n_cells : int or None (setting cells.n_cells, default 1000)
         Number of cells (graph nodes) per region.
-    device : {"auto", "cuda", "cpu"}, default "auto"
+    device : {"auto", "cuda", "cpu"} or None (setting compute.device, default "auto")
         Where to compute. "auto": CUDA if a GPU is available, else the CPU. Each step picks its implementation by the
         device unless the config names one explicitly (e.g. k-means: cuML on the GPU, FAISS on the CPU).
-    random_state : int, default 0
+    random_state : int or None (setting compute.seed, default 0)
         Seed. Each region's seed is derived from it and the region's id.
-    local_chart : {"last", "all", "none"}, default "last"
+    local_chart : {"last", "all", "none"} or None (setting embedding.local_chart, default "last")
         The second scale: points placed within their cell by the cell's local PCA. "last": charts at the deepest level
         during ``fit``, other levels on demand; "all": charts at every level during ``fit``; "none": plain coordinates.
-    chunk_size : int, default 10_000
+    chunk_size : int or None (setting data.chunk_size, default 10_000)
         Points per chunk when an array is read in pieces. A re-iterable's own pieces are used as they come (re-cutting
         would copy every chunk), so for a loader its batch size is the chunk size. Streaming k-means updates once per
         chunk, so results depend on it; that's also why it is fixed rather than estimated from free memory.
-    levels : int, default 1
+    levels : int or None (setting hierarchy.levels, default 1)
         Depth of the hierarchy. Only 1 for now; more levels are stage 2.
     config : str, Path or None, default None
-        YAML file with any other settings, merged over the package's ``config.yaml``. The direct arguments above
-        override the same settings in it.
+        YAML file with any settings, merged over the package's defaults.
 
     Attributes (after ``fit``)
     --------------------------
@@ -55,13 +71,13 @@ class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
 
     def __init__(
         self,
-        n_components: int = 2,
-        n_cells: int = 1000,
-        device: str = "auto",
-        random_state: int = 0,
-        local_chart: str = "last",
-        chunk_size: int = 10_000,
-        levels: int = 1,
+        n_components: int | None = None,
+        n_cells: int | None = None,
+        device: str | None = None,
+        random_state: int | None = None,
+        local_chart: str | None = None,
+        chunk_size: int | None = None,
+        levels: int | None = None,
         config: str | Path | None = None,
     ):
         # scikit-learn: store the arguments unchanged, no checking or work here.
@@ -74,16 +90,16 @@ class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
         self.levels = levels
         self.config = config
 
-    # --- public: fitting and placing ------------------------------------------------------------------------------
 
     def fit(self, X: DataLike, y: None = None) -> "LocalizedVoltageMaps":
-        """Fit the model to X (an array or a re-iterable of chunks); returns the model itself.
+        config = self._resolve_config()
+        device = self._resolve_device(config)
+        chunks = as_chunks(X, config.data.chunk_size)
+        root = fit_region(chunks, config, device=device, region_id=(), seed=config.compute.seed)
+        self.config_, self.device_, self.root_ = config, device, root
+        self.n_features_in_ = root.n_features
+        return self
 
-        ``y`` is ignored (scikit-learn's signature for unsupervised estimators).
-        """
-        # resolve settings and device -> as_chunks(X, self.chunk_size) (refuses one-shot iterators, as every method
-        # taking X does) -> fit_region on the root -> set the fitted attributes
-        raise NotImplementedError
 
     def transform(self, X: DataLike, level: int = 0) -> np.ndarray:
         """Coordinates of the points of X, as one (n, n_components) array.
@@ -121,27 +137,25 @@ class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
         raise NotImplementedError
 
     def _resolve_config(self) -> Config:
-        """The package's config.yaml, merged with the ``config`` YAML, then the direct arguments on top."""
-        raise NotImplementedError
-
-    def _resolve_device(self) -> str:
-        """"cuda" or "cpu": ``device``, with "auto" resolved by whether a GPU is available."""
-        raise NotImplementedError
-
-    def _check_arguments(self) -> None:
-        """Validate the direct arguments (called by fit, not __init__): ranges, allowed values, levels == 1 for now."""
-        for name, minimum in (("n_components", 1), ("n_cells", 2), ("chunk_size", 1), ("random_state", 0),
-                              ("levels", 1)):
+        """The package defaults, merged with the ``config`` YAML, then the direct arguments that were given."""
+        overrides = {}
+        for name, path in _SETTINGS.items():
             value = getattr(self, name)
-            if not isinstance(value, numbers.Integral) or isinstance(value, bool) or value < minimum:
-                raise ValueError(f"{name} must be an integer >= {minimum}, got {value!r}")
-        for name, allowed in (("device", ("auto", "cuda", "cpu")), ("local_chart", ("last", "all", "none"))):
-            value = getattr(self, name)
-            if value not in allowed:
-                raise ValueError(f"{name} must be one of {allowed}, got {value!r}")
-        if self.levels != 1:
+            if value is not None:
+                section = overrides
+                for key in path[:-1]:
+                    section = section.setdefault(key, {})
+                section[path[-1]] = value
+        config = load_config(self.config, overrides)
+        if config.hierarchy.levels != 1:
             raise NotImplementedError("levels > 1 is not implemented yet")
+        return config
 
-    def _check_fitted(self) -> None:
-        """Raise scikit-learn's NotFittedError if ``fit`` hasn't been called."""
-        raise NotImplementedError
+    def _resolve_device(self, config: Config) -> str:
+        """"cuda" or "cpu": the setting compute.device, with "auto" resolved by whether a GPU is available."""
+        device = config.compute.device
+        if device == "auto":
+            return "cuda" if torch.cuda.is_available() else "cpu"
+        if device == "cuda" and not torch.cuda.is_available():
+            raise RuntimeError("device is 'cuda' but no CUDA GPU is available")
+        return device

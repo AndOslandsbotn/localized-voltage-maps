@@ -16,8 +16,7 @@ Stages: (1) single level built from these pieces, (2) several levels fitted one 
 ```python
 from lvm import LocalizedVoltageMaps
 
-model = LocalizedVoltageMaps(n_components=2, n_cells=1000, device="auto", random_state=0, local_chart="last",
-                             chunk_size=10_000, config=None)
+model = LocalizedVoltageMaps(n_components=2, n_cells=300, config="my_settings.yaml")   # any argument may be left out
 model.fit(X)                       # returns the model itself
 Z = model.transform(X)             # (n, n_components) array
 Z = model.fit_transform(X)
@@ -25,7 +24,7 @@ for Z_chunk in model.transform_chunks(X):   # one array per chunk, for data too 
     ...
 ```
 
-**Constructor arguments.** The most important settings are direct arguments; everything else comes from a YAML file.
+**Constructor arguments.** The most important settings are direct arguments; everything else comes from a YAML file. Every direct argument is exactly a setting, with the same values, and defaults to `None` ("not given"): its value then comes from the `config` YAML if that sets it, else from the package defaults (`lvm_new/config/config.yaml`). A given argument wins over both. So the YAML and the direct arguments are equivalent, and all rules (types, ranges, allowed values) live in the config models.
 
 | Argument | Meaning | Default |
 |---|---|---|

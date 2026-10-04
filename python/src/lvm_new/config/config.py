@@ -14,7 +14,7 @@ class _Section(BaseModel):
 
 
 class ComputeConfig(_Section):
-    device: Literal["cuda", "cpu"]
+    device: Literal["auto", "cuda", "cpu"]
     seed: int = Field(ge=0)
 
 
@@ -30,13 +30,13 @@ class LandmarkMdsConfig(_Section):
     n_components: int = Field(ge=1)
 
 
-class LocalScaleConfig(_Section):
-    strategy: Literal["pca", "none"]
-
-
 class EmbeddingConfig(_Section):
     landmark_mds: LandmarkMdsConfig
-    local_scale: LocalScaleConfig
+    local_chart: Literal["last", "all", "none"]
+
+
+class HierarchyConfig(_Section):
+    levels: int = Field(ge=1)
 
 
 class Config(_Section):
@@ -44,6 +44,7 @@ class Config(_Section):
     data: DataConfig
     cells: CellsConfig
     embedding: EmbeddingConfig
+    hierarchy: HierarchyConfig
 
 
 def load_config(path: str | Path | None = None, overrides: Mapping[str, Any] | None = None) -> Config:
