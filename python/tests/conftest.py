@@ -2,6 +2,8 @@
 
 Layout:
 * unit/         one file per library module (test_graph.py tests lvm/graph.py, ...): small inputs, one piece at a time
+* unit_new/     tests of the new library (lvm_new), added one at a time as each piece is agreed; the old tests are
+                reviewed when lvm_new replaces lvm
 * integration/  whole fits, end to end (fit, transform, streaming, the local chart)
 * regression/   LVM's results on a fixed dataset, pinned in regression/reference/ (see test_regression.py)
 * helpers.py    plain helper functions (importable from every folder: pythonpath in pyproject.toml)
