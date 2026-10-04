@@ -13,8 +13,6 @@ from lvm.voltage import (
     threshold_voltages,
 )
 
-DEVICES = ("cpu", "cuda")
-
 
 def _random_grounded_laplacian(rng, n=40, rho_g=0.3):
     points = rng.random((n, 2))
@@ -37,7 +35,6 @@ def _reference_voltage(L_rho, sources):
     return v
 
 
-@pytest.mark.parametrize("device", DEVICES)
 def test_solve_voltage_satisfies_kirchhoff_condition(device):
     rng = np.random.default_rng(0)
     L_rho = _random_grounded_laplacian(rng)
@@ -54,7 +51,6 @@ def test_solve_voltage_satisfies_kirchhoff_condition(device):
     assert np.allclose(residual[free], 0.0, atol=1e-6)
 
 
-@pytest.mark.parametrize("device", DEVICES)
 def test_voltage_maps_match_reference(device):
     rng = np.random.default_rng(6)
     L_rho = _random_grounded_laplacian(rng, n=30)
@@ -88,7 +84,6 @@ def _neighbour_average(K, p, rho_g, v):
     return (Kp @ v) / (rho_g + Kp.sum(axis=1))
 
 
-@pytest.mark.parametrize("device", DEVICES)
 def test_grounded_maps_match_reference(device):
     rng = np.random.default_rng(10)
     K, p = _random_region(rng)
@@ -250,7 +245,6 @@ def test_chained_distances_keep_disconnected_pairs_infinite():
     assert np.isinf(chained_distances(D)[0, 1])
 
 
-@pytest.mark.parametrize("device", ["cpu", "cuda"])
 def test_average_extension_interpolates_cell_voltages_without_ground(device):
     import torch
 

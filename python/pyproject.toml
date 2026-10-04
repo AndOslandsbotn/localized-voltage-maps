@@ -22,5 +22,9 @@ viz = [
 packages = ["src/lvm"]
 
 [tool.pytest.ini_options]
-pythonpath = ["."]
+pythonpath = ["tests"]          # tests/helpers.py, importable from unit/, integration/ and regression/
 testpaths = ["tests"]
+addopts = "--strict-markers"
+markers = [
+    "gpu: needs a CUDA GPU (skipped automatically without one; deselect with -m 'not gpu')",
+]

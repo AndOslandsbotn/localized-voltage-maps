@@ -53,7 +53,6 @@ def test_first_landmark_on_a_line_is_near_an_end():
     assert first < 5 or first >= 45
 
 
-@pytest.mark.parametrize("device", ["cpu", "cuda"])
 def test_greedy_selection_is_distinct_and_mi_never_decreases(device):
     rng = np.random.default_rng(0)
     centroids = rng.random((200, 2))
@@ -70,6 +69,7 @@ def test_greedy_selection_is_distinct_and_mi_never_decreases(device):
     assert sel.scores[-1] == pytest.approx(mutual_information(V[sel.indices], p, 0.01))
 
 
+@pytest.mark.gpu
 def test_cpu_and_cuda_pick_the_same_landmarks():
     # A symmetric line has exact ties (mirror cells score the same), which the
     # devices may break differently in the last bit; random masses remove them.
@@ -113,7 +113,6 @@ def test_incremental_greedy_matches_brute_force(thresholded):
         assert sel.scores[k - 1] == pytest.approx(mutual_information(V[sel.indices[:k]], p, noise_std), rel=1e-9)
 
 
-@pytest.mark.parametrize("device", ["cpu", "cuda"])
 def test_float32_picks_the_same_landmarks_as_float64(device):
     rng = np.random.default_rng(3)
     centroids = rng.random((300, 5))

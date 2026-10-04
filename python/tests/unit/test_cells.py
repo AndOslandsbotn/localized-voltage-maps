@@ -9,7 +9,7 @@ from lvm.regions import Region, estimate_masses, min_count_for, route
 from lvm.stream import array_source, iter_array_chunks
 
 
-STRATEGIES = ["cuml", "faiss", "sklearn"]
+STRATEGIES = [pytest.param("cuml", marks=pytest.mark.gpu), "faiss", "sklearn"]
 
 
 def _fit(sample, n_cells, strategy="sklearn", seed=0):
@@ -59,7 +59,7 @@ def test_fit_cells_rejects_empty_sample():
         _fit(np.empty((0, 2)), 10)
 
 
-@pytest.mark.parametrize("device", [None, "cuda"])
+@pytest.mark.parametrize("device", [None, pytest.param("cuda", marks=pytest.mark.gpu)])
 def test_assign_cells_matches_brute_force_on_both_devices(device):
     rng = np.random.default_rng(4)
     X, C = rng.random((500, 6)), rng.random((30, 6))
@@ -137,6 +137,7 @@ def test_sq_distances_are_never_negative():
     assert np.all(sq_distances(X, X) >= 0.0)
 
 
+@pytest.mark.gpu
 def test_sq_distances_on_gpu_matches_numpy():
     import torch
 
@@ -147,8 +148,6 @@ def test_sq_distances_on_gpu_matches_numpy():
 
 
 # --- streaming refinement (cells.refine) ------------------------------------
-
-DEVICES = ["cpu"] + (["cuda"] if __import__("torch").cuda.is_available() else [])
 
 
 def _refine(source, sample, centroids, *, skip=0, device="cpu", **stream):
@@ -167,7 +166,6 @@ def test_refine_none_keeps_the_sample_centroids():
     np.testing.assert_array_equal(out.centroids, C)
 
 
-@pytest.mark.parametrize("device", DEVICES)
 def test_stream_refinement_gives_each_cluster_the_mean_of_all_its_points(device):
     # Separated blobs: assignments never change, so the running means end exactly at each blob's mean over the
     # whole stream -- the sample (the stream's prefix, skipped) counted once.
@@ -182,7 +180,6 @@ def test_stream_refinement_gives_each_cluster_the_mean_of_all_its_points(device)
     np.testing.assert_array_equal(sample, seed)
 
 
-@pytest.mark.parametrize("device", DEVICES)
 def test_stream_refinement_respects_max_points(device):
     centers, X = _blobs(n_blobs=4, per_blob=500)
     X = X[np.random.default_rng(1).permutation(len(X))]

@@ -27,7 +27,6 @@ def test_typical_fraction_decreases_with_rho_g():
 
 
 @pytest.mark.parametrize("statistic", ["median", "mean"])
-@pytest.mark.parametrize("device", ["cpu", "cuda"])
 def test_choose_rho_g_hits_target(statistic, device):
     K, p = _region()
     config = _scaling(target=0.1, statistic=statistic, tolerance=0.01)

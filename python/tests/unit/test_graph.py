@@ -120,7 +120,6 @@ def test_exclude_self_needs_a_square_matrix():
 
 
 @pytest.mark.parametrize("strategy", ["tapered", "gaussian"])
-@pytest.mark.parametrize("device", ["cpu", "cuda"])
 def test_smooth_kernels_fall_with_distance_and_end_at_r(strategy, device):
     import torch
 
@@ -134,21 +133,31 @@ def test_smooth_kernels_fall_with_distance_and_end_at_r(strategy, device):
     assert np.all(K[0, 5:] == 0.0)                    # nothing beyond r (gaussian: cutoff 3 * r/3)
 
 
-def test_adaptive_knn_kernel_weights_each_points_k_nearest_cells():
-    import torch
+def _shell_distances():
+    return np.random.default_rng(0).random((50, 30)) * 10 + 5.0   # every point far from all cells (a "shell")
 
+
+def test_adaptive_knn_kernel_weights_each_points_k_nearest_cells():
     from lvm.graph import adaptive_knn_kernel
 
-    rng = np.random.default_rng(0)
-    sq = rng.random((50, 30)) * 10 + 5.0                  # every point far from all cells (a "shell")
+    sq = _shell_distances()
     K = adaptive_knn_kernel(sq, k=6)
     assert np.all((K > 0).sum(axis=1) == 6)
     nearest = sq.argmin(axis=1)
     assert np.allclose(K[np.arange(50), nearest], 1.0)    # nearest cell gets weight 1
     row = sq[0][K[0] > 0], K[0][K[0] > 0]
     assert np.all(np.diff(row[1][np.argsort(row[0])]) < 0)   # weights fall with distance
+
+
+@pytest.mark.gpu
+def test_adaptive_knn_kernel_on_gpu_matches_numpy():
+    import torch
+
+    from lvm.graph import adaptive_knn_kernel
+
+    sq = _shell_distances()
     Kt = adaptive_knn_kernel(torch.as_tensor(sq, device="cuda"), k=6).cpu().numpy()
-    assert np.allclose(K, Kt)
+    assert np.allclose(adaptive_knn_kernel(sq, k=6), Kt)
 
 
 def test_point_knn_radius_gives_a_typical_point_k_cells():
@@ -223,7 +232,7 @@ def test_adaptive_radius_gives_every_cell_k_edges_where_one_radius_does_not():
     assert (K1[60:] > 0).sum(axis=1).min() < 5          # the spread cluster is under-connected by one radius
 
 
-@pytest.mark.skipif(not __import__("torch").cuda.is_available(), reason="needs CUDA")
+@pytest.mark.gpu
 @pytest.mark.parametrize("strategy", ["radial", "tapered", "gaussian"])
 def test_per_cell_radius_on_torch_matches_numpy(strategy):
     import torch

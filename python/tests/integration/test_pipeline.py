@@ -16,9 +16,10 @@ def _strip_in_20d(n=6000, seed=0):
 
 
 def _config(**overrides):
+    # k-means on the CPU too (FAISS, as the experiments' CPU path): the default, cuML, needs a GPU whatever compute.device says.
     base = {
         "compute": {"device": "cpu"},
-        "cells": {"n_cells": 150, "sample_size": 3000, "masses": {"rel_error": 0.2}},
+        "cells": {"n_cells": 150, "sample_size": 3000, "masses": {"rel_error": 0.2}, "kmeans": {"strategy": "faiss"}},
         "landmarks": {"n_landmarks": 10, "count": {"strategy": "fixed"}},
     }
     for key, value in overrides.items():
@@ -59,6 +60,7 @@ def test_streamed_transform_matches_in_memory(strip_model):
     assert np.allclose(streamed, model.transform(X[:2500]))
 
 
+@pytest.mark.gpu
 def test_gpu_and_cpu_point_paths_agree(strip_model):
     # Same fitted model; only where the per-point steps run differs.
     import dataclasses
@@ -105,7 +107,6 @@ def test_local_scale_pipeline_spreads_points_and_streams():
     assert len(np.unique(np.round(Z, 6), axis=0)) > 0.9 * len(Z)       # points no longer piled up
 
 
-@pytest.mark.parametrize("device", ["cpu", "cuda"])
 def test_local_pca_pipeline_runs_on_its_device_and_streams(device):
     Y, X = _strip_in_20d(n=3000, seed=2)
     config = _config(compute={"device": device},
@@ -154,7 +155,8 @@ def test_three_dimensional_landmark_mds_gets_enough_landmarks():
     rng = np.random.default_rng(5)
     Y = rng.normal(size=(3000, 3))
     X = Y / np.linalg.norm(Y, axis=1, keepdims=True)                 # the unit sphere: d ~ 2, so d + 1 = 3 landmarks
-    config = load_config(overrides={"compute": {"device": "cpu"}, "cells": {"n_cells": 100, "sample_size": 3000},
+    config = load_config(overrides={"compute": {"device": "cpu"}, "cells": {"n_cells": 100, "sample_size": 3000,
+                                                                          "kmeans": {"strategy": "faiss"}},
                                     "embedding": {"landmark_mds": {"n_components": 3}}})
     model = fit_level(array_source(X, chunk_size=1000), config)
     assert model.V.shape[0] >= 4                                     # 3 coordinates need at least 4 landmarks

@@ -90,6 +90,7 @@ def test_chain_fills_distances_outside_the_support():
     assert abs(np.corrcoef(chain.cell_coords[:, 0], points[:, 0])[0, 1]) > 0.99
 
 
+@pytest.mark.gpu
 def test_landmark_mds_transform_on_gpu_matches_numpy():
     import torch
 
@@ -127,7 +128,6 @@ def test_local_scale_spreads_each_cell_to_its_share_and_keeps_its_order():
     assert fit_local_scale(Z, cell, 3, config=none) is None
 
 
-@pytest.mark.parametrize("device", ["cpu", "cuda"])
 def test_local_pca_directions_match_each_cells_exact_pca(device):
     import torch
 
@@ -152,7 +152,6 @@ def test_local_pca_directions_match_each_cells_exact_pca(device):
     assert local.valid.all() and local.anchors.device.type == device
 
 
-@pytest.mark.parametrize("device", ["cpu"] + (["cuda"] if __import__("torch").cuda.is_available() else []))
 def test_local_pca_in_three_dimensions(device):
     # A 3-D embedding: each cell gets its 3 main directions, turned by a 3 x 3 rotation onto its LVM offsets.
     import torch

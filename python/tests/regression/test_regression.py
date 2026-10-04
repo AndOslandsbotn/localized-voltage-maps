@@ -11,7 +11,7 @@ failure says where results changed: cells, masses, radii, graph, rho_g, landmark
 
 When a change of results is intended, regenerate the references (and say why in the commit):
 
-    LVM_UPDATE_REFERENCE=1 pytest tests/test_regression.py
+    LVM_UPDATE_REFERENCE=1 pytest tests/regression
 """
 
 import os
@@ -24,7 +24,7 @@ from lvm.config import load_config
 from lvm.pipeline import fit_level
 from lvm.stream import array_source
 
-REFERENCE = Path(__file__).with_name("data")
+REFERENCE = Path(__file__).with_name("reference")
 UPDATE = os.environ.get("LVM_UPDATE_REFERENCE") == "1"
 BASE = {"cells": {"n_cells": 150, "sample_size": 3000}}
 CASES = {
@@ -64,12 +64,8 @@ def _results(case: str) -> dict[str, np.ndarray]:
     }
 
 
-@pytest.mark.parametrize("case", list(CASES))
+@pytest.mark.parametrize("case", ["cpu", pytest.param("cuda", marks=pytest.mark.gpu)])
 def test_results_match_the_pinned_reference(case):
-    if case == "cuda":
-        pytest.importorskip("cuml")
-        if not __import__("torch").cuda.is_available():
-            pytest.skip("needs CUDA")
     results = _results(case)
     path = REFERENCE / f"regression_{case}.npz"
     if UPDATE:

@@ -12,11 +12,11 @@ def _dimension_config(strategy, **options):
 
 @pytest.mark.parametrize("strategy", ["mle", "twonn"])
 @pytest.mark.parametrize("d", [2, 5])
-def test_estimators_recover_the_dimension_of_a_flat_subspace(strategy, d):
+def test_estimators_recover_the_dimension_of_a_flat_subspace(strategy, d, device):
     rng = np.random.default_rng(d)
     Q, _ = np.linalg.qr(rng.normal(size=(30, d)))
     X = rng.random((4000, d)) @ Q.T                     # d-dimensional cube embedded in 30-D
-    est = choose_dimension(X, config=_dimension_config(strategy)).d
+    est = choose_dimension(X, config=_dimension_config(strategy), device=device).d
     assert est == pytest.approx(d, rel=0.25)
 
 
@@ -28,7 +28,6 @@ def _levina_bickel(X, k):
     return 1.0 / np.mean(1.0 / m)                           # harmonic mean
 
 
-@pytest.mark.parametrize("device", ["cpu", "cuda"])
 @pytest.mark.parametrize("k", [10, 30])
 def test_mle_is_levina_bickel_with_the_configured_k(device, k):
     rng = np.random.default_rng(0)
