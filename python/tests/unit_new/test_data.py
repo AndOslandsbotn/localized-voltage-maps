@@ -1,5 +1,3 @@
-"""lvm_new.data: inputs as re-iterable chunk sources."""
-
 import numpy as np
 import pytest
 

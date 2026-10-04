@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import numbers
 from pathlib import Path
 from typing import Iterator
 
@@ -129,7 +130,17 @@ class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
 
     def _check_arguments(self) -> None:
         """Validate the direct arguments (called by fit, not __init__): ranges, allowed values, levels == 1 for now."""
-        raise NotImplementedError
+        for name, minimum in (("n_components", 1), ("n_cells", 2), ("chunk_size", 1), ("random_state", 0),
+                              ("levels", 1)):
+            value = getattr(self, name)
+            if not isinstance(value, numbers.Integral) or isinstance(value, bool) or value < minimum:
+                raise ValueError(f"{name} must be an integer >= {minimum}, got {value!r}")
+        for name, allowed in (("device", ("auto", "cuda", "cpu")), ("local_chart", ("last", "all", "none"))):
+            value = getattr(self, name)
+            if value not in allowed:
+                raise ValueError(f"{name} must be one of {allowed}, got {value!r}")
+        if self.levels != 1:
+            raise NotImplementedError("levels > 1 is not implemented yet")
 
     def _check_fitted(self) -> None:
         """Raise scikit-learn's NotFittedError if ``fit`` hasn't been called."""

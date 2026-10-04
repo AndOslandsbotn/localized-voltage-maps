@@ -1,0 +1,23 @@
+# Localized Voltage Maps: default settings, the only place default values are defined.
+#
+# A run's own YAML file (LocalizedVoltageMaps(config=path)) needs only the keys it changes; they are merged over these
+# defaults, and the direct arguments of LocalizedVoltageMaps are applied last. Types and allowed ranges are checked
+# by the models in config.py. Sections are added here as the steps that use them are written.
+
+compute:
+  device: cuda           # cuda | cpu (LocalizedVoltageMaps resolves device="auto" to one of these)
+  seed: 0                # every step's seed; a region's seed is derived from it and the region's id
+
+data:
+  chunk_size: 10000      # points per chunk when an array is read in pieces; a re-iterable's own pieces are used as
+                         # they come. Streaming k-means updates once per chunk, so results depend on it
+
+cells:
+  n_cells: 1000          # number of cells (graph nodes) per region
+
+embedding:
+  landmark_mds:
+    n_components: 2      # dimension of the embedding
+  local_scale:
+    strategy: pca        # pca: within each cell, points placed along the cell's main directions (the local chart);
+                         # none: plain coordinates (points of a cell close to its centre)

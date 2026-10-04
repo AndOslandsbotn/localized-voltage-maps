@@ -6,6 +6,8 @@ from typing import Iterable, Iterator, TypeAlias
 import numpy as np
 from numpy.typing import ArrayLike
 
+from lvm_new.precision import DATA_DTYPE
+
 DataLike: TypeAlias = ArrayLike | Iterable[ArrayLike]
 """Aanything with a 2-D shape that can be sliced: NumPy,
 memory-mapped, HDF5, Zarr, torch, CuPy), or a re-iterable
@@ -21,7 +23,7 @@ class ArrayChunks:
 
     def __iter__(self) -> Iterator[np.ndarray]:
         for start in range(0, self.X.shape[0], self.chunk_size):
-            yield np.asarray(self.X[start:start + self.chunk_size], dtype=np.float32)
+            yield np.asarray(self.X[start:start + self.chunk_size], dtype=DATA_DTYPE)
 
 
 class IterableChunks:
@@ -37,7 +39,7 @@ class IterableChunks:
                 piece = piece[0]
             if not hasattr(piece, "shape"):
                 raise TypeError(f"Expected arrays or (features, ...) tuples, got {type(piece).__name__}")
-            piece = np.asarray(piece, dtype=np.float32)
+            piece = np.asarray(piece, dtype=DATA_DTYPE)
             if piece.ndim != 2:
                 raise ValueError(f"Expected 2-D chunks (points x features), got shape {piece.shape}")
             yield piece

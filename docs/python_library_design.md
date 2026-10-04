@@ -122,10 +122,10 @@ Kept from the start, so that stage 3 needs no redesign:
 
 ## Order of work
 
-The new library is assembled in `python/src/lvm_new/`, next to the untouched `lvm` (which keeps the experiments running): `lvm_new` holds only what has been written for this design and imports everything else from `lvm`. When every part has moved over, it replaces `lvm` under the final name.
+The new library is built from scratch in `python/src/lvm_new/`, next to the untouched `lvm` (which keeps the experiments running). The two never import from each other. When `lvm_new` is complete, it replaces `lvm` under the final name, and the regression test (pinned results) checks that it computes what `lvm` did.
 
 Each step keeps all tests passing, including the regression test (pinned results), and is committed on its own:
-1. `estimator.py`: `LocalizedVoltageMaps` as a thin wrapper around today's `fit_level`, plus `data.py`.
+1. `estimator.py`, `data.py` (inputs as chunk sources), `precision.py`, `config.py` (pydantic models + `config.yaml`, sections added as the steps that use them arrive). `fit` works once the step modules exist; nothing wraps the old `fit_level`.
 2. `LevelModel` → `RegionModel`, `pipeline.py` → `region.py` with `fit_region`; region ids and per-region seeds.
 3. `device="auto"` and device-based strategies (k-means first).
 4. `io.py` and `cli.py`; delete the removed modules.

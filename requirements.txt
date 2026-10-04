@@ -5,6 +5,7 @@ numpy==2.4.6
 scipy==1.18.1
 scikit-learn==1.9.1
 pyyaml==6.0.3
+pydantic==2.13.5
 torch==2.14.0
 cuml-cu13==26.8.0
 cugraph-cu13==26.8.0
