@@ -22,6 +22,11 @@ class DataConfig(_Section):
     chunk_size: int = Field(ge=1)
 
 
+class SampleConfig(_Section):
+    strategy: Literal["prefix", "reservoir"]
+    size: int = Field(ge=1)
+
+
 class CellsConfig(_Section):
     n_cells: int = Field(ge=2)
 
@@ -42,14 +47,18 @@ class HierarchyConfig(_Section):
 class Config(_Section):
     compute: ComputeConfig
     data: DataConfig
+    sample: SampleConfig
     cells: CellsConfig
     embedding: EmbeddingConfig
     hierarchy: HierarchyConfig
 
 
-def load_config(path: str | Path | None = None, overrides: Mapping[str, Any] | None = None) -> Config:
+def load_config(path: str | Path | Mapping[str, Any] | None = None, overrides: Mapping[str, Any] | None = None) -> Config:
+    """The defaults, with the run's settings (a YAML file, or a dict of the same structure) and then ``overrides``
+    merged over them."""
     settings = yaml.safe_load(DEFAULTS.read_text())
-    for update in (yaml.safe_load(Path(path).read_text()) if path else None, overrides):
+    run = path if isinstance(path, Mapping) else (yaml.safe_load(Path(path).read_text()) if path else None)
+    for update in (run, overrides):
         if update:
             settings = _merge(settings, update)
     return Config.model_validate(settings)

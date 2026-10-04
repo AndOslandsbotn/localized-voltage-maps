@@ -12,6 +12,11 @@ data:
   chunk_size: 10000      # points per chunk when an array is read in pieces; a re-iterable's own pieces are used as
                          # they come. Streaming k-means updates once per chunk, so results depend on it
 
+sample:                  # the region's sample, held in memory (dimension estimate, k-means, local chart)
+  strategy: prefix       # prefix: the first points; the data must be in random order (fast: stops reading)
+                         # reservoir: uniform over one full pass; for data in any order
+  size: 50000            # points in the sample (all of them if the data has fewer)
+
 cells:
   n_cells: 1000          # number of cells (graph nodes) per region
 

@@ -51,8 +51,9 @@ class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
         chunk, so results depend on it; that's also why it is fixed rather than estimated from free memory.
     levels : int or None (setting hierarchy.levels, default 1)
         Depth of the hierarchy. Only 1 for now; more levels are stage 2.
-    config : str, Path or None, default None
-        YAML file with any settings, merged over the package's defaults.
+    config : str, Path, dict or None, default None
+        Any settings, merged over the package's defaults: a YAML file, or a dict of the same structure
+        (e.g. ``{"graph": {"radius": {"strategy": "knn"}}}``).
 
     Attributes (after ``fit``)
     --------------------------
@@ -78,7 +79,7 @@ class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
         local_chart: str | None = None,
         chunk_size: int | None = None,
         levels: int | None = None,
-        config: str | Path | None = None,
+        config: str | Path | dict | None = None,
     ):
         # scikit-learn: store the arguments unchanged, no checking or work here.
         self.n_components = n_components
