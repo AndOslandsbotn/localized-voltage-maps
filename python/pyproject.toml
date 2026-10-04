@@ -12,6 +12,7 @@ dependencies = [
     "scikit-learn",
     "pyyaml",
     "pydantic>=2",
+    "scikit-dimension",
 ]
 
 [project.optional-dependencies]

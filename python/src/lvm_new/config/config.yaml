@@ -17,6 +17,14 @@ sample:                  # the region's sample, held in memory (dimension estima
                          # reservoir: uniform over one full pass; for data in any order
   size: 50000            # points in the sample (all of them if the data has fewer)
 
+dimension:               # the region's intrinsic dimension d̂, estimated from its sample; sets the number of landmarks
+  strategy: mle          # mle: Levina & Bickel (2005) on k-NN distances | twonn: Facco et al. (2017) | fixed: given d
+  sample_size: 10000     # points of the region's sample used (mle, twonn); all if the sample is smaller
+  mle:
+    k: 20                # neighbours per point
+  fixed:
+    d: 12.0              # the dimension, when it is known
+
 cells:
   n_cells: 1000          # number of cells (graph nodes) per region
 

@@ -13,6 +13,16 @@ class _Section(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
 
+class _Choice(_Section):
+    """A section that chooses a strategy: ``strategy`` names it, the field of that name holds its options."""
+
+    strategy: str
+
+    @property
+    def options(self) -> Any:
+        return getattr(self, self.strategy, None)
+
+
 class ComputeConfig(_Section):
     device: Literal["auto", "cuda", "cpu"]
     seed: int = Field(ge=0)
@@ -22,9 +32,24 @@ class DataConfig(_Section):
     chunk_size: int = Field(ge=1)
 
 
-class SampleConfig(_Section):
+class SampleConfig(_Choice):
     strategy: Literal["prefix", "reservoir"]
     size: int = Field(ge=1)
+
+
+class MleOptions(_Section):
+    k: int = Field(ge=2)
+
+
+class FixedDimensionOptions(_Section):
+    d: float = Field(gt=0)
+
+
+class DimensionConfig(_Choice):
+    strategy: Literal["mle", "twonn", "fixed"]
+    sample_size: int = Field(ge=3)
+    mle: MleOptions
+    fixed: FixedDimensionOptions
 
 
 class CellsConfig(_Section):
@@ -48,6 +73,7 @@ class Config(_Section):
     compute: ComputeConfig
     data: DataConfig
     sample: SampleConfig
+    dimension: DimensionConfig
     cells: CellsConfig
     embedding: EmbeddingConfig
     hierarchy: HierarchyConfig

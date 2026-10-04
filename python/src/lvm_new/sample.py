@@ -4,13 +4,11 @@ import numpy as np
 
 from lvm_new.config import SampleConfig
 from lvm_new.precision import DATA_DTYPE
-from lvm_new.strategies import resolve
 
 
 def sample_region(chunks, *, config: SampleConfig, seed: int) -> np.ndarray:
     """(size, n_features) sample of the region's points, by the strategy in ``config`` (all points if fewer)."""
-    strategy, options = resolve(_STRATEGIES, config)
-    return strategy(chunks, size=config.size, seed=seed, options=options)
+    return _STRATEGIES[config.strategy](chunks, options=config.options, size=config.size, seed=seed)
 
 
 def _prefix(chunks, *, size: int, seed: int, options: None) -> np.ndarray:

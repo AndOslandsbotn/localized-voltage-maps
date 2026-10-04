@@ -40,7 +40,7 @@ class RegionModel:
 def fit_region(chunks, config: Config, *, device: str, region_id: tuple[int, ...], seed: int) -> RegionModel:
     """Fit one region to its data: the method's nine steps, in order."""
     sample = sample_region(chunks, config=config.sample, seed=seed)
-    dimension = estimate_dimension(sample, config, device=device, seed=seed)
+    dimension = estimate_dimension(sample, config=config.dimension, device=device, seed=seed)
     centroids = fit_cells(sample, chunks, config, device=device, seed=seed)
     masses = cell_masses(chunks, centroids, config, device=device)
     graph = build_graph(centroids, config)
