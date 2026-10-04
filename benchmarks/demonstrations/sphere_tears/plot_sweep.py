@@ -25,7 +25,7 @@ def main() -> None:
     fig = plt.figure(figsize=(4.4 * len(COUNTS), 9))
     for col, L in enumerate(COUNTS):
         name = f"sweep_L{L}" if variant == "before" else f"sweep_{variant}_L{L}"
-        data, info = np.load(HERE / f"{name}.npz"), json.loads((HERE / f"{name}.json").read_text())
+        data, info = np.load(HERE / "embeddings" / f"{name}.npz"), json.loads((HERE / f"{name}.json").read_text())
         X, Z, torn, lm = data["X"], data["Z"], data["torn"], data["landmarks"]
         angle = np.arctan2(X[:, 1], X[:, 0])
         order = np.random.default_rng(0).permutation(len(X))

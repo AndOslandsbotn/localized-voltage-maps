@@ -11,7 +11,7 @@
   P_f<f>: D with 3 nearest cells, sharpness 16, points placed within their cell by the cell's local PCA (fill f)
 
 Tuned LVM (150 cells), tuning split (20k), GPU, seeds 0-2, each run isolated and
-memory-guarded. Writes results.jsonl and Z_<variant>.npz (seed 0); plot.py draws them.
+memory-guarded. Writes results.jsonl and embeddings/Z_<variant>.npz (seed 0); plot.py draws them.
 
     python benchmarks/mnist/diagnostics/kernels/run.py
 """

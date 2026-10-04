@@ -32,25 +32,25 @@
    "strategy": "reach"
   }
  },
- "fit_s": 2.1533555499991053,
- "total_s": 2.251829913999245,
+ "fit_s": 1.3663841680099722,
+ "total_s": 1.4388426310033537,
  "info": {
   "stages": {
-   "sample": 0.625267472001724,
-   "dimension": 0.3291595479968237,
-   "cells": 0.4811800480019883,
-   "masses": 0.1749011639985838,
-   "graph": 0.09866871700069169,
-   "scaling": 0.4368178189979517,
-   "voltages": 0.006272844999330118,
-   "landmarks": 9.36200376600027e-06,
-   "embedding": 0.0010553859974606894
+   "sample": 0.1380689739889931,
+   "dimension": 0.31787216500379145,
+   "cells": 0.2892580930056283,
+   "masses": 0.144614314995124,
+   "graph": 0.11472922599932645,
+   "scaling": 0.35363872500602156,
+   "voltages": 0.007162102992879227,
+   "landmarks": 1.0021001799032092e-05,
+   "embedding": 0.0010156450007343665
   },
-  "rho_g": 0.0012910855084788749,
+  "rho_g": 0.0045215191970120585,
   "reach": 14.0,
   "rho_rounds": 2,
   "n_landmarks": 14,
-  "dimension": 12.305518303898284
+  "dimension": 12.305518292715197
  },
  "colourings": {
   "digit": {
@@ -58,10 +58,10 @@
    "categorical": true
   }
  },
- "trustworthiness": 0.9640591914936303,
- "continuity": 0.8974740375163005,
- "knn_accuracy": 0.8904,
- "distance_correlation": 0.43316521891041676,
- "occupied_squares": 1908,
- "visible_share": 0.03816
+ "trustworthiness": 0.9706148420102317,
+ "continuity": 0.9392901354198013,
+ "knn_accuracy": 0.8984,
+ "distance_correlation": 0.32713316207243287,
+ "occupied_squares": 4781,
+ "visible_share": 0.09562
 }

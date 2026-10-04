@@ -1,0 +1,12 @@
+{
+ "best": "mi",
+ "chosen_on": "the pictures (metrics tie), by the user",
+ "rule_best": "maxmin+mi",
+ "rule": "mnist_tune, mean trustworthiness",
+ "trustworthiness": {
+  "mi": 0.9717329818437154,
+  "maxmin": 0.9729441580900794,
+  "maxmin+mi": 0.973313671581904,
+  "mi+maxmin": 0.9732099508476276
+ }
+}

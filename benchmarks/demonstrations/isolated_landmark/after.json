@@ -1,0 +1,15 @@
+{
+ "variant": "after",
+ "graph_pieces": 1,
+ "landmarks_in_size1_pieces": 0,
+ "n_landmarks": 15,
+ "rho_g": 0.0006445865860757787,
+ "rho_g_lower_bound": 1e-06,
+ "reach": 15.0,
+ "trustworthiness": 0.9603108957769084,
+ "continuity": 0.8768340816531247,
+ "knn_accuracy": 0.8321999999999999,
+ "distance_correlation": 0.4281057012099978,
+ "occupied_squares": 2104,
+ "visible_share": 0.04208
+}

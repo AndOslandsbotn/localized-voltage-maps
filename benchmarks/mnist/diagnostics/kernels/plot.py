@@ -39,7 +39,7 @@ def draw(name: str, variants: list[str]) -> None:
     rows = -(-len(variants) // cols)
     fig, axes = plt.subplots(rows, cols, figsize=(5.5 * cols, 6 * rows), squeeze=False)
     for ax, variant in zip(axes.flat, variants):
-        data, r = np.load(HERE / f"Z_{variant}.npz"), results[(variant, 0)]
+        data, r = np.load(HERE / "embeddings" / f"Z_{variant}.npz"), results[(variant, 0)]
         Z, y = data["Z"], data["y"]
         order = np.random.default_rng(0).permutation(len(y))
         ax.scatter(Z[order, 0], Z[order, 1], c=y[order], cmap="tab10", vmin=-0.5, vmax=9.5, s=0.5, rasterized=True)

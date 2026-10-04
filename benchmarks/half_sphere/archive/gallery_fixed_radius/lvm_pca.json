@@ -1,0 +1,78 @@
+{
+ "dataset": "half_sphere",
+ "split": "eval",
+ "n": 20000,
+ "seed": 0,
+ "method": "lvm_pca_gpu",
+ "label": "LVM + local PCA (GPU)",
+ "params": {
+  "cells": {
+   "n_cells": 300
+  },
+  "embedding": {
+   "landmark_mds": {
+    "missing": "chain"
+   },
+   "strategy": "landmark_mds",
+   "local_scale": {
+    "strategy": "pca",
+    "pca": {
+     "fill": 0.6
+    }
+   }
+  },
+  "landmarks": {
+   "count": {
+    "dimension": {
+     "multiplier": 1.0
+    },
+    "strategy": "dimension"
+   },
+   "strategy": "mutual_information"
+  },
+  "scaling": {
+   "reach": {
+    "k": null,
+    "quantile": 0.1
+   },
+   "strategy": "reach"
+  }
+ },
+ "fit_s": 0.3811992370028747,
+ "total_s": 0.3937465839990182,
+ "info": {
+  "stages": {
+   "sample": 0.0005569159984588623,
+   "dimension": 0.06669881301058922,
+   "cells": 0.009573165996698663,
+   "masses": 0.0020820289937546477,
+   "graph": 0.003303739009425044,
+   "scaling": 0.1766769419919001,
+   "voltages": 0.007195212005171925,
+   "landmarks": 1.1487994925118983e-05,
+   "embedding": 0.0008663170010549948,
+   "local_scale": 0.11422935100563336
+  },
+  "rho_g": 0.002374891358821792,
+  "reach": 3.0,
+  "rho_rounds": 2,
+  "n_landmarks": 3,
+  "dimension": 1.9703093208311546
+ },
+ "colourings": {
+  "height": {
+   "cmap": "viridis",
+   "categorical": false
+  },
+  "angle": {
+   "cmap": "hsv",
+   "categorical": false
+  }
+ },
+ "trustworthiness": 0.9964538108135219,
+ "continuity": 0.9979228568562544,
+ "knn_accuracy": NaN,
+ "distance_correlation": 0.958493497257214,
+ "occupied_squares": 18837,
+ "visible_share": 0.94185
+}

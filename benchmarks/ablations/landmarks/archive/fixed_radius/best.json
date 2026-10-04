@@ -1,0 +1,10 @@
+{
+ "best": "maxmin+mi",
+ "chosen_on": "mnist_tune, mean trustworthiness",
+ "trustworthiness": {
+  "mi": 0.9718726845220182,
+  "maxmin": 0.97363555983549,
+  "maxmin+mi": 0.973738389808406,
+  "mi+maxmin": 0.9733543103621226
+ }
+}

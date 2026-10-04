@@ -130,10 +130,14 @@ def _tsne(gpu: bool):
     def embed(X: np.ndarray, params: dict, seed: int):
         perplexity = float(params.get("perplexity", 30.0))
         late = float(params.get("late_exaggeration", 1.0))
+        dims = int(params.get("n_components", 2))
         n = X.shape[0]
         t0 = time.perf_counter()
         if gpu:
             from cuml.manifold import TSNE
+
+            if dims != 2:
+                raise ValueError("cuML t-SNE embeds in 2-D only; use tsne_cpu for 3-D")
 
             Z = TSNE(n_components=2, perplexity=perplexity, n_neighbors=min(int(3 * perplexity), n - 1),
                      early_exaggeration=12.0, late_exaggeration=late, exaggeration_iter=250, max_iter=750,
@@ -143,9 +147,11 @@ def _tsne(gpu: bool):
         else:
             from openTSNE import TSNE
 
-            Z = np.asarray(TSNE(n_components=2, perplexity=perplexity, early_exaggeration=12,
+            # FFT (FIt-SNE) works in 1-2 dimensions only; Barnes-Hut in any (slower, fine for a 3-D picture).
+            Z = np.asarray(TSNE(n_components=dims, perplexity=perplexity, early_exaggeration=12,
                                 early_exaggeration_iter=250, n_iter=500, exaggeration=late, initialization="pca",
-                                negative_gradient_method="fft", n_jobs=-1, random_state=seed).fit(X))
+                                negative_gradient_method="fft" if dims <= 2 else "bh", n_jobs=-1,
+                                random_state=seed).fit(X))
         return Z, time.perf_counter() - t0, {}
     return embed
 
@@ -199,7 +205,7 @@ def _lisomap_distances_gpu(X: np.ndarray, n_neighbors: int, landmarks: np.ndarra
     return D
 
 
-LOCAL_PCA = {"embedding": {"local_scale": {"strategy": "pca", "pca": {"fill": 0.35}}}}
+LOCAL_PCA = {"embedding": {"local_scale": {"strategy": "pca", "pca": {"fill": 0.6}}}}
 
 METHODS: dict[str, Method] = {
     "lvm_gpu": Method("lvm", "gpu", "LVM (GPU)", _lvm(True)),
@@ -212,8 +218,9 @@ METHODS: dict[str, Method] = {
     "lisomap_cpu": Method("lisomap", "cpu", "Landmark Isomap (CPU, sklearn + SciPy)", _lisomap(False)),
     "tsne_gpu": Method("tsne", "gpu", "t-SNE (GPU, cuML)", _tsne(True)),
     "tsne_cpu": Method("tsne", "cpu", "t-SNE (CPU, openTSNE)", _tsne(False)),
-    # LVM plus a local chart per cell: its points placed by the cell's own 2-D PCA (fill 0.35, chosen in
-    # diagnostics/kernels). The single-level stand-in for zooming into each region; uses LVM's tuning.
+    # LVM plus a local chart per cell: its points placed by the cell's own 2-D PCA. Fill 0.6, so that neighbouring
+    # cells touch and a digit is not split into beads (mnist/diagnostics/fragmentation; 0.35 before). The
+    # single-level stand-in for zooming into each region; uses LVM's tuning.
     "lvm_pca_gpu": Method("lvm_pca", "gpu", "LVM + local PCA (GPU)", _lvm(True), tuned_as="lvm",
                           overrides=LOCAL_PCA),
     "lvm_pca_cpu": Method("lvm_pca", "cpu", "LVM + local PCA (CPU)", _lvm(False), tuned_as="lvm",

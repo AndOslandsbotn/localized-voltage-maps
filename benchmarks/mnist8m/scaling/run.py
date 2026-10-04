@@ -1,4 +1,4 @@
-"""MNIST8M scaling: LVM streamed from disk vs UMAP held in memory, from 50k to all 8.1M points.
+"""MNIST8M scaling: LVM streamed from disk vs the other methods held in memory, from 1k to all 8.1M points.
 
 Every run is its own memory-guarded process (5 GB, this machine has 7.8 GB); a run over the limit is recorded as
 such. Results go to results.jsonl (finished runs are skipped); then plot.py draws figure.png.
@@ -18,47 +18,65 @@ sys.path.insert(0, str(BENCH))
 from common.runner import thread_env  # noqa: E402
 
 FULL = 8_100_000
-GRID = (50_000, 200_000, 500_000, 1_000_000, 4_000_000, FULL)
+GRID = (1_000, 5_000, 10_000, 20_000, 30_000, 40_000, 50_000, 200_000, 500_000, 1_000_000, 4_000_000, FULL)
+# Up to 50k every method is fitted on all n (A and B coincide): which method needs the fewest points for good quality
 STREAMED = ("lvm_gpu", "lvm_pca_gpu")                 # every size: streamed from disk
 IN_MEMORY = ("umap_gpu", "tsne_gpu", "le_gpu", "lisomap_gpu")   # fitted on all n, up the grid until memory runs out
-TRANSFORM = ("umap_gpu", "lisomap_gpu")               # then: fit on the largest size that fitted, transform the rest
+TRANSFORM = ("umap_gpu", "lisomap_gpu")               # A: fit on the largest size that fitted, transform the rest
+SAMPLE = 50_000                                        # B: LVM's k-means sample; UMAP and Landmark Isomap fit on it too
 LIMIT_MB = 5000
 
 
-def label(method: str, n: int, fit_n: int | None) -> str:
-    return f"{method} n={n:,}" + (f" (fit on {fit_n:,})" if fit_n else "")
+def label(method: str, n: int, fit: int) -> str:
+    return f"{method} n={n:,} (fit on {fit:,})"
 
 
-def render(rows: list, current: str | None = None) -> None:
+def default_fit(method: str, n: int) -> int:
+    return min(n, SAMPLE) if method.startswith("lvm") else n
+
+
+def planned(rows: list) -> list[tuple[str, int, int, str]]:
+    """Every run of the experiment as (method, n, fit_n, part); the A transform runs depend on earlier results."""
+    plan = [(m, n, default_fit(m, n), "B") for m in STREAMED for n in GRID]
+    plan += [(m, FULL, SAMPLE, "B") for m in TRANSFORM]
+    plan += [(m, n, n, "A") for m in IN_MEMORY for n in GRID]
+    plan += [("lvm_gpu", n, n, "A") for n in GRID if n > SAMPLE]
+    for m in TRANSFORM:
+        fitted = [r["n"] for r in rows if r["method"] == m and r["status"] == "ok" and fit_of(r) == r["n"]]
+        if fitted and max(fitted) < FULL:
+            plan.append((m, FULL, max(fitted), "A"))
+    return plan
+
+
+def find(rows: list, method: str, n: int, fit: int) -> dict | None:
+    for r in rows:
+        if r["method"] == method and r["n"] == n and fit_of(r) == fit and r["status"] in ("ok", "memory_limit"):
+            return r
+    return None
+
+
+def render(rows: list, current: tuple | None = None) -> None:
     """progress.md: an overall bar, every planned run with its status, and the running run's stage."""
-    done = {label(r["method"], r["n"], (r.get("info") or {}).get("fit_n") if (r.get("info") or {}).get("fit_n", r["n"]) < r["n"] else None): r
-            for r in rows}
-    failed = {r["method"] for r in rows if r["status"] != "ok" and r["method"] in IN_MEMORY}
-    largest = {m: max([r["n"] for r in rows if r["method"] == m and r["status"] == "ok"
-                       and (r.get("info") or {}).get("fit_n", r["n"]) == r["n"]], default=None) for m in TRANSFORM}
-    plan = [(m, n, None) for m in STREAMED for n in GRID] + [(m, n, None) for m in IN_MEMORY for n in GRID] + \
-           [(m, FULL, "largest") for m in TRANSFORM]
-    lines, finished, total = [], 0, 0
-    for m, n, fit in plan:
-        fit_n = largest.get(m) if fit == "largest" else None
-        name = label(m, n, fit_n) if fit != "largest" else f"{m} n={FULL:,} (fit on the largest size that fitted" + \
-            (f": {fit_n:,})" if fit_n else ")")
-        r = done.get(label(m, n, fit_n)) if fit != "largest" or fit_n else None
+    lines, finished, plan = [], 0, planned(rows)
+    for m, n, fit, part in plan:
+        r = find(rows, m, n, fit)
         if r is not None:
-            status = ("done  " + f"{r['total_s']:.0f} s, peak {r['peak_rss_mb'] / 1024:.1f} GB, trust {r['trustworthiness']:.3f}"
+            status = (f"done  {r['total_s']:.0f} s, peak {r['peak_rss_mb'] / 1024:.1f} GB, trust {r['trustworthiness']:.3f}"
                       if r["status"] == "ok" else r["status"])
             finished += 1
-        elif current and name.startswith(current.split(" (fit")[0]) and (fit_n is None or current == label(m, n, fit_n)):
+        elif current == (m, n, fit):
             status = "**running**"
-        elif m in failed and fit != "largest" and any(x["method"] == m and x["status"] != "ok" and x["n"] < n for x in rows):
-            status = "skipped (a smaller size already exceeded memory)"
+        elif fit == n and any(x["method"] == m and x["status"] == "memory_limit" and fit_of(x) == x["n"] and x["n"] < n
+                              for x in rows):
+            status = "skipped (a smaller full fit already exceeded memory)"
             finished += 1
         else:
             status = "pending"
-        total += 1
-        lines.append(f"| {name} | {status} |")
+        lines.append(f"| {part} | {label(m, n, fit)} | {status} |")
+    total = len(plan)
     bar = "#" * round(30 * finished / total) + "-" * (30 - round(30 * finished / total))
-    text = [f"# MNIST8M scaling progress", "", f"`[{bar}]` {finished}/{total} runs finished", ""]
+    text = ["# MNIST8M scaling progress", "", f"`[{bar}]` {finished}/{total} runs finished", "",
+            "B = fitted on LVM's 50k sample, the rest streamed/transformed (main); A = fitted on everything", ""]
     run_file = HERE / "progress_run.json"
     if current and run_file.exists():
         try:
@@ -67,8 +85,14 @@ def render(rows: list, current: str | None = None) -> None:
             text += [f"**Now:** {st['run']}: {st['stage']}{pct}, {st['elapsed_s']:.0f} s", ""]
         except (ValueError, KeyError):
             pass
-    text += ["| run | status |", "|---|---|", *lines, ""]
+    text += ["| part | run | status |", "|---|---|---|", *lines, ""]
     (HERE / "progress.md").write_text("\n".join(text))
+
+
+def fit_of(r: dict) -> int:
+    """How many points a run was fitted on (LVM: its k-means sample, 50k unless set, or the streamed points)."""
+    default = min(r["n"], SAMPLE) if r["method"].startswith("lvm") else r["n"]
+    return (r.get("info") or {}).get("fit_n", default)
 
 
 def run(rows: list, path: Path, method: str, n: int, fit_n: int | None = None) -> dict:
@@ -76,18 +100,17 @@ def run(rows: list, path: Path, method: str, n: int, fit_n: int | None = None) -
     import tempfile
     import time
 
-    fit = fit_n or n
-    for r in rows:   # finished or out of memory counts as done; a failed run (e.g. after sleep) is retried
-        if r["method"] == method and r["n"] == n and (r.get("info") or {}).get("fit_n", n) == fit \
-                and r["status"] in ("ok", "memory_limit"):
-            return r
+    fit = fit_n or default_fit(method, n)
+    done = find(rows, method, n, fit)     # finished or out of memory counts as done; a failed run is retried
+    if done is not None:
+        return done
     cmd = [sys.executable, str(BENCH / "common" / "guard.py"), "--limit-mb", str(LIMIT_MB), "--",
            sys.executable, str(HERE / "one.py"), "--method", method, "--n", str(n)] + \
           (["--fit-n", str(fit_n)] if fit_n else [])
     with tempfile.TemporaryFile("w+") as out, tempfile.TemporaryFile("w+") as err:
         proc = subprocess.Popen(cmd, stdout=out, stderr=err, text=True, env=thread_env(16))
         while proc.poll() is None:                     # the overview refreshes every 10 s; the run is not touched
-            render(rows, label(method, n, fit_n))
+            render(rows, (method, n, fit))
             time.sleep(10)
         out.seek(0), err.seek(0)
         stdout, stderr = out.read(), err.read()
@@ -124,6 +147,15 @@ def main() -> None:
     for method in TRANSFORM:
         if largest.get(method, FULL) < FULL:
             run(rows, path, method, FULL, fit_n=largest[method])
+    # B (the main comparison): fitted on the same 50k sample as LVM, the rest placed by transform; one run to 8.1M
+    # per method, with time and quality recorded at every grid size on the way.
+    for method in TRANSFORM:
+        run(rows, path, method, FULL, fit_n=SAMPLE)
+    # A for LVM: the cells fitted on all n points -- k-means on the 50k sample, refined by streaming k-means over
+    # all n (memory independent of n).
+    for n in GRID:
+        if n > SAMPLE and run(rows, path, "lvm_gpu", n, fit_n=n)["status"] != "ok":
+            break
     subprocess.run([sys.executable, str(HERE / "plot.py")])
 
 

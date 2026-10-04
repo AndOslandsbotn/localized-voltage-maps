@@ -1,0 +1,14 @@
+{
+ "method": "tsne_cpu",
+ "label": "t-SNE (CPU, openTSNE)",
+ "params": {
+  "late_exaggeration": 2.0,
+  "perplexity": 15,
+  "n_components": 3
+ },
+ "seconds": 29.564619054988725,
+ "info": {},
+ "trustworthiness": 0.9995927896479085,
+ "continuity": 0.9987968502357307,
+ "distance_correlation": 0.8668786361535238
+}

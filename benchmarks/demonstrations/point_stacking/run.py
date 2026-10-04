@@ -28,14 +28,14 @@ TITLES = {"before": "before: hard kernel from points to cells",
 
 def main() -> None:
     for variant in TITLES:
-        if not (HERE / f"{variant}.npz").exists():
+        if not (HERE / "embeddings" / f"{variant}.npz").exists():
             cmd = [sys.executable, str(BENCH / "common" / "guard.py"), "--limit-mb", "4500", "--",
                    sys.executable, str(HERE / "one.py"), "--variant", variant]
             out = subprocess.run(cmd, capture_output=True, text=True, env=thread_env(16)).stdout
             print([l for l in out.splitlines() if l.startswith(variant)], flush=True)
     fig, axes = plt.subplots(1, 3, figsize=(18, 6.4))
     for ax, (variant, title) in zip(axes, TITLES.items()):
-        data, info = np.load(HERE / f"{variant}.npz"), json.loads((HERE / f"{variant}.json").read_text())
+        data, info = np.load(HERE / "embeddings" / f"{variant}.npz"), json.loads((HERE / f"{variant}.json").read_text())
         Z, y = data["Z"], data["y"]
         info.update(stacking(Z))
         order = np.random.default_rng(0).permutation(len(y))

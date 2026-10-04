@@ -150,3 +150,36 @@ def test_local_pca_directions_match_each_cells_exact_pca(device):
         overlap = np.linalg.svd(vt[:2] @ B[:, c, :], compute_uv=False)
         assert np.all(overlap > 0.999)
     assert local.valid.all() and local.anchors.device.type == device
+
+
+@pytest.mark.parametrize("device", ["cpu"] + (["cuda"] if __import__("torch").cuda.is_available() else []))
+def test_local_pca_in_three_dimensions(device):
+    # A 3-D embedding: each cell gets its 3 main directions, turned by a 3 x 3 rotation onto its LVM offsets.
+    import torch
+
+    from lvm.embedding import _fit_local_pca
+
+    rng = np.random.default_rng(2)
+    n_cells, d, m = 5, 20, 3000
+    cell = rng.integers(0, n_cells, m)
+    spaces = [np.linalg.qr(rng.normal(size=(d, 3)))[0] for _ in range(n_cells)]
+    X = np.stack([spaces[c] @ (rng.normal(size=3) * [3.0, 2.0, 1.0]) for c in cell]) + 0.05 * rng.normal(size=(m, d))
+    centres = rng.normal(size=(n_cells, 3)) * 10
+    Z = centres[cell] + rng.normal(size=(m, 3))
+    t = lambda a, dt: torch.as_tensor(a, dtype=dt, device=device)
+    local = _fit_local_pca(t(Z, torch.float64), t(cell, torch.long), n_cells, t(X, torch.float32), fill=0.5)
+    assert local.anchors.shape == (n_cells, 3) and local.bases.shape == (d, 3 * n_cells)
+    R = local.rotations.cpu().numpy()
+    assert R.shape == (n_cells, 3, 3) and np.allclose(R @ R.transpose(0, 2, 1), np.eye(3), atol=1e-9)
+    B = local.bases.cpu().numpy().reshape(d, n_cells, 3)
+    for c in range(n_cells):
+        overlap = np.linalg.svd(spaces[c].T @ B[:, c, :], compute_uv=False)
+        assert np.all(overlap > 0.99)                 # the cell's own 3-D subspace
+    out = local.apply(t(Z, torch.float64), t(cell, torch.long), t(X, torch.float32)).cpu().numpy()
+    assert out.shape == (m, 3) and np.isfinite(out).all()
+    # Each cell's median point sits at fill x the distance to the nearest other cell's anchor.
+    A = local.anchors.cpu().numpy()
+    D = np.linalg.norm(A[:, None] - A[None], axis=2) + np.diag(np.full(n_cells, np.inf))
+    for c in range(n_cells):
+        r = np.linalg.norm(out[cell == c] - A[c], axis=1)
+        assert np.median(r) == pytest.approx(0.5 * D[c].min(), rel=0.02)

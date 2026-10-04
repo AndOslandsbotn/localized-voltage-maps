@@ -2,7 +2,7 @@
 
 One level of the hierarchy, run on the whole dataset (the root region):
 
-    sample -> intrinsic dimension -> k-means cells -> streamed masses -> radius
+    sample -> intrinsic dimension -> k-means cells (-> refined over the stream) -> streamed masses -> radius
     -> kernel -> rho_g -> candidate voltage maps -> threshold -> landmarks -> embedding
 
 ``fit_level`` returns a ``LevelModel`` whose ``transform`` embeds any data
@@ -21,11 +21,11 @@ from typing import Iterator
 import numpy as np
 import torch
 
-from lvm.cells import fit_cells, sq_distances
+from lvm.cells import fit_cells, refine_cells, sq_distances
 from lvm.config import Config, KernelConfig
 from lvm.dimension import Dimension, choose_dimension
 from lvm.embedding import LandmarkMdsEmbedding, LocalPca, LocalScale, LogMdsEmbedding, fit_embedding, fit_local_scale
-from lvm.graph import adaptive_knn_kernel, choose_kernel, choose_radius
+from lvm.graph import adaptive_knn_kernel, choose_kernel, choose_radius, connect_components
 from lvm.landmarks import LandmarkSelection, choose_landmarks, landmark_count
 from lvm.regions import CellMasses, Region, estimate_masses, min_count_for, sample_regions
 from lvm.scaling import RhoChoice, choose_rho_g
@@ -38,7 +38,7 @@ class LevelModel:
     config: Config
     centroids: np.ndarray          # (n, d) cell centroids
     masses: CellMasses             # streamed cell masses; .p sums to 1
-    r: float                       # kernel radius
+    r: float                       # kernel radius (graph.radius adaptive_per_cell: the median of r_cells)
     K: np.ndarray                  # (n, n) kernel between cells
     rho: RhoChoice                 # chosen ground scaling
     landmarks: LandmarkSelection   # .indices are rows of the candidate maps
@@ -50,6 +50,7 @@ class LevelModel:
     timings: dict[str, float] = field(default_factory=dict)   # seconds per stage
     local_scale: LocalScale | LocalPca | None = None   # embedding.local_scale: a second scale per cell
     V_dist: np.ndarray | None = None   # the same maps thresholded at embedding.distance_floor (None: = V)
+    r_cells: np.ndarray | None = None  # (n,) each cell's own radius (graph.radius adaptive_per_cell), else None
 
     @cached_property
     def _on_device(self) -> tuple:
@@ -97,7 +98,7 @@ class LevelModel:
         if cfg.extension.kernel == "knn":
             Kx = adaptive_knn_kernel(d2, k=cfg.extension.knn.k, sharpness=cfg.extension.knn.sharpness)
         else:
-            Kx = choose_kernel(d2, r=self.r, config=self._point_kernel).K
+            Kx = choose_kernel(d2, r=self.r if self.r_cells is None else self.r_cells, config=self._point_kernel).K
         nearest = d2.argmin(1)
         VX = extend_voltages(Kx, V, p, config=cfg.extension, rho_g=self.rho.rho_g, nearest=nearest)
         return threshold_voltages(VX, threshold), nearest, X
@@ -157,6 +158,12 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
     ).centroids
     lap("cells")
 
+    if cfg.cells.refine.strategy != "none":
+        # A shuffled stream's sample is its prefix: those points already shaped the centroids.
+        root.centroids = refine_cells(source, sample.points, root.centroids, config=cfg.cells.refine,
+                                      skip=sample.points.shape[0] if cfg.data.shuffled else 0, device=device).centroids
+        lap("refine")
+
     masses = estimate_masses(
         source, root,
         min_count=min_count_for(cfg.cells.masses.rel_error),
@@ -167,8 +174,12 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
     p = masses.p
     lap("masses")
 
-    r = choose_radius(root.centroids, config=cfg.graph.radius, points=sample.points).r
-    K = choose_kernel(sq_distances(root.centroids, root.centroids), r=r, config=cfg.graph.kernel, exclude_self=True).K
+    radius = choose_radius(root.centroids, config=cfg.graph.radius, points=sample.points)
+    r = radius.r
+    cell_sq = sq_distances(root.centroids, root.centroids)
+    K = choose_kernel(cell_sq, r=radius.between_cells(), config=cfg.graph.kernel, exclude_self=True).K
+    if cfg.graph.connect:
+        K = connect_components(K, cell_sq)
     lap("graph")
 
     sources = choose_sources(p, config=cfg.sources)
@@ -202,6 +213,7 @@ def fit_level(source: ChunkSource, config: Config, *, device: str | None = None)
         centroids=root.centroids,
         masses=masses,
         r=r,
+        r_cells=radius.per_cell,
         K=K,
         rho=rho,
         landmarks=landmarks,

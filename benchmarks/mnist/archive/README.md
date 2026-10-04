@@ -13,3 +13,6 @@ Superseded results, kept for reference. Each folder is named after what changed 
 | `tuning_lvm_radial_points/`, `comparisons_radial_points/` | k-nearest-cells point step (previously the hard kernel) |
 | `comparisons_lvm_pca_numpy/` | local PCA on the GPU (previously NumPy) |
 | `gallery_before_reorg/` | the shared gallery tool (`common/gallery.py`) |
+| `tuning_lvm_fixed_radius/` | LVM tuning with one global kernel radius (`graph.radius: knn`), the default until 2026-10-03; superseded by `graph.radius: adaptive_per_cell` (see `demonstrations/uneven_connectivity/`). Only LVM rows moved; the other methods don't use the radius and were kept (also the trade-off figure of that time) |
+| `comparisons_fixed_radius_lvm/` | LVM rows of the GPU and CPU comparisons with one global kernel radius (`graph.radius: knn`), the default until 2026-10-03; superseded by `graph.radius: adaptive_per_cell` (see `demonstrations/uneven_connectivity/`). Only LVM rows moved; the other methods don't use the radius and were kept |
+| `gallery_fixed_radius/` | LVM panels of the gallery with one global kernel radius (`graph.radius: knn`), the default until 2026-10-03; superseded by `graph.radius: adaptive_per_cell` (see `demonstrations/uneven_connectivity/`). Only LVM rows moved; the other methods don't use the radius and were kept |

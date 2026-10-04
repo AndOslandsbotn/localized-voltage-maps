@@ -19,7 +19,7 @@ Every method uses its MNIST-tuned settings, unchanged; there is no tuning split.
 
 | Folder | What |
 |---|---|
-| `scaling/` | time, peak memory and quality on the grid, and the 8.1M embeddings (`run.py`, which also draws `figure.png`) |
+| `scaling/` | `run.py` runs everything; `plot.py` draws three figures: `figure_cost.png` (construction: fit time and memory vs fit size; streaming: time to place n points after a 50k fit, and throughput), `figure_quality.png` (the four measures vs points streamed, and vs fit size), `figure_embeddings.png` (the 8.1M embeddings) |
 
 ## Results (2026-10-03, seed 0, RTX 5060, 7.8 GB RAM, memory guard 5 GB per run)
 

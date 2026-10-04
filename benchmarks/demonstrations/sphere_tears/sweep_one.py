@@ -59,7 +59,8 @@ def main() -> None:
     v = v.cpu().numpy() if hasattr(v, "cpu") else np.asarray(v)
     V_dist = model.V if model.V_dist is None else model.V_dist
     lm_v = V_dist[:, model.landmark_cells]
-    np.savez(HERE / f"{name}.npz", X=X, Z=Z, torn=t, landmarks=model.centroids[model.landmark_cells])
+    (HERE / "embeddings").mkdir(exist_ok=True)
+    np.savez(HERE / "embeddings" / f"{name}.npz", X=X, Z=Z, torn=t, landmarks=model.centroids[model.landmark_cells])
     out = {"variant": args.variant, "landmarks": args.landmarks, "torn_share": float(t.mean()),
            "rho_g": model.rho.rho_g, "distance_floor": floor,
            "chained_point_pairs": float(np.mean(v < floor)),

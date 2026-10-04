@@ -1,6 +1,6 @@
 """Half-sphere gallery: LVM, LVM + local PCA and t-SNE on 20k points, at their MNIST-tuned settings, unchanged.
 
-    python benchmarks/half_sphere/gallery/run.py      # figure.png (+ one .npz/.json per panel)
+    python benchmarks/half_sphere/gallery/run.py      # figure.png (+ one .json per panel, its embedding in embeddings/<panel>.npz)
 """
 
 import sys

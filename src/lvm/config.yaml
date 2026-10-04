@@ -43,6 +43,14 @@ cells:                   # Voronoi cells (k-means) for each region
     sklearn:
       max_iter: 30
       tol: 1.0e-4
+  refine:                # after k-means on the sample: the centroids fitted to the whole stream
+    strategy: none       # none: k-means on the sample only (memory and time independent of n)
+                         # stream: mini-batch k-means (Sculley 2010) over the data, chunk by chunk, from the
+                         #   sample's centroids: each centroid is the running mean of the points assigned to it
+                         #   (the sample's points count from the start). Memory: one chunk + the centroids, for any n
+    stream:
+      passes: 1          # scans of the data
+      max_points: null   # points streamed per pass at most (null = all)
   masses:                # cell masses p_i, estimated by streaming
     rel_error: 0.05      # typical (1 std) relative error per cell: stop once every cell has
                          # >= 1/rel_error^2 points (only with data.shuffled; else full scan)
@@ -57,7 +65,8 @@ graph:
       sigma: 0.3333      # width as a fraction of r
       cutoff: 3.0        # in widths: 3 * r/3 = r, the same support as the other two
   radius:                # kernel radius r, recomputed for every region
-    strategy: knn        # knn: a typical cell has ~k neighbours, in any dimension
+    strategy: adaptive_per_cell  # adaptive_per_cell (default since 2026-10-03, see below): a radius per cell
+                         # knn: one radius; a typical cell has ~k neighbours, in any dimension
                          # centroid_spacing: multiple of the nearest-neighbour distance; fine in low
                          #   dimensions, but connects almost every cell in high ones (distances concentrate)
     knn:
@@ -67,7 +76,17 @@ graph:
       sample_size: 5000  #   spacing, so this r is larger than knn's (Def. 10 / Thm 11 assume cells << r)
     centroid_spacing:
       multiplier: 3.0    # r = multiplier * median nearest-neighbour centroid distance
+    adaptive_per_cell:   # adaptive_per_cell: each cell its own radius r_i, the distance to its k-th nearest centroid;
+      k: 10              #   two cells are joined when either is within the other's radius (r_ij = max(r_i, r_j):
+                         #   the symmetric kNN graph), so every cell has >= k edges. One global r under-connects
+                         #   varied digits (MNIST8M's 0s: 2 edges per cell, graph paths 3.7x the straight distance,
+                         #   blown up) and over-connects compact ones (1s: squeezed); mnist8m/diagnostics/connectivity
   edge_weighting: mass   # mass: W_ij scaled by p_i p_j (Effective resistance paper, Def 11)
+  connect: true          # join every disconnected piece of the cell graph to the main piece by its shortest link
+                         #   (weight 1). A cell no edge reaches can still be chosen as a landmark (its map identifies
+                         #   it perfectly), but it reaches nothing, so `reach` with k = all becomes impossible and
+                         #   rho_g runs to its lower bound: nearly flat maps, a collapsed embedding (MNIST8M;
+                         #   demonstrations/isolated_landmark)
 
 ground:
   weighting: mass        # mass: rho_i = rho_g * p_i (per node)
@@ -125,7 +144,10 @@ dimension:               # intrinsic dimension d of the region, estimated from i
 
 landmarks:
   strategy: mutual_information   # mutual_information: greedy MI between cell identity and voltages
-                                 # maxmin: farthest-point selection on voltage distance (spread)
+                         # maxmin: farthest-point selection on voltage distance (spread)
+                         # combined: the first share by one of them, the rest by the other, chosen given the
+                         #   first ones. All four are tied on the metrics (benchmarks/ablations/landmarks); MI is
+                         #   the default for its pictures (separate clusters rather than arms)
   count:                 # how many landmarks
     strategy: dimension  # fixed: n_landmarks; dimension: ceil(multiplier * (d_hat + 1))
     dimension:
@@ -136,6 +158,10 @@ landmarks:
     precision: float32   # float32 | float64 for the candidate scoring; consumer GPUs run float64
                          # at a small fraction of float32 speed
     scratch_mb: 128      # temporary memory per scoring chunk (a few chunk-sized tensors coexist)
+  combined:
+    first: maxmin
+    second: mutual_information
+    fraction: 0.5        # share of the landmarks chosen by `first` (rounded up)
 
 extension:               # voltages at individual data points (not just at cells)
   strategy: average      # grounded: a point is a zero-mass node of the network, with its own ground,
@@ -178,7 +204,7 @@ embedding:               # low-dimensional coordinates from the landmark voltage
     cell:
       fill: 0.5          # a cell's points spread over this share of the distance to its nearest neighbour
     pca:                 # pca: within each cell, the 2 main directions of its points' raw features
-      fill: 0.35         #   (rotated to match the cell's LVM offsets), median point at fill * nearest-cell distance
+      fill: 0.6          #   (rotated to match the cell's LVM offsets), median point at fill * nearest-cell distance
 
 partition:               # how cells are split into child regions
   strategy: support      # argmax: disjoint, cell goes to its highest-voltage landmark

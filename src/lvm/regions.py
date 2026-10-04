@@ -78,7 +78,9 @@ class _Reservoir:
     """Uniform sample of fixed size from a stream (Algorithm R, vectorized per chunk).
 
     With ``prefix=True`` it just keeps the first ``size`` points, which is a
-    uniform sample when the input is pre-shuffled.
+    uniform sample when the input is pre-shuffled. Points are stored as float32
+    (what k-means and the local charts use anyway): the sample is the one part of
+    a level that is held in memory, so it should cost no more than needed.
     """
 
     def __init__(self, size: int, rng: np.random.Generator, prefix: bool):
@@ -95,7 +97,7 @@ class _Reservoir:
 
     def add(self, X: np.ndarray) -> None:
         if self.buf is None:
-            self.buf = np.empty((self.size, X.shape[1]), dtype=np.float64)
+            self.buf = np.empty((self.size, X.shape[1]), dtype=np.float32)
         n_fill = min(self.size - self.filled, X.shape[0])
         self.buf[self.filled : self.filled + n_fill] = X[:n_fill]
         self.filled += n_fill
@@ -115,8 +117,11 @@ class _Reservoir:
         self.n_seen += X.shape[0]
 
     def result(self) -> RegionSample:
-        points = self.buf[: self.filled] if self.buf is not None else np.empty((0, 0))
-        return RegionSample(points=points.copy(), n_seen=self.n_seen)
+        """The sample; the buffer itself when it is full (no second copy), a trimmed copy otherwise."""
+        if self.buf is None:
+            return RegionSample(points=np.empty((0, 0), dtype=np.float32), n_seen=self.n_seen)
+        points = self.buf if self.filled == self.size else self.buf[: self.filled].copy()
+        return RegionSample(points=points, n_seen=self.n_seen)
 
 
 def sample_regions(

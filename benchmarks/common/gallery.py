@@ -2,7 +2,7 @@
 
 A gallery folder holds a small ``run.py`` that names its dataset and panels and
 calls ``run_gallery``. Each panel embeds the dataset in its own memory-guarded
-process (``python common/gallery.py ...``), saving ``<panel>.npz`` (the
+process (``python common/gallery.py ...``), saving ``embeddings/<panel>.npz`` (the
 embedding, colours and reference view) and ``<panel>.json`` (settings, time,
 scores, how piled up it looks); finished panels are skipped. Then
 ``plot_gallery`` draws ``figure.png``: one column per panel (after the truth,
@@ -38,7 +38,7 @@ def run_gallery(folder: Path, dataset: str, panels: list[Panel], *, split: str =
     from common.runner import thread_env
 
     for p in panels:
-        if (folder / f"{p.name}.npz").exists():
+        if (folder / "embeddings" / f"{p.name}.npz").exists():
             continue
         cmd = [sys.executable, str(BENCH / "common" / "guard.py"), "--limit-mb", str(memory_limit_mb), "--",
                sys.executable, str(Path(__file__).resolve()), "--folder", str(folder), "--dataset", dataset,
@@ -64,7 +64,8 @@ def _embed(folder: Path, dataset: str, split: str, n: int | None, seed: int, nam
     total_s = time.perf_counter() - t0
     scores = {**quality(X, Z, labels, seed=seed, extra=ds.extra_metrics), **stacking(Z)}
     colours = ds.colourings(X, labels) if ds.colourings else {}
-    np.savez(folder / f"{name}.npz", Z=Z, **{f"colour_{k}": c.values for k, c in colours.items()},
+    (folder / "embeddings").mkdir(exist_ok=True)
+    np.savez(folder / "embeddings" / f"{name}.npz", Z=Z, **{f"colour_{k}": c.values for k, c in colours.items()},
              **({"reference": ds.reference(X)} if ds.reference else {}))
     (folder / f"{name}.json").write_text(json.dumps(
         {"dataset": dataset, "split": split, "n": len(X), "seed": seed, "method": method, "label": m.label,
@@ -90,8 +91,8 @@ def plot_gallery(folder: Path, dataset: str, panels: list[Panel]) -> Path:
     from common.datasets import DATASETS
 
     ds = DATASETS[dataset]
-    panels = [p for p in panels if (folder / f"{p.name}.npz").exists()]
-    data = {p.name: (np.load(folder / f"{p.name}.npz"), json.loads((folder / f"{p.name}.json").read_text()))
+    panels = [p for p in panels if (folder / "embeddings" / f"{p.name}.npz").exists()]
+    data = {p.name: (np.load(folder / "embeddings" / f"{p.name}.npz"), json.loads((folder / f"{p.name}.json").read_text()))
             for p in panels}
     first = data[panels[0].name][0]
     styles = data[panels[0].name][1]["colourings"]
@@ -116,11 +117,6 @@ def plot_gallery(folder: Path, dataset: str, panels: list[Panel]) -> Path:
         order = np.random.default_rng(0).permutation(len(Z))       # no category drawn on top of all others
         kw = dict(vmin=-0.5, vmax=9.5) if categorical[colouring] else {}
         ax.scatter(Z[order, 0], Z[order, 1], c=values[order], cmap=cmaps[colouring], s=0.4, rasterized=True, **kw)
-        if categorical[colouring]:
-            for v in np.unique(values):
-                cx, cy = np.median(Z[values == v], axis=0)
-                ax.text(cx, cy, str(v), fontsize=13, weight="bold", ha="center", va="center",
-                        bbox=dict(boxstyle="circle,pad=0.15", fc="white", alpha=0.7, lw=0))
         if info is not None and (len(colourings) == 1 or r == 0):
             title = (f"{title}\n{_settings(info)}\ntrust {info['trustworthiness']:.3f}  "
                      f"cont {info['continuity']:.3f}  global {info['distance_correlation']:.3f}"
@@ -136,10 +132,20 @@ def plot_gallery(folder: Path, dataset: str, panels: list[Panel]) -> Path:
             ax.set_aspect("equal", adjustable="datalim")
     for ax in axes.flat[len(grid):]:
         ax.axis("off")
+    for colouring in colourings:            # categories: one colour legend for the figure, nothing drawn on the data
+        if categorical[colouring]:
+            from matplotlib.lines import Line2D
+
+            cats = np.unique(first[f"colour_{colouring}"])
+            cmap = plt.get_cmap(cmaps[colouring])
+            handles = [Line2D([], [], ls="", marker="o", ms=8, color=cmap((c + 0.5) / 10)) for c in cats]
+            fig.legend(handles, [str(c) for c in cats], title=colouring, loc="center right", fontsize=11,
+                       title_fontsize=11, frameon=False)
+            fig.subplots_adjust(right=0.94)
     info0 = data[panels[0].name][1]
     fig.suptitle(f"{ds.title}: {info0['split']} split, n = {info0['n']}, seed {info0['seed']}; "
                  "each method at its MNIST-tuned settings", fontsize=11)
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0, 0.95, 1) if any(categorical.values()) else (0, 0, 1, 1))
     out = folder / "figure.png"
     fig.savefig(out, dpi=120)
     plt.close(fig)

@@ -1,0 +1,19 @@
+{
+ "dataset": "half_sphere",
+ "variant": "after",
+ "radius": "adaptive_per_cell",
+ "spacing_spread_p90_over_p10": 1.3308438978370818,
+ "edges_p10_p50_p90": [
+  10.0,
+  11.0,
+  12.0
+ ],
+ "n_landmarks": 3,
+ "rho_g": 0.003353628856001657,
+ "trustworthiness": 0.9955625157989768,
+ "continuity": 0.9975734537064901,
+ "knn_accuracy": NaN,
+ "distance_correlation": 0.9428731277512835,
+ "occupied_squares": 18104,
+ "visible_share": 0.9052
+}

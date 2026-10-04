@@ -19,8 +19,8 @@ params:
 selected_by: highest mean trustworthiness on the 'tune' split (n=20000, seeds=[0,
   1, 2])
 scores:
-  trustworthiness: 0.9682
-  continuity: 0.9178
-  knn_accuracy: 0.8908
-  distance_correlation: 0.5019
-  total_s: 1.3277
+  trustworthiness: 0.9706
+  continuity: 0.9376
+  knn_accuracy: 0.8947
+  distance_correlation: 0.4032
+  total_s: 1.0604

@@ -34,7 +34,8 @@ def main() -> None:
     seconds = time.perf_counter() - t0
     scores = quality(X, Z, None, seed=0)
     scores.pop("knn_accuracy")
-    np.savez(HERE / f"{args.name}.npz", X=X, Z=Z)
+    (HERE / "embeddings").mkdir(exist_ok=True)
+    np.savez(HERE / "embeddings" / f"{args.name}.npz", X=X, Z=Z)
     (HERE / f"{args.name}.json").write_text(json.dumps({"method": args.method, "label": m.label, "params": params,
                                                          "seconds": seconds, "info": info, **scores}, indent=1, default=str))
     print(args.name, {k: round(v, 3) for k, v in scores.items()}, f"{seconds:.1f}s",

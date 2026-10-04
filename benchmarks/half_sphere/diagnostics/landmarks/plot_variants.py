@@ -20,7 +20,7 @@ VARIANTS = [("lvm_gpu", "mutual information, 3 landmarks (default)"), ("lvm_mi_L
 def main() -> None:
     fig, axes = plt.subplots(2, len(VARIANTS), figsize=(4.4 * len(VARIANTS), 9))
     for col, (name, title) in enumerate(VARIANTS):
-        data, info = np.load(HERE / f"{name}.npz"), json.loads((HERE / f"{name}.json").read_text())
+        data, info = np.load(HERE / "embeddings" / f"{name}.npz"), json.loads((HERE / f"{name}.json").read_text())
         X, Z = data["X"], data["Z"]
         order = np.random.default_rng(0).permutation(len(X))
         for row, (c, cmap) in enumerate([(X[:, 2], "viridis"), (np.arctan2(X[:, 1], X[:, 0]), "hsv")]):

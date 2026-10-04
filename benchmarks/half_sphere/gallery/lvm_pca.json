@@ -17,7 +17,7 @@
    "local_scale": {
     "strategy": "pca",
     "pca": {
-     "fill": 0.35
+     "fill": 0.6
     }
    }
   },
@@ -38,26 +38,26 @@
    "strategy": "reach"
   }
  },
- "fit_s": 0.38359973300248384,
- "total_s": 0.39795389599748887,
+ "fit_s": 0.3431981799949426,
+ "total_s": 0.35572792700259015,
  "info": {
   "stages": {
-   "sample": 0.0010353600009693764,
-   "dimension": 0.06811285900039366,
-   "cells": 0.010531749001529533,
-   "masses": 0.0029050529992673546,
-   "graph": 0.001822980004362762,
-   "scaling": 0.18875615199794993,
-   "voltages": 0.005846359999850392,
-   "landmarks": 8.33500234875828e-06,
-   "embedding": 0.000791353995737154,
-   "local_scale": 0.10378475800098386
+   "sample": 0.0005667929945047945,
+   "dimension": 0.060141776004456915,
+   "cells": 0.008322123001562431,
+   "masses": 0.0018853729998227209,
+   "graph": 0.0031867460056673735,
+   "scaling": 0.1657670159911504,
+   "voltages": 0.006707420005113818,
+   "landmarks": 9.665993275120854e-06,
+   "embedding": 0.0008847440039971843,
+   "local_scale": 0.09572202099661808
   },
-  "rho_g": 0.002374891358821792,
+  "rho_g": 0.003353628856001657,
   "reach": 3.0,
   "rho_rounds": 2,
   "n_landmarks": 3,
-  "dimension": 1.9703093272003918
+  "dimension": 1.9703093208311546
  },
  "colourings": {
   "height": {
@@ -69,10 +69,10 @@
    "categorical": false
   }
  },
- "trustworthiness": 0.9986734757749022,
- "continuity": 0.9943814906209248,
+ "trustworthiness": 0.9955624034506971,
+ "continuity": 0.9975697101013141,
  "knn_accuracy": NaN,
- "distance_correlation": 0.9073036015594365,
- "occupied_squares": 17620,
- "visible_share": 0.881
+ "distance_correlation": 0.9427605384322757,
+ "occupied_squares": 18060,
+ "visible_share": 0.903
 }

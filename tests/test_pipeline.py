@@ -121,7 +121,9 @@ def test_distance_floor_reads_voltages_below_tau_and_keeps_tau_elsewhere():
     from lvm.embedding import point_landmark_distances
 
     Y, X = _strip_in_20d(n=3000, seed=3)
-    model = fit_level(array_source(X, chunk_size=1000), _config(embedding={"distance_floor": 1e-10}))
+    # One global radius: on this strip it leaves cells outside some maps' tau-support, the case the floor is for.
+    model = fit_level(array_source(X, chunk_size=1000), _config(embedding={"distance_floor": 1e-10},
+                                                               graph={"radius": {"strategy": "knn"}}))
     tau, eps = model.config.voltage.threshold, model.distance_floor
     assert eps == 1e-10 and model.embedding.tau == eps
     # Support (tau) path and distance (epsilon) path of the same model.
@@ -158,3 +160,25 @@ def test_three_dimensional_landmark_mds_gets_enough_landmarks():
     assert model.V.shape[0] >= 4                                     # 3 coordinates need at least 4 landmarks
     Z = model.transform(X)
     assert Z.shape == (3000, 3) and np.isfinite(Z).all()
+
+
+def test_refined_cells_stream_the_whole_dataset():
+    Y, X = _strip_in_20d()
+    base = fit_level(array_source(X, chunk_size=1000), _config(cells={"sample_size": 600}))
+    refined = fit_level(array_source(X, chunk_size=1000),
+                        _config(cells={"sample_size": 600, "refine": {"strategy": "stream"}}))
+    assert "refine" in refined.timings and "refine" not in base.timings
+    assert refined.centroids.shape == base.centroids.shape
+    assert not np.allclose(refined.centroids, base.centroids)
+    assert trustworthiness(X[:1500], refined.transform(X[:1500]), n_neighbors=10) > 0.85
+
+
+@pytest.mark.parametrize("extension_kernel", ["knn", "graph"])
+def test_adaptive_per_cell_radius_pipeline(extension_kernel):
+    Y, X = _strip_in_20d()
+    model = fit_level(array_source(X, chunk_size=1000), _config(
+        graph={"radius": {"strategy": "adaptive_per_cell"}}, extension={"kernel": extension_kernel}))
+    assert model.r_cells is not None and model.r_cells.shape == (model.centroids.shape[0],)
+    assert (model.K > 0).sum(axis=1).min() >= 10
+    idx = np.random.default_rng(0).choice(len(X), 1500, replace=False)
+    assert trustworthiness(Y[idx], model.transform(X[idx]), n_neighbors=10) > 0.85

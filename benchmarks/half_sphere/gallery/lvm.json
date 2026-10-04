@@ -32,25 +32,25 @@
    "strategy": "reach"
   }
  },
- "fit_s": 0.2825451079988852,
- "total_s": 0.29394461800256977,
+ "fit_s": 0.2595634950121166,
+ "total_s": 0.2751518940058304,
  "info": {
   "stages": {
-   "sample": 0.000997011004074011,
-   "dimension": 0.06829069199739024,
-   "cells": 0.011147561999678146,
-   "masses": 0.0018207649991381913,
-   "graph": 0.002007798000704497,
-   "scaling": 0.19114872199861566,
-   "voltages": 0.006316575003438629,
-   "landmarks": 9.966999641619623e-06,
-   "embedding": 0.0007929639978101477
+   "sample": 0.0005577849951805547,
+   "dimension": 0.06099183901096694,
+   "cells": 0.01200352500018198,
+   "masses": 0.001636970991967246,
+   "graph": 0.0030883040017215535,
+   "scaling": 0.1728273229964543,
+   "voltages": 0.007646209996892139,
+   "landmarks": 7.947004633024335e-06,
+   "embedding": 0.0007893720030551776
   },
-  "rho_g": 0.002374891358821792,
+  "rho_g": 0.003353628856001657,
   "reach": 3.0,
   "rho_rounds": 2,
   "n_landmarks": 3,
-  "dimension": 1.9703093272003918
+  "dimension": 1.9703093208311546
  },
  "colourings": {
   "height": {
@@ -62,10 +62,10 @@
    "categorical": false
   }
  },
- "trustworthiness": 0.998063520914836,
- "continuity": 0.992270197612599,
+ "trustworthiness": 0.9982276055772896,
+ "continuity": 0.9951717363827867,
  "knn_accuracy": NaN,
- "distance_correlation": 0.9040256642956123,
- "occupied_squares": 2903,
- "visible_share": 0.14515
+ "distance_correlation": 0.940289352000046,
+ "occupied_squares": 2981,
+ "visible_share": 0.14905
 }

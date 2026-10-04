@@ -3,8 +3,9 @@
 In 2-D every method must flatten the half sphere. In 3-D, a method that captures
 distances along the surface (as LVM's -log v approximately does) needs the third
 direction to fit them, so classical-MDS-type methods should return a bowl.
-Panels: the truth; LVM with the default landmark count (at least 4 for 3-D) and
-with 12; UMAP (cuML t-SNE supports only 2-D). Each in its own memory-guarded
+Panels: the truth; LVM with the default landmark count (at least 4 for 3-D), the
+same with its local PCA chart (each cell's 3 main directions), and LVM with 12; UMAP; t-SNE on the CPU (openTSNE,
+Barnes-Hut: cuML t-SNE is 2-D only; only the picture matters here, not the time). Each in its own memory-guarded
 process; then figure.png.
 
     python benchmarks/half_sphere/gallery_3d/run.py
@@ -24,14 +25,16 @@ from common.runner import thread_env  # noqa: E402
 LVM_3D = {"embedding": {"landmark_mds": {"n_components": 3}}}
 PANELS = [
     ("lvm", "lvm_gpu", LVM_3D, "LVM, default landmark count"),
+    ("lvm_pca", "lvm_pca_gpu", LVM_3D, "LVM + local PCA chart (3 directions per cell), default landmark count"),
     ("lvm_L12", "lvm_gpu", {**LVM_3D, "landmarks": {"n_landmarks": 12, "count": {"strategy": "fixed"}}}, "LVM, 12 landmarks"),
     ("umap", "umap_gpu", {"n_components": 3}, "UMAP"),
+    ("tsne", "tsne_cpu", {"n_components": 3}, "t-SNE (CPU, openTSNE Barnes-Hut: cuML t-SNE is 2-D only)"),
 ]
 
 
 def main() -> None:
     for name, method, override, _ in PANELS:
-        if (HERE / f"{name}.npz").exists():
+        if (HERE / "embeddings" / f"{name}.npz").exists():
             continue
         cmd = [sys.executable, str(BENCH / "common" / "guard.py"), "--limit-mb", "4500", "--", sys.executable,
                str(HERE / "one.py"), "--name", name, "--method", method, "--override", json.dumps(override)]

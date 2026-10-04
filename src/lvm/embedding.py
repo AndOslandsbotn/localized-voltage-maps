@@ -86,24 +86,24 @@ class LocalScale:
 
 @dataclass(frozen=True)
 class LocalPca:
-    """Points placed within their cell by the cell's own 2-D PCA of the raw features (torch, on one device).
+    """Points placed within their cell by the cell's own k-D PCA of the raw features (torch, on one device).
 
-    z = anchors[c] + scale[c] * ((x - mean_c) @ B_c) @ rotations[c]. The cells
-    keep LVM's global layout; within a cell the two main directions of
+    k is the embedding's dimension. z = anchors[c] + scale[c] * ((x - mean_c) @ B_c) @ rotations[c]. The
+    cells keep LVM's global layout; within a cell the k main directions of
     variation of its points give local coordinates, turned to agree with the
-    LVM offsets. Cells with fewer than 3 points keep their LVM positions.
+    LVM offsets. Cells with at most k points keep their LVM positions.
     """
-    anchors: "torch.Tensor"      # (n_cells, 2)
-    bases: "torch.Tensor"        # (d, 2 n_cells): columns 2c, 2c+1 are cell c's directions
-    mean_proj: "torch.Tensor"    # (n_cells, 2) each cell's mean projected on its directions
-    rotations: "torch.Tensor"    # (n_cells, 2, 2)
+    anchors: "torch.Tensor"      # (n_cells, k)
+    bases: "torch.Tensor"        # (d, k n_cells): columns k c ... k c + k - 1 are cell c's directions
+    mean_proj: "torch.Tensor"    # (n_cells, k) each cell's mean projected on its directions
+    rotations: "torch.Tensor"    # (n_cells, k, k)
     scale: "torch.Tensor"        # (n_cells,)
     valid: "torch.Tensor"        # (n_cells,) bool
 
     def project(self, X, cell):
-        """(m, 2) coordinates of points X along their own cell's two directions (one matmul for all cells)."""
-        m, n = X.shape[0], self.anchors.shape[0]
-        P = (X @ self.bases).view(m, n, 2)
+        """(m, k) coordinates of points X along their own cell's k directions (one matmul for all cells)."""
+        (m, n), k = (X.shape[0], self.anchors.shape[0]), self.anchors.shape[1]
+        P = (X @ self.bases).view(m, n, k)
         return P[torch.arange(m, device=X.device), cell] - self.mean_proj[cell]
 
     def apply(self, Z, cell, X):
@@ -151,19 +151,19 @@ def fit_local_scale(
 
 
 def _fit_local_pca(Z, cell, n_cells: int, X, *, fill: float, max_points: int = 256) -> LocalPca:
-    """Fit ``LocalPca`` on torch tensors Z (m, 2), cell (m,), X (m, d), all on one device.
+    """Fit ``LocalPca`` on torch tensors Z (m, k), cell (m,), X (m, d), all on one device; k = Z's dimension.
 
-    Each cell's two directions come from at most ``max_points`` of its points
-    (two directions need few; this bounds memory): their Gram matrices are
-    built and eigendecomposed in one batch.
+    Each cell's k directions come from at most ``max_points`` of its points
+    (a few directions need few points; this bounds memory): their Gram
+    matrices are built and eigendecomposed in one batch.
     """
     import torch
 
-    dev, m, d = X.device, X.shape[0], X.shape[1]
+    dev, m, d, k = X.device, X.shape[0], X.shape[1], Z.shape[1]
     Z = Z.to(torch.float64)
     counts = torch.bincount(cell, minlength=n_cells)
     safe = counts.clamp(min=1).to(torch.float64)
-    anchors = torch.zeros(n_cells, 2, dtype=torch.float64, device=dev).index_add_(0, cell, Z) / safe[:, None]
+    anchors = torch.zeros(n_cells, k, dtype=torch.float64, device=dev).index_add_(0, cell, Z) / safe[:, None]
     means = torch.zeros(n_cells, d, dtype=X.dtype, device=dev).index_add_(0, cell, X) / safe[:, None].to(X.dtype)
 
     # Each cell's first max_points points, centred, in a padded (n_cells, max_points, d) tensor.
@@ -176,18 +176,18 @@ def _fit_local_pca(Z, cell, n_cells: int, X, *, fill: float, max_points: int = 2
     rows = order[keep]
     P[sorted_cell[keep], rank[keep]] = X[rows] - means[sorted_cell[keep]]
     evals, evecs = torch.linalg.eigh(P @ P.transpose(1, 2))          # ascending; padded rows add zeros
-    V = P.transpose(1, 2) @ evecs[:, :, -2:].flip(-1)                  # (n_cells, d, 2), largest first
+    V = P.transpose(1, 2) @ evecs[:, :, -k:].flip(-1)                  # (n_cells, d, k), largest first
     norms = V.norm(dim=1)
-    valid = (counts >= 3) & (norms > 0).all(dim=1)
+    valid = (counts >= k + 1) & (norms > 0).all(dim=1)
     V = V / norms.clamp(min=1e-12)[:, None, :]
-    bases = V.permute(1, 0, 2).reshape(d, 2 * n_cells)
+    bases = V.permute(1, 0, 2).reshape(d, k * n_cells)
     mean_proj = torch.einsum("nd,ndk->nk", means, V)
 
-    local = LocalPca(anchors, bases, mean_proj, torch.eye(2, dtype=torch.float64, device=dev).repeat(n_cells, 1, 1),
+    local = LocalPca(anchors, bases, mean_proj, torch.eye(k, dtype=torch.float64, device=dev).repeat(n_cells, 1, 1),
                      torch.ones(n_cells, dtype=torch.float64, device=dev), valid)
     u = torch.cat([local.project(X[s:s + 10000], cell[s:s + 10000]) for s in range(0, m, 10000)]).to(torch.float64)
     # Orthogonal Procrustes per cell: the rotation/reflection that best maps u onto the LVM offsets.
-    M = torch.zeros(n_cells, 2, 2, dtype=torch.float64, device=dev).index_add_(
+    M = torch.zeros(n_cells, k, k, dtype=torch.float64, device=dev).index_add_(
         0, cell, u[:, :, None] * (Z - anchors[cell])[:, None, :])
     a, _, bt = torch.linalg.svd(M)
     rotations = a @ bt

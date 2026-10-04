@@ -26,14 +26,24 @@ import numpy as np
 from array_api_compat import array_namespace
 
 from lvm.config import (
-    CentroidSpacingConfig, GaussianKernelConfig, KernelConfig, KnnRadiusConfig, PointKnnRadiusConfig, RadiusConfig,
+    AdaptivePerCellRadiusConfig, CentroidSpacingConfig, GaussianKernelConfig, KernelConfig, KnnRadiusConfig,
+    PointKnnRadiusConfig, RadiusConfig,
 )
 from lvm.strategies import resolve
 
 
 @dataclass(frozen=True)
 class Radius:
-    r: float
+    r: float                              # one radius for the region (adaptive_per_cell: the median of per_cell)
+    per_cell: np.ndarray | None = None    # (n,) each cell's own radius (adaptive_per_cell), else None
+
+    def between_cells(self):
+        """Radius for the cell-to-cell kernel: r, or the (n, n) matrix max(r_i, r_j) (symmetric kNN graph)."""
+        return self.r if self.per_cell is None else np.maximum.outer(self.per_cell, self.per_cell)
+
+    def to_cells(self):
+        """Radius for a points-to-cells kernel: r, or (n,) each cell's own radius (one per column)."""
+        return self.r if self.per_cell is None else self.per_cell
 
 
 @dataclass(frozen=True)
@@ -104,6 +114,27 @@ def _centroid_spacing(centroids: np.ndarray, *, options: CentroidSpacingConfig, 
     return Radius(float(options.multiplier * np.median(_neighbour_distances(centroids, 1)[:, 0])))
 
 
+def _adaptive_per_cell(centroids: np.ndarray, *, options: AdaptivePerCellRadiusConfig, points=None) -> Radius:
+    """Each cell its own radius: r_i = distance to its k-th nearest centroid.
+
+    With r_ij = max(r_i, r_j) (``Radius.between_cells``) two cells are joined
+    when either is among the other's k nearest, so every cell has at least k
+    edges wherever it lies: like UMAP's per-point scale, it removes the
+    dependence of connectivity on how spread out a part of the data is. One
+    global r (``_knn``) leaves cells in spread-out parts with few edges, and
+    voltage then has to detour along thin chains.
+    """
+    if options.k < 1:
+        raise ValueError(f"k must be >= 1, got {options.k}")
+    if centroids.shape[0] < 2:
+        return Radius(0.0)
+    k = min(options.k, centroids.shape[0] - 1)
+    # The k-th neighbour lies exactly on r_i; the kernel's distances come from another routine, so rounding could
+    # drop it in one direction only (an asymmetric K). A relative margin far above rounding keeps it in.
+    per_cell = _neighbour_distances(centroids, k)[:, k - 1] * (1.0 + 1e-9)
+    return Radius(float(np.median(per_cell)), per_cell)
+
+
 def _neighbour_distances(centroids: np.ndarray, k: int) -> np.ndarray:
     """(n, k) distances from each centroid to its k nearest other centroids, ascending."""
     from sklearn.neighbors import NearestNeighbors
@@ -117,12 +148,13 @@ _RADIUS_STRATEGIES: dict[str, Callable[..., Radius]] = {
     "knn": _knn,
     "point_knn": _point_knn,
     "centroid_spacing": _centroid_spacing,
+    "adaptive_per_cell": _adaptive_per_cell,
 }
 
 
 # --- kernel (config graph.kernel) -------------------------------------------
 
-def choose_kernel(sq_dist: np.ndarray, *, r: float, config: KernelConfig, exclude_self: bool = False) -> Kernel:
+def choose_kernel(sq_dist: np.ndarray, *, r, config: KernelConfig, exclude_self: bool = False) -> Kernel:
     """Kernel from squared distances with the strategy named in ``config.strategy``.
 
     ``sq_dist`` is an (m, n) NumPy array or torch tensor (the kernel comes back
@@ -130,12 +162,19 @@ def choose_kernel(sq_dist: np.ndarray, *, r: float, config: KernelConfig, exclud
     data points to cells, or ``sq_distances(centroids, centroids)`` between
     cells. Taking distances rather than coordinates lets a caller compute them
     once and reuse them (the pipeline also needs each point's nearest cell).
-    ``r`` is the kernel radius, e.g. ``choose_radius(...).r``.
+    ``r`` is the kernel radius: a number, or an array broadcastable to
+    ``sq_dist`` (a radius per pair or per column), e.g.
+    ``choose_radius(...).between_cells()`` or ``.to_cells()``.
     ``exclude_self=True`` (cells to cells) zeroes the diagonal: a self-loop
     carries no current.
     """
     strategy, options = resolve(_KERNEL_STRATEGIES, config)
-    K = strategy(sq_dist if hasattr(sq_dist, "shape") else np.asarray(sq_dist), options=options, r=r)
+    sq_dist = sq_dist if hasattr(sq_dist, "shape") else np.asarray(sq_dist)
+    if not np.isscalar(r) and not isinstance(sq_dist, np.ndarray):          # per-cell radii, onto the tensor's device
+        import torch
+
+        r = torch.as_tensor(np.asarray(r), dtype=sq_dist.dtype, device=sq_dist.device)
+    K = strategy(sq_dist, options=options, r=r)
     if exclude_self:
         if K.shape[0] != K.shape[1]:
             raise ValueError(f"exclude_self needs a square distance matrix, got {tuple(K.shape)}")
@@ -200,6 +239,32 @@ def adaptive_knn_kernel(sq_dist, *, k: int, sharpness: float = 1.0):
     s2 = excess.mean(dim=1, keepdim=True)
     w = torch.exp(-sharpness * excess / (2.0 * torch.where(s2 > 0, s2, torch.ones_like(s2))))
     return torch.zeros_like(sq_dist).scatter_(1, idx, w)
+
+
+def connect_components(K: np.ndarray, sq_dist: np.ndarray) -> np.ndarray:
+    """K with every connected piece of the graph joined to the largest one by its shortest link (weight 1).
+
+    ``sq_dist`` are the squared distances between the same nodes. Pieces are
+    joined one at a time, each through its closest pair of nodes to the
+    growing main piece, so the result is connected with as few, and as short,
+    added edges as possible. K itself is not changed.
+    """
+    from scipy.sparse.csgraph import connected_components
+
+    K = np.array(K, copy=True)
+    D = np.asarray(sq_dist, dtype=np.float64)
+    n_pieces, label = connected_components(K > 0, directed=False)
+    if n_pieces == 1:
+        return K
+    main = label == np.bincount(label).argmax()
+    for piece in sorted(set(label[~main].tolist()), key=lambda c: -np.sum(label == c)):
+        inside = np.flatnonzero(label == piece)
+        sub = D[np.ix_(inside, np.flatnonzero(main))]
+        i, j = np.unravel_index(np.argmin(sub), sub.shape)
+        a, b = inside[i], np.flatnonzero(main)[j]
+        K[a, b] = K[b, a] = 1.0
+        main[inside] = True
+    return K
 
 
 # --- grounded Laplacian -----------------------------------------------------

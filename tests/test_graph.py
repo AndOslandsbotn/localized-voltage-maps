@@ -51,10 +51,12 @@ def test_single_cell_radius_is_zero(strategy, options):
     assert _radius(np.zeros((1, 3)), strategy, **options) == 0.0
 
 
-def test_default_radius_strategy_is_knn():
+def test_default_radius_strategy_is_adaptive_per_cell_with_k_10():
     rng = np.random.default_rng(1)
     centroids = rng.random((100, 3))
-    assert choose_radius(centroids, config=load_config().graph.radius).r == _radius(centroids, "knn", k=10)
+    default = choose_radius(centroids, config=load_config().graph.radius)
+    assert default.per_cell is not None
+    assert default.r == pytest.approx(_radius(centroids, "knn", k=10), rel=1e-8)   # its summary r: the median
 
 
 # --- kernel -----------------------------------------------------------------
@@ -159,3 +161,81 @@ def test_point_knn_radius_gives_a_typical_point_k_cells():
     assert np.median(within) == pytest.approx(10, abs=1)
     with pytest.raises(ValueError, match="sample points"):
         choose_radius(centroids, config=config)
+
+
+def test_connect_components_joins_every_piece_by_its_shortest_link():
+    from scipy.sparse.csgraph import connected_components
+
+    from lvm.graph import connect_components
+
+    pts = np.array([[0.0, 0], [0.1, 0], [0.2, 0],          # main piece
+                    [1.0, 0], [1.1, 0],                    # a second piece, closest to point 2
+                    [0.2, 2.0]])                           # an isolated point, closest to point 2
+    sq = ((pts[:, None] - pts[None]) ** 2).sum(-1)
+    K = choose_kernel(sq, r=0.15, config=load_config().graph.kernel, exclude_self=True).K
+    assert connected_components(K > 0, directed=False)[0] == 3
+    Kc = connect_components(K, sq)
+    assert connected_components(Kc > 0, directed=False)[0] == 1
+    added = np.argwhere(np.triu(Kc) != np.triu(K))
+    assert {tuple(e) for e in added} == {(2, 3), (2, 5)}           # each piece joined through its closest pair
+    assert np.array_equal(connect_components(Kc, sq), Kc)          # an already connected graph is unchanged
+
+
+# --- adaptive_per_cell radius --------------------------------------------------
+
+def _adaptive(k=5):
+    return load_config(overrides={"graph": {"radius": {"strategy": "adaptive_per_cell",
+                                                       "adaptive_per_cell": {"k": k}}}}).graph
+
+
+def _dense_and_spread(seed=0):
+    # One tight cluster and one 10x wider, same number of cells: a single global radius suits only one of them.
+    rng = np.random.default_rng(seed)
+    return np.vstack([rng.normal(0.0, 0.1, (60, 3)), rng.normal(5.0, 1.0, (60, 3))])
+
+
+def test_adaptive_radius_is_each_cells_kth_neighbour_distance():
+    from scipy.spatial.distance import cdist
+
+    from lvm.graph import choose_radius
+
+    C = _dense_and_spread()
+    radius = choose_radius(C, config=_adaptive(5).radius)
+    D = cdist(C, C)
+    np.fill_diagonal(D, np.inf)
+    np.testing.assert_allclose(radius.per_cell, np.sort(D, axis=1)[:, 4], rtol=1e-8)
+    assert radius.r == pytest.approx(np.median(radius.per_cell))
+
+
+def test_adaptive_radius_gives_every_cell_k_edges_where_one_radius_does_not():
+    from lvm.cells import sq_distances
+    from lvm.graph import choose_kernel, choose_radius
+
+    C = _dense_and_spread()
+    sq = sq_distances(C, C)
+    graph = _adaptive(5)
+    adaptive = choose_radius(C, config=graph.radius)
+    K = choose_kernel(sq, r=adaptive.between_cells(), config=graph.kernel, exclude_self=True).K
+    assert np.array_equal(K, K.T) and (K > 0).sum(axis=1).min() >= 5
+    one = load_config(overrides={"graph": {"radius": {"strategy": "knn", "knn": {"k": 5}}}}).graph
+    K1 = choose_kernel(sq, r=choose_radius(C, config=one.radius).between_cells(), config=one.kernel,
+                       exclude_self=True).K
+    assert (K1[60:] > 0).sum(axis=1).min() < 5          # the spread cluster is under-connected by one radius
+
+
+@pytest.mark.skipif(not __import__("torch").cuda.is_available(), reason="needs CUDA")
+@pytest.mark.parametrize("strategy", ["radial", "tapered", "gaussian"])
+def test_per_cell_radius_on_torch_matches_numpy(strategy):
+    import torch
+
+    from lvm.cells import sq_distances
+    from lvm.graph import choose_kernel, choose_radius
+
+    C = _dense_and_spread()
+    X = np.random.default_rng(1).normal(2.5, 2.0, (40, 3))
+    config = load_config(overrides={"graph": {"kernel": {"strategy": strategy}}}).graph.kernel
+    r = choose_radius(C, config=_adaptive(5).radius).to_cells()
+    sq = sq_distances(X, C)
+    K = choose_kernel(sq, r=r, config=config).K
+    Kt = choose_kernel(torch.as_tensor(sq, device="cuda"), r=r, config=config).K
+    np.testing.assert_allclose(Kt.cpu().numpy(), K, atol=1e-12)

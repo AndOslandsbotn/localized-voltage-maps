@@ -8,9 +8,11 @@ from lvm.voltage import solve_grounded_voltage_maps, threshold_voltages
 
 
 def _landmarks_config(precision="float64", **overrides):
-    # float64 by default here so results can be compared with exact references.
+    # Mutual information unless a test says otherwise (the default strategy is combined); float64 by default here
+    # so results can be compared with exact references.
     mi = {"precision": precision, **overrides.pop("mutual_information", {})}
-    return load_config(overrides={"landmarks": {**overrides, "mutual_information": mi}}).landmarks
+    return load_config(overrides={"landmarks": {"strategy": "mutual_information", **overrides,
+                                                "mutual_information": mi}}).landmarks
 
 
 def _entropy(p):
@@ -153,3 +155,46 @@ def test_maxmin_returns_distinct_landmarks_and_respects_the_count():
     V = threshold_voltages(solve_grounded_voltage_maps(region_kernel(centroids), p, 5e-3, [[i] for i in range(150)], device="cpu"), 1e-3)
     sel = choose_landmarks(V, p, config=_maxmin_config(), n_landmarks=12, tau=1e-3, device="cpu")
     assert len(sel.indices) == 12 == len(set(sel.indices.tolist()))
+
+
+# --- combined (config landmarks.combined) ------------------------------------
+
+def _random_maps(n=150, seed=4):
+    rng = np.random.default_rng(seed)
+    centroids = rng.random((n, 3))
+    p = rng.dirichlet(np.ones(n))
+    V = solve_grounded_voltage_maps(region_kernel(centroids), p, 5e-3, [[i] for i in range(n)], device="cpu")
+    return threshold_voltages(V, 1e-3), p
+
+
+def _combined_config(first, second, fraction=0.5):
+    return _landmarks_config(strategy="combined", combined={"first": first, "second": second, "fraction": fraction})
+
+
+@pytest.mark.parametrize("strategy", ["mutual_information", "maxmin"])
+def test_combining_a_strategy_with_itself_is_that_strategy(strategy):
+    # Both are greedy: continuing from a strategy's own first picks is the same run.
+    V, p = _random_maps()
+    alone = choose_landmarks(V, p, config=_landmarks_config(strategy=strategy), n_landmarks=11, device="cpu")
+    both = choose_landmarks(V, p, config=_combined_config(strategy, strategy, 0.4), n_landmarks=11, device="cpu")
+    np.testing.assert_array_equal(both.indices, alone.indices)
+
+
+@pytest.mark.parametrize("first,second", [("maxmin", "mutual_information"), ("mutual_information", "maxmin")])
+def test_combined_starts_with_the_first_strategy_and_returns_distinct_landmarks(first, second):
+    V, p = _random_maps()
+    n = 11
+    sel = choose_landmarks(V, p, config=_combined_config(first, second), n_landmarks=n, device="cpu")
+    head = choose_landmarks(V, p, config=_landmarks_config(strategy=first), n_landmarks=6, device="cpu")  # ceil(5.5)
+    assert len(sel.indices) == n == len(set(sel.indices.tolist())) == len(sel.scores)
+    np.testing.assert_array_equal(sel.indices[:6], head.indices)
+
+
+def test_maxmin_after_given_landmarks_fills_the_gap_they_leave():
+    # On a line, with both ends already chosen, farthest point takes the middle next.
+    from lvm.landmarks import LandmarkSelection, _maxmin
+
+    V, p = _line_maps(41)
+    start = LandmarkSelection(indices=np.array([0, 40]), scores=np.array([np.inf, np.inf]))
+    sel = _maxmin(V, p, options=None, n_landmarks=3, cells=np.arange(41), tau=1e-3, device="cpu", start=start)
+    assert sel.indices[:2].tolist() == [0, 40] and 15 <= sel.indices[2] <= 25

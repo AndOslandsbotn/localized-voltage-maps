@@ -17,7 +17,7 @@
    "local_scale": {
     "strategy": "pca",
     "pca": {
-     "fill": 0.35
+     "fill": 0.6
     }
    }
   },
@@ -38,26 +38,26 @@
    "strategy": "reach"
   }
  },
- "fit_s": 1.8060765359987272,
- "total_s": 1.888600904996565,
+ "fit_s": 1.7084733439987758,
+ "total_s": 1.7963568489940371,
  "info": {
   "stages": {
-   "sample": 0.308721585002786,
-   "dimension": 0.30190791199856903,
-   "cells": 0.3604428940016078,
-   "masses": 0.12940914600039832,
-   "graph": 0.06771997399482643,
-   "scaling": 0.41380281100282446,
-   "voltages": 0.0061335919963312335,
-   "landmarks": 9.146002412308007e-06,
-   "embedding": 0.0011044569982914254,
-   "local_scale": 0.21682076900469838
+   "sample": 0.17891468199377414,
+   "dimension": 0.3302409269963391,
+   "cells": 0.4275118229998043,
+   "masses": 0.1424963059980655,
+   "graph": 0.0627298870094819,
+   "scaling": 0.358808617995237,
+   "voltages": 0.006361845997162163,
+   "landmarks": 9.648007107898593e-06,
+   "embedding": 0.0010128989961231127,
+   "local_scale": 0.2003818160010269
   },
-  "rho_g": 0.0012910855084788749,
+  "rho_g": 0.0045215191970120585,
   "reach": 14.0,
   "rho_rounds": 2,
   "n_landmarks": 14,
-  "dimension": 12.305518303898284
+  "dimension": 12.305518292715197
  },
  "colourings": {
   "digit": {
@@ -65,10 +65,10 @@
    "categorical": true
   }
  },
- "trustworthiness": 0.958154944327415,
- "continuity": 0.899894420704183,
- "knn_accuracy": 0.8978000000000002,
- "distance_correlation": 0.43473009013950376,
- "occupied_squares": 12420,
- "visible_share": 0.2484
+ "trustworthiness": 0.9181931989166416,
+ "continuity": 0.9400924465844117,
+ "knn_accuracy": 0.8308,
+ "distance_correlation": 0.32828782540322515,
+ "occupied_squares": 36303,
+ "visible_share": 0.72606
 }

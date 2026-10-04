@@ -144,3 +144,62 @@ def test_sq_distances_on_gpu_matches_numpy():
     X, C = rng.random((200, 10)), rng.random((25, 10))
     gpu = sq_distances(torch.as_tensor(X, device="cuda"), torch.as_tensor(C, device="cuda")).cpu().numpy()
     np.testing.assert_allclose(gpu, sq_distances(X, C), rtol=1e-9, atol=1e-9)
+
+
+# --- streaming refinement (cells.refine) ------------------------------------
+
+DEVICES = ["cpu"] + (["cuda"] if __import__("torch").cuda.is_available() else [])
+
+
+def _refine(source, sample, centroids, *, skip=0, device="cpu", **stream):
+    from lvm.cells import refine_cells
+
+    config = load_config(overrides={"cells": {"refine": {"strategy": "stream", "stream": stream}}}).cells.refine
+    return refine_cells(source, sample, centroids, config=config, skip=skip, device=device).centroids
+
+
+def test_refine_none_keeps_the_sample_centroids():
+    from lvm.cells import refine_cells
+
+    _, X = _blobs()
+    C = _fit(X[:400], 8)
+    out = refine_cells(array_source(X, 100), X[:400], C, config=load_config().cells.refine)
+    np.testing.assert_array_equal(out.centroids, C)
+
+
+@pytest.mark.parametrize("device", DEVICES)
+def test_stream_refinement_gives_each_cluster_the_mean_of_all_its_points(device):
+    # Separated blobs: assignments never change, so the running means end exactly at each blob's mean over the
+    # whole stream -- the sample (the stream's prefix, skipped) counted once.
+    centers, X = _blobs(n_blobs=4, per_blob=500)
+    X = X[np.random.default_rng(1).permutation(len(X))]
+    sample = X[:300]
+    seed = sample.copy()
+    C0 = np.array([sample[assign_cells(sample, centers) == b].mean(axis=0) for b in range(4)])
+    C = _refine(array_source(X, 128), sample, C0, skip=300, device=device, passes=1, max_points=None)
+    expected = np.array([X[assign_cells(X, centers) == b].mean(axis=0) for b in range(4)])
+    np.testing.assert_allclose(C, expected, rtol=0, atol=1e-5)
+    np.testing.assert_array_equal(sample, seed)
+
+
+@pytest.mark.parametrize("device", DEVICES)
+def test_stream_refinement_respects_max_points(device):
+    centers, X = _blobs(n_blobs=4, per_blob=500)
+    X = X[np.random.default_rng(1).permutation(len(X))]
+    C0 = np.array([X[:300][assign_cells(X[:300], centers) == b].mean(axis=0) for b in range(4)])
+    C = _refine(array_source(X, 128), X[:300], C0, skip=300, device=device, passes=1, max_points=500)
+    seen = X[:800]
+    expected = np.array([seen[assign_cells(seen, centers) == b].mean(axis=0) for b in range(4)])
+    np.testing.assert_allclose(C, expected, rtol=0, atol=1e-5)
+
+
+def test_stream_refinement_improves_cells_seeded_on_a_small_sample():
+    # k-means on 300 points, then streamed over 4000: the within-cell spread on all the data goes down.
+    rng = np.random.default_rng(0)
+    X = rng.random((4000, 3))
+    C0 = _fit(X[:300], 40)
+    before = C0.copy()
+    C = _refine(array_source(X, 500), X[:300], C0, skip=300, passes=2, max_points=None)
+    np.testing.assert_array_equal(C0, before)                      # the caller's centroids are not changed
+    inertia = lambda C: float(np.min(cdist(X, C, "sqeuclidean"), axis=1).sum())
+    assert inertia(C) < 0.97 * inertia(C0)

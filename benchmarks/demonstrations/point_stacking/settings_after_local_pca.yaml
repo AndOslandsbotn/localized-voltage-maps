@@ -45,6 +45,7 @@ graph:
     centroid_spacing:
       multiplier: 3.0
   edge_weighting: mass
+  connect: false
 ground:
   weighting: mass
 sources:

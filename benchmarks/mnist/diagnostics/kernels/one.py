@@ -71,7 +71,8 @@ def main() -> None:
     no_cell = float(np.mean(np.concatenate([sq_distances(X[s:s + 5000], model.centroids).min(axis=1)
                                             for s in range(0, N, 5000)]) > model.r**2))
     if args.seed == 0:
-        np.savez(HERE / f"Z_{args.variant}.npz", Z=Z, y=y)
+        (HERE / "embeddings").mkdir(exist_ok=True)
+        np.savez(HERE / "embeddings" / f"Z_{args.variant}.npz", Z=Z, y=y)
     print("RESULT " + json.dumps({"variant": args.variant, "seed": args.seed, "seconds": seconds,
                                   "rho_g": model.rho.rho_g, "no_cell_within_r": no_cell, **stacking(Z),
                                   "r": model.r, "cell_degree": float((model.K > 0).sum(axis=1).mean()),

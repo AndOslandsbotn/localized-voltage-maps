@@ -335,7 +335,8 @@ def _mnist8m(split: str, n: int | None, seed: int) -> tuple[np.ndarray, np.ndarr
 
 def stream(dataset: str, *, n: int | None = None, chunk_size: int = 10_000):
     """A chunk source (``lvm.stream.ChunkSource``) over the first n points, read from disk chunk by chunk with
-    plain file reads, so only the current chunk is in memory.
+    plain file reads, so only the current chunk is in memory. Chunks are float32 in [0, 1], the precision every
+    method computes in (the other methods get float32 too), so no chunk is converted twice.
 
     Only datasets stored on disk stream this way (``mnist8m``); for the others use
     ``lvm.stream.array_source(load(...))``.
@@ -349,7 +350,9 @@ def stream(dataset: str, *, n: int | None = None, chunk_size: int = 10_000):
         with open(MNIST8M_DIR / "X.u8", "rb") as f:
             for start in range(0, n, chunk_size):
                 k = min(chunk_size, n - start)
-                yield np.fromfile(f, dtype=np.uint8, count=k * MNIST8M_D).reshape(k, MNIST8M_D).astype(np.float64) / 255.0
+                chunk = np.fromfile(f, dtype=np.uint8, count=k * MNIST8M_D).reshape(k, MNIST8M_D).astype(np.float32)
+                chunk /= 255.0
+                yield chunk
     return chunks
 
 

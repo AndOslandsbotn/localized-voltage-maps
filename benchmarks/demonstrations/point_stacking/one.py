@@ -36,7 +36,8 @@ def main() -> None:
     Z = np.concatenate(list(model.transform_source(array_source(X, cfg.data.chunk_size))))
     seconds = time.perf_counter() - t
     out = {"variant": args.variant, "seconds": seconds, **quality(X, Z, y, seed=0), **stacking(Z)}
-    np.savez(HERE / f"{args.variant}.npz", Z=Z, y=y)
+    (HERE / "embeddings").mkdir(exist_ok=True)
+    np.savez(HERE / "embeddings" / f"{args.variant}.npz", Z=Z, y=y)
     (HERE / f"{args.variant}.json").write_text(json.dumps(out, indent=1))
     print(args.variant, {k: round(v, 3) if isinstance(v, float) else v for k, v in out.items()}, flush=True)
 

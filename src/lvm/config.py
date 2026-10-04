@@ -83,10 +83,23 @@ class MassesConfig:
 
 
 @dataclass(frozen=True)
+class StreamRefineConfig:
+    passes: int
+    max_points: int | None
+
+
+@dataclass(frozen=True)
+class RefineConfig:
+    strategy: Literal["none", "stream"]
+    stream: StreamRefineConfig
+
+
+@dataclass(frozen=True)
 class CellsConfig:
     n_cells: int
     sample_size: int
     kmeans: KMeansConfig
+    refine: RefineConfig
     masses: MassesConfig
 
 
@@ -119,11 +132,17 @@ class PointKnnRadiusConfig:
 
 
 @dataclass(frozen=True)
+class AdaptivePerCellRadiusConfig:
+    k: int
+
+
+@dataclass(frozen=True)
 class RadiusConfig:
-    strategy: Literal["knn", "point_knn", "centroid_spacing"]
+    strategy: Literal["knn", "point_knn", "centroid_spacing", "adaptive_per_cell"]
     knn: KnnRadiusConfig
     point_knn: PointKnnRadiusConfig
     centroid_spacing: CentroidSpacingConfig
+    adaptive_per_cell: AdaptivePerCellRadiusConfig
 
 
 @dataclass(frozen=True)
@@ -131,6 +150,7 @@ class GraphConfig:
     kernel: KernelConfig
     radius: RadiusConfig
     edge_weighting: Literal["mass"]
+    connect: bool
 
 
 @dataclass(frozen=True)
@@ -207,11 +227,19 @@ class LandmarkCountConfig:
 
 
 @dataclass(frozen=True)
+class CombinedLandmarksConfig:
+    first: Literal["mutual_information", "maxmin"]
+    second: Literal["mutual_information", "maxmin"]
+    fraction: float
+
+
+@dataclass(frozen=True)
 class LandmarksConfig:
-    strategy: Literal["mutual_information", "maxmin"]
+    strategy: Literal["mutual_information", "maxmin", "combined"]
     count: LandmarkCountConfig
     n_landmarks: int
     mutual_information: MutualInformationConfig
+    combined: CombinedLandmarksConfig
 
 
 @dataclass(frozen=True)
