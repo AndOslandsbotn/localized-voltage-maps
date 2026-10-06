@@ -24,7 +24,7 @@ viz = [
 packages = ["src/lvm"]
 
 [tool.pytest.ini_options]
-pythonpath = ["tests"]          # tests/helpers.py, importable from unit/, integration/ and regression/
+pythonpath = ["tests_old"]      # tests_old/helpers.py, for the old code's tests (pytest tests_old)
 testpaths = ["tests"]
 addopts = "--strict-markers"
 markers = [

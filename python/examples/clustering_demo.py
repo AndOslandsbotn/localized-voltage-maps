@@ -1,10 +1,10 @@
 from pathlib import Path
 
-from lvm.clustering import create_centroids
-from lvm.datasets import load_mnist
+from lvm_old.clustering import create_centroids
+from lvm_old.datasets import load_mnist
 
 try:
-    from lvm.viz import plot_flat_image_grid
+    from lvm_old.viz import plot_flat_image_grid
 except ImportError:
     plot_flat_image_grid = None
 

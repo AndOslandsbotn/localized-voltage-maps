@@ -1,351 +1,210 @@
-"""Solve the grounded energy-minimizing voltage (EMV) system.
-
-Given a grounded graph Laplacian ``L_rho`` (as produced by
-``graph.grounded_laplacian``) and a set of source nodes S clamped to
-voltage 1, this solves for the voltage at every node -- Definition 3 /
-Lemma 4 in Structure_from_Voltage.pdf.
-
-Lemma 4's fixed point v = D~^-1 W~(s) v says, at every free node i,
-(L_rho @ v)[i] = 0, i.e. no current leaves the circuit at i except through
-the ground. The only nonzero entries of L_rho @ v are therefore at the
-sources, where current c is injected to hold them at 1:
-
-    L_rho @ v = e_S @ c    =>    v = G[:, S] @ c,    with G = L_rho^-1,
-
-and v[S] = 1 fixes c through the small |S| x |S| system G[S, S] @ c = 1.
-L_rho is symmetric positive-definite when every node has a positive ground
-weight, so G comes from one Cholesky factorization.
-``solve_grounded_voltage_maps`` ensures this by leaving zero-mass cells out of
-the solve.
-
-L_rho is the same for every landmark on a graph -- only S changes -- so G is
-computed once and every voltage map is read off its columns. That costs
-O(n^3) once instead of O(n^3) per landmark.
-"""
-
 from __future__ import annotations
 
-import time
-from dataclasses import dataclass
-from typing import Callable, Sequence
+import math
 
-import numpy as np
-import scipy.sparse as sp
 import torch
-from array_api_compat import array_namespace
 
-from lvm.config import ExtensionConfig, SourcesConfig
-from lvm.graph import grounded_laplacian
-from lvm.strategies import resolve
-
-
-@dataclass(frozen=True)
-class Sources:
-    sets: list[list[int]]   # cells clamped to voltage 1, one set per candidate landmark
-    cells: np.ndarray       # (len(sets),) the cell each candidate is placed at
+from lvm.cells import sq_distances
+from lvm.compute import BLOCK_BYTES, TORCH_DATA_DTYPE
+from lvm.config import Config
+from lvm.config.config import NearestKernelOptions, ReachOptions
+from lvm.graph import kernel_weights
 
 
-def choose_sources(p: np.ndarray, *, config: SourcesConfig) -> Sources:
-    """Candidate landmarks' source sets with the strategy named in ``config.strategy``.
-
-    Config choice point ``sources``; see ``lvm.strategies``.
+def voltage_maps(kernel: torch.Tensor, masses: torch.Tensor, rho_g: float, sources: torch.Tensor) -> torch.Tensor:
+    """The map with source s minimises (1/2) sum_ij W_ij (v_i - v_j)^2 + rho_g sum_i p_i v_i^2 with v_s = 1, where
+    W = p p^T * K. So L v = c e_s with the grounded Laplacian L = diag(W 1 + rho_g p) - W, and v = G e_s / G_ss with
+    G = L^-1: one Cholesky factorisation.
     """
-    strategy, options = resolve(_SOURCE_STRATEGIES, config)
-    return strategy(np.asarray(p, dtype=np.float64), options=options)
+    weights = masses[:, None] * masses[None, :] * kernel
+    laplacian = torch.diag(weights.sum(dim=1) + rho_g * masses) - weights
+    columns = torch.eye(len(masses), dtype=laplacian.dtype, device=laplacian.device)[:, sources]
+    G = torch.cholesky_solve(columns, torch.linalg.cholesky(laplacian))         # (n_cells, len(sources))
+    rows = torch.arange(len(sources), device=G.device)
+    maps = (G / G[sources, rows]).T.contiguous()
+    maps[rows, sources] = 1.0                                                  # exactly, not up to rounding
+    return maps
 
 
-def _single_node(p: np.ndarray, *, options: None) -> Sources:
-    """Every cell with mass is a candidate, clamping only itself."""
-    cells = np.flatnonzero(p > 0)
-    return Sources(sets=[[int(i)] for i in cells], cells=cells)
+def threshold(maps: torch.Tensor, tau: float) -> torch.Tensor:
+    return torch.where(maps >= tau, maps, torch.zeros_like(maps))
 
 
-_SOURCE_STRATEGIES: dict[str, Callable[..., Sources]] = {
-    "single_node": _single_node,
-}
+def point_voltages(points: torch.Tensor, centroids: torch.Tensor, masses: torch.Tensor, radius: torch.Tensor,
+                   maps: torch.Tensor, rho_g: float, *, config: Config) -> torch.Tensor:
+    """(m, L) voltages at data points, from the voltages v_i of the cells around them, with kernel weights w_i and
+    masses p_i. average: v(x) = sum_i w_i p_i v_i / sum_i w_i p_i, a point interpolates its cells (Def. 10).
+    grounded: v(x) = sum_i w_i p_i v_i / (rho_g + sum_i w_i p_i), a point is a node with its own ground. A point with
+    no cell within the kernel's reach takes its nearest cell's voltages."""
+    extension = config.extension
+    sq_dist = sq_distances(points, centroids)
+    match extension.kernel:
+        case "nearest":
+            weights = _nearest_kernel(sq_dist, extension.nearest)
+        case "graph":
+            weights = kernel_weights(sq_dist, radius.square()[None, :], config.graph.kernel).to(sq_dist.dtype)
+    weights = weights * masses.to(weights.dtype)
+    total = weights.sum(dim=1, keepdim=True)
+    cell_voltages = maps.T.to(weights.dtype)                                    # (n_cells, L)
+    match extension.strategy:
+        case "average":
+            voltages = weights @ cell_voltages / total
+        case "grounded":
+            voltages = weights @ cell_voltages / (rho_g + total)
+    return torch.where(total > 0, voltages, cell_voltages[sq_dist.argmin(dim=1)])
 
 
-def _node_indices(n: int, indices: Sequence[int]) -> np.ndarray:
-    idx = np.unique(np.asarray(indices, dtype=int))
-    if idx.size and (idx.min() < 0 or idx.max() >= n):
-        raise ValueError(f"source indices must be in [0, {n}), got range [{idx.min()}, {idx.max()}]")
-    return idx
+def _nearest_kernel(sq_dist: torch.Tensor, options: NearestKernelOptions) -> torch.Tensor:
+    """Weights on each point's k nearest cells: w_i = exp(-sharpness (d_i^2 - d_1^2) / (2 s^2)), with d_1 the nearest
+    and s^2 the mean of d_i^2 - d_1^2 over the k cells; 0 elsewhere. Subtracting d_1^2 removes what all nearby cells
+    share in high dimensions (the point's own offset from the cells), leaving how much closer it is to one than
+    another."""
+    nearest, cells = torch.topk(sq_dist, min(options.k, sq_dist.shape[1]), dim=1, largest=False)
+    excess = nearest - nearest[:, :1]
+    spread = excess.mean(dim=1, keepdim=True)
+    weights = torch.exp(-options.sharpness * excess / (2.0 * torch.where(spread > 0, spread, 1.0)))
+    return torch.zeros_like(sq_dist).scatter_(1, cells, weights)
 
 
-def solve_voltage_maps(
-    L_rho,
-    source_sets: Sequence[Sequence[int]],
-    *,
-    device: str = "cuda",
-) -> np.ndarray:
-    """Solve the grounded EMV independently for each source set.
+def choose_landmarks(kernel: torch.Tensor, masses: torch.Tensor, dimension: float, *,
+                     config: Config) -> tuple[torch.Tensor, float]:
+    """The landmarks, and the largest rho_g (the most local maps) at which they still reach the data: a ``share`` of
+    the data (by mass) is reached (v >= tau) by at least k of them. The landmarks are chosen at a start rho_g where
+    the median candidate map reaches min(k / L, share) of the data, what each of k evenly spread landmarks would
+    need; rho_g is then bisected with the landmarks fixed."""
+    reach, tau = config.landmarks.reach, config.voltage.threshold
+    n_landmarks = _landmark_count(dimension, len(masses), config)
+    k = n_landmarks if reach.k is None else min(reach.k, n_landmarks)
+    cells = torch.arange(len(masses), device=kernel.device)
 
-    Mirrors step (4) "Voltage Maps" in Fig. 6 of the paper, where every
-    candidate centroid is used in turn as a landmark. All source sets share
-    one inverse of L_rho (float64); memory is about n^2 * 8 bytes.
+    def coverage(rho_g: float) -> float:
+        reached = voltage_maps(kernel, masses, rho_g, cells) >= tau
+        return float(torch.median(reached.to(masses.dtype) @ masses))
 
-    Parameters
-    ----------
-    L_rho : (n, n) dense ndarray or scipy.sparse matrix
-        Symmetric positive-definite grounded Laplacian, e.g. from
-        ``graph.grounded_laplacian`` restricted to cells with mass.
-    source_sets : sequence of sequences of int
-        Each entry holds the node indices held at voltage 1 for one landmark.
-    device : {"cuda", "cpu"}
-        Torch device to solve on. Both run the exact same computation.
+    start = _largest_passing(coverage, min(k / n_landmarks, reach.share), options=reach)
+    maps = threshold(voltage_maps(kernel, masses, start, cells), tau)
+    landmarks, _ = _mutual_information(maps, masses, n_landmarks, config.landmarks.mutual_information.noise_std)
+    rho_g = _largest_passing(lambda r: _reached(kernel, masses, r, landmarks, tau, reach.share), k, options=reach,
+                             guess=start)
+    return landmarks, rho_g
 
-    Returns
-    -------
-    V : (len(source_sets), n) ndarray
-        Row i is the voltage map for source_sets[i].
+
+def _reached(kernel: torch.Tensor, masses: torch.Tensor, rho_g: float, landmarks: torch.Tensor, tau: float,
+             share: float) -> float:
+    """The largest number of landmarks that reaches (v >= tau) a ``share`` of the data (by mass): the mass-weighted
+    (1 - share)-quantile over cells of the number of landmarks reaching them. Never increases with rho_g."""
+    counts = (voltage_maps(kernel, masses, rho_g, landmarks) >= tau).sum(dim=0)
+    order = torch.argsort(counts)
+    cumulative = torch.cumsum(masses[order], dim=0) / masses.sum()
+    index = int(torch.searchsorted(cumulative, cumulative.new_tensor([1.0 - share]))[0])
+    return float(counts[order][min(index, len(order) - 1)])
+
+
+def _largest_passing(value, target: float, *, options: ReachOptions, guess: float | None = None) -> float:
+    """The largest rho_g within the bounds with value(rho_g) >= target, for a value that never increases with rho_g:
+    bisection on log(rho_g) until the bracket's ratio is within 1 + rel_tolerance. The bracket is the whole range, or
+    grows from ``guess`` by factors of 4."""
+    low_bound, high_bound = options.rho_g_bounds
+    seen = {}
+
+    def passes(rho_g: float) -> bool:
+        if rho_g not in seen:
+            seen[rho_g] = value(rho_g) >= target
+        return seen[rho_g]
+
+    if guess is None:
+        low, high = low_bound, high_bound
+        if passes(high):
+            return high
+        if not passes(low):
+            return low
+    else:
+        low = high = min(max(guess, low_bound), high_bound)
+        if passes(low):
+            while passes(high):
+                if high == high_bound:
+                    return high
+                low, high = high, min(4.0 * high, high_bound)
+        else:
+            while not passes(low):
+                if low == low_bound:
+                    return low
+                high, low = low, max(low / 4.0, low_bound)
+    while high / low > 1.0 + options.rel_tolerance:
+        middle = math.sqrt(low * high)
+        if passes(middle):
+            low = middle
+        else:
+            high = middle
+    return low
+
+
+def _landmark_count(dimension: float, n_cells: int, config: Config) -> int:
+    count = config.landmarks.count
+    match count.strategy:
+        case "dimension":
+            n = math.ceil(count.dimension.multiplier * (dimension + 1))
+        case "fixed":
+            n = count.fixed.n
+    return min(max(n, config.embedding.n_components + 1), n_cells)
+
+
+def _mutual_information(maps: torch.Tensor, masses: torch.Tensor, n_landmarks: int,
+                        noise_std: float) -> tuple[torch.Tensor, torch.Tensor]:
+    """Greedy maximisation of the mutual information between a cell J and its noisy voltages Y = v(J) + N(0, s^2 I),
+    estimated by I = -sum_i p_i log sum_j p_j E_ij with E_ij = exp(-|v(i) - v(j)|^2 / (2 s^2)) (Kolchinsky & Tracey,
+    2017, "Estimating mixture entropy with pairwise distances").
+
+    Adding the map x multiplies E_ij by F_ij = exp(-(x_i - x_j)^2 / (2 s^2)), which equals F_i0 = exp(-x_i^2 / (2 s^2))
+    unless j is in x's support U. So with S_i = sum_j p_j E_ij,
+        S'_i = F_i0 (S_i - sum_{j in U} p_j E_ij) + sum_{j in U} p_j E_ij F_ij,
+    which costs n |U| per candidate instead of n^2. Returns (the chosen rows of maps, I after each addition).
     """
-    L_dense = L_rho.toarray() if sp.issparse(L_rho) else np.asarray(L_rho, dtype=float)
-    n = L_dense.shape[0]
-    L = torch.as_tensor(L_dense, dtype=torch.float64, device=device)
-    G = torch.cholesky_inverse(torch.linalg.cholesky(L))
+    x_all = maps.to(TORCH_DATA_DTYPE)
+    w = masses.to(TORCH_DATA_DTYPE)
+    n_candidates, n = x_all.shape
+    scale = 1.0 / (2.0 * noise_std ** 2)
+    blocks = []
+    for rows, width in _support_blocks(x_all > 0, x_all.element_size()):
+        in_support = x_all[rows] > 0
+        support = torch.argsort(in_support.to(torch.int8), dim=1, descending=True, stable=True)[:, :width]
+        padding = torch.arange(width, device=maps.device)[None, :] >= in_support.sum(dim=1)[:, None]
+        blocks.append((rows, support, w[support].masked_fill(padding, 0.0)))
 
-    # Group source sets by size so each group is one batched solve instead of
-    # one tiny GPU call per landmark.
-    groups: dict[int, list[int]] = {}
-    indices = [_node_indices(n, sources) for sources in source_sets]
-    for k, idx in enumerate(indices):
-        groups.setdefault(idx.size, []).append(k)
-
-    V = torch.empty((len(source_sets), n), dtype=L.dtype, device=device)
-    for ks in groups.values():
-        S = torch.as_tensor(np.stack([indices[k] for k in ks]), device=device)  # (B, m)
-        # Currents injected at the sources so that they sit at voltage 1.
-        c = torch.linalg.solve(G[S[:, :, None], S[:, None, :]], torch.ones(S.shape, dtype=L.dtype, device=device))
-        rows = torch.as_tensor(ks, device=device)
-        V[rows] = torch.einsum("bm,bmn->bn", c, G[S])  # G symmetric: G[S] rows == G[:, S] columns
-        V[rows[:, None], S] = 1.0  # exact, instead of 1 up to rounding
-    return V.cpu().numpy()
-
-
-def solve_grounded_voltage_maps(
-    K: np.ndarray,
-    p: np.ndarray,
-    rho_g: float,
-    source_sets: Sequence[Sequence[int]],
-    *,
-    device: str = "cuda",
-) -> np.ndarray:
-    """Voltage maps on a region's mass-weighted grounded graph, for every cell.
-
-    Cells with p_i > 0 are solved exactly with ``solve_voltage_maps``. A cell
-    with p_i = 0 has no edges and no ground in L_rho (singular row), so it is
-    left out of the solve and then given the voltage the stationarity
-    condition assigns it:
-
-        v_i = sum_j K_ij p_j v_j / (rho_g + sum_j K_ij p_j),
-
-    the same mass-weighted average of its neighbours that every free cell
-    satisfies (the discrete form of Def. 10's extension). It is 0 for a cell
-    with no neighbours. So no cell is dropped and every cell gets a voltage.
-
-    Parameters
-    ----------
-    K : (n, n) ndarray
-        Kernel between cells, e.g. ``graph.choose_kernel(sq_distances(c, c), ..., exclude_self=True).K``.
-    p : (n,) ndarray
-        Cell masses (``CellMasses.p``).
-    rho_g : float
-        Ground scaling; node i's ground weight is ``rho_g * p[i]``.
-    source_sets : sequence of sequences of int
-        Cell indices held at voltage 1, one set per landmark. Sources must
-        have p > 0: a massless cell can't inject current into the graph.
-    device : {"cuda", "cpu"}
-
-    Returns
-    -------
-    V : (len(source_sets), n) ndarray
-    """
-    K = np.asarray(K, dtype=np.float64)
-    p = np.asarray(p, dtype=np.float64)
-    n = p.shape[0]
-    active = np.flatnonzero(p > 0)
-    if active.size == 0:
-        raise ValueError("every cell has zero mass")
-
-    local = np.full(n, -1)
-    local[active] = np.arange(active.size)
-    local_sets = []
-    for sources in source_sets:
-        idx = _node_indices(n, sources)
-        if np.any(local[idx] < 0):
-            raise ValueError(f"source cells must have mass > 0, got zero-mass cells {idx[local[idx] < 0].tolist()}")
-        local_sets.append(local[idx])
-
-    L_rho = grounded_laplacian(K[np.ix_(active, active)], p[active], rho_g)
-    V = np.zeros((len(source_sets), n))
-    V[:, active] = solve_voltage_maps(L_rho, local_sets, device=device)
-
-    empty = np.flatnonzero(p == 0)
-    if empty.size:
-        Kp = K[np.ix_(empty, active)] * p[active]  # (n_empty, n_active)
-        V[:, empty] = (V[:, active] @ Kp.T) / (rho_g + Kp.sum(axis=1))
-    return V
+    E = torch.ones((n, n), dtype=w.dtype, device=maps.device)
+    S = E @ w
+    available = torch.ones(n_candidates, dtype=torch.bool, device=maps.device)
+    chosen, information = [], []
+    for _ in range(min(n_landmarks, n_candidates)):
+        scores = torch.empty(n_candidates, dtype=w.dtype, device=maps.device)
+        for rows, support, w_support in blocks:
+            x = x_all[rows]                                                         # (b, n)
+            wE = E[:, support].permute(1, 0, 2) * w_support[:, None, :]             # (b, n, |U|)
+            F = torch.exp(-(x[:, :, None] - torch.gather(x, 1, support)[:, None, :]).square() * scale)
+            S_new = torch.exp(-x.square() * scale) * (S - wE.sum(dim=2)) + (wE * F).sum(dim=2)
+            scores[rows] = -(w * torch.log(torch.maximum(S_new, w))).sum(dim=1)     # S'_i >= p_i: guards rounding
+        scores[~available] = -torch.inf
+        best = int(torch.argmax(scores))
+        chosen.append(best)
+        information.append(scores[best])
+        available[best] = False
+        x = x_all[best]
+        E *= torch.exp(-(x[:, None] - x[None, :]).square() * scale)
+        S = E @ w                                                                   # exact again, no drift
+    return torch.tensor(chosen, device=maps.device), torch.stack(information)
 
 
-def support_mask(V, tau: float):
-    """Cells where each voltage map is at least ``tau`` (config ``voltage.threshold``).
+def _support_blocks(in_support: torch.Tensor, itemsize: int) -> list[tuple[torch.Tensor, int]]:
+    """Candidates sorted by support size, in blocks whose (rows, n, widest support) temporaries fit BLOCK_BYTES."""
+    n = in_support.shape[1]
+    order = torch.argsort(in_support.sum(dim=1))
+    sizes = in_support.sum(dim=1)[order].clamp(min=1).tolist()
+    blocks, start = [], 0
+    while start < len(order):
+        end = start + 1
+        while end < len(order) and (end + 1 - start) * n * sizes[end] * itemsize <= BLOCK_BYTES:
+            end += 1
+        blocks.append((order[start:end], sizes[end - 1]))
+        start = end
+    return blocks
 
-    This is a map's effective support (Sec. 6.3 of the paper): outside it the
-    landmark's voltage is negligible. Used by the ``support`` partition
-    strategy and the ``support_fraction`` scaling strategy.
-    """
-    if not 0.0 <= tau < 1.0:
-        raise ValueError(f"tau must be in [0, 1), got {tau}")
-    return _as_array(V) >= tau
-
-
-def threshold_voltages(V, tau: float):
-    """Copy of ``V`` with every voltage below ``tau`` set to 0.
-
-    Makes each map local: a cell outside a landmark's support no longer
-    carries its exponentially small voltage. Sources (v = 1) are never
-    affected since ``tau < 1``. Downstream, -log(v) of a zeroed entry is
-    +inf, so consumers must treat 0 as "out of range" rather than take logs.
-    """
-    V = _as_array(V)
-    xp = array_namespace(V)
-    return xp.where(support_mask(V, tau), V, xp.zeros_like(V))
-
-
-def extend_voltages(
-    Kx, V, p, *, config: ExtensionConfig, rho_g: float, nearest
-):
-    """Voltages at data points from the cells' voltage maps, with the strategy in ``config.strategy``.
-
-    Config choice point ``extension``; see ``lvm.strategies``.
-
-    Parameters
-    ----------
-    Kx : (m, n) ndarray
-        Kernel from m data points to the n cells, e.g.
-        ``graph.choose_kernel(cells.sq_distances(X, centroids), ...).K``.
-    V : (L, n) ndarray
-        Voltage maps over the cells (e.g. the landmarks' thresholded maps).
-    p : (n,) ndarray
-        Cell masses.
-    rho_g : float
-        The region's ground scaling.
-    nearest : (m,) ndarray of int
-        Each point's nearest cell (``cells.assign_cells``), the fallback for a
-        point with no cell within the kernel's reach.
-
-    All array inputs are NumPy arrays (computed in float64) or torch tensors
-    on one device (computed there, in their dtype), so the per-point steps can
-    stay on the GPU.
-
-    Returns
-    -------
-    (L, m) array of the same kind as the inputs
-    """
-    strategy, options = resolve(_EXTENSION_STRATEGIES, config)
-    if not isinstance(Kx, torch.Tensor):
-        Kx, V, p = (np.asarray(a, dtype=np.float64) for a in (Kx, V, p))
-        nearest = np.asarray(nearest, dtype=int)
-    return strategy(Kx, V, p, options=options, rho_g=rho_g, nearest=nearest)
-
-
-def _grounded(Kx, V, p, *, options: None, rho_g: float, nearest):
-    """A point is a zero-mass cell: v(x) = sum_i k(x,c_i) p_i v_i / (rho_g + sum_i k(x,c_i) p_i).
-
-    The same fill-in ``solve_grounded_voltage_maps`` gives zero-mass cells, and
-    the discrete form of Theorem 9's fixed point at a single point. A point
-    with no cell within reach would get v = 0 for every landmark, which says
-    nothing about where it is, so it takes its nearest cell's voltages instead.
-    """
-    xp = array_namespace(Kx, V, p)
-    Wx = Kx * p[None, :]                              # (m, n)
-    total = xp.sum(Wx, axis=1)
-    out = (V @ Wx.T) / (rho_g + total)[None, :]       # (L, m)
-    isolated = total == 0
-    return xp.where(isolated[None, :], xp.take(V, nearest, axis=1), out)
-
-
-def voltage_distances(V, tau: float):
-    """Distance d = -log v from voltages; +inf where v < tau (outside the map's support, unknown).
-
-    -log v grows roughly linearly with distance from the landmark (Theorem 12
-    bounds it between two linear functions), and is 0 at the landmark itself.
-    NumPy or torch.
-    """
-    V = _as_array(V)
-    xp = array_namespace(V)
-    return xp.where(V >= tau, -xp.log(xp.clip(V, min=tau)), xp.full_like(V, float("inf")))
-
-
-def chained_distances(D: np.ndarray) -> np.ndarray:
-    """Symmetric, complete distances from a square matrix with unknown (+inf) entries.
-
-    Symmetrises (mean of the two directions where both are known, the known
-    one otherwise), then fills unknown pairs with shortest paths through
-    known ones: d(a, b) = min over routes of the summed known distances. This
-    is the within-level form of chaining distances through landmarks. Pairs
-    in disconnected parts stay +inf.
-    """
-    from scipy.sparse.csgraph import shortest_path
-
-    D = np.asarray(D, dtype=np.float64)
-    Dt = D.T
-    both = np.isfinite(D) & np.isfinite(Dt)
-    S = np.where(both, 0.5 * (D + Dt), np.minimum(D, Dt))
-    np.fill_diagonal(S, 0.0)
-    # Dense csgraph input treats inf as "no edge" (and zero as well, which only the diagonal is).
-    return shortest_path(S, method="D", directed=False)
-
-
-def _as_array(x):
-    """Leave NumPy arrays and torch tensors alone; turn anything else (lists) into NumPy."""
-    return x if isinstance(x, (np.ndarray, torch.Tensor)) else np.asarray(x)
-
-
-def _average(Kx, V, p, *, options: None, rho_g: float, nearest):
-    """Def. 10 of the paper as printed: v(x) = sum_i k(x,c_i) p_i v_i / sum_i k(x,c_i) p_i, no ground term.
-
-    A point is not a node of the network but a location between nodes, so it
-    interpolates its cells' voltages. ``_grounded`` instead treats it as a
-    zero-mass node with its own ground: with only a few cells attached (e.g. the
-    sharp ``knn`` point kernel), that ground term rivals their mass and roughly
-    halves the point's voltage relative to its cells'. ``rho_g`` is unused.
-    """
-    xp = array_namespace(Kx, V, p)
-    Wx = Kx * p[None, :]                              # (m, n)
-    total = xp.sum(Wx, axis=1)
-    isolated = total == 0
-    out = (V @ Wx.T) / xp.where(isolated, xp.ones_like(total), total)[None, :]
-    return xp.where(isolated[None, :], xp.take(V, nearest, axis=1), out)
-
-
-_EXTENSION_STRATEGIES: dict[str, Callable[..., np.ndarray]] = {
-    "grounded": _grounded,
-    "average": _average,
-}
-
-
-def benchmark_devices(
-    L_rho,
-    source_sets: Sequence[Sequence[int]],
-    *,
-    devices: Sequence[str] = ("cpu", "cuda"),
-    repeats: int = 3,
-) -> dict:
-    """Time ``solve_voltage_maps`` on each device for the same problem.
-
-    Each device gets one untimed warm-up run first, so one-off costs such as
-    CUDA initialization aren't counted.
-
-    Returns a dict keyed by device, each {"mean": ..., "min": ..., "times": [...]}.
-    """
-    results: dict = {}
-    for device in devices:
-        solve_voltage_maps(L_rho, source_sets, device=device)
-        times = []
-        for _ in range(repeats):
-            start = time.perf_counter()
-            solve_voltage_maps(L_rho, source_sets, device=device)
-            times.append(time.perf_counter() - start)
-        results[device] = {"mean": float(np.mean(times)), "min": float(np.min(times)), "times": times}
-    return results

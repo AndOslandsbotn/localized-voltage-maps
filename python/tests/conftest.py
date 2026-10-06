@@ -1,12 +1,7 @@
 """Shared test setup.
 
-Layout:
-* unit/         one file per library module (test_graph.py tests lvm/graph.py, ...): small inputs, one piece at a time
-* unit_new/     tests of the new library (lvm_new), added one at a time as each piece is agreed; the old tests are
-                reviewed when lvm_new replaces lvm
-* integration/  whole fits, end to end (fit, transform, streaming, the local chart)
-* regression/   LVM's results on a fixed dataset, pinned in regression/reference/ (see test_regression.py)
-* helpers.py    plain helper functions (importable from every folder: pythonpath in pyproject.toml)
+Layout: unit/ has one file per library module (test_graph.py tests lvm/graph.py, ...). The old library's tests
+(lvm_old) are in ../tests_old and run with ``pytest tests_old``.
 
 GPU: tests marked ``gpu`` need a CUDA GPU and are skipped without one; ``pytest -m "not gpu"`` deselects them.
 A test that takes a ``device`` argument runs on the CPU and, marked ``gpu``, on CUDA.

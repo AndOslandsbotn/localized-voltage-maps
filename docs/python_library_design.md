@@ -24,7 +24,7 @@ for Z_chunk in model.transform_chunks(X):   # one array per chunk, for data too 
     ...
 ```
 
-**Constructor arguments.** The most important settings are direct arguments; everything else comes from a YAML file. Every direct argument is exactly a setting, with the same values, and defaults to `None` ("not given"): its value then comes from the `config` YAML if that sets it, else from the package defaults (`lvm_new/config/config.yaml`). A given argument wins over both. So the YAML and the direct arguments are equivalent, and all rules (types, ranges, allowed values) live in the config models.
+**Constructor arguments.** The most important settings are direct arguments; everything else comes from a YAML file. Every direct argument is exactly a setting, with the same values, and defaults to `None` ("not given"): its value then comes from the `config` YAML if that sets it, else from the package defaults (`lvm/config/config.yaml`). A given argument wins over both. So the YAML and the direct arguments are equivalent, and all rules (types, ranges, allowed values) live in the config models.
 
 | Argument | Meaning | Default |
 |---|---|---|
@@ -121,7 +121,7 @@ Kept from the start, so that stage 3 needs no redesign:
 
 ## Order of work
 
-The new library is built from scratch in `python/src/lvm_new/`, next to the untouched `lvm` (which keeps the experiments running). The two never import from each other. When `lvm_new` is complete, it replaces `lvm` under the final name, and the regression test (pinned results) checks that it computes what `lvm` did.
+The library was built from scratch as `lvm_new` and renamed to `lvm` on 2026-10-06; the previous library is kept as `python/src/lvm_old/` (its tests in `python/tests_old/`, its experiments in `experiments_old/`), for reference only. The two never import from each other. The paper's experiments are rebuilt in `experiments/` with the new `lvm`.
 
 Each step keeps all tests passing, including the regression test (pinned results), and is committed on its own:
 1. `estimator.py`, `data.py` (inputs as chunk sources, the region's sample), `compute.py` (precisions, block memory), `config.py` (pydantic models + `config.yaml`, sections added as the steps that use them arrive). `fit` works once the step modules exist; nothing wraps the old `fit_level`.

@@ -1,26 +1,14 @@
-"""Run a command, killing it if its memory use passes a limit.
-
-This machine has 7.8 GB of RAM (WSL), ~2 GB of which the OS, WSL and the
-editor need; a process that grows past what is left takes the whole machine
-down. Every heavy command should run under this guard (or, for benchmark
-runs, through ``runner.run_isolated``, which applies the same guard per run).
-
-    python experiments/common/guard.py [--limit-mb 4500] -- <command> [args ...]
-
-The guard sums the resident memory of the command's whole process tree every
-0.2 s, kills the tree when it exceeds the limit, and exits with code 137.
-"""
-
 from __future__ import annotations
 
 import argparse
 import subprocess
 import sys
 import time
+from pathlib import Path
 
 import psutil
 
-DEFAULT_LIMIT_MB = 4500
+DEFAULT_LIMIT_MB = 3000
 
 
 def tree_rss_mb(proc: psutil.Process) -> float:
@@ -41,8 +29,8 @@ def kill_tree(proc: psutil.Process) -> None:
             pass
 
 
-def run_guarded(cmd: list[str], limit_mb: float = DEFAULT_LIMIT_MB) -> int:
-    child = subprocess.Popen(cmd)
+def run_guarded(cmd: list[str], limit_mb: float = DEFAULT_LIMIT_MB, cwd: Path | None = None) -> int:
+    child = subprocess.Popen(cmd, cwd=cwd)
     proc = psutil.Process(child.pid)
     peak = 0.0
     while child.poll() is None:
@@ -62,7 +50,7 @@ def run_guarded(cmd: list[str], limit_mb: float = DEFAULT_LIMIT_MB) -> int:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser = argparse.ArgumentParser(description="Run a command, killing it if its memory use passes a limit.")
     parser.add_argument("--limit-mb", type=float, default=DEFAULT_LIMIT_MB)
     parser.add_argument("cmd", nargs=argparse.REMAINDER)
     args = parser.parse_args()

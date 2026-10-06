@@ -22,9 +22,9 @@ from sklearn.manifold import trustworthiness
 from sklearn.model_selection import cross_val_score
 from sklearn.neighbors import KNeighborsClassifier
 
-from lvm.config import load_config
-from lvm.pipeline import fit_level
-from lvm.stream import array_source
+from lvm_old.config import load_config
+from lvm_old.pipeline import fit_level
+from lvm_old.stream import array_source
 
 ROOT = Path(__file__).resolve().parents[1]
 

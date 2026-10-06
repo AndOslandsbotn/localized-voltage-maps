@@ -1,6 +1,3 @@
-from lvm.cells import assign_cells, fit_cells
+from lvm.estimator import LocalizedVoltageMaps
 
-__all__ = [
-    "assign_cells",
-    "fit_cells",
-]
+__all__ = ["LocalizedVoltageMaps"]

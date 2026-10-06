@@ -1,41 +1,3 @@
-"""Benchmark datasets: one registry, so every experiment folder runs the same way on any dataset.
-
-Each dataset gives
-
-* ``load(split, n, seed)`` -> (X, labels or None): n points of ``split`` in a
-  random order (``seed`` picks the subset and the order), float64;
-* ``extra_metrics(X, Z)``: quality measures specific to it (computed on the
-  global-structure subset), if any;
-* ``colourings(X, labels)``: how its pictures are coloured;
-* ``reference(X)``: a 2-D view of the truth for pictures, or None.
-
-Datasets:
-
-* ``mnist``: one fixed shuffle of all 70,000 images (``SPLIT_SEED``) gives
-  ``tune`` (the first 20,000, used only to choose hyperparameters) and
-  ``eval`` (the other 50,000, used for every reported comparison). Downloaded
-  from OpenML on first use (``download``), cached as uint8 .npy files under
-  data/ (not in git) and checked against SHA-256 fingerprints, so every
-  reproduction uses exactly the same images in the same order. Only the rows a
-  run needs are converted to float64.
-
-Datasets are never committed. To fetch them up front:
-
-    python experiments/common/datasets.py --download
-* ``half_sphere``: points uniform on the upper half of the unit sphere in R^3
-  (z >= 0), generated; ``tune`` and ``eval`` use disjoint random streams. It
-  can be flattened into a disc, so a good 2-D embedding keeps every
-  neighbourhood and changes colour smoothly. Its global measure needs no extra:
-  straight-line distance is a monotone function of distance along the sphere,
-  so ``distance_correlation`` (a rank correlation) already is the geodesic one.
-* ``mnist8m``: 8.1 million deformed MNIST digits (Loosli, Canu & Bottou 2007,
-  "infimnist"), 784 pixels, labels; downloaded from the LIBSVM site (2.35 GB
-  xz), converted to a uint8 file on disk (6.4 GB, never held in memory) and
-  shuffled once with a fixed seed, as the streaming method assumes. It does not
-  fit in this machine's memory: LVM streams it (``stream``), other methods get
-  what fits. Settings are MNIST's, unchanged (no tuning split).
-"""
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -333,27 +295,25 @@ def _mnist8m(split: str, n: int | None, seed: int) -> tuple[np.ndarray, np.ndarr
     return X.astype(np.float64) / 255.0, y[rows].astype(np.int64)
 
 
-def stream(dataset: str, *, n: int | None = None, chunk_size: int = 10_000):
-    """A chunk source (``lvm.stream.ChunkSource``) over the first n points, read from disk chunk by chunk with
-    plain file reads, so only the current chunk is in memory. Chunks are float32 in [0, 1], the precision every
-    method computes in (the other methods get float32 too), so no chunk is converted twice.
-
-    Only datasets stored on disk stream this way (``mnist8m``); for the others use
-    ``lvm.stream.array_source(load(...))``.
-    """
+def stream(dataset: str, *, n: int | None = None, chunk_size: int = 10_000) -> "FileChunks":
+    """A re-iterable over the first n points, read from disk chunk by chunk with plain file reads, so only the current
+    chunk is in memory. Chunks are float32 in [0, 1]. Only datasets stored on disk stream this way (``mnist8m``)."""
     if dataset != "mnist8m":
-        raise ValueError(f"{dataset} is held in memory; use lvm.stream.array_source(load(...))")
+        raise ValueError(f"{dataset} is held in memory; use load(...)")
     download("mnist8m")
-    n = MNIST8M_N if n is None else n
+    return FileChunks(MNIST8M_DIR / "X.u8", MNIST8M_N if n is None else n, MNIST8M_D, chunk_size)
 
-    def chunks():
-        with open(MNIST8M_DIR / "X.u8", "rb") as f:
-            for start in range(0, n, chunk_size):
-                k = min(chunk_size, n - start)
-                chunk = np.fromfile(f, dtype=np.uint8, count=k * MNIST8M_D).reshape(k, MNIST8M_D).astype(np.float32)
-                chunk /= 255.0
-                yield chunk
-    return chunks
+
+class FileChunks:
+    def __init__(self, path: Path, n: int, n_features: int, chunk_size: int):
+        self.path, self.n, self.n_features, self.chunk_size = path, n, n_features, chunk_size
+
+    def __iter__(self):
+        with open(self.path, "rb") as f:
+            for start in range(0, self.n, self.chunk_size):
+                k = min(self.chunk_size, self.n - start)
+                chunk = np.fromfile(f, dtype=np.uint8, count=k * self.n_features).reshape(k, self.n_features)
+                yield chunk.astype(np.float32) / 255.0
 
 
 DATASETS: dict[str, Dataset] = {

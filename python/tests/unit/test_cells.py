@@ -1,202 +1,81 @@
 import numpy as np
 import pytest
+import torch
 
-from scipy.spatial.distance import cdist
-
-from lvm.cells import assign_cells, fit_cells, sq_distances
+from lvm.cells import cell_masses, fit_cells, refine_cells
 from lvm.config import load_config
-from lvm.regions import Region, estimate_masses, min_count_for, route
-from lvm.stream import array_source, iter_array_chunks
 
 
-STRATEGIES = [pytest.param("cuml", marks=pytest.mark.gpu), "faiss", "sklearn"]
+# Far from the origin with cells close together, float32 |c|^2 - 2 x.c rounds badly enough to pick the wrong cell.
+FAR = pytest.mark.parametrize("offset, scale", [(0.0, 1.0), (1000.0, 0.001)], ids=["near_origin", "far_from_origin"])
 
 
-def _fit(sample, n_cells, strategy="sklearn", seed=0):
-    config = load_config(overrides={"cells": {"kmeans": {"strategy": strategy}}}).cells.kmeans
-    return fit_cells(sample, config=config, n_cells=n_cells, seed=seed).centroids
-
-
-def _blobs(n_blobs=8, per_blob=200, seed=0):
+def _blobs(n_blobs, per_blob=200, seed=0, offset=0.0, scale=1.0):
     rng = np.random.default_rng(seed)
-    centers = rng.random((n_blobs, 5)) * 20
-    return centers, np.vstack([c + 0.1 * rng.standard_normal((per_blob, 5)) for c in centers])
+    centres = offset + scale * rng.random((n_blobs, 5)) * 20
+    X = np.vstack([c + scale * 0.1 * rng.standard_normal((per_blob, 5)) for c in centres])
+    order = rng.permutation(len(X))
+    return centres, X[order].astype(np.float32), np.repeat(np.arange(n_blobs), per_blob)[order]
 
 
-@pytest.mark.parametrize("strategy", STRATEGIES)
-def test_every_cluster_gets_cells_when_cells_outnumber_clusters(strategy):
-    # The regime LVM uses: many more cells than clusters. Random init
-    # (cuml, faiss) may split one blob more finely than another, but it
-    # must not leave a blob without a cell.
-    centers, sample = _blobs()
-    centroids = _fit(sample, 24, strategy)
-    assert centroids.shape == (24, 5) and centroids.dtype == np.float64
-    nearest = centroids[assign_cells(centers, centroids)]
-    assert np.all(np.linalg.norm(nearest - centers, axis=1) < 0.5)
+@FAR
+def test_kmeans_gives_every_blob_a_cell_on_each_device(device, offset, scale):
+    centres, X, _ = _blobs(8, offset=offset, scale=scale)
+    config = load_config(overrides={"cells": {"n_cells": 24}})
+    centroids = fit_cells(torch.as_tensor(X, device=device), config=config, device=device, seed=0).cpu().numpy()
+    assert centroids.shape == (24, 5)
+    nearest = np.linalg.norm(centres[:, None] - centroids[None], axis=2).min(axis=1)
+    assert np.all(nearest < 0.5 * scale)
 
 
-def test_sklearn_recovers_exactly_k_separated_blobs():
-    # With k = number of blobs only k-means++ (sklearn) guarantees one centroid
-    # per blob; random init (cuml, faiss) can put two in one blob.
-    centers, sample = _blobs()
-    centroids = _fit(sample, 8, "sklearn")
-    np.testing.assert_allclose(centroids[assign_cells(centers, centroids)], centers, atol=0.05)
+def test_a_sample_no_bigger_than_n_cells_gives_one_cell_per_point():
+    X = np.random.default_rng(0).random((10, 3)).astype(np.float32)
+    config = load_config(overrides={"cells": {"n_cells": 20}})
+    np.testing.assert_allclose(fit_cells(torch.as_tensor(X), config=config, device="cpu", seed=0).numpy(), X)
 
 
-@pytest.mark.parametrize("strategy", STRATEGIES)
-def test_fit_cells_is_deterministic_for_a_seed(strategy):
-    sample = np.random.default_rng(1).random((2000, 3))
-    np.testing.assert_allclose(_fit(sample, 10, strategy, seed=3), _fit(sample, 10, strategy, seed=3), rtol=1e-5)
-
-
-def test_fit_cells_small_sample_gets_one_cell_per_point():
-    sample = np.random.default_rng(2).random((5, 2))
-    np.testing.assert_array_equal(_fit(sample, 10), sample)
-
-
-def test_fit_cells_rejects_empty_sample():
-    with pytest.raises(ValueError, match="empty sample"):
-        _fit(np.empty((0, 2)), 10)
-
-
-@pytest.mark.parametrize("device", [None, pytest.param("cuda", marks=pytest.mark.gpu)])
-def test_assign_cells_matches_brute_force_on_both_devices(device):
-    rng = np.random.default_rng(4)
-    X, C = rng.random((500, 6)), rng.random((30, 6))
-    expected = cdist(X, C).argmin(axis=1)
-    np.testing.assert_array_equal(assign_cells(X, C, device=device), expected)
-
-
-def test_min_count_for():
-    assert min_count_for(0.1) == 100
-    assert min_count_for(0.05) == 400
-
-
-def _uniform_line_region(n_cells=4):
-    # Cells centred at 0.5, 1.5, ... on [0, n_cells]: uniform data gives equal masses.
-    return Region(centroids=(np.arange(n_cells) + 0.5)[:, None])
-
-
-def test_shuffled_masses_stop_early_and_are_accurate():
-    X = np.random.default_rng(3).uniform(0, 4, size=(200_000, 1))
-    chunks_read = 0
-
-    def source():
-        nonlocal chunks_read
-        for chunk in iter_array_chunks(X, 1000):
-            chunks_read += 1
-            yield chunk
-
-    masses = estimate_masses(source, _uniform_line_region(), min_count=400, shuffled=True)[()]
-    assert masses.converged
-    assert masses.counts.min() >= 400
-    assert chunks_read < 5  # ~1600 points needed, far less than the 200 chunks available
-    np.testing.assert_allclose(masses.p, 0.25, rtol=0.15)
-    assert masses.p.sum() == pytest.approx(1.0)
-
-
-def test_unshuffled_masses_read_everything():
-    X = np.random.default_rng(4).uniform(0, 4, size=(10_000, 1))
-    masses = estimate_masses(array_source(X, 999), _uniform_line_region(), min_count=1, shuffled=False)[()]
-    assert masses.n_seen == 10_000
-    np.testing.assert_array_equal(masses.counts, np.bincount(assign_cells(X, _uniform_line_region().centroids)))
-
-
-def test_masses_per_overlapping_region_match_brute_force():
-    root = Region(centroids=np.array([[0.0], [1.0], [2.0], [3.0]]))
-    root.add_child([0, 1, 2]).centroids = np.array([[0.0], [2.0]])
-    root.add_child([2, 3]).centroids = np.array([[2.0], [3.0], [4.0]])
-    X = np.random.default_rng(5).uniform(-0.4, 3.4, size=(5000, 1))
-    masses = estimate_masses(array_source(X, 700), root, min_count=1, shuffled=False)
-    for leaf, rows in route(X, root):
-        expected = np.bincount(assign_cells(X[rows], leaf.centroids), minlength=leaf.centroids.shape[0])
-        np.testing.assert_array_equal(masses[leaf.id].counts, expected)
-
-
-def test_max_points_caps_the_scan():
-    X = np.random.default_rng(6).uniform(0, 4, size=(10_000, 1))
-    masses = estimate_masses(array_source(X, 100), _uniform_line_region(), min_count=10_000, shuffled=True, max_points=500)[()]
-    assert masses.n_seen == 500
-    assert not masses.converged
-
-
-def test_masses_require_cells():
-    with pytest.raises(ValueError, match="no cells yet"):
-        estimate_masses(array_source(np.zeros((3, 1)), 2), Region(), min_count=1, shuffled=True)
-
-
-@pytest.mark.parametrize("dtype, rtol", [(np.float64, 1e-10), (np.float32, 1e-4)])
-def test_sq_distances_match_cdist(dtype, rtol):
-    rng = np.random.default_rng(5)
-    X, C = rng.random((300, 20)), rng.random((40, 20))
-    np.testing.assert_allclose(sq_distances(X, C, dtype=dtype), cdist(X, C, "sqeuclidean"), rtol=rtol, atol=rtol)
-
-
-def test_sq_distances_are_never_negative():
-    X = np.full((5, 3), 1e4) + np.random.default_rng(6).random((5, 3)) * 1e-6  # near-identical rows
-    assert np.all(sq_distances(X, X) >= 0.0)
-
-
-@pytest.mark.gpu
-def test_sq_distances_on_gpu_matches_numpy():
-    import torch
-
-    rng = np.random.default_rng(8)
-    X, C = rng.random((200, 10)), rng.random((25, 10))
-    gpu = sq_distances(torch.as_tensor(X, device="cuda"), torch.as_tensor(C, device="cuda")).cpu().numpy()
-    np.testing.assert_allclose(gpu, sq_distances(X, C), rtol=1e-9, atol=1e-9)
-
-
-# --- streaming refinement (cells.refine) ------------------------------------
-
-
-def _refine(source, sample, centroids, *, skip=0, device="cpu", **stream):
-    from lvm.cells import refine_cells
-
-    config = load_config(overrides={"cells": {"refine": {"strategy": "stream", "stream": stream}}}).cells.refine
-    return refine_cells(source, sample, centroids, config=config, skip=skip, device=device).centroids
-
-
-def test_refine_none_keeps_the_sample_centroids():
-    from lvm.cells import refine_cells
-
-    _, X = _blobs()
-    C = _fit(X[:400], 8)
-    out = refine_cells(array_source(X, 100), X[:400], C, config=load_config().cells.refine)
-    np.testing.assert_array_equal(out.centroids, C)
-
-
-def test_stream_refinement_gives_each_cluster_the_mean_of_all_its_points(device):
-    # Separated blobs: assignments never change, so the running means end exactly at each blob's mean over the
-    # whole stream -- the sample (the stream's prefix, skipped) counted once.
-    centers, X = _blobs(n_blobs=4, per_blob=500)
-    X = X[np.random.default_rng(1).permutation(len(X))]
+def test_stream_refinement_ends_at_each_blobs_mean_with_the_prefix_counted_once(device):
+    # Separated blobs: assignments never change, so the running means end exactly at each blob's mean.
+    _, X, blob = _blobs(4, per_blob=500)
     sample = X[:300]
-    seed = sample.copy()
-    C0 = np.array([sample[assign_cells(sample, centers) == b].mean(axis=0) for b in range(4)])
-    C = _refine(array_source(X, 128), sample, C0, skip=300, device=device, passes=1, max_points=None)
-    expected = np.array([X[assign_cells(X, centers) == b].mean(axis=0) for b in range(4)])
-    np.testing.assert_allclose(C, expected, rtol=0, atol=1e-5)
-    np.testing.assert_array_equal(sample, seed)
+    start = np.array([sample[blob[:300] == b].mean(axis=0) for b in range(4)])
+    chunks = [X[a:a + 128] for a in range(0, len(X), 128)]
+    config = load_config(overrides={"cells": {"refine": {"passes": 1}}})       # prefix sample: the first 300 points
+    centroids = refine_cells(chunks, torch.as_tensor(sample, device=device), torch.as_tensor(start, device=device),
+                             config=config, device=device).cpu().numpy()
+    np.testing.assert_allclose(centroids, [X[blob == b].mean(axis=0) for b in range(4)], atol=1e-4)
 
 
-def test_stream_refinement_respects_max_points(device):
-    centers, X = _blobs(n_blobs=4, per_blob=500)
-    X = X[np.random.default_rng(1).permutation(len(X))]
-    C0 = np.array([X[:300][assign_cells(X[:300], centers) == b].mean(axis=0) for b in range(4)])
-    C = _refine(array_source(X, 128), X[:300], C0, skip=300, device=device, passes=1, max_points=500)
-    seen = X[:800]
-    expected = np.array([seen[assign_cells(seen, centers) == b].mean(axis=0) for b in range(4)])
-    np.testing.assert_allclose(C, expected, rtol=0, atol=1e-5)
+class _Counting:
+    """Re-iterable chunks of the given points, 100 at a time; counts the chunks handed out."""
+
+    def __init__(self, X):
+        self.X, self.handed_out = X, 0
+
+    def __iter__(self):
+        for start in range(0, len(self.X), 100):
+            self.handed_out += 1
+            yield self.X[start:start + 100]
 
 
-def test_stream_refinement_improves_cells_seeded_on_a_small_sample():
-    # k-means on 300 points, then streamed over 4000: the within-cell spread on all the data goes down.
+@FAR
+def test_masses_are_each_cells_share_of_the_data(device, offset, scale):
     rng = np.random.default_rng(0)
-    X = rng.random((4000, 3))
-    C0 = _fit(X[:300], 40)
-    before = C0.copy()
-    C = _refine(array_source(X, 500), X[:300], C0, skip=300, passes=2, max_points=None)
-    np.testing.assert_array_equal(C0, before)                      # the caller's centroids are not changed
-    inertia = lambda C: float(np.min(cdist(X, C, "sqeuclidean"), axis=1).sum())
-    assert inertia(C) < 0.97 * inertia(C0)
+    centroids = offset + scale * np.array([[0.0, 0.0], [10.0, 0.0], [0.0, 10.0]])
+    X = np.vstack([c + scale * 0.1 * rng.standard_normal((n, 2)) for c, n in zip(centroids, (100, 300, 600))])
+    config = load_config(overrides={"sample": {"strategy": "reservoir"}})     # data in any order: count it all
+    masses = cell_masses(_Counting(X[rng.permutation(len(X))].astype(np.float32)), torch.as_tensor(centroids, device=device),
+                         config=config, device=device).cpu().numpy()
+    np.testing.assert_allclose(masses, [0.1, 0.3, 0.6])
+
+
+def test_counting_stops_early_only_for_data_in_random_order():
+    centroids = np.array([[0.0], [1.0]])
+    X = np.random.default_rng(0).random((10_000, 1)).astype(np.float32)
+    masses = {"cells": {"masses": {"rel_error": 0.5}}}                               # 4 points a cell
+    random_order = load_config(overrides=masses)                                     # prefix sample
+    any_order = load_config(overrides={**masses, "sample": {"strategy": "reservoir"}})
+    shuffled, ordered = _Counting(X), _Counting(X)
+    cell_masses(shuffled, torch.as_tensor(centroids), config=random_order, device="cpu")
+    cell_masses(ordered, torch.as_tensor(centroids), config=any_order, device="cpu")
+    assert shuffled.handed_out == 1 and ordered.handed_out == 100
