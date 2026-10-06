@@ -1,0 +1,33 @@
+# What matplotlib has no setting for: printed sizes, palettes and output formats. Used through common/style.py.
+
+text_width_in: 6.0      # placeholder until we have the paper's \textwidth (in inches: pt / 72.27)
+widths:                 # figure widths as fractions of the text width
+  full: 1.0
+  half: 0.48
+  third: 0.32
+
+palettes:
+  methods:              # one colour per method in every figure (Okabe-Ito, colour-blind safe)
+    lvm: "#0072B2"
+    lvm_chart: "#56B4E9"
+    umap: "#E69F00"
+    tsne: "#009E73"
+    le: "#CC79A7"
+    lisomap: "#D55E00"
+  categories:           # up to 10 classes, e.g. digits (Paul Tol's muted + grey); to check in viz-palette
+    - "#332288"
+    - "#88CCEE"
+    - "#44AA99"
+    - "#117733"
+    - "#999933"
+    - "#DDCC77"
+    - "#CC6677"
+    - "#882255"
+    - "#AA4499"
+    - "#777777"
+  continuous: viridis
+  cyclic: twilight
+
+formats:                # each figure is saved in every format, at its dpi (PDF: for rasterised scatter layers)
+  pdf: 400
+  png: 150

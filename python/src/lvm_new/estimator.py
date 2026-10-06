@@ -1,21 +1,23 @@
 from __future__ import annotations
 
+from importlib.metadata import version
 from pathlib import Path
 from typing import Iterator
 
 import numpy as np
 import torch
+import yaml
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils.validation import check_is_fitted
 
 from lvm_new.config import Config, load_config
 from lvm_new.data import DataLike, as_chunks
-from lvm_new.region import fit_region
+from lvm_new.region import RegionModel, fit_region, fit_region_chart, load_region, save_region
 
 
 # Each direct argument of LocalizedVoltageMaps and the setting it stands for.
 SETTINGS = {
-    "n_components": ("embedding", "landmark_mds", "n_components"),
+    "n_components": ("embedding", "n_components"),
     "n_cells": ("cells", "n_cells"),
     "device": ("compute", "device"),
     "random_state": ("compute", "seed"),
@@ -23,6 +25,8 @@ SETTINGS = {
     "chunk_size": ("data", "chunk_size"),
     "levels": ("hierarchy", "levels"),
 }
+
+FORMAT = 1      # version of the saved model's layout (model.yaml + regions/<id>.npz)
 
 
 class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
@@ -94,23 +98,64 @@ class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
 
 
     def transform(self, X: DataLike, level: int = 0) -> np.ndarray:
-        raise NotImplementedError
+        return np.concatenate(list(self.transform_chunks(X, level)))
 
     def transform_chunks(self, X: DataLike, level: int = 0) -> Iterator[np.ndarray]:
-        raise NotImplementedError
+        check_is_fitted(self)
+        if level != 0:
+            raise NotImplementedError("levels > 0 are not implemented yet")
+        for chunk in as_chunks(X, self.config_.data.chunk_size):
+            points = torch.as_tensor(chunk, device=self.device_)
+            yield self.root_.transform_chunk(points, config=self.config_).cpu().numpy()
 
     def fit_charts(self, X: DataLike, level: int = 0) -> "LocalizedVoltageMaps":
-        raise NotImplementedError
+        check_is_fitted(self)
+        if level != 0:
+            raise NotImplementedError("levels > 0 are not implemented yet")
+        chunks = as_chunks(X, self.config_.data.chunk_size)
+        self.root_ = fit_region_chart(self.root_, chunks, config=self.config_, device=self.device_)
+        return self
 
-    def regions(self, level: int = 0) -> list:
-        raise NotImplementedError
+    def regions(self, level: int = 0) -> list[RegionModel]:
+        check_is_fitted(self)
+        found = [self.root_]
+        for _ in range(level):
+            found = [child for region in found for child in region.children]
+        if not found:
+            raise ValueError(f"The model has no regions at level {level}")
+        return found
 
     def save(self, path: str | Path) -> None:
-        raise NotImplementedError
+        check_is_fitted(self)
+        folder = Path(path)
+        (folder / "regions").mkdir(parents=True, exist_ok=True)
+        regions = _all_regions(self.root_)
+        model = {
+            "format": FORMAT,
+            "library": version("localized-voltage-maps"),
+            "n_features": self.n_features_in_,
+            "params": {name: value for name, value in self.get_params().items() if name != "config"},
+            "regions": [_file_name(region.id) for region in regions],
+            "settings": self.config_.model_dump(mode="json"),       # complete: defaults, YAML and arguments merged
+        }
+        (folder / "model.yaml").write_text(yaml.safe_dump(model, sort_keys=False))
+        for region in regions:
+            save_region(region, folder / "regions" / f"{_file_name(region.id)}.npz")
 
     @classmethod
     def load(cls, path: str | Path) -> "LocalizedVoltageMaps":
-        raise NotImplementedError
+        folder = Path(path)
+        model = yaml.safe_load((folder / "model.yaml").read_text())
+        if model["format"] != FORMAT:
+            raise ValueError(f"Saved model format {model['format']} is not supported; this version reads {FORMAT}")
+        if model["regions"] != [_file_name(())]:
+            raise NotImplementedError("loading more than one level is not implemented yet")
+        estimator = cls(**model["params"])
+        estimator.config_ = Config.model_validate(model["settings"])
+        estimator.device_ = estimator._resolve_device(estimator.config_)        # this machine's device
+        estimator.root_ = load_region(folder / "regions" / f"{_file_name(())}.npz", estimator.device_)
+        estimator.n_features_in_ = model["n_features"]
+        return estimator
 
     def _resolve_config(self) -> Config:
         overrides = {}
@@ -133,3 +178,12 @@ class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
         if device == "cuda" and not torch.cuda.is_available():
             raise RuntimeError("device is 'cuda' but no CUDA GPU is available")
         return device
+
+
+def _all_regions(region: RegionModel) -> list[RegionModel]:
+    return [region] + [r for child in region.children for r in _all_regions(child)]
+
+
+def _file_name(region_id: tuple[int, ...]) -> str:
+    return "-".join(str(i) for i in region_id) if region_id else "root"
+

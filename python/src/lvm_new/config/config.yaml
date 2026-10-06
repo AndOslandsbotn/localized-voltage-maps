@@ -86,12 +86,30 @@ landmarks:               # the landmarks and their reach rho_g, chosen together
     rel_tolerance: 0.05  # bisection on rho_g stops when its bracket is this narrow (relative)
     rho_g_bounds: [1.0e-6, 1.0e+6]
 
-embedding:
-  landmark_mds:
-    n_components: 2      # dimension of the embedding
+extension:               # a data point's voltages, from the cells' voltages around it
+  strategy: average      # average: the point interpolates its cells, v(x) = sum w_i p_i v_i / sum w_i p_i
+                         # grounded: the point is a node with its own ground,
+                         #   v(x) = sum w_i p_i v_i / (rho_g + sum w_i p_i)
+                         #   (lowers points' voltages, so more distances are chained: tears)
+  kernel: nearest        # w_i. nearest: the point's k nearest cells, w_i = exp(-sharpness (d_i^2 - d_1^2) / (2 s^2)),
+                         #   s^2 the mean of d_i^2 - d_1^2 over them | graph: the graph's kernel with each cell's radius
+                         #   (points that see the same cells get the same voltages: they stack)
+  nearest:
+    k: 3
+    sharpness: 16.0      # larger: closer to the nearest cell's voltages
+
+embedding:               # Landmark MDS on voltage distances d = -log v
+  n_components: 2        # dimension of the embedding
+  distance_floor: 1.0e-10  # below it a voltage is rounding noise: its distance is chained through other landmarks
   local_chart: last      # points placed within their cell along the cell's main directions (the local chart):
                          # last: charts at the deepest level during fit, other levels on demand; all: at every level
                          # during fit; none: plain coordinates (points of a cell close to its centre)
+  chart:                 # a point x in cell c goes to y = origin + s_c (x - m_c) B_c R_c: B_c the cell's principal
+                         #   directions (raw features), R_c a rotation to the layout, s_c a scale
+    fill: 0.6            # s_c puts the cell's median point at fill x the distance to the nearest other cell's anchor
+    max_points: 256      # sample points per cell for its principal directions
+    origin: anchor       # anchor: the cell's anchor a_c (mean coordinate of its sample points) | point: the point's
+                         #   own LVM coordinate (keeps where it lies between cells)
 
 hierarchy:
   levels: 1              # depth of the hierarchy (only 1 for now)

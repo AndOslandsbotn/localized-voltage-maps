@@ -34,7 +34,7 @@ def build_graph(centroids: torch.Tensor, sample: torch.Tensor, *, config: Config
         case "centroid_spacing":
             sq_radius = _centroid_spacing(sq_dist, radius.centroid_spacing.multiplier)
     pair = torch.maximum(sq_radius[:, None], sq_radius[None, :])
-    kernel = _kernel(sq_dist, pair, config.graph.kernel)
+    kernel = kernel_weights(sq_dist, pair, config.graph.kernel)
     kernel.fill_diagonal_(0.0)                                      # no self-loops
     if config.graph.connect:
         _connect(kernel, sq_dist)
@@ -79,7 +79,7 @@ def _centroid_spacing(sq_dist: torch.Tensor, multiplier: float) -> torch.Tensor:
     return _one_radius(multiplier * torch.quantile(_kth_neighbour(sq_dist, 1).sqrt(), 0.5), len(sq_dist))
 
 
-def _kernel(sq_dist: torch.Tensor, sq_radius: torch.Tensor, config: KernelConfig) -> torch.Tensor:
+def kernel_weights(sq_dist: torch.Tensor, sq_radius: torch.Tensor, config: KernelConfig) -> torch.Tensor:
     match config.strategy:
         case "radial":
             return _radial(sq_dist, sq_radius)
@@ -106,7 +106,7 @@ def _gaussian(sq_dist: torch.Tensor, sq_radius: torch.Tensor, *, options: Gaussi
 
 
 def _connect(kernel: torch.Tensor, sq_dist: torch.Tensor) -> None:
-    # In place: each piece, largest first, is joined to the growing main piece by its closest pair of cells.
+    """In place: each piece, largest first, is joined to the growing main piece by its closest pair of cells."""
     n_cells = len(kernel)
     edges = (kernel > 0).nonzero().cpu().numpy()
     n_pieces, label = connected_components(

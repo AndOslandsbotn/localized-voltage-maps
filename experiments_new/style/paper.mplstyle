@@ -1,0 +1,29 @@
+# Matplotlib settings for every figure. Figures are drawn at their printed size and included without scaling,
+# so these sizes are the sizes in the paper. Placeholders until we have the paper's font: Computer Modern.
+
+font.family:            serif
+font.serif:             cmr10, STIXGeneral, DejaVu Serif
+mathtext.fontset:       cm
+axes.formatter.use_mathtext: True     # cmr10 has no minus sign of its own
+font.size:              8
+axes.titlesize:         8
+axes.labelsize:         8
+xtick.labelsize:        7
+ytick.labelsize:        7
+legend.fontsize:        7
+
+axes.linewidth:         0.6
+lines.linewidth:        1.0
+lines.markersize:       3
+xtick.major.width:      0.6
+ytick.major.width:      0.6
+xtick.major.size:       2.5
+ytick.major.size:       2.5
+axes.spines.top:        False
+axes.spines.right:      False
+legend.frameon:         False
+
+figure.constrained_layout.use: True
+savefig.bbox:           standard      # keep the exact printed size (tight would change it)
+pdf.fonttype:           42            # TrueType fonts in PDFs: journals reject Type 3
+ps.fonttype:            42

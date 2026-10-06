@@ -36,9 +36,9 @@ def test_connect_joins_an_isolated_cell_to_its_nearest_cell():
 
 @pytest.mark.parametrize("kernel", ["radial", "tapered", "gaussian"])
 def test_a_kernel_is_one_at_distance_zero_and_zero_beyond_its_reach(kernel):
-    from lvm_new.graph import _kernel
+    from lvm_new.graph import kernel_weights
 
     config = load_config(overrides={"graph": {"kernel": {"strategy": kernel}}}).graph.kernel
     sq = torch.tensor([[0.0, 0.25, 4.0]], dtype=torch.float64)                 # distances 0, 0.5, 2 at radius 1
-    K = _kernel(sq, torch.ones_like(sq), config)[0]
+    K = kernel_weights(sq, torch.ones_like(sq), config)[0]
     assert K[0] == 1.0 and K[2] == 0.0 and 0.0 < K[1] <= 1.0

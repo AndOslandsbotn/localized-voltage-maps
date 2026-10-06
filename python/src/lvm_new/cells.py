@@ -58,7 +58,7 @@ def refine_cells(chunks, sample: torch.Tensor, centroids: torch.Tensor, *, confi
         return centroids
     centroids = centroids.clone()                                  # updated in place
     counts = torch.zeros(len(centroids), dtype=TORCH_SOLVE_DTYPE, device=device)
-    counts += torch.bincount(_labels(sample, centroids), minlength=len(centroids))
+    counts += torch.bincount(assign_cells(sample, centroids), minlength=len(centroids))
     for p in range(refine.passes):
         to_skip, seen = (len(sample) if prefix and p == 0 else 0), 0
         for chunk in chunks:
@@ -79,22 +79,29 @@ def refine_cells(chunks, sample: torch.Tensor, centroids: torch.Tensor, *, confi
 
 
 def _cell_sums(points: torch.Tensor, centroids: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
-    label = _labels(points, centroids)
+    label = assign_cells(points, centroids)
     counts = torch.bincount(label, minlength=len(centroids)).to(TORCH_SOLVE_DTYPE)
     sums = torch.zeros(centroids.shape, dtype=TORCH_DATA_DTYPE, device=centroids.device).index_add_(0, label, points)
     return counts, sums.to(TORCH_SOLVE_DTYPE)
 
 
-def _labels(points: torch.Tensor, centroids: torch.Tensor) -> torch.Tensor:
+def assign_cells(points: torch.Tensor, centroids: torch.Tensor) -> torch.Tensor:
     block = rows_per_block((len(centroids) + points.shape[1]) * points.element_size())
     return torch.cat([_nearest(points[start:start + block], centroids) for start in range(0, len(points), block)])
 
 
 def _nearest(points: torch.Tensor, centroids: torch.Tensor) -> torch.Tensor:
-    # argmin_c |x - c|^2 = argmin_c |c|^2 - 2 x.c, with x and c shifted by the same vector to limit float32 rounding.
+    return sq_distances(points, centroids).argmin(dim=1)
+
+
+def sq_distances(points: torch.Tensor, centroids: torch.Tensor) -> torch.Tensor:
+    """(m, n_cells) |x - c|^2 = |x|^2 + |c|^2 - 2 x.c in float32, with x and c shifted by the same vector (the
+    centroids' mean) to limit rounding."""
     shift = centroids.mean(dim=0).to(TORCH_DATA_DTYPE)
     centred = (centroids - shift).to(TORCH_DATA_DTYPE)
-    return ((centred * centred).sum(dim=1)[None, :] - 2.0 * ((points - shift) @ centred.T)).argmin(dim=1)
+    shifted = points - shift
+    sq = (shifted * shifted).sum(dim=1)[:, None] + (centred * centred).sum(dim=1)[None, :] - 2.0 * (shifted @ centred.T)
+    return sq.clamp(min=0.0)
 
 
 def cell_masses(chunks, centroids: torch.Tensor, *, config: Config, device: str) -> torch.Tensor:
@@ -104,7 +111,8 @@ def cell_masses(chunks, centroids: torch.Tensor, *, config: Config, device: str)
     counts = torch.zeros(len(centroids), dtype=torch.int64, device=device)
     min_count, seen = math.ceil(1.0 / masses.rel_error ** 2), 0
     for chunk in chunks:
-        counts += torch.bincount(_labels(torch.as_tensor(chunk, device=device), centroids), minlength=len(centroids))
+        cells = assign_cells(torch.as_tensor(chunk, device=device), centroids)
+        counts += torch.bincount(cells, minlength=len(centroids))
         seen += len(chunk)
         if random_order and int(counts.min()) >= min_count:
             break

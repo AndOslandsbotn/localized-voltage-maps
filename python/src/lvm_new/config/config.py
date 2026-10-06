@@ -154,13 +154,28 @@ class LandmarksConfig(_Section):
     reach: ReachOptions
 
 
-class LandmarkMdsConfig(_Section):
-    n_components: int = Field(ge=1)
+class NearestKernelOptions(_Section):
+    k: int = Field(ge=1)
+    sharpness: float = Field(gt=0)
+
+
+class ExtensionConfig(_Section):
+    strategy: Literal["average", "grounded"]
+    kernel: Literal["nearest", "graph"]
+    nearest: NearestKernelOptions
+
+
+class ChartConfig(_Section):
+    fill: float = Field(gt=0)
+    max_points: int = Field(ge=2)
+    origin: Literal["anchor", "point"]
 
 
 class EmbeddingConfig(_Section):
-    landmark_mds: LandmarkMdsConfig
+    n_components: int = Field(ge=1)
+    distance_floor: float = Field(gt=0, lt=1)
     local_chart: Literal["last", "all", "none"]
+    chart: ChartConfig
 
 
 class HierarchyConfig(_Section):
@@ -176,6 +191,7 @@ class Config(_Section):
     graph: GraphConfig
     voltage: VoltageConfig
     landmarks: LandmarksConfig
+    extension: ExtensionConfig
     embedding: EmbeddingConfig
     hierarchy: HierarchyConfig
 

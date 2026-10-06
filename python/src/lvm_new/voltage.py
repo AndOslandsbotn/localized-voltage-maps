@@ -4,9 +4,11 @@ import math
 
 import torch
 
+from lvm_new.cells import sq_distances
 from lvm_new.compute import BLOCK_BYTES, TORCH_DATA_DTYPE
 from lvm_new.config import Config
-from lvm_new.config.config import ReachOptions
+from lvm_new.config.config import NearestKernelOptions, ReachOptions
+from lvm_new.graph import kernel_weights
 
 
 def voltage_maps(kernel: torch.Tensor, masses: torch.Tensor, rho_g: float, sources: torch.Tensor) -> torch.Tensor:
@@ -26,6 +28,42 @@ def voltage_maps(kernel: torch.Tensor, masses: torch.Tensor, rho_g: float, sourc
 
 def threshold(maps: torch.Tensor, tau: float) -> torch.Tensor:
     return torch.where(maps >= tau, maps, torch.zeros_like(maps))
+
+
+def point_voltages(points: torch.Tensor, centroids: torch.Tensor, masses: torch.Tensor, radius: torch.Tensor,
+                   maps: torch.Tensor, rho_g: float, *, config: Config) -> torch.Tensor:
+    """(m, L) voltages at data points, from the voltages v_i of the cells around them, with kernel weights w_i and
+    masses p_i. average: v(x) = sum_i w_i p_i v_i / sum_i w_i p_i, a point interpolates its cells (Def. 10).
+    grounded: v(x) = sum_i w_i p_i v_i / (rho_g + sum_i w_i p_i), a point is a node with its own ground. A point with
+    no cell within the kernel's reach takes its nearest cell's voltages."""
+    extension = config.extension
+    sq_dist = sq_distances(points, centroids)
+    match extension.kernel:
+        case "nearest":
+            weights = _nearest_kernel(sq_dist, extension.nearest)
+        case "graph":
+            weights = kernel_weights(sq_dist, radius.square()[None, :], config.graph.kernel).to(sq_dist.dtype)
+    weights = weights * masses.to(weights.dtype)
+    total = weights.sum(dim=1, keepdim=True)
+    cell_voltages = maps.T.to(weights.dtype)                                    # (n_cells, L)
+    match extension.strategy:
+        case "average":
+            voltages = weights @ cell_voltages / total
+        case "grounded":
+            voltages = weights @ cell_voltages / (rho_g + total)
+    return torch.where(total > 0, voltages, cell_voltages[sq_dist.argmin(dim=1)])
+
+
+def _nearest_kernel(sq_dist: torch.Tensor, options: NearestKernelOptions) -> torch.Tensor:
+    """Weights on each point's k nearest cells: w_i = exp(-sharpness (d_i^2 - d_1^2) / (2 s^2)), with d_1 the nearest
+    and s^2 the mean of d_i^2 - d_1^2 over the k cells; 0 elsewhere. Subtracting d_1^2 removes what all nearby cells
+    share in high dimensions (the point's own offset from the cells), leaving how much closer it is to one than
+    another."""
+    nearest, cells = torch.topk(sq_dist, min(options.k, sq_dist.shape[1]), dim=1, largest=False)
+    excess = nearest - nearest[:, :1]
+    spread = excess.mean(dim=1, keepdim=True)
+    weights = torch.exp(-options.sharpness * excess / (2.0 * torch.where(spread > 0, spread, 1.0)))
+    return torch.zeros_like(sq_dist).scatter_(1, cells, weights)
 
 
 def choose_landmarks(kernel: torch.Tensor, masses: torch.Tensor, dimension: float, *,
@@ -108,7 +146,7 @@ def _landmark_count(dimension: float, n_cells: int, config: Config) -> int:
             n = math.ceil(count.dimension.multiplier * (dimension + 1))
         case "fixed":
             n = count.fixed.n
-    return min(max(n, config.embedding.landmark_mds.n_components + 1), n_cells)
+    return min(max(n, config.embedding.n_components + 1), n_cells)
 
 
 def _mutual_information(maps: torch.Tensor, masses: torch.Tensor, n_landmarks: int,
@@ -157,7 +195,7 @@ def _mutual_information(maps: torch.Tensor, masses: torch.Tensor, n_landmarks: i
 
 
 def _support_blocks(in_support: torch.Tensor, itemsize: int) -> list[tuple[torch.Tensor, int]]:
-    # Candidates sorted by support size, in blocks whose (rows, n, widest support) temporaries fit BLOCK_BYTES.
+    """Candidates sorted by support size, in blocks whose (rows, n, widest support) temporaries fit BLOCK_BYTES."""
     n = in_support.shape[1]
     order = torch.argsort(in_support.sum(dim=1))
     sizes = in_support.sum(dim=1)[order].clamp(min=1).tolist()

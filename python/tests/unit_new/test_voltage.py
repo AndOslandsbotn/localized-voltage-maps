@@ -3,7 +3,8 @@ import pytest
 import torch
 
 from lvm_new.config import load_config
-from lvm_new.voltage import _mutual_information, _reached, choose_landmarks, threshold, voltage_maps
+from lvm_new.voltage import (_mutual_information, _reached, choose_landmarks, point_voltages, threshold,
+                             voltage_maps)
 
 
 def _graph(n_cells, seed=0):
@@ -52,3 +53,21 @@ def test_reach_gives_the_largest_rho_g_at_which_the_chosen_landmarks_reach_the_d
     assert len(landmarks) == 4
     assert _reached(K, p, rho_g, landmarks, tau, reach.share) >= 4
     assert _reached(K, p, rho_g * (1 + reach.rel_tolerance), landmarks, tau, reach.share) < 4
+
+
+@pytest.mark.parametrize("strategy", ["average", "grounded"])
+def test_a_points_voltages_come_from_its_nearest_cells(strategy, device):
+    rng = np.random.default_rng(0)
+    centroids, points = rng.random((20, 3)), rng.random((30, 3)).astype(np.float32)
+    masses, maps, rho_g = rng.random(20) / 10, rng.random((4, 20)), 0.05
+    config = load_config(overrides={"extension": {"strategy": strategy}})
+    k, sharpness = config.extension.nearest.k, config.extension.nearest.sharpness
+    sq = ((points[:, None] - centroids[None]) ** 2).sum(axis=2)
+    nearest = np.argsort(sq, axis=1)[:, :k]
+    excess = np.take_along_axis(sq, nearest, axis=1) - sq.min(axis=1, keepdims=True)
+    w = np.exp(-sharpness * excess / (2 * excess.mean(axis=1, keepdims=True))) * masses[nearest]
+    ground = rho_g if strategy == "grounded" else 0.0
+    expected = np.einsum("mk,lmk->ml", w, maps[:, nearest]) / (ground + w.sum(axis=1))[:, None]
+    tensors = [torch.as_tensor(a, device=device) for a in (points, centroids, masses, np.zeros(20), maps)]
+    voltages = point_voltages(*tensors, rho_g, config=config).cpu().numpy()
+    np.testing.assert_allclose(voltages, expected, rtol=1e-4)
