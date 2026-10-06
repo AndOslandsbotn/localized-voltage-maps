@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+from contextlib import AbstractContextManager, nullcontext
 from dataclasses import dataclass, fields, is_dataclass, replace
 from pathlib import Path
+from typing import Callable
 
 import numpy as np
 import torch
@@ -50,29 +52,45 @@ class RegionModel:
         return self.chart.place(points, assign_cells(points, self.centroids), coordinates)
 
 
-def fit_region(chunks, config: Config, *, device: str, region_id: tuple[int, ...], seed: int) -> RegionModel:
-    sample = sample_region(chunks, config=config, device=device, seed=seed)
-    dimension = estimate_dimension(sample, config=config, device=device, seed=seed)
+def fit_region(chunks, config: Config, *, device: str, region_id: tuple[int, ...], seed: int,
+               timer: Callable[[str], AbstractContextManager] | None = None) -> RegionModel:
+    """``timer(step)``, if given, is entered around each step, e.g. to time it; by default nothing is done."""
+    timer = timer or _no_timer
+    with timer("sample"):
+        sample = sample_region(chunks, config=config, device=device, seed=seed)
+    with timer("dimension"):
+        dimension = estimate_dimension(sample, config=config, device=device, seed=seed)
 
-    centroids = fit_cells(sample, config=config, device=device, seed=seed)
-    centroids = refine_cells(chunks, sample, centroids, config=config, device=device)
-    masses = cell_masses(chunks, centroids, config=config, device=device)
+    with timer("cells"):
+        centroids = fit_cells(sample, config=config, device=device, seed=seed)
+    with timer("refine"):
+        centroids = refine_cells(chunks, sample, centroids, config=config, device=device)
+    with timer("masses"):
+        masses = cell_masses(chunks, centroids, config=config, device=device)
+        keep = masses > 0
+        centroids, masses = centroids[keep], masses[keep]
+    with timer("graph"):
+        kernel, radius = build_graph(centroids, sample, config=config, device=device, seed=seed)
 
-    keep = masses > 0
-    centroids, masses = centroids[keep], masses[keep]
-    kernel, radius = build_graph(centroids, sample, config=config, device=device, seed=seed)
+    with timer("landmarks"):
+        landmarks, rho_g = choose_landmarks(kernel, masses, dimension, config=config)
+    with timer("maps"):
+        maps = voltage_maps(kernel, masses, rho_g, landmarks)
 
-    landmarks, rho_g = choose_landmarks(kernel, masses, dimension, config=config)
-    maps = voltage_maps(kernel, masses, rho_g, landmarks)
-
-    embedding = fit_embedding(maps, landmarks, config=config)
+    with timer("embedding"):
+        embedding = fit_embedding(maps, landmarks, config=config)
     region = RegionModel(region_id, sample.shape[1], dimension, centroids, 
                          masses, radius, rho_g, landmarks, maps, embedding
                          )
     if config.embedding.local_chart != "none":
-        coordinates = region.transform_chunk(sample, config=config)
-        region = replace(region, chart=fit_chart(sample, centroids, coordinates, config=config))
+        with timer("chart"):
+            coordinates = region.transform_chunk(sample, config=config)
+            region = replace(region, chart=fit_chart(sample, centroids, coordinates, config=config))
     return region
+
+
+def _no_timer(step: str) -> AbstractContextManager:
+    return nullcontext()
 
 
 def fit_region_chart(region: RegionModel, chunks, *, config: Config, device: str) -> RegionModel:

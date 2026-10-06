@@ -1,35 +1,28 @@
 # Experiments
 
-Every result and figure in the papers, made with `lvm`. Each experiment runs from the repository root with no
-arguments and writes its figure next to its code:
+Every result and figure in the papers, made with `lvm`. Each experiment is a folder with two scripts, run from the
+repository root with no arguments:
 
 ```
-python -m experiments.sfv.mnist.embedding.run
-python -m experiments.sfv.mnist.embedding.run --recompute     # compute again instead of reusing saved results
+python -m experiments.sfv.mnist.embedding.run      # computes the results and saves them next to the script
+python -m experiments.sfv.mnist.embedding.plot     # draws the figure from the saved results
 ```
 
-Results are saved as they are computed and reused, so changing how a figure looks only redraws it.
+`run.py` calls the methods directly and saves its results (e.g. `embeddings.npz`, not in git); `plot.py` only reads
+them, so changing how a figure looks never recomputes anything.
 
 ## Layout
 
 ```
-common/       shared code
+common/       the little that every experiment shares
   datasets.py   loading the datasets (downloaded on first use, checked by fingerprint)
-  methods.py    every method behind one interface: fit_transform(X, seed, device) -> coordinates
-  embed.py      one embedding in its own process (started by runner.embed)
-  runner.py     embed(...): computed under the memory guard, saved in the experiment's embeddings/, reused
-  guard.py      runs a command, killing it if its memory passes a limit
-  plots.py      reusable panels and figures (one embedding, several side by side, ...)
   style.py      figure sizes, palettes and saving (PDF + PNG), from style/
-  cli.py        the one command-line option every experiment has (--recompute)
+  guard.py      watch_memory(): stops a run that passes a memory limit
 style/
   paper.mplstyle  fonts, font sizes, line widths, PDF font embedding (matplotlib's own format)
   figures.yaml    printed text width, figure widths, palettes, output formats and dpi
 sfv/          paper 1, "Structure from Voltage": one folder per dataset, one subfolder per experiment
 ```
-
-An experiment's `run.py` only says what it computes and which figure it draws; everything else is in `common/`.
-Embeddings (`embeddings/*.npz`) are not in git.
 
 ## Figures
 
@@ -40,6 +33,9 @@ rerun the experiments: saved results are reused, so only the figures are redrawn
 
 PDFs embed fonts as TrueType (journals reject Type 3) and rasterise the dense scatter layers, so files stay small;
 the PNG is a preview.
+
+The placeholder font (Computer Modern, `cmr10`) has no symbols such as ±, ×, ≤ or Greek letters: write them as math
+(`$\pm$`, `$\times$`, `$\leq$`, `$\rho_g$`), which uses the matching math font.
 
 ## Datasets
 
@@ -59,9 +55,9 @@ order (`seed` picks the subset and the order), float64. Datasets are never commi
 
 ## Memory
 
-Every fit runs in its own process under `guard.py`, which sums the memory of the process tree every 0.2 s and kills
-it past a limit (3 GB by default), so one run cannot exhaust the machine's memory. Heavy ad-hoc commands can go
-through it too:
+Each `run.py` starts with `watch_memory(limit_mb=...)`: a background thread checks the memory of the process (and any
+processes it started) every 0.2 s and stops it past the limit, so one run cannot exhaust the machine's memory; the
+peak is printed at the end. Heavy ad-hoc commands can run under the same guard:
 
 ```
 python experiments/common/guard.py --limit-mb 3000 -- <command> [args ...]

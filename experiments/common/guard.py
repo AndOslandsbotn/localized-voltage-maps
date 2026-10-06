@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import argparse
+import atexit
+import os
 import subprocess
 import sys
+import threading
 import time
 from pathlib import Path
 
@@ -27,6 +30,26 @@ def kill_tree(proc: psutil.Process) -> None:
             p.kill()
         except psutil.NoSuchProcess:
             pass
+
+
+def watch_memory(limit_mb: float = DEFAULT_LIMIT_MB) -> None:
+    """Stop this process (and the processes it started) if their memory passes ``limit_mb``: a background thread
+    checks every 0.2 s. The peak is printed when the process ends."""
+    process, peak = psutil.Process(), [0.0]
+
+    def watch() -> None:
+        while True:
+            rss = tree_rss_mb(process)
+            peak[0] = max(peak[0], rss)
+            if rss > limit_mb:
+                print(f"[guard] stopped: memory {rss:.0f} MB > limit {limit_mb:.0f} MB", file=sys.stderr, flush=True)
+                for child in process.children(recursive=True):
+                    child.kill()
+                os._exit(137)
+            time.sleep(0.2)
+
+    threading.Thread(target=watch, daemon=True).start()
+    atexit.register(lambda: print(f"[guard] peak memory {peak[0]:.0f} MB (limit {limit_mb:.0f} MB)", file=sys.stderr))
 
 
 def run_guarded(cmd: list[str], limit_mb: float = DEFAULT_LIMIT_MB, cwd: Path | None = None) -> int:
