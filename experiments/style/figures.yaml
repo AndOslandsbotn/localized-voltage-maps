@@ -25,9 +25,21 @@ palettes:
     - "#882255"
     - "#AA4499"
     - "#777777"
-  continuous: viridis
-  cyclic: twilight
+  continuous:           # low to high, blended (from the muted colours above)
+    - "#332288"
+    - "#44AA99"
+    - "#999933"
+    - "#DDCC77"
+  cyclic:               # a loop through the muted colours, blended; the last joins the first
+    - "#332288"
+    - "#44AA99"
+    - "#117733"
+    - "#999933"
+    - "#DDCC77"
+    - "#CC6677"
+    - "#882255"
+    - "#AA4499"
 
 formats:                # each figure is saved in every format, at its dpi (PDF: for rasterised scatter layers)
-  pdf: 400
+  pdf: 300
   png: 150

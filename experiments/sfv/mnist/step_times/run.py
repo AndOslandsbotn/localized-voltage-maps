@@ -5,6 +5,7 @@ import numpy as np
 
 from experiments.common.datasets import load
 from experiments.common.guard import watch_memory
+from experiments.common.record import environment, fitted
 from experiments.common.timing import StepTimer
 from lvm.config import load_config
 from lvm.data import as_chunks
@@ -19,14 +20,18 @@ def main() -> None:
     config = load_config()
     X = load("eval", n=N, seed=0)[0].astype(np.float32)
     fit_region(as_chunks(X[:2000], 2000), config, device=DEVICE, region_id=(), seed=0)              # warm-up
-    seconds = {}
+    seconds, fits = {}, []
     for seed in SEEDS:
         timer = StepTimer(DEVICE)
-        fit_region(as_chunks(X, config.data.chunk_size), config, device=DEVICE, region_id=(), seed=seed, timer=timer)
+        region = fit_region(as_chunks(X, config.data.chunk_size), config, device=DEVICE, region_id=(), seed=seed,
+                            timer=timer)
         for step, s in timer.seconds.items():
             seconds.setdefault(step, []).append(s)
+        fits.append(fitted(region))
     off = ["refine"] if config.cells.refine.passes == 0 else []
-    results = {"dataset": "mnist", "n": N, "seeds": list(SEEDS), "device": DEVICE, "off": off, "seconds": seconds}
+    results = {"dataset": "mnist", "split": "eval", "n": N, "n_features": X.shape[1], "seeds": list(SEEDS),
+               "environment": environment(DEVICE), "settings": config.model_dump(mode="json"), "fitted": fits,
+               "off": off, "seconds": seconds}
     (HERE / "step_times.json").write_text(json.dumps(results, indent=2))
 
 

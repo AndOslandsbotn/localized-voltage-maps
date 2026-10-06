@@ -7,7 +7,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import yaml  # noqa: E402
-from matplotlib.colors import ListedColormap  # noqa: E402
+from matplotlib.colors import LinearSegmentedColormap, ListedColormap  # noqa: E402
 
 STYLE = Path(__file__).resolve().parents[1] / "style"
 SETTINGS = yaml.safe_load((STYLE / "figures.yaml").read_text())
@@ -29,6 +29,15 @@ def category_colours(n: int) -> ListedColormap:
     if n > len(colours):
         raise ValueError(f"The category palette has {len(colours)} colours, {n} are needed")
     return ListedColormap(colours[:n])
+
+
+def continuous_colours() -> LinearSegmentedColormap:
+    return LinearSegmentedColormap.from_list("continuous", SETTINGS["palettes"]["continuous"])
+
+
+def cyclic_colours() -> LinearSegmentedColormap:
+    colours = SETTINGS["palettes"]["cyclic"]
+    return LinearSegmentedColormap.from_list("cyclic", colours + colours[:1])
 
 
 def save_figure(fig, path: Path) -> None:

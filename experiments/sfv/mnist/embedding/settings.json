@@ -1,0 +1,266 @@
+{
+  "dataset": "mnist",
+  "split": "eval",
+  "n": 50000,
+  "n_features": 784,
+  "environment": {
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "lvm": "0.0.1",
+    "torch": "2.14.0+cu130"
+  },
+  "models": {
+    "lvm": {
+      "settings": {
+        "compute": {
+          "device": "auto",
+          "seed": 0
+        },
+        "data": {
+          "chunk_size": 10000
+        },
+        "sample": {
+          "strategy": "prefix",
+          "size": 50000
+        },
+        "dimension": {
+          "strategy": "mle",
+          "sample_size": 10000,
+          "mle": {
+            "k": 20
+          },
+          "fixed": {
+            "d": 12.0
+          }
+        },
+        "cells": {
+          "n_cells": 300,
+          "kmeans": {
+            "strategy": "auto",
+            "cuml": {
+              "init": "random",
+              "max_iter": 30,
+              "tol": 0.0001
+            },
+            "lloyd": {
+              "iterations": 25
+            }
+          },
+          "refine": {
+            "passes": 0,
+            "max_points": null
+          },
+          "masses": {
+            "rel_error": 0.05,
+            "max_points": null
+          }
+        },
+        "graph": {
+          "radius": {
+            "strategy": "adaptive_per_cell",
+            "adaptive_per_cell": {
+              "k": 10
+            },
+            "knn": {
+              "k": 10
+            },
+            "point_knn": {
+              "k": 10,
+              "sample_size": 5000
+            },
+            "centroid_spacing": {
+              "multiplier": 3.0
+            }
+          },
+          "kernel": {
+            "strategy": "radial",
+            "gaussian": {
+              "sigma": 0.3333,
+              "cutoff": 3.0
+            }
+          },
+          "connect": true
+        },
+        "voltage": {
+          "threshold": 0.001
+        },
+        "landmarks": {
+          "count": {
+            "strategy": "dimension",
+            "dimension": {
+              "multiplier": 1.0
+            },
+            "fixed": {
+              "n": 20
+            }
+          },
+          "mutual_information": {
+            "noise_std": 0.01
+          },
+          "reach": {
+            "k": null,
+            "share": 0.9,
+            "rel_tolerance": 0.05,
+            "rho_g_bounds": [
+              1e-06,
+              1000000.0
+            ]
+          }
+        },
+        "extension": {
+          "strategy": "average",
+          "kernel": "nearest",
+          "nearest": {
+            "k": 3,
+            "sharpness": 16.0
+          }
+        },
+        "embedding": {
+          "n_components": 2,
+          "distance_floor": 1e-10,
+          "local_chart": "none",
+          "chart": {
+            "fill": 0.6,
+            "max_points": 256,
+            "origin": "anchor"
+          }
+        },
+        "hierarchy": {
+          "levels": 1
+        }
+      },
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.305518286271884,
+        "rho_g": 0.005204159858634534
+      }
+    },
+    "lvm_chart": {
+      "settings": {
+        "compute": {
+          "device": "auto",
+          "seed": 0
+        },
+        "data": {
+          "chunk_size": 10000
+        },
+        "sample": {
+          "strategy": "prefix",
+          "size": 50000
+        },
+        "dimension": {
+          "strategy": "mle",
+          "sample_size": 10000,
+          "mle": {
+            "k": 20
+          },
+          "fixed": {
+            "d": 12.0
+          }
+        },
+        "cells": {
+          "n_cells": 300,
+          "kmeans": {
+            "strategy": "auto",
+            "cuml": {
+              "init": "random",
+              "max_iter": 30,
+              "tol": 0.0001
+            },
+            "lloyd": {
+              "iterations": 25
+            }
+          },
+          "refine": {
+            "passes": 0,
+            "max_points": null
+          },
+          "masses": {
+            "rel_error": 0.05,
+            "max_points": null
+          }
+        },
+        "graph": {
+          "radius": {
+            "strategy": "adaptive_per_cell",
+            "adaptive_per_cell": {
+              "k": 10
+            },
+            "knn": {
+              "k": 10
+            },
+            "point_knn": {
+              "k": 10,
+              "sample_size": 5000
+            },
+            "centroid_spacing": {
+              "multiplier": 3.0
+            }
+          },
+          "kernel": {
+            "strategy": "radial",
+            "gaussian": {
+              "sigma": 0.3333,
+              "cutoff": 3.0
+            }
+          },
+          "connect": true
+        },
+        "voltage": {
+          "threshold": 0.001
+        },
+        "landmarks": {
+          "count": {
+            "strategy": "dimension",
+            "dimension": {
+              "multiplier": 1.0
+            },
+            "fixed": {
+              "n": 20
+            }
+          },
+          "mutual_information": {
+            "noise_std": 0.01
+          },
+          "reach": {
+            "k": null,
+            "share": 0.9,
+            "rel_tolerance": 0.05,
+            "rho_g_bounds": [
+              1e-06,
+              1000000.0
+            ]
+          }
+        },
+        "extension": {
+          "strategy": "average",
+          "kernel": "nearest",
+          "nearest": {
+            "k": 3,
+            "sharpness": 16.0
+          }
+        },
+        "embedding": {
+          "n_components": 2,
+          "distance_floor": 1e-10,
+          "local_chart": "last",
+          "chart": {
+            "fill": 0.6,
+            "max_points": 256,
+            "origin": "anchor"
+          }
+        },
+        "hierarchy": {
+          "levels": 1
+        }
+      },
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.305518286271884,
+        "rho_g": 0.005204159858634534
+      }
+    }
+  }
+}
