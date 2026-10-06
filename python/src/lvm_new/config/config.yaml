@@ -18,8 +18,8 @@ sample:                  # the region's sample, held in memory (dimension estima
   size: 50000            # points in the sample (all of them if the data has fewer)
 
 dimension:               # the region's intrinsic dimension d̂, estimated from its sample; sets the number of landmarks
-  strategy: mle          # mle: Levina & Bickel (2005) on k-NN distances | twonn: Facco et al. (2017) | fixed: given d
-  sample_size: 10000     # points of the region's sample used (mle, twonn); all if the sample is smaller
+  strategy: mle          # mle: Levina & Bickel (2005) on k-NN distances | fixed: given d
+  sample_size: 10000     # points of the region's sample used (mle); all if the sample is smaller
   mle:
     k: 20                # neighbours per point
   fixed:
@@ -28,22 +28,44 @@ dimension:               # the region's intrinsic dimension d̂, estimated from 
 cells:
   n_cells: 1000          # number of cells (graph nodes) per region
   kmeans:                # k-means on the sample
-    strategy: auto       # auto: cuml on cuda, faiss on cpu | cuml (GPU) | faiss (CPU) | sklearn (CPU, reference)
+    strategy: auto       # auto: cuml on cuda, lloyd on cpu | cuml (GPU only) | lloyd (torch, either device)
     cuml:
       init: random       # random | k-means||
       max_iter: 30
       tol: 1.0e-4
-    faiss:
-      niter: 25
-    sklearn:
-      max_iter: 30
-      tol: 1.0e-4
-  refine:                # after k-means on the sample: the centroids fitted to the whole stream
-    strategy: none       # none | stream: mini-batch k-means over the data, chunk by chunk (one chunk + centroids
-                         #   in memory, for any size of data)
-    stream:
-      passes: 1          # scans of the data
-      max_points: null   # points streamed per pass at most (null = all)
+    lloyd:
+      iterations: 25
+  refine:                # mini-batch k-means over the stream after k-means on the sample (Sculley 2010): one chunk
+                         # + the centroids in memory, for any size of data
+    passes: 0            # scans of the data; 0 = no refinement
+    max_points: null     # points streamed per pass at most (null = all)
+  masses:                # each cell's share of the data, counted in a streamed pass
+    rel_error: 0.05      # stop once every cell has >= 1/rel_error^2 points (400): ~5% error per mass. Only for data
+                         # in random order (sample.strategy prefix); otherwise one full pass
+    max_points: null     # points read at most (null = all)
+
+graph:                   # the graph between cells
+  radius:                # each cell's radius; two cells are joined within max(r_i, r_j)
+    strategy: adaptive_per_cell   # adaptive_per_cell: each cell's distance to its k-th nearest cell (symmetric kNN
+                         #   graph: every cell has >= k edges) | knn: one radius, the median distance to the k-th
+                         #   nearest cell | point_knn: one radius, the median distance from a data point to its k-th
+                         #   nearest cell | centroid_spacing: one radius, multiplier x median nearest-cell distance
+    adaptive_per_cell:
+      k: 10
+    knn:
+      k: 10
+    point_knn:
+      k: 10
+      sample_size: 5000  # data points of the sample used
+    centroid_spacing:
+      multiplier: 3.0
+  kernel:                # edge weight from distance d and pair radius r
+    strategy: radial     # radial: 1 if d <= r | tapered: (1 - d^2/r^2)+ | gaussian: exp(-d^2 / (2 (sigma r)^2)),
+                         #   0 beyond cutoff * sigma * r
+    gaussian:
+      sigma: 0.3333
+      cutoff: 3.0
+  connect: true          # join every piece of the graph to the largest by its shortest link (weight 1)
 
 embedding:
   landmark_mds:

@@ -13,16 +13,6 @@ class _Section(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
 
-class _Choice(_Section):
-    """A section that chooses a strategy: ``strategy`` names it, the field of that name holds its options."""
-
-    strategy: str
-
-    @property
-    def options(self) -> Any:
-        return getattr(self, self.strategy, None)
-
-
 class ComputeConfig(_Section):
     device: Literal["auto", "cuda", "cpu"]
     seed: int = Field(ge=0)
@@ -32,7 +22,7 @@ class DataConfig(_Section):
     chunk_size: int = Field(ge=1)
 
 
-class SampleConfig(_Choice):
+class SampleConfig(_Section):
     strategy: Literal["prefix", "reservoir"]
     size: int = Field(ge=1)
 
@@ -45,8 +35,8 @@ class FixedDimensionOptions(_Section):
     d: float = Field(gt=0)
 
 
-class DimensionConfig(_Choice):
-    strategy: Literal["mle", "twonn", "fixed"]
+class DimensionConfig(_Section):
+    strategy: Literal["mle", "fixed"]
     sample_size: int = Field(ge=3)
     mle: MleOptions
     fixed: FixedDimensionOptions
@@ -58,36 +48,68 @@ class CumlKMeansOptions(_Section):
     tol: float = Field(ge=0)
 
 
-class FaissKMeansOptions(_Section):
-    niter: int = Field(ge=1)
+class LloydKMeansOptions(_Section):
+    iterations: int = Field(ge=1)
 
 
-class SklearnKMeansOptions(_Section):
-    max_iter: int = Field(ge=1)
-    tol: float = Field(ge=0)
-
-
-class KMeansConfig(_Choice):
-    strategy: Literal["auto", "cuml", "faiss", "sklearn"]
+class KMeansConfig(_Section):
+    strategy: Literal["auto", "cuml", "lloyd"]
     cuml: CumlKMeansOptions
-    faiss: FaissKMeansOptions
-    sklearn: SklearnKMeansOptions
+    lloyd: LloydKMeansOptions
 
 
-class StreamRefineOptions(_Section):
-    passes: int = Field(ge=1)
+class RefineConfig(_Section):
+    passes: int = Field(ge=0)
     max_points: int | None = Field(ge=1)
 
 
-class RefineConfig(_Choice):
-    strategy: Literal["none", "stream"]
-    stream: StreamRefineOptions
+class MassesConfig(_Section):
+    rel_error: float = Field(gt=0, lt=1)
+    max_points: int | None = Field(ge=1)
 
 
 class CellsConfig(_Section):
     n_cells: int = Field(ge=2)
     kmeans: KMeansConfig
     refine: RefineConfig
+    masses: MassesConfig
+
+
+class KOptions(_Section):
+    k: int = Field(ge=1)
+
+
+class PointKnnOptions(_Section):
+    k: int = Field(ge=1)
+    sample_size: int = Field(ge=1)
+
+
+class CentroidSpacingOptions(_Section):
+    multiplier: float = Field(gt=0)
+
+
+class RadiusConfig(_Section):
+    strategy: Literal["adaptive_per_cell", "knn", "point_knn", "centroid_spacing"]
+    adaptive_per_cell: KOptions
+    knn: KOptions
+    point_knn: PointKnnOptions
+    centroid_spacing: CentroidSpacingOptions
+
+
+class GaussianKernelOptions(_Section):
+    sigma: float = Field(gt=0)
+    cutoff: float = Field(gt=0)
+
+
+class KernelConfig(_Section):
+    strategy: Literal["radial", "tapered", "gaussian"]
+    gaussian: GaussianKernelOptions
+
+
+class GraphConfig(_Section):
+    radius: RadiusConfig
+    kernel: KernelConfig
+    connect: bool
 
 
 class LandmarkMdsConfig(_Section):
@@ -109,6 +131,7 @@ class Config(_Section):
     sample: SampleConfig
     dimension: DimensionConfig
     cells: CellsConfig
+    graph: GraphConfig
     embedding: EmbeddingConfig
     hierarchy: HierarchyConfig
 

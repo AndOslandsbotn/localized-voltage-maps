@@ -69,12 +69,12 @@ A region's own results (centroids, masses, landmarks, ρ_g, dimension, ...) are 
 
 | Step | Module | Config section |
 |---|---|---|
-| 1. sample the region (shuffled prefix, or reservoir over a full pass) | `regions` | `cells.sample_size`, `data` |
+| 1. sample the region (shuffled prefix, or reservoir over a full pass) | `data` | `sample` |
 | 2. intrinsic dimension d̂ | `dimension` | `dimension` |
 | 3. cells: k-means on the sample, then streaming refinement | `cells` | `cells.kmeans`, `cells.refine` |
-| 4. cell masses (a streamed pass) | `regions` | `cells.masses` |
+| 4. cell masses (a streamed pass) | `cells` | `cells.masses` |
 | 5. graph: radius per cell, kernel, connecting pieces | `graph` | `graph` |
-| 6. candidate maps, ρ_g and landmarks (the reach alternation) | `voltage`, `scaling`, `landmarks` | `sources`, `voltage`, `scaling`, `landmarks` |
+| 6. landmarks and their reach ρ_g, chosen together (the reach alternation) | `voltage` | `voltage`, `landmarks` |
 | 7. voltage maps of the landmarks (support and distance thresholds) | `voltage` | `voltage`, `embedding.distance_floor` |
 | 8. embedding: Landmark MDS with chaining | `embedding` | `embedding` |
 | 9. local chart (optional second scale) | `embedding` | `embedding.local_scale` |
@@ -95,15 +95,15 @@ lvm/
   __init__.py      exports LocalizedVoltageMaps, RegionModel, fit_region, load_config
   estimator.py     LocalizedVoltageMaps: the scikit-learn estimator; resolves inputs, device and settings; runs the levels
   region.py        RegionModel + fit_region (today's pipeline.py)
-  data.py          turning inputs into re-iterable chunk sources; refusing one-shot iterators (today's stream.py, in part)
+  data.py          turning inputs into re-iterable chunk sources; refusing one-shot iterators; the region's sample
   io.py            readers for files: CsvChunks, NpyChunks (re-iterable); plain reads, one chunk at a time, not memory
                    maps, so files bigger than RAM stream without filling memory (pages of a memory map count as the
                    process's memory)
   cli.py           command line: `lvm fit data.csv --out model.npz`, `lvm transform model.npz data.csv --out coords.npy`
   __main__.py      `python -m lvm` → cli
-  config.py, config.yaml, strategies.py      settings and the strategy convention (unchanged roles)
-  regions.py       passes over the data per region: the Region tree, routing points to regions, sampling, masses
-  dimension.py, cells.py, graph.py, scaling.py, voltage.py, landmarks.py, embedding.py      the steps (unchanged roles)
+  config/          config.py (pydantic models) + config.yaml (the defaults)
+  compute.py       precisions (data path, solve) and the memory per block
+  dimension.py, cells.py, graph.py, voltage.py, embedding.py      the steps
 ```
 
 **Removed:** `lvm.py` (the stale sketch; replaced by `estimator.py`), `pipeline.py` (becomes `region.py`), `stream.py` (split into `data.py` and `io.py`), `datasets/mnist.py` (dataset-specific: belongs in `experiments/common/datasets.py`).
@@ -124,7 +124,7 @@ Kept from the start, so that stage 3 needs no redesign:
 The new library is built from scratch in `python/src/lvm_new/`, next to the untouched `lvm` (which keeps the experiments running). The two never import from each other. When `lvm_new` is complete, it replaces `lvm` under the final name, and the regression test (pinned results) checks that it computes what `lvm` did.
 
 Each step keeps all tests passing, including the regression test (pinned results), and is committed on its own:
-1. `estimator.py`, `data.py` (inputs as chunk sources), `precision.py`, `config.py` (pydantic models + `config.yaml`, sections added as the steps that use them arrive). `fit` works once the step modules exist; nothing wraps the old `fit_level`.
+1. `estimator.py`, `data.py` (inputs as chunk sources, the region's sample), `compute.py` (precisions, block memory), `config.py` (pydantic models + `config.yaml`, sections added as the steps that use them arrive). `fit` works once the step modules exist; nothing wraps the old `fit_level`.
 2. `LevelModel` → `RegionModel`, `pipeline.py` → `region.py` with `fit_region`; region ids and per-region seeds.
 3. `device="auto"` and device-based strategies (k-means first).
 4. `io.py` and `cli.py`; delete the removed modules.

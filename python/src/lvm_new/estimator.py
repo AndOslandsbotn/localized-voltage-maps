@@ -14,7 +14,7 @@ from lvm_new.region import fit_region
 
 
 # Each direct argument of LocalizedVoltageMaps and the setting it stands for.
-_SETTINGS = {
+SETTINGS = {
     "n_components": ("embedding", "landmark_mds", "n_components"),
     "n_cells": ("cells", "n_cells"),
     "device": ("compute", "device"),
@@ -140,7 +140,7 @@ class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
     def _resolve_config(self) -> Config:
         """The package defaults, merged with the ``config`` YAML, then the direct arguments that were given."""
         overrides = {}
-        for name, path in _SETTINGS.items():
+        for name, path in SETTINGS.items():
             value = getattr(self, name)
             if value is not None:
                 section = overrides
