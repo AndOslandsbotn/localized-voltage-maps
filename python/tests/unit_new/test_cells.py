@@ -21,8 +21,8 @@ def _blobs(n_blobs, per_blob=200, seed=0, offset=0.0, scale=1.0):
 @FAR
 def test_kmeans_gives_every_blob_a_cell_on_each_device(device, offset, scale):
     centres, X, _ = _blobs(8, offset=offset, scale=scale)
-    cells = load_config(overrides={"cells": {"n_cells": 24}}).cells
-    centroids = fit_cells(torch.as_tensor(X, device=device), config=cells, device=device, seed=0).cpu().numpy()
+    config = load_config(overrides={"cells": {"n_cells": 24}})
+    centroids = fit_cells(torch.as_tensor(X, device=device), config=config, device=device, seed=0).cpu().numpy()
     assert centroids.shape == (24, 5)
     nearest = np.linalg.norm(centres[:, None] - centroids[None], axis=2).min(axis=1)
     assert np.all(nearest < 0.5 * scale)
@@ -30,8 +30,8 @@ def test_kmeans_gives_every_blob_a_cell_on_each_device(device, offset, scale):
 
 def test_a_sample_no_bigger_than_n_cells_gives_one_cell_per_point():
     X = np.random.default_rng(0).random((10, 3)).astype(np.float32)
-    cells = load_config(overrides={"cells": {"n_cells": 20}}).cells
-    np.testing.assert_allclose(fit_cells(torch.as_tensor(X), config=cells, device="cpu", seed=0).numpy(), X)
+    config = load_config(overrides={"cells": {"n_cells": 20}})
+    np.testing.assert_allclose(fit_cells(torch.as_tensor(X), config=config, device="cpu", seed=0).numpy(), X)
 
 
 def test_stream_refinement_ends_at_each_blobs_mean_with_the_prefix_counted_once(device):
@@ -40,9 +40,9 @@ def test_stream_refinement_ends_at_each_blobs_mean_with_the_prefix_counted_once(
     sample = X[:300]
     start = np.array([sample[blob[:300] == b].mean(axis=0) for b in range(4)])
     chunks = [X[a:a + 128] for a in range(0, len(X), 128)]
-    refine = load_config(overrides={"cells": {"refine": {"passes": 1}}}).cells.refine
+    config = load_config(overrides={"cells": {"refine": {"passes": 1}}})       # prefix sample: the first 300 points
     centroids = refine_cells(chunks, torch.as_tensor(sample, device=device), torch.as_tensor(start, device=device),
-                             config=refine, device=device, skip=300).cpu().numpy()
+                             config=config, device=device).cpu().numpy()
     np.testing.assert_allclose(centroids, [X[blob == b].mean(axis=0) for b in range(4)], atol=1e-4)
 
 
@@ -63,17 +63,19 @@ def test_masses_are_each_cells_share_of_the_data(device, offset, scale):
     rng = np.random.default_rng(0)
     centroids = offset + scale * np.array([[0.0, 0.0], [10.0, 0.0], [0.0, 10.0]])
     X = np.vstack([c + scale * 0.1 * rng.standard_normal((n, 2)) for c, n in zip(centroids, (100, 300, 600))])
-    masses_config = load_config().cells.masses
+    config = load_config(overrides={"sample": {"strategy": "reservoir"}})     # data in any order: count it all
     masses = cell_masses(_Counting(X[rng.permutation(len(X))].astype(np.float32)), torch.as_tensor(centroids, device=device),
-                         config=masses_config, device=device, random_order=False).cpu().numpy()
+                         config=config, device=device).cpu().numpy()
     np.testing.assert_allclose(masses, [0.1, 0.3, 0.6])
 
 
 def test_counting_stops_early_only_for_data_in_random_order():
     centroids = np.array([[0.0], [1.0]])
     X = np.random.default_rng(0).random((10_000, 1)).astype(np.float32)
-    masses_config = load_config(overrides={"cells": {"masses": {"rel_error": 0.5}}}).cells.masses   # 4 points a cell
+    masses = {"cells": {"masses": {"rel_error": 0.5}}}                               # 4 points a cell
+    random_order = load_config(overrides=masses)                                     # prefix sample
+    any_order = load_config(overrides={**masses, "sample": {"strategy": "reservoir"}})
     shuffled, ordered = _Counting(X), _Counting(X)
-    cell_masses(shuffled, torch.as_tensor(centroids), config=masses_config, device="cpu", random_order=True)
-    cell_masses(ordered, torch.as_tensor(centroids), config=masses_config, device="cpu", random_order=False)
+    cell_masses(shuffled, torch.as_tensor(centroids), config=random_order, device="cpu")
+    cell_masses(ordered, torch.as_tensor(centroids), config=any_order, device="cpu")
     assert shuffled.handed_out == 1 and ordered.handed_out == 100

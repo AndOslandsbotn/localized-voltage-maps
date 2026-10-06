@@ -5,7 +5,7 @@ import torch
 from lvm_new.config import load_config
 from lvm_new.dimension import estimate_dimension
 
-MLE = load_config(overrides={"dimension": {"strategy": "mle"}}).dimension
+MLE = load_config(overrides={"dimension": {"strategy": "mle"}})
 
 
 def _flat(d, n=4000, scale=1.0, offset=0.0, seed=0):
@@ -25,7 +25,7 @@ def test_mle_matches_scikit_dimension(device):
     import skdim
 
     points = _flat(5, n=2000)                           # below sample_size: both see the same points
-    expected = skdim.id.MLE().fit(points.astype(np.float64), n_neighbors=MLE.mle.k).dimension_
+    expected = skdim.id.MLE().fit(points.astype(np.float64), n_neighbors=MLE.dimension.mle.k).dimension_
     sample = torch.as_tensor(points, device=device)
     assert estimate_dimension(sample, config=MLE, device=device, seed=0) == pytest.approx(expected, rel=1e-4)
 

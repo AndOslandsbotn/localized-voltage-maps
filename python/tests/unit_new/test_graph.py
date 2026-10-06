@@ -7,7 +7,7 @@ from lvm_new.graph import build_graph
 
 
 def _graph(centroids, device="cpu", **graph):
-    config = load_config(overrides={"graph": graph} if graph else None).graph
+    config = load_config(overrides={"graph": graph} if graph else None)
     centroids = torch.as_tensor(centroids, device=device)
     return build_graph(centroids, centroids.float(), config=config, device=device, seed=0)[0].cpu().numpy()
 

@@ -8,17 +8,12 @@ import torch
 from numpy.typing import ArrayLike
 
 from lvm_new.compute import DATA_DTYPE, TORCH_DATA_DTYPE
-from lvm_new.config import SampleConfig
+from lvm_new.config import Config
 
-DataLike: TypeAlias = ArrayLike | Iterable[ArrayLike]
-"""Aanything with a 2-D shape that can be sliced: NumPy,
-memory-mapped, HDF5, Zarr, torch, CuPy), or a re-iterable
-of chunks (each chunk an array of points)."""
+DataLike: TypeAlias = ArrayLike | Iterable[ArrayLike]   # a 2-D array that can be sliced, or a re-iterable of chunks
 
 
 class ArrayChunks:
-    """An array as a re-iterable source: each pass yields slices of ``chunk_size`` rows."""
-
     def __init__(self, X: ArrayLike, chunk_size: int):
         self.X = X
         self.chunk_size = chunk_size
@@ -29,16 +24,13 @@ class ArrayChunks:
 
 
 class IterableChunks:
-    """A re-iterable of chunks, passed on as they come: the loader's batch size is the chunk size (re-cutting would
-    copy every chunk). A tuple or list piece gives its first element (a DataLoader yields (features, labels))."""
-
     def __init__(self, source: Iterable[ArrayLike]):
         self.source = source
 
     def __iter__(self) -> Iterator[np.ndarray]:
         for piece in self.source:
             if isinstance(piece, (tuple, list)):
-                piece = piece[0]
+                piece = piece[0]                    # (features, labels)
             if not hasattr(piece, "shape"):
                 raise TypeError(f"Expected arrays or (features, ...) tuples, got {type(piece).__name__}")
             piece = np.asarray(piece, dtype=DATA_DTYPE)
@@ -63,18 +55,15 @@ def as_chunks(X: DataLike, chunk_size: int) -> ArrayChunks | IterableChunks:
     raise TypeError(f"Expected an array or a re-iterable, got {type(X).__name__}")
 
 
-def sample_region(chunks, *, config: SampleConfig, device: str, seed: int) -> torch.Tensor:
-    """(size, n_features) sample of the region's points on ``device``, by the strategy in ``config`` (all points if
-    fewer)."""
-    match config.strategy:
+def sample_region(chunks, *, config: Config, device: str, seed: int) -> torch.Tensor:
+    match config.sample.strategy:
         case "prefix":
-            return _prefix(chunks, config.size, device=device)
+            return _prefix(chunks, config.sample.size, device=device)
         case "reservoir":
-            return _reservoir(chunks, config.size, device=device, seed=seed)
+            return _reservoir(chunks, config.sample.size, device=device, seed=seed)
 
 
 def _prefix(chunks, size: int, *, device: str) -> torch.Tensor:
-    """The first ``size`` points; stops reading once full. The data must be in random order."""
     buffer, filled = None, 0
     for chunk in chunks:
         buffer = _buffer(buffer, size, chunk, device)
@@ -87,7 +76,7 @@ def _prefix(chunks, size: int, *, device: str) -> torch.Tensor:
 
 
 def _reservoir(chunks, size: int, *, device: str, seed: int) -> torch.Tensor:
-    """A uniform sample from one full pass (reservoir sampling), for data in any order."""
+    """Reservoir sampling (Vitter, 1985, "Random sampling with a reservoir"): a uniform sample from one pass."""
     rng = np.random.default_rng(seed)
     buffer, filled, seen = None, 0, 0
     for chunk in chunks:

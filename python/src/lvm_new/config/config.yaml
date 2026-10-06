@@ -2,7 +2,7 @@
 #
 # A run's own YAML file (LocalizedVoltageMaps(config=path)) needs only the keys it changes; they are merged over these
 # defaults, and the direct arguments of LocalizedVoltageMaps are applied last. Types and allowed ranges are checked
-# by the models in config.py. Sections are added here as the steps that use them are written.
+# by the models in config.py.
 
 compute:
   device: auto           # auto (CUDA if a GPU is available, else the CPU) | cuda | cpu
@@ -26,7 +26,7 @@ dimension:               # the region's intrinsic dimension d̂, estimated from 
     d: 12.0              # the dimension, when it is known
 
 cells:
-  n_cells: 1000          # number of cells (graph nodes) per region
+  n_cells: 300           # number of cells (graph nodes) per region
   kmeans:                # k-means on the sample
     strategy: auto       # auto: cuml on cuda, lloyd on cpu | cuml (GPU only) | lloyd (torch, either device)
     cuml:
@@ -66,6 +66,25 @@ graph:                   # the graph between cells
       sigma: 0.3333
       cutoff: 3.0
   connect: true          # join every piece of the graph to the largest by its shortest link (weight 1)
+
+voltage:
+  threshold: 1.0e-3      # tau: a map's support is where its voltage is >= tau
+
+landmarks:               # the landmarks and their reach rho_g, chosen together
+  count:                 # how many landmarks (at least n_components + 1, at most the number of cells)
+    strategy: dimension  # dimension: ceil(multiplier * (d + 1)); d + 1 landmarks pin down a point in d dimensions
+                         # fixed: n
+    dimension:
+      multiplier: 1.0
+    fixed:
+      n: 20
+  mutual_information:    # chosen greedily by the mutual information between a cell and its noisy voltages
+    noise_std: 0.01      # the noise
+  reach:                 # rho_g: the most local maps for which the chosen landmarks still reach the data
+    k: null              # landmarks that must reach a point (v >= tau); null = all of them
+    share: 0.9           # share of the data (by mass) that must be reached by at least k landmarks
+    rel_tolerance: 0.05  # bisection on rho_g stops when its bracket is this narrow (relative)
+    rho_g_bounds: [1.0e-6, 1.0e+6]
 
 embedding:
   landmark_mds:

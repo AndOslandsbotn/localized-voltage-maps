@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any, Literal, Mapping
 
 import yaml
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 DEFAULTS = Path(__file__).with_name("config.yaml")
 
@@ -112,6 +112,48 @@ class GraphConfig(_Section):
     connect: bool
 
 
+class VoltageConfig(_Section):
+    threshold: float = Field(gt=0, lt=1)
+
+
+class MultiplierOptions(_Section):
+    multiplier: float = Field(gt=0)
+
+
+class FixedCountOptions(_Section):
+    n: int = Field(ge=1)
+
+
+class CountConfig(_Section):
+    strategy: Literal["dimension", "fixed"]
+    dimension: MultiplierOptions
+    fixed: FixedCountOptions
+
+
+class MutualInformationOptions(_Section):
+    noise_std: float = Field(gt=0)
+
+
+class ReachOptions(_Section):
+    k: int | None = Field(ge=1)
+    share: float = Field(gt=0, le=1)
+    rel_tolerance: float = Field(gt=0)
+    rho_g_bounds: tuple[float, float]
+
+    @model_validator(mode="after")
+    def _ordered_bounds(self) -> ReachOptions:
+        low, high = self.rho_g_bounds
+        if not 0 < low < high:
+            raise ValueError(f"rho_g_bounds must satisfy 0 < low < high, got {self.rho_g_bounds}")
+        return self
+
+
+class LandmarksConfig(_Section):
+    count: CountConfig
+    mutual_information: MutualInformationOptions
+    reach: ReachOptions
+
+
 class LandmarkMdsConfig(_Section):
     n_components: int = Field(ge=1)
 
@@ -132,13 +174,13 @@ class Config(_Section):
     dimension: DimensionConfig
     cells: CellsConfig
     graph: GraphConfig
+    voltage: VoltageConfig
+    landmarks: LandmarksConfig
     embedding: EmbeddingConfig
     hierarchy: HierarchyConfig
 
 
 def load_config(path: str | Path | Mapping[str, Any] | None = None, overrides: Mapping[str, Any] | None = None) -> Config:
-    """The defaults, with the run's settings (a YAML file, or a dict of the same structure) and then ``overrides``
-    merged over them."""
     settings = yaml.safe_load(DEFAULTS.read_text())
     run = path if isinstance(path, Mapping) else (yaml.safe_load(Path(path).read_text()) if path else None)
     for update in (run, overrides):

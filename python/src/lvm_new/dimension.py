@@ -3,27 +3,24 @@ from __future__ import annotations
 import numpy as np
 import torch
 
-from lvm_new.config import DimensionConfig
+from lvm_new.config import Config
 from lvm_new.compute import TORCH_DATA_DTYPE, TORCH_SOLVE_DTYPE, rows_per_block
 
 
-def estimate_dimension(sample: torch.Tensor, *, config: DimensionConfig, device: str, seed: int) -> float:
-    """The region's intrinsic dimension d̂ (unrounded), by the strategy in ``config``."""
-    match config.strategy:
+def estimate_dimension(sample: torch.Tensor, *, config: Config, device: str, seed: int) -> float:
+    match config.dimension.strategy:
         case "mle":
-            return _mle(_subsample(sample, config.sample_size, seed), config.mle.k, device=device)
+            return _mle(_subsample(sample, config.dimension.sample_size, seed), config.dimension.mle.k, device=device)
         case "fixed":
-            return config.fixed.d
+            return config.dimension.fixed.d
 
 
 def _mle(points: torch.Tensor, k: int, *, device: str) -> float:
-    """Levina & Bickel (2005), "Maximum likelihood estimation of intrinsic dimension", NIPS 17.
-
-    Each point's estimate is (k - 1) / sum_j log(T_k / T_j) over its neighbour distances T_1 <= ... <= T_k,
-    combined by the harmonic mean (MacKay & Ghahramani, 2005): scikit-dimension's MLE with its defaults, on the device.
-    """
+    """Maximum likelihood estimate (Levina & Bickel, 2005). Each point's estimate is (k - 1) / sum_j log(T_k / T_j)
+    over its neighbour distances T_1 <= ... <= T_k; the estimates are combined by their harmonic mean (MacKay &
+    Ghahramani, 2005)."""
     distances = _nearest_neighbours(points, k, device=device)
-    distances = distances[distances[:, 0] > 0]          # a duplicate point (distance 0) would give log(inf)
+    distances = distances[distances[:, 0] > 0]          # duplicate points: log(inf)
     local = (k - 1) / torch.log(distances[:, -1:] / distances).sum(dim=1)
     return float(1.0 / (1.0 / local).mean())
 
@@ -36,7 +33,6 @@ def _subsample(sample: torch.Tensor, size: int, seed: int) -> torch.Tensor:
 
 
 def _nearest_neighbours(points: torch.Tensor, k: int, *, device: str) -> torch.Tensor:
-    """(n, k) distances from each point to its k nearest other points, nearest first, in SOLVE_DTYPE on the device."""
     if device == "cpu":
         from sklearn.neighbors import NearestNeighbors
 

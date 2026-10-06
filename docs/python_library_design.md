@@ -29,7 +29,7 @@ for Z_chunk in model.transform_chunks(X):   # one array per chunk, for data too 
 | Argument | Meaning | Default |
 |---|---|---|
 | `n_components` | dimension of the embedding | 2 |
-| `n_cells` | number of cells (graph nodes) per region | 1000 |
+| `n_cells` | number of cells (graph nodes) per region | 300 |
 | `device` | `"auto"` (CUDA if available, else CPU), `"cuda"` or `"cpu"` | `"auto"` |
 | `random_state` | seed | 0 |
 | `local_chart` | the second scale: place points within their cell by the cell's local PCA (config `embedding.local_scale: pca`). `"last"`: charts at the deepest level during `fit`, other levels on demand; `"all"`: charts at every level during `fit` (more time, every level ready); `"none"`: plain coordinates. With one level, `"last"` and `"all"` are the same (see "Local charts") | `"last"` |
@@ -134,7 +134,7 @@ Each step keeps all tests passing, including the regression test (pinned results
 
 ## Decided
 
-- `n_cells` default 1000 (the package's `config.yaml`), not the 300 tuned on MNIST.
+- `n_cells` default 300, the value tuned on MNIST and used in the paper's benchmarks (changed from 1000 on 2026-10-06: at 1000 cells the landmark selection alone took 6 s on MNIST 50k).
 - `chunk_size` is a direct argument with a fixed default of 10,000 (an opt-in `"auto"` from free memory could come later).
 - `local_chart="last"` (default): charts at the deepest level during `fit`, at other levels on demand; `"all"` fits them at every level during `fit` (the user's choice to spend the time); `"none"`: no charts (see "Local charts").
 - Save format: a folder with a readable `model.yaml` and one `.npz` per region.

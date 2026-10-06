@@ -1,15 +1,13 @@
 from __future__ import annotations
 
-import numpy as np
+import torch
 
 from lvm_new.config import Config
 
 
-def fit_embedding(maps, config: Config):
-    """Landmark MDS: the landmarks placed from their voltage distances, ready to triangulate points."""
+def fit_embedding(maps: torch.Tensor, *, config: Config):
     raise NotImplementedError
 
 
-def fit_chart(region, sample: np.ndarray, config: Config, *, device: str):
-    """The local chart: each cell's main directions, from the sample placed by the region's embedding."""
+def fit_chart(region, sample: torch.Tensor, *, config: Config, device: str):
     raise NotImplementedError

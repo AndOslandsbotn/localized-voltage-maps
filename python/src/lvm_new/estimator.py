@@ -26,48 +26,39 @@ SETTINGS = {
 
 
 class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
-    """Localized Voltage Maps: a streaming embedding of data into ``n_components`` dimensions.
+    """Localized Voltage Maps: an embedding of data into ``n_components`` dimensions by grounded voltage maps.
 
-    Every direct argument is a setting (lvm_new/config/config.yaml). None means "not given": the value then comes from
-    the ``config`` YAML if it sets it, else from the package defaults. A given argument wins over both.
+    Each argument left as None takes its value from ``config``, else from the package defaults.
 
     Parameters
     ----------
-    n_components : int or None (setting embedding.landmark_mds.n_components, default 2)
+    n_components : int, default 2
         Dimension of the embedding.
-    n_cells : int or None (setting cells.n_cells, default 1000)
+    n_cells : int, default 300
         Number of cells (graph nodes) per region.
-    device : {"auto", "cuda", "cpu"} or None (setting compute.device, default "auto")
-        Where to compute. "auto": CUDA if a GPU is available, else the CPU. Each step picks its implementation by the
-        device unless the config names one explicitly (e.g. k-means: cuML on the GPU, FAISS on the CPU).
-    random_state : int or None (setting compute.seed, default 0)
-        Seed. Each region's seed is derived from it and the region's id.
-    local_chart : {"last", "all", "none"} or None (setting embedding.local_chart, default "last")
-        The second scale: points placed within their cell by the cell's local PCA. "last": charts at the deepest level
-        during ``fit``, other levels on demand; "all": charts at every level during ``fit``; "none": plain coordinates.
-    chunk_size : int or None (setting data.chunk_size, default 10_000)
-        Points per chunk when an array is read in pieces. A re-iterable's own pieces are used as they come (re-cutting
-        would copy every chunk), so for a loader its batch size is the chunk size. Streaming k-means updates once per
-        chunk, so results depend on it; that's also why it is fixed rather than estimated from free memory.
-    levels : int or None (setting hierarchy.levels, default 1)
-        Depth of the hierarchy. Only 1 for now; more levels are stage 2.
-    config : str, Path, dict or None, default None
-        Any settings, merged over the package's defaults: a YAML file, or a dict of the same structure
-        (e.g. ``{"graph": {"radius": {"strategy": "knn"}}}``).
+    device : {"auto", "cuda", "cpu"}, default "auto"
+        Where to compute; "auto" uses a GPU if one is available.
+    random_state : int, default 0
+        Random seed.
+    local_chart : {"last", "all", "none"}, default "last"
+        Levels at which points are placed within their cell by a local PCA chart.
+    chunk_size : int, default 10000
+        Points per chunk when an array is read in pieces.
+    levels : int, default 1
+        Depth of the hierarchy.
+    config : str, Path or dict, optional
+        Settings merged over the package defaults: a YAML file, or a dict of the same structure.
 
-    Attributes (after ``fit``)
-    --------------------------
+    Attributes
+    ----------
     root_ : RegionModel
-        The fitted model of level 0 (the whole data).
+        The fitted root region.
     config_ : Config
-        The complete settings used (YAML + direct arguments).
+        The settings used.
     device_ : str
-        The device actually used.
+        The device used.
     n_features_in_ : int
         Number of input features.
-
-    A region's own results (centroids, masses, landmarks, rho_g, dimension, ...) are attributes of its RegionModel:
-    ``model.root_`` for level 0, ``model.regions(level)`` for any level.
     """
 
     def __init__(
@@ -103,42 +94,25 @@ class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
 
 
     def transform(self, X: DataLike, level: int = 0) -> np.ndarray:
-        """Coordinates of the points of X, as one (n, n_components) array.
-
-        ``level``: which level's embedding (only 0 for now). A level without local charts gets them first, from X
-        (see ``fit_charts``).
-        """
-        # np.concatenate(list(self.transform_chunks(X, level)))
         raise NotImplementedError
 
     def transform_chunks(self, X: DataLike, level: int = 0) -> Iterator[np.ndarray]:
-        """Coordinates of X one chunk at a time, for data too big to hold: yields (chunk, n_components) arrays."""
-        # for each chunk: route to its region (stage 1: the root) -> region.transform_chunk
         raise NotImplementedError
 
     def fit_charts(self, X: DataLike, level: int = 0) -> "LocalizedVoltageMaps":
-        """Fit the local charts of one level from X (one pass, at most 256 points per cell); returns the model itself.
-
-        Needed only for a level without charts (with local_chart="last", every level but the deepest); transform does
-        it on demand. A chart is only as good as its data: a cell needs at least n_components + 1 points.
-        """
         raise NotImplementedError
 
     def regions(self, level: int = 0) -> list:
-        """The fitted regions at one depth, as a list of RegionModel (level 0: [root_])."""
         raise NotImplementedError
 
     def save(self, path: str | Path) -> None:
-        """Store the fitted model as a folder: model.yaml (versions, settings; readable) + regions/<id>.npz (arrays)."""
         raise NotImplementedError
 
     @classmethod
     def load(cls, path: str | Path) -> "LocalizedVoltageMaps":
-        """Load a model stored with ``save`` (arrays loaded without pickle; checks the format version)."""
         raise NotImplementedError
 
     def _resolve_config(self) -> Config:
-        """The package defaults, merged with the ``config`` YAML, then the direct arguments that were given."""
         overrides = {}
         for name, path in SETTINGS.items():
             value = getattr(self, name)
@@ -153,7 +127,6 @@ class LocalizedVoltageMaps(TransformerMixin, BaseEstimator):
         return config
 
     def _resolve_device(self, config: Config) -> str:
-        """"cuda" or "cpu": the setting compute.device, with "auto" resolved by whether a GPU is available."""
         device = config.compute.device
         if device == "auto":
             return "cuda" if torch.cuda.is_available() else "cpu"

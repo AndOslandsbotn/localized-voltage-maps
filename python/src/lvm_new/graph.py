@@ -5,15 +5,13 @@ import torch
 from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components
 
-from lvm_new.config import GraphConfig
+from lvm_new.config import Config
 from lvm_new.config.config import GaussianKernelOptions, KernelConfig, PointKnnOptions
 from lvm_new.compute import TORCH_DATA_DTYPE, TORCH_SOLVE_DTYPE
 
 
-def build_graph(centroids: torch.Tensor, sample: torch.Tensor, *, config: GraphConfig, device: str,
+def build_graph(centroids: torch.Tensor, sample: torch.Tensor, *, config: Config, device: str,
                 seed: int) -> tuple[torch.Tensor, torch.Tensor]:
-    """(kernel, radius): the (n_cells, n_cells) kernel between cells (zero diagonal) and each cell's radius, on the
-    device."""
     n_cells = len(centroids)
     if n_cells < 2:
         empty = torch.zeros(n_cells, dtype=TORCH_SOLVE_DTYPE, device=device)
@@ -25,7 +23,7 @@ def build_graph(centroids: torch.Tensor, sample: torch.Tensor, *, config: GraphC
     sq_dist = (sq_dist + sq_dist.T) / 2
     sq_dist.fill_diagonal_(0.0)
 
-    radius = config.radius
+    radius = config.graph.radius
     match radius.strategy:
         case "adaptive_per_cell":
             sq_radius = _adaptive_per_cell(sq_dist, radius.adaptive_per_cell.k)
@@ -36,41 +34,36 @@ def build_graph(centroids: torch.Tensor, sample: torch.Tensor, *, config: GraphC
         case "centroid_spacing":
             sq_radius = _centroid_spacing(sq_dist, radius.centroid_spacing.multiplier)
     pair = torch.maximum(sq_radius[:, None], sq_radius[None, :])
-    kernel = _kernel(sq_dist, pair, config.kernel)
+    kernel = _kernel(sq_dist, pair, config.graph.kernel)
     kernel.fill_diagonal_(0.0)                                      # no self-loops
-    if config.connect:
+    if config.graph.connect:
         _connect(kernel, sq_dist)
     return kernel, sq_radius.sqrt()
 
 
 def _kth_neighbour(sq_dist: torch.Tensor, k: int) -> torch.Tensor:
-    """(n,) each cell's squared distance to its k-th nearest other cell (itself, at distance 0, comes first)."""
     k = min(k, len(sq_dist) - 1)
     return torch.topk(sq_dist, k + 1, dim=1, largest=False).values[:, k]
 
 
 def _one_radius(radius: torch.Tensor, n_cells: int) -> torch.Tensor:
-    """(n_cells,) one squared radius for every cell, from a radius (a distance)."""
     return torch.full((n_cells,), float(radius) ** 2, dtype=TORCH_SOLVE_DTYPE, device=radius.device)
 
 
 def _adaptive_per_cell(sq_dist: torch.Tensor, k: int) -> torch.Tensor:
-    """Each cell its own radius, the distance to its k-th nearest cell (returned squared): with r_ij = max(r_i, r_j)
-    two cells are joined when either is among the other's k nearest, the symmetric kNN graph (von Luxburg, 2007, "A
-    tutorial on spectral clustering"), so every cell has at least k edges wherever it lies."""
+    """r_i = distance to the k-th nearest cell. With r_ij = max(r_i, r_j), cells i and j are joined when either is
+    among the other's k nearest: the symmetric kNN graph (von Luxburg, 2007, "A tutorial on spectral clustering")."""
     return _kth_neighbour(sq_dist, k)
 
 
 def _knn(sq_dist: torch.Tensor, k: int) -> torch.Tensor:
-    """One radius: the median over cells of the distance to their k-th nearest cell."""
+    """r = median over cells of the distance to the k-th nearest cell."""
     return _one_radius(torch.quantile(_kth_neighbour(sq_dist, k).sqrt(), 0.5), len(sq_dist))
 
 
 def _point_knn(sample: torch.Tensor, centred: torch.Tensor, mean: torch.Tensor, *, options: PointKnnOptions,
                seed: int) -> torch.Tensor:
-    """One radius: the median over data points (a subsample of the sample) of the distance to their k-th nearest cell.
-    In high dimensions points sit farther from every centroid than centroids sit from each other, so this radius is
-    larger than knn's."""
+    """r = median over sample points of the distance to the k-th nearest cell."""
     points = sample
     if len(sample) > options.sample_size:
         rows = np.random.default_rng(seed).choice(len(sample), options.sample_size, replace=False)
@@ -82,13 +75,11 @@ def _point_knn(sample: torch.Tensor, centred: torch.Tensor, mean: torch.Tensor, 
 
 
 def _centroid_spacing(sq_dist: torch.Tensor, multiplier: float) -> torch.Tensor:
-    """One radius: multiplier x the median distance to the nearest cell. Fine in low dimensions; in high ones it
-    connects almost every cell (distances concentrate)."""
+    """r = multiplier * median over cells of the distance to the nearest cell."""
     return _one_radius(multiplier * torch.quantile(_kth_neighbour(sq_dist, 1).sqrt(), 0.5), len(sq_dist))
 
 
 def _kernel(sq_dist: torch.Tensor, sq_radius: torch.Tensor, config: KernelConfig) -> torch.Tensor:
-    """The kernel between cells from their squared distances and squared pair radii, by the strategy in ``config``."""
     match config.strategy:
         case "radial":
             return _radial(sq_dist, sq_radius)
@@ -99,25 +90,23 @@ def _kernel(sq_dist: torch.Tensor, sq_radius: torch.Tensor, config: KernelConfig
 
 
 def _radial(sq_dist: torch.Tensor, sq_radius: torch.Tensor) -> torch.Tensor:
-    """K_ij = 1 if d_ij <= r_ij, else 0 (compared on squares)."""
+    """K_ij = 1 if d_ij <= r_ij, else 0."""
     return (sq_dist <= sq_radius).to(TORCH_SOLVE_DTYPE)
 
 
 def _tapered(sq_dist: torch.Tensor, sq_radius: torch.Tensor) -> torch.Tensor:
-    """K_ij = (1 - d_ij^2 / r_ij^2)+: falls smoothly to 0 at r_ij."""
+    """K_ij = max(0, 1 - d_ij^2 / r_ij^2)."""
     return torch.clamp(1.0 - sq_dist / sq_radius, min=0.0)
 
 
 def _gaussian(sq_dist: torch.Tensor, sq_radius: torch.Tensor, *, options: GaussianKernelOptions) -> torch.Tensor:
-    """K_ij = exp(-d_ij^2 / (2 s^2)) with s = sigma r_ij, set to 0 beyond cutoff * s."""
+    """K_ij = exp(-d_ij^2 / (2 s^2)) with s = sigma * r_ij, and 0 beyond d_ij = cutoff * s."""
     sq_width = options.sigma ** 2 * sq_radius
     return torch.exp(-sq_dist / (2.0 * sq_width)) * (sq_dist <= options.cutoff ** 2 * sq_width)
 
 
 def _connect(kernel: torch.Tensor, sq_dist: torch.Tensor) -> None:
-    """Join every piece of the graph to the largest, in place: one piece at a time (largest first), each by its
-    closest pair of cells to the growing main piece, with weight 1. The pieces are labelled with SciPy on the CPU:
-    faster than on the GPU at these sizes, the copy of the edge list included."""
+    # In place: each piece, largest first, is joined to the growing main piece by its closest pair of cells.
     n_cells = len(kernel)
     edges = (kernel > 0).nonzero().cpu().numpy()
     n_pieces, label = connected_components(

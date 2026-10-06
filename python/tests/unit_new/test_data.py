@@ -55,7 +55,7 @@ class _Counting:
 
 
 def _config(strategy, size):
-    return load_config(overrides={"sample": {"strategy": strategy, "size": size}}).sample
+    return load_config(overrides={"sample": {"strategy": strategy, "size": size}})
 
 
 def test_prefix_takes_the_first_points_and_stops_reading():

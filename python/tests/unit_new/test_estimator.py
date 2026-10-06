@@ -17,8 +17,8 @@ def test_more_than_one_level_is_not_implemented_yet():
 
 def test_a_given_argument_beats_the_yaml_which_beats_the_defaults(tmp_path):
     path = tmp_path / "run.yaml"
-    path.write_text("cells:\n  n_cells: 300\n")
-    assert LocalizedVoltageMaps()._resolve_config().cells.n_cells == 1000
-    assert LocalizedVoltageMaps(config=path)._resolve_config().cells.n_cells == 300
-    assert LocalizedVoltageMaps(config={"cells": {"n_cells": 300}})._resolve_config().cells.n_cells == 300
+    path.write_text("cells:\n  n_cells: 200\n")
+    assert LocalizedVoltageMaps()._resolve_config().cells.n_cells == 300
+    assert LocalizedVoltageMaps(config=path)._resolve_config().cells.n_cells == 200
+    assert LocalizedVoltageMaps(config={"cells": {"n_cells": 200}})._resolve_config().cells.n_cells == 200
     assert LocalizedVoltageMaps(config=path, n_cells=500)._resolve_config().cells.n_cells == 500
