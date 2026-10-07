@@ -295,6 +295,12 @@ def _mnist8m(split: str, n: int | None, seed: int) -> tuple[np.ndarray, np.ndarr
     return X.astype(np.float64) / 255.0, y[rows].astype(np.int64)
 
 
+def mnist8m_labels(n: int | None = None) -> np.ndarray:
+    """The labels of the first n images of the shuffled file (all by default), read with a plain file read."""
+    download("mnist8m")
+    return np.fromfile(MNIST8M_DIR / "y.i8", dtype=np.int8, count=MNIST8M_N if n is None else n).astype(np.int64)
+
+
 def stream(dataset: str, *, n: int | None = None, chunk_size: int = 10_000) -> "FileChunks":
     """A re-iterable over the first n points, read from disk chunk by chunk with plain file reads, so only the current
     chunk is in memory. Chunks are float32 in [0, 1]. Only datasets stored on disk stream this way (``mnist8m``)."""
