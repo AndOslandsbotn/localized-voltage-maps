@@ -9,15 +9,19 @@ from experiments.common.methods import tsne_cpu
 from experiments.common.record import environment
 
 HERE = Path(__file__).resolve().parent
-N, SEED = 20_000, 0
+N, SEEDS = 20_000, (0, 1, 2)
 
 
 def main() -> None:
     watch_memory(limit_mb=3000)
     (HERE / "embeddings").mkdir(exist_ok=True)
-    X = load("eval", n=N, seed=SEED, dataset="half_sphere")[0].astype(np.float32)
-    Z = tsne_cpu(X, seed=SEED, n_components=3)
-    np.savez(HERE / "embeddings" / "tsne.npz", Z=Z, environment=json.dumps(environment("cpu")))
+    for seed in SEEDS:
+        path = HERE / "embeddings" / f"tsne_seed{seed}.npz"
+        if path.exists():
+            continue
+        X = load("eval", n=N, seed=seed, dataset="half_sphere")[0].astype(np.float32)
+        Z = tsne_cpu(X, seed=seed, n_components=3)
+        np.savez(path, Z=Z, environment=json.dumps(environment("cpu")))
 
 
 if __name__ == "__main__":

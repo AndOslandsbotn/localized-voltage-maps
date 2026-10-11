@@ -24,6 +24,22 @@
     },
     {
       "dataset": "swiss_roll",
+      "method": "lvm_chart_3",
+      "seed": 0,
+      "geodesic": 0.9692459381016998,
+      "aspect": 0.17833225429058075,
+      "true_aspect": 0.2324345050707512
+    },
+    {
+      "dataset": "swiss_roll",
+      "method": "lvm_chart_12",
+      "seed": 0,
+      "geodesic": 0.9766439289046787,
+      "aspect": 0.21650178730487823,
+      "true_aspect": 0.2324345050707512
+    },
+    {
+      "dataset": "swiss_roll",
       "method": "laplacian_eigenmaps",
       "seed": 0,
       "geodesic": 0.7088867724454498,
@@ -44,6 +60,22 @@
       "seed": 1,
       "geodesic": 0.8855751640638015,
       "aspect": 0.5822032690048218,
+      "true_aspect": 0.2324345050707512
+    },
+    {
+      "dataset": "swiss_roll",
+      "method": "lvm_chart_3",
+      "seed": 1,
+      "geodesic": 0.879080067166914,
+      "aspect": 0.5829045176506042,
+      "true_aspect": 0.2324345050707512
+    },
+    {
+      "dataset": "swiss_roll",
+      "method": "lvm_chart_12",
+      "seed": 1,
+      "geodesic": 0.8859246014217667,
+      "aspect": 0.5825961828231812,
       "true_aspect": 0.2324345050707512
     },
     {
@@ -72,6 +104,22 @@
     },
     {
       "dataset": "swiss_roll",
+      "method": "lvm_chart_3",
+      "seed": 2,
+      "geodesic": 0.5466525028570924,
+      "aspect": 0.8330662846565247,
+      "true_aspect": 0.2324345050707512
+    },
+    {
+      "dataset": "swiss_roll",
+      "method": "lvm_chart_12",
+      "seed": 2,
+      "geodesic": 0.6132877664498452,
+      "aspect": 0.7146268486976624,
+      "true_aspect": 0.2324345050707512
+    },
+    {
+      "dataset": "swiss_roll",
       "method": "laplacian_eigenmaps",
       "seed": 2,
       "geodesic": 0.7088867724454498,
@@ -92,6 +140,22 @@
       "seed": 0,
       "geodesic": 0.9788430913132183,
       "aspect": 0.20370300114154816,
+      "true_aspect": 0.23416116871426562
+    },
+    {
+      "dataset": "swiss_roll_even",
+      "method": "lvm_chart_3",
+      "seed": 0,
+      "geodesic": 0.9743834435303527,
+      "aspect": 0.12140019983053207,
+      "true_aspect": 0.23416116871426562
+    },
+    {
+      "dataset": "swiss_roll_even",
+      "method": "lvm_chart_12",
+      "seed": 0,
+      "geodesic": 0.9796771478745963,
+      "aspect": 0.2049320936203003,
       "true_aspect": 0.23416116871426562
     },
     {
@@ -120,6 +184,22 @@
     },
     {
       "dataset": "swiss_roll_even",
+      "method": "lvm_chart_3",
+      "seed": 1,
+      "geodesic": 0.9738769233776259,
+      "aspect": 0.12493151426315308,
+      "true_aspect": 0.23416116871426562
+    },
+    {
+      "dataset": "swiss_roll_even",
+      "method": "lvm_chart_12",
+      "seed": 1,
+      "geodesic": 0.9771782280497985,
+      "aspect": 0.22435544431209564,
+      "true_aspect": 0.23416116871426562
+    },
+    {
+      "dataset": "swiss_roll_even",
       "method": "laplacian_eigenmaps",
       "seed": 1,
       "geodesic": 0.7576303882646561,
@@ -140,6 +220,22 @@
       "seed": 2,
       "geodesic": 0.9652722889758221,
       "aspect": 0.2473452389240265,
+      "true_aspect": 0.23416116871426562
+    },
+    {
+      "dataset": "swiss_roll_even",
+      "method": "lvm_chart_3",
+      "seed": 2,
+      "geodesic": 0.9701999182552457,
+      "aspect": 0.15744106471538544,
+      "true_aspect": 0.23416116871426562
+    },
+    {
+      "dataset": "swiss_roll_even",
+      "method": "lvm_chart_12",
+      "seed": 2,
+      "geodesic": 0.9648428285699915,
+      "aspect": 0.2470037043094635,
       "true_aspect": 0.23416116871426562
     },
     {

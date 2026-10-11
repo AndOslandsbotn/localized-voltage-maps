@@ -6,8 +6,9 @@ import numpy as np
 from experiments.common import style
 
 HERE = Path(__file__).resolve().parent
-LABELS = {"lvm": "LVM", "lvm_chart": "LVM + local chart", "umap": "UMAP", "tsne": "t-SNE",
+LABELS = {"lvm": "LVM", "lvm_chart": "LVM + local chart", "umap_seeded": "UMAP", "tsne": "t-SNE",
           "laplacian_eigenmaps": "Laplacian eigenmaps", "landmark_isomap": "Landmark Isomap"}
+COLOUR = {"umap_seeded": "umap"}
 PANELS = (("procrustes", "(a) between seeds", "Procrustes disparity $\\downarrow$"),
           ("neighbour_agreement", "(b) between seeds", "neighbour agreement $\\uparrow$"))
 
@@ -18,7 +19,7 @@ def main() -> None:
     for ax, (metric, title, label) in zip(axes, PANELS):
         for y, method in enumerate(LABELS):
             values = [r[metric] for r in rows if r["method"] == method]
-            ax.barh(y, np.mean(values), xerr=np.std(values), color=style.method_colour(method),
+            ax.barh(y, np.mean(values), xerr=np.std(values), color=style.method_colour(COLOUR.get(method, method)),
                     error_kw={"linewidth": 0.5, "capsize": 1.0})
         ax.set_xlabel(label)
         ax.set_title(title, loc="left")

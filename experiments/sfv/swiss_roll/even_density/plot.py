@@ -7,10 +7,11 @@ from experiments.common.datasets import load, unrolled
 from experiments.sfv.swiss_roll.even_density.run import DATASETS, N
 
 HERE = Path(__file__).resolve().parent
-SEED = 0
+SEED, SHOWN = 0, "lvm_chart"
+TITLES = {"lvm": "LVM", "lvm_chart": "LVM + chart"}
 ROWS = {"swiss_roll": "uneven density\n(angle uniform)", "swiss_roll_even": "even density\n(arc length uniform)"}
-COLUMNS = {"truth": "truth, unrolled", "lvm_3": "LVM, 3 landmarks", "lvm_12": "LVM, 12 landmarks",
-           "laplacian_eigenmaps": "Laplacian eigenmaps\n(best pair)"}
+COLUMNS = {"truth": "truth, unrolled", f"{SHOWN}_3": f"{TITLES[SHOWN]},\n3 landmarks",
+           f"{SHOWN}_12": f"{TITLES[SHOWN]},\n12 landmarks", "laplacian_eigenmaps": "Laplacian eigenmaps\n(best pair)"}
 
 
 def main() -> None:

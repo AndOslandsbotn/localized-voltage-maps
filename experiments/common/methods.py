@@ -22,10 +22,13 @@ def lvm_chart(X: np.ndarray, *, seed: int, n_components: int = 2, config: dict |
 
 
 def umap_gpu(X: np.ndarray, *, seed: int, n_components: int = 2, n_neighbors: int = 30, min_dist: float = 0.0,
-             build_algo: str = "brute_force_knn") -> np.ndarray:
+             build_algo: str = "brute_force_knn", seeded: bool = False) -> np.ndarray:
+    """cuML UMAP. ``seeded`` passes the seed as random_state: reproducible runs, but slower (less parallel), so it is
+    off by default and used only where runs are compared seed by seed."""
     from cuml.manifold import UMAP
 
-    umap = UMAP(n_components=n_components, n_neighbors=n_neighbors, min_dist=min_dist, build_algo=build_algo)
+    umap = UMAP(n_components=n_components, n_neighbors=n_neighbors, min_dist=min_dist, build_algo=build_algo,
+                random_state=seed if seeded else None)
     return np.asarray(umap.fit_transform(X))
 
 

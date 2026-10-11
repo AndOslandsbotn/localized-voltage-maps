@@ -1,0 +1,408 @@
+{
+  "dataset": "half_sphere",
+  "split": "eval",
+  "n": 20000,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "sample": 1500,
+  "graph_neighbours": 10,
+  "environment": {
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "lvm": "0.0.1",
+    "torch": "2.14.0+cu130"
+  },
+  "settings": {
+    "lvm": {
+      "compute": {
+        "device": "auto",
+        "seed": 0
+      },
+      "data": {
+        "chunk_size": 10000
+      },
+      "sample": {
+        "strategy": "prefix",
+        "size": 50000
+      },
+      "dimension": {
+        "strategy": "mle",
+        "sample_size": 10000,
+        "mle": {
+          "k": 20
+        },
+        "fixed": {
+          "d": 12.0
+        }
+      },
+      "cells": {
+        "n_cells": 300,
+        "min_points_per_cell": 10,
+        "placement": "kmeans",
+        "kmeans": {
+          "strategy": "auto",
+          "cuml": {
+            "init": "random",
+            "max_iter": 30,
+            "tol": 0.0001
+          },
+          "lloyd": {
+            "iterations": 25
+          }
+        },
+        "refine": {
+          "strategy": "minibatch",
+          "passes": 0,
+          "tolerance": 0.01,
+          "max_points": null
+        },
+        "masses": {
+          "rel_error": 0.05,
+          "max_points": null
+        }
+      },
+      "graph": {
+        "radius": {
+          "strategy": "adaptive_per_cell",
+          "adaptive_per_cell": {
+            "k": 10
+          },
+          "knn": {
+            "k": 10
+          },
+          "point_knn": {
+            "k": 10,
+            "sample_size": 5000
+          },
+          "centroid_spacing": {
+            "multiplier": 3.0
+          }
+        },
+        "kernel": {
+          "strategy": "radial",
+          "gaussian": {
+            "sigma": 0.3333,
+            "cutoff": 3.0
+          }
+        },
+        "connect": true
+      },
+      "voltage": {
+        "threshold": 0.001
+      },
+      "landmarks": {
+        "count": {
+          "strategy": "dimension",
+          "dimension": {
+            "multiplier": 1.0
+          },
+          "fixed": {
+            "n": 20
+          }
+        },
+        "mutual_information": {
+          "noise_std": 0.01
+        },
+        "reach": {
+          "k": null,
+          "share": 0.9,
+          "rel_tolerance": 0.05,
+          "rho_g_bounds": [
+            1e-06,
+            1000000.0
+          ]
+        }
+      },
+      "extension": {
+        "strategy": "average",
+        "kernel": "nearest",
+        "nearest": {
+          "k": 3,
+          "sharpness": 16.0
+        }
+      },
+      "embedding": {
+        "n_components": 2,
+        "distance_floor": 1e-10,
+        "local_chart": "last",
+        "chart": {
+          "fill": 0.6,
+          "max_points": 256,
+          "origin": "anchor"
+        }
+      },
+      "hierarchy": {
+        "levels": 1
+      }
+    },
+    "lvm_chart": {
+      "compute": {
+        "device": "auto",
+        "seed": 0
+      },
+      "data": {
+        "chunk_size": 10000
+      },
+      "sample": {
+        "strategy": "prefix",
+        "size": 50000
+      },
+      "dimension": {
+        "strategy": "mle",
+        "sample_size": 10000,
+        "mle": {
+          "k": 20
+        },
+        "fixed": {
+          "d": 12.0
+        }
+      },
+      "cells": {
+        "n_cells": 300,
+        "min_points_per_cell": 10,
+        "placement": "kmeans",
+        "kmeans": {
+          "strategy": "auto",
+          "cuml": {
+            "init": "random",
+            "max_iter": 30,
+            "tol": 0.0001
+          },
+          "lloyd": {
+            "iterations": 25
+          }
+        },
+        "refine": {
+          "strategy": "minibatch",
+          "passes": 0,
+          "tolerance": 0.01,
+          "max_points": null
+        },
+        "masses": {
+          "rel_error": 0.05,
+          "max_points": null
+        }
+      },
+      "graph": {
+        "radius": {
+          "strategy": "adaptive_per_cell",
+          "adaptive_per_cell": {
+            "k": 10
+          },
+          "knn": {
+            "k": 10
+          },
+          "point_knn": {
+            "k": 10,
+            "sample_size": 5000
+          },
+          "centroid_spacing": {
+            "multiplier": 3.0
+          }
+        },
+        "kernel": {
+          "strategy": "radial",
+          "gaussian": {
+            "sigma": 0.3333,
+            "cutoff": 3.0
+          }
+        },
+        "connect": true
+      },
+      "voltage": {
+        "threshold": 0.001
+      },
+      "landmarks": {
+        "count": {
+          "strategy": "dimension",
+          "dimension": {
+            "multiplier": 1.0
+          },
+          "fixed": {
+            "n": 20
+          }
+        },
+        "mutual_information": {
+          "noise_std": 0.01
+        },
+        "reach": {
+          "k": null,
+          "share": 0.9,
+          "rel_tolerance": 0.05,
+          "rho_g_bounds": [
+            1e-06,
+            1000000.0
+          ]
+        }
+      },
+      "extension": {
+        "strategy": "average",
+        "kernel": "nearest",
+        "nearest": {
+          "k": 3,
+          "sharpness": 16.0
+        }
+      },
+      "embedding": {
+        "n_components": 2,
+        "distance_floor": 1e-10,
+        "local_chart": "last",
+        "chart": {
+          "fill": 0.6,
+          "max_points": 256,
+          "origin": "anchor"
+        }
+      },
+      "hierarchy": {
+        "levels": 1
+      }
+    },
+    "umap": {
+      "n_components": 2,
+      "n_neighbors": 30,
+      "min_dist": 0.0,
+      "build_algo": "brute_force_knn"
+    },
+    "tsne": {
+      "perplexity": 15.0,
+      "late_exaggeration": 2.0
+    },
+    "laplacian_eigenmaps": {
+      "n_components": 2,
+      "n_neighbors": 5
+    },
+    "landmark_isomap": {
+      "n_components": 2,
+      "n_neighbors": 10,
+      "n_landmarks": 60
+    }
+  },
+  "rows": [
+    {
+      "method": "graph",
+      "seed": 0,
+      "exact": 0.999921920408514
+    },
+    {
+      "method": "lvm",
+      "seed": 0,
+      "exact": 0.9632646756431845,
+      "graph": 0.9632010198793215
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 0,
+      "exact": 0.9649138447218029,
+      "graph": 0.9648146642778721
+    },
+    {
+      "method": "umap",
+      "seed": 0,
+      "exact": 0.9147247687234074,
+      "graph": 0.9148867363065918
+    },
+    {
+      "method": "tsne",
+      "seed": 0,
+      "exact": 0.8706949630587779,
+      "graph": 0.8706276256445821
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seed": 0,
+      "exact": 0.8478146056059108,
+      "graph": 0.847876279726043
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 0,
+      "exact": 0.9902932367273763,
+      "graph": 0.9903211482144413
+    },
+    {
+      "method": "graph",
+      "seed": 1,
+      "exact": 0.9999224878148453
+    },
+    {
+      "method": "lvm",
+      "seed": 1,
+      "exact": 0.9420524057429861,
+      "graph": 0.9420601641471136
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 1,
+      "exact": 0.9437572510168916,
+      "graph": 0.9437074050143908
+    },
+    {
+      "method": "umap",
+      "seed": 1,
+      "exact": 0.9125545915244533,
+      "graph": 0.9125460777115563
+    },
+    {
+      "method": "tsne",
+      "seed": 1,
+      "exact": 0.8581875812508968,
+      "graph": 0.8584589783792469
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seed": 1,
+      "exact": 0.9772928175680998,
+      "graph": 0.9772503111822156
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 1,
+      "exact": 0.989029464180411,
+      "graph": 0.988963083062595
+    },
+    {
+      "method": "graph",
+      "seed": 2,
+      "exact": 0.9999261102130347
+    },
+    {
+      "method": "lvm",
+      "seed": 2,
+      "exact": 0.9698858481657456,
+      "graph": 0.9698067597562895
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 2,
+      "exact": 0.9788995704265725,
+      "graph": 0.9788080487834125
+    },
+    {
+      "method": "umap",
+      "seed": 2,
+      "exact": 0.9158570135973861,
+      "graph": 0.9159143596779878
+    },
+    {
+      "method": "tsne",
+      "seed": 2,
+      "exact": 0.8643211634126677,
+      "graph": 0.8644729845662089
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seed": 2,
+      "exact": 0.8450188972819044,
+      "graph": 0.8454692937887338
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 2,
+      "exact": 0.9887758290574216,
+      "graph": 0.9887064591345813
+    }
+  ]
+}

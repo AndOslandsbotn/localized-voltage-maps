@@ -10,7 +10,7 @@ from experiments.common.guard import watch_memory
 from experiments.sfv.mnist8m.stability.run_lvm import SEEDS
 
 HERE = Path(__file__).resolve().parent
-METHODS = ("lvm", "lvm_chart", "umap", "tsne", "laplacian_eigenmaps", "landmark_isomap")
+METHODS = ("lvm", "lvm_chart", "umap_seeded", "tsne", "laplacian_eigenmaps", "landmark_isomap")
 K, SAMPLE = 10, 10_000
 
 

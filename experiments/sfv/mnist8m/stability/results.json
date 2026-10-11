@@ -191,94 +191,94 @@
       "neighbour_agreement": 0.07958710152077025
     },
     {
-      "method": "umap",
+      "method": "umap_seeded",
       "seeds": [
         0,
         1
       ],
-      "procrustes": 0.006477772220765374,
-      "neighbour_agreement": 0.42668540608857947
+      "procrustes": 0.0046895959008073345,
+      "neighbour_agreement": 0.4734284040434969
     },
     {
-      "method": "umap",
+      "method": "umap_seeded",
       "seeds": [
         0,
         2
       ],
-      "procrustes": 0.007177981574878829,
-      "neighbour_agreement": 0.4349644014224509
+      "procrustes": 0.004771773858825542,
+      "neighbour_agreement": 0.4682546266770725
     },
     {
-      "method": "umap",
+      "method": "umap_seeded",
       "seeds": [
         0,
         3
       ],
-      "procrustes": 0.008102709293653936,
-      "neighbour_agreement": 0.43793620710215136
+      "procrustes": 0.005046506547545817,
+      "neighbour_agreement": 0.46511098718103355
     },
     {
-      "method": "umap",
+      "method": "umap_seeded",
       "seeds": [
         0,
         4
       ],
-      "procrustes": 0.008540373443587322,
-      "neighbour_agreement": 0.4298828123974408
+      "procrustes": 0.005710098982649435,
+      "neighbour_agreement": 0.4579638038775809
     },
     {
-      "method": "umap",
+      "method": "umap_seeded",
       "seeds": [
         1,
         2
       ],
-      "procrustes": 0.007480506376755758,
-      "neighbour_agreement": 0.4319015714849305
+      "procrustes": 0.007083649973697088,
+      "neighbour_agreement": 0.4718217988152199
     },
     {
-      "method": "umap",
+      "method": "umap_seeded",
       "seeds": [
         1,
         3
       ],
-      "procrustes": 0.007837522094713313,
-      "neighbour_agreement": 0.43060090565609144
+      "procrustes": 0.004875539523631518,
+      "neighbour_agreement": 0.47005461365260126
     },
     {
-      "method": "umap",
+      "method": "umap_seeded",
       "seeds": [
         1,
         4
       ],
-      "procrustes": 0.007504434204733793,
-      "neighbour_agreement": 0.42756211418440515
+      "procrustes": 0.00736345846406837,
+      "neighbour_agreement": 0.4656084455877799
     },
     {
-      "method": "umap",
+      "method": "umap_seeded",
       "seeds": [
         2,
         3
       ],
-      "procrustes": 0.007216627458536587,
-      "neighbour_agreement": 0.4338510032451209
+      "procrustes": 0.00796455180431146,
+      "neighbour_agreement": 0.47493835907814236
     },
     {
-      "method": "umap",
+      "method": "umap_seeded",
       "seeds": [
         2,
         4
       ],
-      "procrustes": 0.007997893663916237,
-      "neighbour_agreement": 0.4319691651485769
+      "procrustes": 0.006438320416569568,
+      "neighbour_agreement": 0.46760510463908306
     },
     {
-      "method": "umap",
+      "method": "umap_seeded",
       "seeds": [
         3,
         4
       ],
-      "procrustes": 0.0070308721868724685,
-      "neighbour_agreement": 0.43792981970729644
+      "procrustes": 0.007070121397740158,
+      "neighbour_agreement": 0.4725055217400419
     },
     {
       "method": "tsne",

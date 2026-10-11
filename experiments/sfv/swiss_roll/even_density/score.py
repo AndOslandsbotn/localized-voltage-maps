@@ -11,7 +11,7 @@ from experiments.sfv.swiss_roll.landmarks.score import aspect
 
 HERE = Path(__file__).resolve().parent
 SAMPLE = 1_500
-NAMES = ("lvm_3", "lvm_12", "laplacian_eigenmaps")
+NAMES = ("lvm_3", "lvm_12", "lvm_chart_3", "lvm_chart_12", "laplacian_eigenmaps")
 
 
 def main() -> None:

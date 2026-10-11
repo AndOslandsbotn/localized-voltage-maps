@@ -15,7 +15,7 @@ def main() -> None:
         ax.barh(y, sizes[method] / 2**20, color=style.method_colour(method))
     ax.axvline(sizes["data"] / 2**20, color="0.4", linestyle="--", linewidth=0.7, label="the 50k fitted points")
     ax.set_xscale("log")
-    ax.set_yticks(range(len(PLACING)), [LABELS[m] for m in PLACING])
+    ax.set_yticks(range(len(PLACING)), [{**LABELS, "umap": "UMAP"}[m] for m in PLACING])
     ax.invert_yaxis()
     ax.set_xlabel("model size (MB)")
     ax.legend(loc="upper center", fontsize="small")

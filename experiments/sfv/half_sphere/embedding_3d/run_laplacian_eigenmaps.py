@@ -9,15 +9,19 @@ from experiments.common.methods import laplacian_eigenmaps_gpu
 from experiments.common.record import environment
 
 HERE = Path(__file__).resolve().parent
-N, SEED = 20_000, 0
+N, SEEDS = 20_000, (0, 1, 2)
 
 
 def main() -> None:
     watch_memory(limit_mb=3000)
     (HERE / "embeddings").mkdir(exist_ok=True)
-    X = load("eval", n=N, seed=SEED, dataset="half_sphere")[0].astype(np.float32)
-    Z = laplacian_eigenmaps_gpu(X, seed=SEED, n_components=3)
-    np.savez(HERE / "embeddings" / "laplacian_eigenmaps.npz", Z=Z, environment=json.dumps(environment("cuda")))
+    for seed in SEEDS:
+        path = HERE / "embeddings" / f"laplacian_eigenmaps_seed{seed}.npz"
+        if path.exists():
+            continue
+        X = load("eval", n=N, seed=seed, dataset="half_sphere")[0].astype(np.float32)
+        Z = laplacian_eigenmaps_gpu(X, seed=seed, n_components=3)
+        np.savez(path, Z=Z, environment=json.dumps(environment("cuda")))
 
 
 if __name__ == "__main__":

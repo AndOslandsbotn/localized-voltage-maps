@@ -26,7 +26,7 @@ def main() -> None:
             "angle": (np.arctan2(X[:, 1], X[:, 0]), style.cyclic_colours())}
     columns = {"(a) Truth": X}
     for name, title in TITLES.items():
-        columns[title] = aligned(np.load(HERE / "embeddings" / f"{name}.npz")["Z"], X)
+        columns[title] = aligned(np.load(HERE / "embeddings" / f"{name}_seed{SEED}.npz")["Z"], X)
     fig, axes = style.figure("full", aspect=0.32, nrows=len(rows), ncols=len(columns),
                              subplot_kw={"projection": "3d"})
     for row, (name, (values, colours)) in zip(axes, rows.items()):

@@ -1,0 +1,121 @@
+{
+  "dataset": "half_sphere",
+  "split": "eval",
+  "n": 20000,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "dimensions": 3,
+  "rows": [
+    {
+      "method": "lvm",
+      "seed": 0,
+      "procrustes": 0.037102896624742046,
+      "height": 0.9338555699595965
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 0,
+      "procrustes": 0.03765195584214007,
+      "height": 0.9350090695400225
+    },
+    {
+      "method": "umap",
+      "seed": 0,
+      "procrustes": 0.3115090732737365,
+      "height": 0.10024547568311368
+    },
+    {
+      "method": "tsne",
+      "seed": 0,
+      "procrustes": 0.09287348708362836,
+      "height": 0.9919233045003081
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seed": 0,
+      "procrustes": 0.31268735907904355,
+      "height": 0.22459969491216766
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 0,
+      "procrustes": 0.018583821158568138,
+      "height": 0.9913747660594366
+    },
+    {
+      "method": "lvm",
+      "seed": 1,
+      "procrustes": 0.05857279079265951,
+      "height": 0.8713229107833182
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 1,
+      "procrustes": 0.05534743027102524,
+      "height": 0.8784458037616144
+    },
+    {
+      "method": "umap",
+      "seed": 1,
+      "procrustes": 0.3450494033883578,
+      "height": 0.017257815566644536
+    },
+    {
+      "method": "tsne",
+      "seed": 1,
+      "procrustes": 0.09376679726384232,
+      "height": 0.9922896425547238
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seed": 1,
+      "procrustes": 0.11292007821696916,
+      "height": 0.07238464623096161
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 1,
+      "procrustes": 0.024013122574257598,
+      "height": 0.9762952212287379
+    },
+    {
+      "method": "lvm",
+      "seed": 2,
+      "procrustes": 0.024633166446912665,
+      "height": 0.968217681376422
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 2,
+      "procrustes": 0.017217289277078024,
+      "height": 0.9813472161548678
+    },
+    {
+      "method": "umap",
+      "seed": 2,
+      "procrustes": 0.3070832419025986,
+      "height": 0.1255994531959986
+    },
+    {
+      "method": "tsne",
+      "seed": 2,
+      "procrustes": 0.0935739740473361,
+      "height": 0.992187251157968
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seed": 2,
+      "procrustes": 0.20844979527398405,
+      "height": 0.6630842906342106
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 2,
+      "procrustes": 0.02735750360853153,
+      "height": 0.9725541177808852
+    }
+  ]
+}
