@@ -121,9 +121,9 @@ Kept from the start, so that stage 3 needs no redesign:
 
 ## Order of work
 
-The library was built from scratch as `lvm_new` and renamed to `lvm` on 2026-10-06; the previous library is kept as `python/src/lvm_old/` (its tests in `python/tests_old/`, its experiments in `experiments_old/`), for reference only. The two never import from each other. The paper's experiments are rebuilt in `experiments/` with the new `lvm`.
+The library was built from scratch as `lvm_new` and renamed to `lvm` on 2026-10-06. The previous library, its tests and its experiments (`lvm_old`, `tests_old`, `experiments_old`) were removed on 2026-10-11 and remain in the git history. The paper's experiments are rebuilt in `experiments/` with the new `lvm`.
 
-Each step keeps all tests passing, including the regression test (pinned results), and is committed on its own:
+Each step keeps all tests passing and is committed on its own:
 1. `estimator.py`, `data.py` (inputs as chunk sources, the region's sample), `compute.py` (precisions, block memory), `config.py` (pydantic models + `config.yaml`, sections added as the steps that use them arrive). `fit` works once the step modules exist; nothing wraps the old `fit_level`.
 2. `LevelModel` → `RegionModel`, `pipeline.py` → `region.py` with `fit_region`; region ids and per-region seeds.
 3. `device="auto"` and device-based strategies (k-means first).
