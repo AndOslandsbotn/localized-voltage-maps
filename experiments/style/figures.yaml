@@ -12,8 +12,8 @@ palettes:
     lvm_chart: "#56B4E9"
     umap: "#E69F00"
     tsne: "#009E73"
-    le: "#CC79A7"
-    lisomap: "#D55E00"
+    laplacian_eigenmaps: "#CC79A7"
+    landmark_isomap: "#D55E00"
   categories:           # up to 10 classes, e.g. digits (Paul Tol's muted + grey); to check in viz-palette
     - "#332288"
     - "#88CCEE"

@@ -1,0 +1,414 @@
+{
+  "dataset": "mnist8m",
+  "n_fit": 50000,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "sample": 5000,
+  "not_placing": [
+    "tsne",
+    "laplacian_eigenmaps"
+  ],
+  "environment": {
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "lvm": "0.0.1",
+    "torch": "2.14.0+cu130"
+  },
+  "settings": {
+    "lvm": {
+      "compute": {
+        "device": "auto",
+        "seed": 0
+      },
+      "data": {
+        "chunk_size": 10000
+      },
+      "sample": {
+        "strategy": "prefix",
+        "size": 50000
+      },
+      "dimension": {
+        "strategy": "mle",
+        "sample_size": 10000,
+        "mle": {
+          "k": 20
+        },
+        "fixed": {
+          "d": 12.0
+        }
+      },
+      "cells": {
+        "n_cells": 300,
+        "placement": "kmeans",
+        "kmeans": {
+          "strategy": "auto",
+          "cuml": {
+            "init": "random",
+            "max_iter": 30,
+            "tol": 0.0001
+          },
+          "lloyd": {
+            "iterations": 25
+          }
+        },
+        "refine": {
+          "passes": 0,
+          "max_points": null
+        },
+        "masses": {
+          "rel_error": 0.05,
+          "max_points": null
+        }
+      },
+      "graph": {
+        "radius": {
+          "strategy": "adaptive_per_cell",
+          "adaptive_per_cell": {
+            "k": 10
+          },
+          "knn": {
+            "k": 10
+          },
+          "point_knn": {
+            "k": 10,
+            "sample_size": 5000
+          },
+          "centroid_spacing": {
+            "multiplier": 3.0
+          }
+        },
+        "kernel": {
+          "strategy": "radial",
+          "gaussian": {
+            "sigma": 0.3333,
+            "cutoff": 3.0
+          }
+        },
+        "connect": true
+      },
+      "voltage": {
+        "threshold": 0.001
+      },
+      "landmarks": {
+        "count": {
+          "strategy": "dimension",
+          "dimension": {
+            "multiplier": 1.0
+          },
+          "fixed": {
+            "n": 20
+          }
+        },
+        "mutual_information": {
+          "noise_std": 0.01
+        },
+        "reach": {
+          "k": null,
+          "share": 0.9,
+          "rel_tolerance": 0.05,
+          "rho_g_bounds": [
+            1e-06,
+            1000000.0
+          ]
+        }
+      },
+      "extension": {
+        "strategy": "average",
+        "kernel": "nearest",
+        "nearest": {
+          "k": 3,
+          "sharpness": 16.0
+        }
+      },
+      "embedding": {
+        "n_components": 2,
+        "distance_floor": 1e-10,
+        "local_chart": "last",
+        "chart": {
+          "fill": 0.6,
+          "max_points": 256,
+          "origin": "anchor"
+        }
+      },
+      "hierarchy": {
+        "levels": 1
+      }
+    },
+    "lvm_chart": {
+      "compute": {
+        "device": "auto",
+        "seed": 0
+      },
+      "data": {
+        "chunk_size": 10000
+      },
+      "sample": {
+        "strategy": "prefix",
+        "size": 50000
+      },
+      "dimension": {
+        "strategy": "mle",
+        "sample_size": 10000,
+        "mle": {
+          "k": 20
+        },
+        "fixed": {
+          "d": 12.0
+        }
+      },
+      "cells": {
+        "n_cells": 300,
+        "placement": "kmeans",
+        "kmeans": {
+          "strategy": "auto",
+          "cuml": {
+            "init": "random",
+            "max_iter": 30,
+            "tol": 0.0001
+          },
+          "lloyd": {
+            "iterations": 25
+          }
+        },
+        "refine": {
+          "passes": 0,
+          "max_points": null
+        },
+        "masses": {
+          "rel_error": 0.05,
+          "max_points": null
+        }
+      },
+      "graph": {
+        "radius": {
+          "strategy": "adaptive_per_cell",
+          "adaptive_per_cell": {
+            "k": 10
+          },
+          "knn": {
+            "k": 10
+          },
+          "point_knn": {
+            "k": 10,
+            "sample_size": 5000
+          },
+          "centroid_spacing": {
+            "multiplier": 3.0
+          }
+        },
+        "kernel": {
+          "strategy": "radial",
+          "gaussian": {
+            "sigma": 0.3333,
+            "cutoff": 3.0
+          }
+        },
+        "connect": true
+      },
+      "voltage": {
+        "threshold": 0.001
+      },
+      "landmarks": {
+        "count": {
+          "strategy": "dimension",
+          "dimension": {
+            "multiplier": 1.0
+          },
+          "fixed": {
+            "n": 20
+          }
+        },
+        "mutual_information": {
+          "noise_std": 0.01
+        },
+        "reach": {
+          "k": null,
+          "share": 0.9,
+          "rel_tolerance": 0.05,
+          "rho_g_bounds": [
+            1e-06,
+            1000000.0
+          ]
+        }
+      },
+      "extension": {
+        "strategy": "average",
+        "kernel": "nearest",
+        "nearest": {
+          "k": 3,
+          "sharpness": 16.0
+        }
+      },
+      "embedding": {
+        "n_components": 2,
+        "distance_floor": 1e-10,
+        "local_chart": "last",
+        "chart": {
+          "fill": 0.6,
+          "max_points": 256,
+          "origin": "anchor"
+        }
+      },
+      "hierarchy": {
+        "levels": 1
+      }
+    },
+    "umap": {
+      "n_neighbors": 30,
+      "min_dist": 0.0
+    },
+    "landmark_isomap": {
+      "n_neighbors": 10,
+      "n_landmarks": 60
+    }
+  },
+  "rows": [
+    {
+      "method": "lvm",
+      "seed": 0,
+      "fit_seconds": 0.44995525100966915,
+      "transform_seconds": 14.051078316988423,
+      "n_placed": 8050000,
+      "points_per_second": 572909.7666666028,
+      "trustworthiness": 0.9535309940816531,
+      "continuity": 0.9138580439362022,
+      "density_preservation": 0.3443227193567465,
+      "knn_accuracy": 0.8183999999999999
+    },
+    {
+      "method": "lvm",
+      "seed": 1,
+      "fit_seconds": 0.4926620689802803,
+      "transform_seconds": 14.433240648009814,
+      "n_placed": 8050000,
+      "points_per_second": 557740.3021482917,
+      "trustworthiness": 0.951626526231317,
+      "continuity": 0.9057244778814324,
+      "density_preservation": 0.22314497755469534,
+      "knn_accuracy": 0.8154
+    },
+    {
+      "method": "lvm",
+      "seed": 2,
+      "fit_seconds": 0.499758591002319,
+      "transform_seconds": 14.401703008974437,
+      "n_placed": 8050000,
+      "points_per_second": 558961.6724482954,
+      "trustworthiness": 0.951261735379677,
+      "continuity": 0.9091911686227304,
+      "density_preservation": 0.5343932929675277,
+      "knn_accuracy": 0.829
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 0,
+      "fit_seconds": 0.6173880390124395,
+      "transform_seconds": 18.721620929951314,
+      "n_placed": 8050000,
+      "points_per_second": 429984.1359954794,
+      "trustworthiness": 0.8983716882335239,
+      "continuity": 0.9136796509178453,
+      "density_preservation": 0.1122056878226591,
+      "knn_accuracy": 0.7582
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 1,
+      "fit_seconds": 0.636003730003722,
+      "transform_seconds": 17.797560664010234,
+      "n_placed": 8050000,
+      "points_per_second": 452309.17607031966,
+      "trustworthiness": 0.8917231096398837,
+      "continuity": 0.9033446845220182,
+      "density_preservation": 0.23702483936911545,
+      "knn_accuracy": 0.7491999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 2,
+      "fit_seconds": 0.654755491996184,
+      "transform_seconds": 16.49177593702916,
+      "n_placed": 8050000,
+      "points_per_second": 488122.08162040624,
+      "trustworthiness": 0.8925629972916039,
+      "continuity": 0.909366367739994,
+      "density_preservation": 0.23954623286512908,
+      "knn_accuracy": 0.7594000000000001
+    },
+    {
+      "method": "umap",
+      "seed": 0,
+      "fit_seconds": 2.334717969002668,
+      "transform_seconds": 333.9970336059923,
+      "n_placed": 8050000,
+      "points_per_second": 24102.01046724378,
+      "trustworthiness": 0.9173588163306249,
+      "continuity": 0.9357585555221186,
+      "density_preservation": -0.26914468793762275,
+      "knn_accuracy": 0.8263999999999999
+    },
+    {
+      "method": "umap",
+      "seed": 1,
+      "fit_seconds": 2.3388767809956335,
+      "transform_seconds": 320.3877967540175,
+      "n_placed": 8050000,
+      "points_per_second": 25125.80092487264,
+      "trustworthiness": 0.9192742501755442,
+      "continuity": 0.9368437195305447,
+      "density_preservation": -0.26218019930648206,
+      "knn_accuracy": 0.8131999999999999
+    },
+    {
+      "method": "umap",
+      "seed": 2,
+      "fit_seconds": 2.1899671360151842,
+      "transform_seconds": 319.41507122898474,
+      "n_placed": 8050000,
+      "points_per_second": 25202.317376655825,
+      "trustworthiness": 0.920024158892567,
+      "continuity": 0.9416502758551509,
+      "density_preservation": -0.22282166083581564,
+      "knn_accuracy": 0.8240000000000001
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 0,
+      "fit_seconds": 4.975486903975252,
+      "transform_seconds": 316.52343736198964,
+      "n_placed": 8050000,
+      "points_per_second": 25432.555854603837,
+      "trustworthiness": 0.7184967238439162,
+      "continuity": 0.9203123763667369,
+      "density_preservation": 0.4286457360763694,
+      "knn_accuracy": 0.422
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 1,
+      "fit_seconds": 4.9743986400426365,
+      "transform_seconds": 316.8625395729905,
+      "n_placed": 8050000,
+      "points_per_second": 25405.338260711793,
+      "trustworthiness": 0.7128648971812619,
+      "continuity": 0.9189638358912628,
+      "density_preservation": 0.3549069468408526,
+      "knn_accuracy": 0.3342
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 2,
+      "fit_seconds": 5.0150789989857,
+      "transform_seconds": 317.16375817201333,
+      "n_placed": 8050000,
+      "points_per_second": 25381.210155903416,
+      "trustworthiness": 0.7141099689036011,
+      "continuity": 0.9250242230915839,
+      "density_preservation": 0.4010599554025387,
+      "knn_accuracy": 0.3774
+    }
+  ]
+}

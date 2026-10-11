@@ -1,0 +1,1281 @@
+{
+  "dataset": "swiss_roll",
+  "n": 20000,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "shortcut_ratio": 2.0,
+  "layer_spacing": 6.283185307179586,
+  "settings": {
+    "default": {},
+    "cells_1000": {
+      "cells": {
+        "n_cells": 1000
+      }
+    },
+    "k_5": {
+      "graph": {
+        "radius": {
+          "adaptive_per_cell": {
+            "k": 5
+          }
+        }
+      }
+    }
+  },
+  "environment": {
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "lvm": "0.0.1",
+    "torch": "2.14.0+cu130"
+  },
+  "models": {
+    "default_seed0": {
+      "settings": {
+        "compute": {
+          "device": "auto",
+          "seed": 0
+        },
+        "data": {
+          "chunk_size": 10000
+        },
+        "sample": {
+          "strategy": "prefix",
+          "size": 50000
+        },
+        "dimension": {
+          "strategy": "mle",
+          "sample_size": 10000,
+          "mle": {
+            "k": 20
+          },
+          "fixed": {
+            "d": 12.0
+          }
+        },
+        "cells": {
+          "n_cells": 300,
+          "kmeans": {
+            "strategy": "auto",
+            "cuml": {
+              "init": "random",
+              "max_iter": 30,
+              "tol": 0.0001
+            },
+            "lloyd": {
+              "iterations": 25
+            }
+          },
+          "refine": {
+            "passes": 0,
+            "max_points": null
+          },
+          "masses": {
+            "rel_error": 0.05,
+            "max_points": null
+          }
+        },
+        "graph": {
+          "radius": {
+            "strategy": "adaptive_per_cell",
+            "adaptive_per_cell": {
+              "k": 10
+            },
+            "knn": {
+              "k": 10
+            },
+            "point_knn": {
+              "k": 10,
+              "sample_size": 5000
+            },
+            "centroid_spacing": {
+              "multiplier": 3.0
+            }
+          },
+          "kernel": {
+            "strategy": "radial",
+            "gaussian": {
+              "sigma": 0.3333,
+              "cutoff": 3.0
+            }
+          },
+          "connect": true
+        },
+        "voltage": {
+          "threshold": 0.001
+        },
+        "landmarks": {
+          "count": {
+            "strategy": "dimension",
+            "dimension": {
+              "multiplier": 1.0
+            },
+            "fixed": {
+              "n": 20
+            }
+          },
+          "mutual_information": {
+            "noise_std": 0.01
+          },
+          "reach": {
+            "k": null,
+            "share": 0.9,
+            "rel_tolerance": 0.05,
+            "rho_g_bounds": [
+              1e-06,
+              1000000.0
+            ]
+          }
+        },
+        "extension": {
+          "strategy": "average",
+          "kernel": "nearest",
+          "nearest": {
+            "k": 3,
+            "sharpness": 16.0
+          }
+        },
+        "embedding": {
+          "n_components": 2,
+          "distance_floor": 1e-10,
+          "local_chart": "none",
+          "chart": {
+            "fill": 0.6,
+            "max_points": 256,
+            "origin": "anchor"
+          }
+        },
+        "hierarchy": {
+          "levels": 1
+        }
+      },
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 3,
+        "dimension": 1.9861806234150932,
+        "rho_g": 0.004994613362398556
+      }
+    },
+    "cells_1000_seed0": {
+      "settings": {
+        "compute": {
+          "device": "auto",
+          "seed": 0
+        },
+        "data": {
+          "chunk_size": 10000
+        },
+        "sample": {
+          "strategy": "prefix",
+          "size": 50000
+        },
+        "dimension": {
+          "strategy": "mle",
+          "sample_size": 10000,
+          "mle": {
+            "k": 20
+          },
+          "fixed": {
+            "d": 12.0
+          }
+        },
+        "cells": {
+          "n_cells": 1000,
+          "kmeans": {
+            "strategy": "auto",
+            "cuml": {
+              "init": "random",
+              "max_iter": 30,
+              "tol": 0.0001
+            },
+            "lloyd": {
+              "iterations": 25
+            }
+          },
+          "refine": {
+            "passes": 0,
+            "max_points": null
+          },
+          "masses": {
+            "rel_error": 0.05,
+            "max_points": null
+          }
+        },
+        "graph": {
+          "radius": {
+            "strategy": "adaptive_per_cell",
+            "adaptive_per_cell": {
+              "k": 10
+            },
+            "knn": {
+              "k": 10
+            },
+            "point_knn": {
+              "k": 10,
+              "sample_size": 5000
+            },
+            "centroid_spacing": {
+              "multiplier": 3.0
+            }
+          },
+          "kernel": {
+            "strategy": "radial",
+            "gaussian": {
+              "sigma": 0.3333,
+              "cutoff": 3.0
+            }
+          },
+          "connect": true
+        },
+        "voltage": {
+          "threshold": 0.001
+        },
+        "landmarks": {
+          "count": {
+            "strategy": "dimension",
+            "dimension": {
+              "multiplier": 1.0
+            },
+            "fixed": {
+              "n": 20
+            }
+          },
+          "mutual_information": {
+            "noise_std": 0.01
+          },
+          "reach": {
+            "k": null,
+            "share": 0.9,
+            "rel_tolerance": 0.05,
+            "rho_g_bounds": [
+              1e-06,
+              1000000.0
+            ]
+          }
+        },
+        "extension": {
+          "strategy": "average",
+          "kernel": "nearest",
+          "nearest": {
+            "k": 3,
+            "sharpness": 16.0
+          }
+        },
+        "embedding": {
+          "n_components": 2,
+          "distance_floor": 1e-10,
+          "local_chart": "none",
+          "chart": {
+            "fill": 0.6,
+            "max_points": 256,
+            "origin": "anchor"
+          }
+        },
+        "hierarchy": {
+          "levels": 1
+        }
+      },
+      "fitted": {
+        "n_cells": 1000,
+        "n_landmarks": 3,
+        "dimension": 1.9861806234150932,
+        "rho_g": 9.051267003710271e-05
+      }
+    },
+    "k_5_seed0": {
+      "settings": {
+        "compute": {
+          "device": "auto",
+          "seed": 0
+        },
+        "data": {
+          "chunk_size": 10000
+        },
+        "sample": {
+          "strategy": "prefix",
+          "size": 50000
+        },
+        "dimension": {
+          "strategy": "mle",
+          "sample_size": 10000,
+          "mle": {
+            "k": 20
+          },
+          "fixed": {
+            "d": 12.0
+          }
+        },
+        "cells": {
+          "n_cells": 300,
+          "kmeans": {
+            "strategy": "auto",
+            "cuml": {
+              "init": "random",
+              "max_iter": 30,
+              "tol": 0.0001
+            },
+            "lloyd": {
+              "iterations": 25
+            }
+          },
+          "refine": {
+            "passes": 0,
+            "max_points": null
+          },
+          "masses": {
+            "rel_error": 0.05,
+            "max_points": null
+          }
+        },
+        "graph": {
+          "radius": {
+            "strategy": "adaptive_per_cell",
+            "adaptive_per_cell": {
+              "k": 5
+            },
+            "knn": {
+              "k": 10
+            },
+            "point_knn": {
+              "k": 10,
+              "sample_size": 5000
+            },
+            "centroid_spacing": {
+              "multiplier": 3.0
+            }
+          },
+          "kernel": {
+            "strategy": "radial",
+            "gaussian": {
+              "sigma": 0.3333,
+              "cutoff": 3.0
+            }
+          },
+          "connect": true
+        },
+        "voltage": {
+          "threshold": 0.001
+        },
+        "landmarks": {
+          "count": {
+            "strategy": "dimension",
+            "dimension": {
+              "multiplier": 1.0
+            },
+            "fixed": {
+              "n": 20
+            }
+          },
+          "mutual_information": {
+            "noise_std": 0.01
+          },
+          "reach": {
+            "k": null,
+            "share": 0.9,
+            "rel_tolerance": 0.05,
+            "rho_g_bounds": [
+              1e-06,
+              1000000.0
+            ]
+          }
+        },
+        "extension": {
+          "strategy": "average",
+          "kernel": "nearest",
+          "nearest": {
+            "k": 3,
+            "sharpness": 16.0
+          }
+        },
+        "embedding": {
+          "n_components": 2,
+          "distance_floor": 1e-10,
+          "local_chart": "none",
+          "chart": {
+            "fill": 0.6,
+            "max_points": 256,
+            "origin": "anchor"
+          }
+        },
+        "hierarchy": {
+          "levels": 1
+        }
+      },
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 3,
+        "dimension": 1.9861806234150932,
+        "rho_g": 0.00043570370147845975
+      }
+    },
+    "default_seed1": {
+      "settings": {
+        "compute": {
+          "device": "auto",
+          "seed": 1
+        },
+        "data": {
+          "chunk_size": 10000
+        },
+        "sample": {
+          "strategy": "prefix",
+          "size": 50000
+        },
+        "dimension": {
+          "strategy": "mle",
+          "sample_size": 10000,
+          "mle": {
+            "k": 20
+          },
+          "fixed": {
+            "d": 12.0
+          }
+        },
+        "cells": {
+          "n_cells": 300,
+          "kmeans": {
+            "strategy": "auto",
+            "cuml": {
+              "init": "random",
+              "max_iter": 30,
+              "tol": 0.0001
+            },
+            "lloyd": {
+              "iterations": 25
+            }
+          },
+          "refine": {
+            "passes": 0,
+            "max_points": null
+          },
+          "masses": {
+            "rel_error": 0.05,
+            "max_points": null
+          }
+        },
+        "graph": {
+          "radius": {
+            "strategy": "adaptive_per_cell",
+            "adaptive_per_cell": {
+              "k": 10
+            },
+            "knn": {
+              "k": 10
+            },
+            "point_knn": {
+              "k": 10,
+              "sample_size": 5000
+            },
+            "centroid_spacing": {
+              "multiplier": 3.0
+            }
+          },
+          "kernel": {
+            "strategy": "radial",
+            "gaussian": {
+              "sigma": 0.3333,
+              "cutoff": 3.0
+            }
+          },
+          "connect": true
+        },
+        "voltage": {
+          "threshold": 0.001
+        },
+        "landmarks": {
+          "count": {
+            "strategy": "dimension",
+            "dimension": {
+              "multiplier": 1.0
+            },
+            "fixed": {
+              "n": 20
+            }
+          },
+          "mutual_information": {
+            "noise_std": 0.01
+          },
+          "reach": {
+            "k": null,
+            "share": 0.9,
+            "rel_tolerance": 0.05,
+            "rho_g_bounds": [
+              1e-06,
+              1000000.0
+            ]
+          }
+        },
+        "extension": {
+          "strategy": "average",
+          "kernel": "nearest",
+          "nearest": {
+            "k": 3,
+            "sharpness": 16.0
+          }
+        },
+        "embedding": {
+          "n_components": 2,
+          "distance_floor": 1e-10,
+          "local_chart": "none",
+          "chart": {
+            "fill": 0.6,
+            "max_points": 256,
+            "origin": "anchor"
+          }
+        },
+        "hierarchy": {
+          "levels": 1
+        }
+      },
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 3,
+        "dimension": 1.9838385967261092,
+        "rho_g": 0.004293510210083482
+      }
+    },
+    "cells_1000_seed1": {
+      "settings": {
+        "compute": {
+          "device": "auto",
+          "seed": 1
+        },
+        "data": {
+          "chunk_size": 10000
+        },
+        "sample": {
+          "strategy": "prefix",
+          "size": 50000
+        },
+        "dimension": {
+          "strategy": "mle",
+          "sample_size": 10000,
+          "mle": {
+            "k": 20
+          },
+          "fixed": {
+            "d": 12.0
+          }
+        },
+        "cells": {
+          "n_cells": 1000,
+          "kmeans": {
+            "strategy": "auto",
+            "cuml": {
+              "init": "random",
+              "max_iter": 30,
+              "tol": 0.0001
+            },
+            "lloyd": {
+              "iterations": 25
+            }
+          },
+          "refine": {
+            "passes": 0,
+            "max_points": null
+          },
+          "masses": {
+            "rel_error": 0.05,
+            "max_points": null
+          }
+        },
+        "graph": {
+          "radius": {
+            "strategy": "adaptive_per_cell",
+            "adaptive_per_cell": {
+              "k": 10
+            },
+            "knn": {
+              "k": 10
+            },
+            "point_knn": {
+              "k": 10,
+              "sample_size": 5000
+            },
+            "centroid_spacing": {
+              "multiplier": 3.0
+            }
+          },
+          "kernel": {
+            "strategy": "radial",
+            "gaussian": {
+              "sigma": 0.3333,
+              "cutoff": 3.0
+            }
+          },
+          "connect": true
+        },
+        "voltage": {
+          "threshold": 0.001
+        },
+        "landmarks": {
+          "count": {
+            "strategy": "dimension",
+            "dimension": {
+              "multiplier": 1.0
+            },
+            "fixed": {
+              "n": 20
+            }
+          },
+          "mutual_information": {
+            "noise_std": 0.01
+          },
+          "reach": {
+            "k": null,
+            "share": 0.9,
+            "rel_tolerance": 0.05,
+            "rho_g_bounds": [
+              1e-06,
+              1000000.0
+            ]
+          }
+        },
+        "extension": {
+          "strategy": "average",
+          "kernel": "nearest",
+          "nearest": {
+            "k": 3,
+            "sharpness": 16.0
+          }
+        },
+        "embedding": {
+          "n_components": 2,
+          "distance_floor": 1e-10,
+          "local_chart": "none",
+          "chart": {
+            "fill": 0.6,
+            "max_points": 256,
+            "origin": "anchor"
+          }
+        },
+        "hierarchy": {
+          "levels": 1
+        }
+      },
+      "fitted": {
+        "n_cells": 1000,
+        "n_landmarks": 3,
+        "dimension": 1.9838385967261092,
+        "rho_g": 9.76596133571239e-05
+      }
+    },
+    "k_5_seed1": {
+      "settings": {
+        "compute": {
+          "device": "auto",
+          "seed": 1
+        },
+        "data": {
+          "chunk_size": 10000
+        },
+        "sample": {
+          "strategy": "prefix",
+          "size": 50000
+        },
+        "dimension": {
+          "strategy": "mle",
+          "sample_size": 10000,
+          "mle": {
+            "k": 20
+          },
+          "fixed": {
+            "d": 12.0
+          }
+        },
+        "cells": {
+          "n_cells": 300,
+          "kmeans": {
+            "strategy": "auto",
+            "cuml": {
+              "init": "random",
+              "max_iter": 30,
+              "tol": 0.0001
+            },
+            "lloyd": {
+              "iterations": 25
+            }
+          },
+          "refine": {
+            "passes": 0,
+            "max_points": null
+          },
+          "masses": {
+            "rel_error": 0.05,
+            "max_points": null
+          }
+        },
+        "graph": {
+          "radius": {
+            "strategy": "adaptive_per_cell",
+            "adaptive_per_cell": {
+              "k": 5
+            },
+            "knn": {
+              "k": 10
+            },
+            "point_knn": {
+              "k": 10,
+              "sample_size": 5000
+            },
+            "centroid_spacing": {
+              "multiplier": 3.0
+            }
+          },
+          "kernel": {
+            "strategy": "radial",
+            "gaussian": {
+              "sigma": 0.3333,
+              "cutoff": 3.0
+            }
+          },
+          "connect": true
+        },
+        "voltage": {
+          "threshold": 0.001
+        },
+        "landmarks": {
+          "count": {
+            "strategy": "dimension",
+            "dimension": {
+              "multiplier": 1.0
+            },
+            "fixed": {
+              "n": 20
+            }
+          },
+          "mutual_information": {
+            "noise_std": 0.01
+          },
+          "reach": {
+            "k": null,
+            "share": 0.9,
+            "rel_tolerance": 0.05,
+            "rho_g_bounds": [
+              1e-06,
+              1000000.0
+            ]
+          }
+        },
+        "extension": {
+          "strategy": "average",
+          "kernel": "nearest",
+          "nearest": {
+            "k": 3,
+            "sharpness": 16.0
+          }
+        },
+        "embedding": {
+          "n_components": 2,
+          "distance_floor": 1e-10,
+          "local_chart": "none",
+          "chart": {
+            "fill": 0.6,
+            "max_points": 256,
+            "origin": "anchor"
+          }
+        },
+        "hierarchy": {
+          "levels": 1
+        }
+      },
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 3,
+        "dimension": 1.9838385967261092,
+        "rho_g": 0.000428642890346215
+      }
+    },
+    "default_seed2": {
+      "settings": {
+        "compute": {
+          "device": "auto",
+          "seed": 2
+        },
+        "data": {
+          "chunk_size": 10000
+        },
+        "sample": {
+          "strategy": "prefix",
+          "size": 50000
+        },
+        "dimension": {
+          "strategy": "mle",
+          "sample_size": 10000,
+          "mle": {
+            "k": 20
+          },
+          "fixed": {
+            "d": 12.0
+          }
+        },
+        "cells": {
+          "n_cells": 300,
+          "kmeans": {
+            "strategy": "auto",
+            "cuml": {
+              "init": "random",
+              "max_iter": 30,
+              "tol": 0.0001
+            },
+            "lloyd": {
+              "iterations": 25
+            }
+          },
+          "refine": {
+            "passes": 0,
+            "max_points": null
+          },
+          "masses": {
+            "rel_error": 0.05,
+            "max_points": null
+          }
+        },
+        "graph": {
+          "radius": {
+            "strategy": "adaptive_per_cell",
+            "adaptive_per_cell": {
+              "k": 10
+            },
+            "knn": {
+              "k": 10
+            },
+            "point_knn": {
+              "k": 10,
+              "sample_size": 5000
+            },
+            "centroid_spacing": {
+              "multiplier": 3.0
+            }
+          },
+          "kernel": {
+            "strategy": "radial",
+            "gaussian": {
+              "sigma": 0.3333,
+              "cutoff": 3.0
+            }
+          },
+          "connect": true
+        },
+        "voltage": {
+          "threshold": 0.001
+        },
+        "landmarks": {
+          "count": {
+            "strategy": "dimension",
+            "dimension": {
+              "multiplier": 1.0
+            },
+            "fixed": {
+              "n": 20
+            }
+          },
+          "mutual_information": {
+            "noise_std": 0.01
+          },
+          "reach": {
+            "k": null,
+            "share": 0.9,
+            "rel_tolerance": 0.05,
+            "rho_g_bounds": [
+              1e-06,
+              1000000.0
+            ]
+          }
+        },
+        "extension": {
+          "strategy": "average",
+          "kernel": "nearest",
+          "nearest": {
+            "k": 3,
+            "sharpness": 16.0
+          }
+        },
+        "embedding": {
+          "n_components": 2,
+          "distance_floor": 1e-10,
+          "local_chart": "none",
+          "chart": {
+            "fill": 0.6,
+            "max_points": 256,
+            "origin": "anchor"
+          }
+        },
+        "hierarchy": {
+          "levels": 1
+        }
+      },
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 3,
+        "dimension": 1.9898150306788904,
+        "rho_g": 0.004557456157521565
+      }
+    },
+    "cells_1000_seed2": {
+      "settings": {
+        "compute": {
+          "device": "auto",
+          "seed": 2
+        },
+        "data": {
+          "chunk_size": 10000
+        },
+        "sample": {
+          "strategy": "prefix",
+          "size": 50000
+        },
+        "dimension": {
+          "strategy": "mle",
+          "sample_size": 10000,
+          "mle": {
+            "k": 20
+          },
+          "fixed": {
+            "d": 12.0
+          }
+        },
+        "cells": {
+          "n_cells": 1000,
+          "kmeans": {
+            "strategy": "auto",
+            "cuml": {
+              "init": "random",
+              "max_iter": 30,
+              "tol": 0.0001
+            },
+            "lloyd": {
+              "iterations": 25
+            }
+          },
+          "refine": {
+            "passes": 0,
+            "max_points": null
+          },
+          "masses": {
+            "rel_error": 0.05,
+            "max_points": null
+          }
+        },
+        "graph": {
+          "radius": {
+            "strategy": "adaptive_per_cell",
+            "adaptive_per_cell": {
+              "k": 10
+            },
+            "knn": {
+              "k": 10
+            },
+            "point_knn": {
+              "k": 10,
+              "sample_size": 5000
+            },
+            "centroid_spacing": {
+              "multiplier": 3.0
+            }
+          },
+          "kernel": {
+            "strategy": "radial",
+            "gaussian": {
+              "sigma": 0.3333,
+              "cutoff": 3.0
+            }
+          },
+          "connect": true
+        },
+        "voltage": {
+          "threshold": 0.001
+        },
+        "landmarks": {
+          "count": {
+            "strategy": "dimension",
+            "dimension": {
+              "multiplier": 1.0
+            },
+            "fixed": {
+              "n": 20
+            }
+          },
+          "mutual_information": {
+            "noise_std": 0.01
+          },
+          "reach": {
+            "k": null,
+            "share": 0.9,
+            "rel_tolerance": 0.05,
+            "rho_g_bounds": [
+              1e-06,
+              1000000.0
+            ]
+          }
+        },
+        "extension": {
+          "strategy": "average",
+          "kernel": "nearest",
+          "nearest": {
+            "k": 3,
+            "sharpness": 16.0
+          }
+        },
+        "embedding": {
+          "n_components": 2,
+          "distance_floor": 1e-10,
+          "local_chart": "none",
+          "chart": {
+            "fill": 0.6,
+            "max_points": 256,
+            "origin": "anchor"
+          }
+        },
+        "hierarchy": {
+          "levels": 1
+        }
+      },
+      "fitted": {
+        "n_cells": 1000,
+        "n_landmarks": 3,
+        "dimension": 1.9898150306788904,
+        "rho_g": 8.810298569933577e-05
+      }
+    },
+    "k_5_seed2": {
+      "settings": {
+        "compute": {
+          "device": "auto",
+          "seed": 2
+        },
+        "data": {
+          "chunk_size": 10000
+        },
+        "sample": {
+          "strategy": "prefix",
+          "size": 50000
+        },
+        "dimension": {
+          "strategy": "mle",
+          "sample_size": 10000,
+          "mle": {
+            "k": 20
+          },
+          "fixed": {
+            "d": 12.0
+          }
+        },
+        "cells": {
+          "n_cells": 300,
+          "kmeans": {
+            "strategy": "auto",
+            "cuml": {
+              "init": "random",
+              "max_iter": 30,
+              "tol": 0.0001
+            },
+            "lloyd": {
+              "iterations": 25
+            }
+          },
+          "refine": {
+            "passes": 0,
+            "max_points": null
+          },
+          "masses": {
+            "rel_error": 0.05,
+            "max_points": null
+          }
+        },
+        "graph": {
+          "radius": {
+            "strategy": "adaptive_per_cell",
+            "adaptive_per_cell": {
+              "k": 5
+            },
+            "knn": {
+              "k": 10
+            },
+            "point_knn": {
+              "k": 10,
+              "sample_size": 5000
+            },
+            "centroid_spacing": {
+              "multiplier": 3.0
+            }
+          },
+          "kernel": {
+            "strategy": "radial",
+            "gaussian": {
+              "sigma": 0.3333,
+              "cutoff": 3.0
+            }
+          },
+          "connect": true
+        },
+        "voltage": {
+          "threshold": 0.001
+        },
+        "landmarks": {
+          "count": {
+            "strategy": "dimension",
+            "dimension": {
+              "multiplier": 1.0
+            },
+            "fixed": {
+              "n": 20
+            }
+          },
+          "mutual_information": {
+            "noise_std": 0.01
+          },
+          "reach": {
+            "k": null,
+            "share": 0.9,
+            "rel_tolerance": 0.05,
+            "rho_g_bounds": [
+              1e-06,
+              1000000.0
+            ]
+          }
+        },
+        "extension": {
+          "strategy": "average",
+          "kernel": "nearest",
+          "nearest": {
+            "k": 3,
+            "sharpness": 16.0
+          }
+        },
+        "embedding": {
+          "n_components": 2,
+          "distance_floor": 1e-10,
+          "local_chart": "none",
+          "chart": {
+            "fill": 0.6,
+            "max_points": 256,
+            "origin": "anchor"
+          }
+        },
+        "hierarchy": {
+          "levels": 1
+        }
+      },
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 3,
+        "dimension": 1.9898150306788904,
+        "rho_g": 0.00041723129394828504
+      }
+    }
+  },
+  "rows": [
+    {
+      "setting": "default",
+      "seed": 0,
+      "cells": 300,
+      "edges": 1607,
+      "shortcuts": 25,
+      "cells_with_shortcut": 38,
+      "radius_median": 4.797794815520642,
+      "radius_max": 6.992695675929427,
+      "ratio_max": 10.654412732076624,
+      "exact": 0.6077549242054315
+    },
+    {
+      "setting": "cells_1000",
+      "seed": 0,
+      "cells": 1000,
+      "edges": 5310,
+      "shortcuts": 0,
+      "cells_with_shortcut": 0,
+      "radius_median": 2.5124264831462098,
+      "radius_max": 4.519131153962977,
+      "ratio_max": 1.0627762276062585,
+      "exact": 0.941989163219213
+    },
+    {
+      "setting": "k_5",
+      "seed": 0,
+      "cells": 300,
+      "edges": 750,
+      "shortcuts": 0,
+      "cells_with_shortcut": 0,
+      "radius_median": 3.160015157289462,
+      "radius_max": 5.769113699874538,
+      "ratio_max": 1.0741263817167481,
+      "exact": 0.9681615873448052
+    },
+    {
+      "setting": "default",
+      "seed": 1,
+      "cells": 300,
+      "edges": 1584,
+      "shortcuts": 24,
+      "cells_with_shortcut": 35,
+      "radius_median": 4.827786021687001,
+      "radius_max": 6.871383548109826,
+      "ratio_max": 10.897097143605215,
+      "exact": 0.44343118278958676
+    },
+    {
+      "setting": "cells_1000",
+      "seed": 1,
+      "cells": 1000,
+      "edges": 5286,
+      "shortcuts": 0,
+      "cells_with_shortcut": 0,
+      "radius_median": 2.5523271747093825,
+      "radius_max": 5.7059847415970095,
+      "ratio_max": 1.0727517078820044,
+      "exact": 0.9551790815611184
+    },
+    {
+      "setting": "k_5",
+      "seed": 1,
+      "cells": 300,
+      "edges": 752,
+      "shortcuts": 0,
+      "cells_with_shortcut": 0,
+      "radius_median": 3.1713127414752282,
+      "radius_max": 6.191729092529278,
+      "ratio_max": 1.083599265150481,
+      "exact": 0.9756398371105531
+    },
+    {
+      "setting": "default",
+      "seed": 2,
+      "cells": 300,
+      "edges": 1603,
+      "shortcuts": 11,
+      "cells_with_shortcut": 19,
+      "radius_median": 4.796324449609579,
+      "radius_max": 6.788561276808538,
+      "ratio_max": 10.89886677451638,
+      "exact": 0.7262117332584304
+    },
+    {
+      "setting": "cells_1000",
+      "seed": 2,
+      "cells": 1000,
+      "edges": 5257,
+      "shortcuts": 0,
+      "cells_with_shortcut": 0,
+      "radius_median": 2.5898531702028382,
+      "radius_max": 5.300960979071223,
+      "ratio_max": 1.0749066541213363,
+      "exact": 0.9588908393998827
+    },
+    {
+      "setting": "k_5",
+      "seed": 2,
+      "cells": 300,
+      "edges": 751,
+      "shortcuts": 0,
+      "cells_with_shortcut": 0,
+      "radius_median": 3.176849751393372,
+      "radius_max": 5.222959910476092,
+      "ratio_max": 1.0674384187384705,
+      "exact": 0.9725689007919175
+    }
+  ],
+  "sample": 1500
+}

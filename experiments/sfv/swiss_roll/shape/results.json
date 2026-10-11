@@ -1,0 +1,120 @@
+{
+  "dataset": "swiss_roll",
+  "split": "eval",
+  "n": 20000,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "rows": [
+    {
+      "method": "lvm",
+      "seed": 0,
+      "procrustes": 0.08055177687974224,
+      "along_roll": 0.9988550436804332
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 0,
+      "procrustes": 0.03308107948997756,
+      "along_roll": 0.9988055812963849
+    },
+    {
+      "method": "umap",
+      "seed": 0,
+      "procrustes": 0.5946421912677564,
+      "along_roll": 0.13833174850368313
+    },
+    {
+      "method": "tsne",
+      "seed": 0,
+      "procrustes": 0.8820750599306004,
+      "along_roll": 0.3733281491266303
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seed": 0,
+      "procrustes": 0.37437410149891065,
+      "along_roll": 0.9894166623909008
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 0,
+      "procrustes": 8.647672611667009e-05,
+      "along_roll": 0.9999919861869799
+    },
+    {
+      "method": "lvm",
+      "seed": 1,
+      "procrustes": 0.02743296971836312,
+      "along_roll": 0.9982486963004935
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 1,
+      "procrustes": 0.02666285286394916,
+      "along_roll": 0.9985460716387341
+    },
+    {
+      "method": "umap",
+      "seed": 1,
+      "procrustes": 0.5738740515047437,
+      "along_roll": 0.4447129541913662
+    },
+    {
+      "method": "tsne",
+      "seed": 1,
+      "procrustes": 0.8710659438075048,
+      "along_roll": 0.41035544368281196
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seed": 1,
+      "procrustes": 0.3722663112932816,
+      "along_roll": 0.9506187083827643
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 1,
+      "procrustes": 6.466076633190827e-05,
+      "along_roll": 0.9999935598564836
+    },
+    {
+      "method": "lvm",
+      "seed": 2,
+      "procrustes": 0.026595582384899716,
+      "along_roll": 0.9989538120948233
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 2,
+      "procrustes": 0.02590021893023095,
+      "along_roll": 0.9991356192835856
+    },
+    {
+      "method": "umap",
+      "seed": 2,
+      "procrustes": 0.6118904613938382,
+      "along_roll": 0.36622452479913525
+    },
+    {
+      "method": "tsne",
+      "seed": 2,
+      "procrustes": 0.8501386138764417,
+      "along_roll": 0.41279009610028483
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seed": 2,
+      "procrustes": 0.37150157070787776,
+      "along_roll": 0.9872422618721067
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 2,
+      "procrustes": 0.00011316612285376616,
+      "along_roll": 0.9999930676404826
+    }
+  ]
+}

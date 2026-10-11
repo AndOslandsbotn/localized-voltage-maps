@@ -1,0 +1,11 @@
+{
+  "n": 50000,
+  "bytes": {
+    "data": 156800000,
+    "lvm": 1929661,
+    "lvm_chart": 3824183,
+    "landmark_isomap": 180801440,
+    "umap": 182849600
+  },
+  "note": "bytes kept to place new points; landmark_isomap counts its distance table (n x landmarks, float64) plus the training data its neighbour search needs"
+}

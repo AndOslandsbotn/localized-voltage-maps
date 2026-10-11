@@ -1,0 +1,120 @@
+{
+  "dataset": "half_sphere",
+  "split": "eval",
+  "n": 20000,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "rows": [
+    {
+      "method": "lvm",
+      "seed": 0,
+      "procrustes": 0.11101764764940578,
+      "rings": 0.785491443583251
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 0,
+      "procrustes": 0.10959386629700117,
+      "rings": 0.7857489408229709
+    },
+    {
+      "method": "umap",
+      "seed": 0,
+      "procrustes": 0.0031958470953928346,
+      "rings": 0.9936249572182597
+    },
+    {
+      "method": "tsne",
+      "seed": 0,
+      "procrustes": 0.002103588773717112,
+      "rings": 0.9974685215125282
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seed": 0,
+      "procrustes": 0.01719168843663817,
+      "rings": 0.9761129142362354
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 0,
+      "procrustes": 0.0013209954800447441,
+      "rings": 0.9968694762636736
+    },
+    {
+      "method": "lvm",
+      "seed": 1,
+      "procrustes": 0.06848247735940233,
+      "rings": 0.7883960003821042
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 1,
+      "procrustes": 0.06849463337038154,
+      "rings": 0.7860363602116467
+    },
+    {
+      "method": "umap",
+      "seed": 1,
+      "procrustes": 0.0031150188660966577,
+      "rings": 0.9947546624481013
+    },
+    {
+      "method": "tsne",
+      "seed": 1,
+      "procrustes": 0.0018782789702548462,
+      "rings": 0.997371922091292
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seed": 1,
+      "procrustes": 0.522064701735939,
+      "rings": 0.46010139645117965
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 1,
+      "procrustes": 0.002453384986466803,
+      "rings": 0.9947650348919125
+    },
+    {
+      "method": "lvm",
+      "seed": 2,
+      "procrustes": 0.14961584368071135,
+      "rings": 0.7324856510755261
+    },
+    {
+      "method": "lvm_chart",
+      "seed": 2,
+      "procrustes": 0.14829110140625718,
+      "rings": 0.7335211111299789
+    },
+    {
+      "method": "umap",
+      "seed": 2,
+      "procrustes": 0.0031760183547643794,
+      "rings": 0.9950895120861648
+    },
+    {
+      "method": "tsne",
+      "seed": 2,
+      "procrustes": 0.002163399562616357,
+      "rings": 0.9974337227664467
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seed": 2,
+      "procrustes": 0.017273909769463552,
+      "rings": 0.9593678321586517
+    },
+    {
+      "method": "landmark_isomap",
+      "seed": 2,
+      "procrustes": 0.0012905387279684385,
+      "rings": 0.9968778843126945
+    }
+  ]
+}

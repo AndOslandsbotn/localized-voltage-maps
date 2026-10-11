@@ -1,0 +1,3528 @@
+{
+  "dataset": "kuzushiji49",
+  "n_fit": 50000,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "min_points": 1000,
+  "timings": [
+    {
+      "seed": 0,
+      "seconds": {
+        "level1": 0.5756355879129842,
+        "same": 4.546632957761176,
+        "new": 6.000406596926041,
+        "same_chart": 6.591725119622424,
+        "new_chart": 8.874648773111403,
+        "umap_same": 4.082229423802346,
+        "umap_new": 11.172697802772745,
+        "umap_global": 2.499160911887884,
+        "tsne_same": 8.119841204839759,
+        "tsne_new": 17.846324117737822,
+        "tsne_global": 2.9930829879594967
+      },
+      "routing": 0.6459965030662715
+    },
+    {
+      "seed": 1,
+      "seconds": {
+        "level1": 0.5034545599482954,
+        "same": 4.566151871229522,
+        "new": 6.043354252935387,
+        "same_chart": 6.537565845996141,
+        "new_chart": 8.7584915679181,
+        "umap_same": 3.7660979971988127,
+        "umap_new": 11.962058186531067,
+        "umap_global": 2.499160911887884,
+        "tsne_same": 8.184507028898224,
+        "tsne_new": 18.971114213811234,
+        "tsne_global": 2.9930829879594967
+      },
+      "routing": 0.5846297509269789
+    },
+    {
+      "seed": 2,
+      "seconds": {
+        "level1": 0.5136635570088401,
+        "same": 4.333283597137779,
+        "new": 5.7507657369133085,
+        "same_chart": 5.95050200226251,
+        "new_chart": 7.632169157965109,
+        "umap_same": 3.942130696377717,
+        "umap_new": 10.859216224984266,
+        "umap_global": 2.499160911887884,
+        "tsne_same": 7.1933945879573,
+        "tsne_new": 17.172824194072746,
+        "tsne_global": 2.9930829879594967
+      },
+      "routing": 0.6152555759763345
+    }
+  ],
+  "rows": [
+    {
+      "seed": 0,
+      "region": 0,
+      "n_fit": 10255,
+      "n_all": 55298,
+      "purity": {
+        "level1": 0.6252559726962458,
+        "same": 0.7039492930277913,
+        "new": 0.7230619210141395
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.9021748781221788,
+          "continuity": 0.9030743625238239,
+          "density_preservation": 0.11952200732238727,
+          "knn_accuracy": 0.5864
+        },
+        "same": {
+          "trustworthiness": 0.9341880429330925,
+          "continuity": 0.9076843374460828,
+          "density_preservation": 0.19115330287756097,
+          "knn_accuracy": 0.6586000000000001
+        },
+        "new": {
+          "trustworthiness": 0.9396513792757548,
+          "continuity": 0.925918350887752,
+          "density_preservation": 0.45468393180395583,
+          "knn_accuracy": 0.6786
+        },
+        "same_chart": {
+          "trustworthiness": 0.8857330564750727,
+          "continuity": 0.9083433764670479,
+          "density_preservation": 0.10980373783507982,
+          "knn_accuracy": 0.6161999999999999
+        },
+        "new_chart": {
+          "trustworthiness": 0.8920608887551409,
+          "continuity": 0.9260698605677601,
+          "density_preservation": 0.2938778165665524,
+          "knn_accuracy": 0.6336
+        },
+        "umap_same": {
+          "trustworthiness": 0.9237684301334136,
+          "continuity": 0.9609622469655933,
+          "density_preservation": -0.19546230436870562,
+          "knn_accuracy": 0.6584
+        },
+        "umap_new": {
+          "trustworthiness": 0.9281351951048249,
+          "continuity": 0.9561486688735079,
+          "density_preservation": -0.20723780946925238,
+          "knn_accuracy": 0.7002
+        },
+        "umap_global": {
+          "trustworthiness": 0.9032458019861571,
+          "continuity": 0.9492255231216772,
+          "density_preservation": 0.1779037999467749,
+          "knn_accuracy": 0.6638000000000001
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9526246805095797,
+          "continuity": 0.9632485986558331,
+          "density_preservation": 0.14094629565470274,
+          "knn_accuracy": 0.718
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9517204213060487,
+          "continuity": 0.9571252883940214,
+          "density_preservation": 0.07955881392784654,
+          "knn_accuracy": 0.7722
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9347188444176948,
+          "continuity": 0.9428550105326512,
+          "density_preservation": 0.3458926165978696,
+          "knn_accuracy": 0.7236
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "region": 1,
+      "n_fit": 9411,
+      "n_all": 50925,
+      "purity": {
+        "level1": 0.7129954308787589,
+        "same": 0.8007650621613006,
+        "new": 0.8241419615343747
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.9161444839000903,
+          "continuity": 0.9029008205436854,
+          "density_preservation": 0.07215763009167958,
+          "knn_accuracy": 0.6908000000000001
+        },
+        "same": {
+          "trustworthiness": 0.9440509780318989,
+          "continuity": 0.9155886327615608,
+          "density_preservation": 0.4703001080830042,
+          "knn_accuracy": 0.777
+        },
+        "new": {
+          "trustworthiness": 0.9466921095395726,
+          "continuity": 0.9157048369946835,
+          "density_preservation": 0.44861934675303156,
+          "knn_accuracy": 0.8018000000000001
+        },
+        "same_chart": {
+          "trustworthiness": 0.8783710703179858,
+          "continuity": 0.9161286347677802,
+          "density_preservation": 0.2877998871509407,
+          "knn_accuracy": 0.701
+        },
+        "new_chart": {
+          "trustworthiness": 0.8720322158691944,
+          "continuity": 0.9165541859765273,
+          "density_preservation": 0.30419839055719294,
+          "knn_accuracy": 0.7064
+        },
+        "umap_same": {
+          "trustworthiness": 0.9350184491924968,
+          "continuity": 0.9553326632560939,
+          "density_preservation": -0.054119821688737066,
+          "knn_accuracy": 0.8203999999999999
+        },
+        "umap_new": {
+          "trustworthiness": 0.9374261811616009,
+          "continuity": 0.948593359414184,
+          "density_preservation": -0.07537032057320887,
+          "knn_accuracy": 0.8694000000000001
+        },
+        "umap_global": {
+          "trustworthiness": 0.8958709920754339,
+          "continuity": 0.9265591172635169,
+          "density_preservation": 0.1469577784586076,
+          "knn_accuracy": 0.8076000000000001
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9574867328719029,
+          "continuity": 0.9567792837797171,
+          "density_preservation": 0.3650299388034337,
+          "knn_accuracy": 0.8361999999999998
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9605091945029591,
+          "continuity": 0.9504735800983047,
+          "density_preservation": 0.2632154300496584,
+          "knn_accuracy": 0.8842000000000001
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9417899568662855,
+          "continuity": 0.9292590470458421,
+          "density_preservation": 0.30418943986686,
+          "knn_accuracy": 0.8478
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "region": 2,
+      "n_fit": 5190,
+      "n_all": 28183,
+      "purity": {
+        "level1": 0.5263969171483622,
+        "same": 0.6622350674373796,
+        "new": 0.7161849710982658
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8842943685424817,
+          "continuity": 0.9109598675895275,
+          "density_preservation": 0.1867337014781118,
+          "knn_accuracy": 0.48599999999999993
+        },
+        "same": {
+          "trustworthiness": 0.9296770267830274,
+          "continuity": 0.9085178934697562,
+          "density_preservation": 0.3874438338255385,
+          "knn_accuracy": 0.6026
+        },
+        "new": {
+          "trustworthiness": 0.9405635831076337,
+          "continuity": 0.8998792175744809,
+          "density_preservation": 0.15747760804084732,
+          "knn_accuracy": 0.6748
+        },
+        "same_chart": {
+          "trustworthiness": 0.8786052322198816,
+          "continuity": 0.9091488253586117,
+          "density_preservation": 0.3336282927867656,
+          "knn_accuracy": 0.584
+        },
+        "new_chart": {
+          "trustworthiness": 0.882708676898385,
+          "continuity": 0.8995898926672685,
+          "density_preservation": 0.10089916203415426,
+          "knn_accuracy": 0.5898
+        },
+        "umap_same": {
+          "trustworthiness": 0.9245300230715217,
+          "continuity": 0.9560230153475775,
+          "density_preservation": -0.07066135186116095,
+          "knn_accuracy": 0.633
+        },
+        "umap_new": {
+          "trustworthiness": 0.925001685224195,
+          "continuity": 0.9478627505266326,
+          "density_preservation": -0.07337634759857739,
+          "knn_accuracy": 0.6970000000000001
+        },
+        "umap_global": {
+          "trustworthiness": 0.8783656535259303,
+          "continuity": 0.926518142240947,
+          "density_preservation": 0.11360608910423639,
+          "knn_accuracy": 0.6316
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9519268572574983,
+          "continuity": 0.9554160537666767,
+          "density_preservation": 0.33668317132048664,
+          "knn_accuracy": 0.6934
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9539583388504363,
+          "continuity": 0.9489391433443676,
+          "density_preservation": 0.24408097547463609,
+          "knn_accuracy": 0.7474000000000001
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9278021707292607,
+          "continuity": 0.9215522800682114,
+          "density_preservation": 0.32026913693251696,
+          "knn_accuracy": 0.7178
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "region": 3,
+      "n_fit": 2877,
+      "n_all": 15711,
+      "purity": {
+        "level1": 0.6590198123044838,
+        "same": 0.7761557177615572,
+        "new": 0.8164754953076121
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8928600186418875,
+          "continuity": 0.9120990003626465,
+          "density_preservation": 0.16669788983909947,
+          "knn_accuracy": 0.6155833333333334
+        },
+        "same": {
+          "trustworthiness": 0.9243756555923749,
+          "continuity": 0.921292425644566,
+          "density_preservation": 0.23325206353343805,
+          "knn_accuracy": 0.7132463768115942
+        },
+        "new": {
+          "trustworthiness": 0.9433777601080493,
+          "continuity": 0.9264861111136418,
+          "density_preservation": 0.2149733180871577,
+          "knn_accuracy": 0.7709371980676328
+        },
+        "same_chart": {
+          "trustworthiness": 0.891704615182042,
+          "continuity": 0.9223477627275339,
+          "density_preservation": 0.14866202815356414,
+          "knn_accuracy": 0.6996914251207729
+        },
+        "new_chart": {
+          "trustworthiness": 0.9216813337762103,
+          "continuity": 0.9266345101093096,
+          "density_preservation": 0.15175131421988075,
+          "knn_accuracy": 0.7316684782608697
+        },
+        "umap_same": {
+          "trustworthiness": 0.9420120447704112,
+          "continuity": 0.9607155049619889,
+          "density_preservation": 0.18318995515085496,
+          "knn_accuracy": 0.7674601449275362
+        },
+        "umap_new": {
+          "trustworthiness": 0.938200910278492,
+          "continuity": 0.9537609525036364,
+          "density_preservation": 0.18743099716529915,
+          "knn_accuracy": 0.8043079710144928
+        },
+        "umap_global": {
+          "trustworthiness": 0.8974710403617452,
+          "continuity": 0.9233626019590198,
+          "density_preservation": 0.30652901493271867,
+          "knn_accuracy": 0.7737185990338165
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9601626983570251,
+          "continuity": 0.9633111330039208,
+          "density_preservation": 0.5061574389033269,
+          "knn_accuracy": 0.7872753623188407
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9597206717177229,
+          "continuity": 0.9575330589221267,
+          "density_preservation": 0.4270140948203461,
+          "knn_accuracy": 0.8300307971014492
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9317996624490718,
+          "continuity": 0.9144071349586042,
+          "density_preservation": 0.3724928059011973,
+          "knn_accuracy": 0.7848496376811595
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "region": 4,
+      "n_fit": 2231,
+      "n_all": 11561,
+      "purity": {
+        "level1": 0.705961452263559,
+        "same": 0.8117436127297176,
+        "new": 0.8525324966382788
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8800784093082831,
+          "continuity": 0.9002100538350833,
+          "density_preservation": 0.10094054774709157,
+          "knn_accuracy": 0.6624833217965309
+        },
+        "same": {
+          "trustworthiness": 0.9153520371782643,
+          "continuity": 0.9044731806318327,
+          "density_preservation": 0.19191448995109006,
+          "knn_accuracy": 0.7445099868580772
+        },
+        "new": {
+          "trustworthiness": 0.9273676830278018,
+          "continuity": 0.9198175804084361,
+          "density_preservation": -0.0037674152181662547,
+          "knn_accuracy": 0.8032262918710688
+        },
+        "same_chart": {
+          "trustworthiness": 0.8861221128472122,
+          "continuity": 0.906122899853635,
+          "density_preservation": 0.15939838518039015,
+          "knn_accuracy": 0.7144671502091672
+        },
+        "new_chart": {
+          "trustworthiness": 0.9001722815730944,
+          "continuity": 0.9201723200129968,
+          "density_preservation": 0.009030021690876296,
+          "knn_accuracy": 0.7700675153740432
+        },
+        "umap_same": {
+          "trustworthiness": 0.9410660254890947,
+          "continuity": 0.9610407138249413,
+          "density_preservation": 0.2525402874636116,
+          "knn_accuracy": 0.7875342342071207
+        },
+        "umap_new": {
+          "trustworthiness": 0.9381162080735732,
+          "continuity": 0.9544307500606187,
+          "density_preservation": 0.242507051379438,
+          "knn_accuracy": 0.8449092605411263
+        },
+        "umap_global": {
+          "trustworthiness": 0.880231319193721,
+          "continuity": 0.9216472792995765,
+          "density_preservation": 0.41950196562809167,
+          "knn_accuracy": 0.7566085813745849
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9587010995127135,
+          "continuity": 0.9639740830085415,
+          "density_preservation": 0.5975150060862285,
+          "knn_accuracy": 0.8292212156780128
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9596797591962661,
+          "continuity": 0.9586867148966053,
+          "density_preservation": 0.43546422185793204,
+          "knn_accuracy": 0.8758339101734534
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9250176899419265,
+          "continuity": 0.9124315959407867,
+          "density_preservation": 0.48860404368324056,
+          "knn_accuracy": 0.8103961637624021
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "region": 5,
+      "n_fit": 3745,
+      "n_all": 20680,
+      "purity": {
+        "level1": 0.5359145527369826,
+        "same": 0.7156208277703605,
+        "new": 0.77543391188251
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8525141677932824,
+          "continuity": 0.857116015258133,
+          "density_preservation": 0.05023788277794392,
+          "knn_accuracy": 0.4953271028037383
+        },
+        "same": {
+          "trustworthiness": 0.9262445436029377,
+          "continuity": 0.8942147075127743,
+          "density_preservation": 0.2874716303363386,
+          "knn_accuracy": 0.6576769025367156
+        },
+        "new": {
+          "trustworthiness": 0.9343336308804107,
+          "continuity": 0.8886890596050577,
+          "density_preservation": 0.4576906822967227,
+          "knn_accuracy": 0.731909212283044
+        },
+        "same_chart": {
+          "trustworthiness": 0.8814777642478482,
+          "continuity": 0.8950952630946817,
+          "density_preservation": 0.07823692200135708,
+          "knn_accuracy": 0.6429906542056074
+        },
+        "new_chart": {
+          "trustworthiness": 0.8809346188178508,
+          "continuity": 0.8887932911755604,
+          "density_preservation": 0.2943093916186831,
+          "knn_accuracy": 0.653671562082777
+        },
+        "umap_same": {
+          "trustworthiness": 0.9120544441343877,
+          "continuity": 0.9458058767546522,
+          "density_preservation": 0.09629800747440645,
+          "knn_accuracy": 0.6966622162883845
+        },
+        "umap_new": {
+          "trustworthiness": 0.9047496639842085,
+          "continuity": 0.9376188226837195,
+          "density_preservation": 0.062465410568926405,
+          "knn_accuracy": 0.7372496662216289
+        },
+        "umap_global": {
+          "trustworthiness": 0.8484659189864092,
+          "continuity": 0.9270612557369696,
+          "density_preservation": 0.14819464991560094,
+          "knn_accuracy": 0.6437917222963953
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9437731176985142,
+          "continuity": 0.9450770576525952,
+          "density_preservation": 0.523909535740075,
+          "knn_accuracy": 0.7289719626168225
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9459404871240038,
+          "continuity": 0.9379756643840802,
+          "density_preservation": 0.35735935260906704,
+          "knn_accuracy": 0.7781041388518024
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9201141120188674,
+          "continuity": 0.9146800515716447,
+          "density_preservation": 0.34221645689688374,
+          "knn_accuracy": 0.7252336448598131
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "region": 6,
+      "n_fit": 1208,
+      "n_all": 6377,
+      "purity": {
+        "level1": 0.6009933774834437,
+        "same": 0.8120860927152318,
+        "new": 0.8286423841059603
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8893666264039874,
+          "continuity": 0.9100656698182626,
+          "density_preservation": -0.0525672956319924,
+          "knn_accuracy": 0.5753232056513837
+        },
+        "same": {
+          "trustworthiness": 0.9098021575242617,
+          "continuity": 0.9246837991308815,
+          "density_preservation": 0.21632997953655164,
+          "knn_accuracy": 0.6879462295531704
+        },
+        "new": {
+          "trustworthiness": 0.9148506809946271,
+          "continuity": 0.918958862648729,
+          "density_preservation": 0.42550833836420326,
+          "knn_accuracy": 0.7309831624429889
+        },
+        "same_chart": {
+          "trustworthiness": 0.9023714023907701,
+          "continuity": 0.9256434392658308,
+          "density_preservation": 0.21437299408201804,
+          "knn_accuracy": 0.6556496690785638
+        },
+        "new_chart": {
+          "trustworthiness": 0.9051733377761118,
+          "continuity": 0.9191739208907771,
+          "density_preservation": 0.4186304883276796,
+          "knn_accuracy": 0.7152532492027023
+        },
+        "umap_same": {
+          "trustworthiness": 0.9470255598594971,
+          "continuity": 0.9605839476862843,
+          "density_preservation": 0.35829707170387126,
+          "knn_accuracy": 0.7475326634889065
+        },
+        "umap_new": {
+          "trustworthiness": 0.94569425354381,
+          "continuity": 0.9513821900120788,
+          "density_preservation": 0.38248498229176814,
+          "knn_accuracy": 0.7723637735331434
+        },
+        "umap_global": {
+          "trustworthiness": 0.9037133991419884,
+          "continuity": 0.922380912713288,
+          "density_preservation": 0.4530411590188905,
+          "knn_accuracy": 0.726027913994719
+        },
+        "tsne_same": {
+          "trustworthiness": 0.959797437072209,
+          "continuity": 0.962195565551807,
+          "density_preservation": 0.7332305769079482,
+          "knn_accuracy": 0.7591303453242344
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9624541491385175,
+          "continuity": 0.9570769294847765,
+          "density_preservation": 0.5306612427627232,
+          "knn_accuracy": 0.7922533520798327
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9255522928901662,
+          "continuity": 0.9236380801643828,
+          "density_preservation": 0.5336891902782422,
+          "knn_accuracy": 0.7723946366722677
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "region": 7,
+      "n_fit": 2101,
+      "n_all": 11442,
+      "purity": {
+        "level1": 0.7981913374583531,
+        "same": 0.8976677772489291,
+        "new": 0.9186101856258925
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.870253242196892,
+          "continuity": 0.8830423251774366,
+          "density_preservation": 0.010591682341719201,
+          "knn_accuracy": 0.7839192399049881
+        },
+        "same": {
+          "trustworthiness": 0.9184428736712581,
+          "continuity": 0.9034195336421754,
+          "density_preservation": 0.14223141475039922,
+          "knn_accuracy": 0.8619714964370546
+        },
+        "new": {
+          "trustworthiness": 0.9212368988702963,
+          "continuity": 0.9149723887347544,
+          "density_preservation": 0.1380789199994242,
+          "knn_accuracy": 0.8933864947404139
+        },
+        "same_chart": {
+          "trustworthiness": 0.8952348272694066,
+          "continuity": 0.9051458753244079,
+          "density_preservation": 0.07522346935406862,
+          "knn_accuracy": 0.851503223617238
+        },
+        "new_chart": {
+          "trustworthiness": 0.8930303079751841,
+          "continuity": 0.914902871313691,
+          "density_preservation": 0.08037314618056922,
+          "knn_accuracy": 0.8700588168759189
+        },
+        "umap_same": {
+          "trustworthiness": 0.9259492032141879,
+          "continuity": 0.9570044336184513,
+          "density_preservation": 0.039779906928513374,
+          "knn_accuracy": 0.8848128039814501
+        },
+        "umap_new": {
+          "trustworthiness": 0.9112717842458598,
+          "continuity": 0.9483751443952835,
+          "density_preservation": 0.1556045159532322,
+          "knn_accuracy": 0.9119454812803982
+        },
+        "umap_global": {
+          "trustworthiness": 0.8674504075019476,
+          "continuity": 0.9261422133356368,
+          "density_preservation": 0.33324908228334577,
+          "knn_accuracy": 0.8814794706481166
+        },
+        "tsne_same": {
+          "trustworthiness": 0.8612893062419272,
+          "continuity": 0.9400577934882991,
+          "density_preservation": 0.08609622879274206,
+          "knn_accuracy": 0.8472107227689175
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9508238419193016,
+          "continuity": 0.9519697154179073,
+          "density_preservation": 0.47824656716177355,
+          "knn_accuracy": 0.9238457188100895
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9201382908277058,
+          "continuity": 0.9316515260112348,
+          "density_preservation": 0.41199082566108386,
+          "knn_accuracy": 0.8967153036986766
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "region": 8,
+      "n_fit": 1685,
+      "n_all": 8902,
+      "purity": {
+        "level1": 0.572106824925816,
+        "same": 0.7454005934718101,
+        "new": 0.7780415430267063
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8588187618141148,
+          "continuity": 0.8932371052297148,
+          "density_preservation": 0.0638302052823191,
+          "knn_accuracy": 0.5584569732937685
+        },
+        "same": {
+          "trustworthiness": 0.8949536411246282,
+          "continuity": 0.913791314409421,
+          "density_preservation": 0.14483775535976146,
+          "knn_accuracy": 0.6409495548961425
+        },
+        "new": {
+          "trustworthiness": 0.9119179412802391,
+          "continuity": 0.9150702203879517,
+          "density_preservation": 0.29257518850988634,
+          "knn_accuracy": 0.7002967359050445
+        },
+        "same_chart": {
+          "trustworthiness": 0.8791051888347673,
+          "continuity": 0.9148156264913445,
+          "density_preservation": 0.15253257054518393,
+          "knn_accuracy": 0.6409495548961425
+        },
+        "new_chart": {
+          "trustworthiness": 0.8925406867672139,
+          "continuity": 0.9155140000870923,
+          "density_preservation": 0.24863903788866396,
+          "knn_accuracy": 0.6789317507418398
+        },
+        "umap_same": {
+          "trustworthiness": 0.921796340879259,
+          "continuity": 0.9482997716937586,
+          "density_preservation": 0.14999516608414235,
+          "knn_accuracy": 0.6724035608308605
+        },
+        "umap_new": {
+          "trustworthiness": 0.9175998428783827,
+          "continuity": 0.9401204895298171,
+          "density_preservation": 0.06329901027413119,
+          "knn_accuracy": 0.7240356083086052
+        },
+        "umap_global": {
+          "trustworthiness": 0.8633332000287938,
+          "continuity": 0.9121991960847569,
+          "density_preservation": 0.0003440546092186741,
+          "knn_accuracy": 0.6308605341246292
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9442919262772574,
+          "continuity": 0.9501931227299347,
+          "density_preservation": 0.4753550420240271,
+          "knn_accuracy": 0.6997032640949554
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9439695781266801,
+          "continuity": 0.9421060162116094,
+          "density_preservation": 0.3462214626942411,
+          "knn_accuracy": 0.7412462908011869
+        },
+        "tsne_global": {
+          "trustworthiness": 0.907518891474997,
+          "continuity": 0.9082983497786701,
+          "density_preservation": 0.2267133174281379,
+          "knn_accuracy": 0.6807121661721067
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "region": 9,
+      "n_fit": 1158,
+      "n_all": 5996,
+      "purity": {
+        "level1": 0.5138169257340242,
+        "same": 0.7728842832469776,
+        "new": 0.7668393782383419
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8614224328522353,
+          "continuity": 0.8879300688200814,
+          "density_preservation": -0.009920619016020123,
+          "knn_accuracy": 0.4870092551127033
+        },
+        "same": {
+          "trustworthiness": 0.8600718056862545,
+          "continuity": 0.8907759927136125,
+          "density_preservation": 0.14502890692431306,
+          "knn_accuracy": 0.5716487535453052
+        },
+        "new": {
+          "trustworthiness": 0.8768650393230614,
+          "continuity": 0.8919669845013095,
+          "density_preservation": 0.3210861191931839,
+          "knn_accuracy": 0.6139759665621735
+        },
+        "same_chart": {
+          "trustworthiness": 0.8498623220447237,
+          "continuity": 0.8925076435263395,
+          "density_preservation": 0.13587019838765915,
+          "knn_accuracy": 0.5734027466786087
+        },
+        "new_chart": {
+          "trustworthiness": 0.8694348136642441,
+          "continuity": 0.8935948572011655,
+          "density_preservation": 0.3142128186459365,
+          "knn_accuracy": 0.5923943872219735
+        },
+        "umap_same": {
+          "trustworthiness": 0.9255255609346833,
+          "continuity": 0.9439607260688654,
+          "density_preservation": 0.05423899128032096,
+          "knn_accuracy": 0.6355650097029407
+        },
+        "umap_new": {
+          "trustworthiness": 0.9161574131812564,
+          "continuity": 0.931374852136975,
+          "density_preservation": 0.020557384597463483,
+          "knn_accuracy": 0.6977459322286907
+        },
+        "umap_global": {
+          "trustworthiness": 0.8145973401662112,
+          "continuity": 0.8655313809745165,
+          "density_preservation": 0.3812183169997191,
+          "knn_accuracy": 0.5422376474100611
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9373906569464443,
+          "continuity": 0.9472545662747588,
+          "density_preservation": 0.49762342179964064,
+          "knn_accuracy": 0.6433236303925959
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9405133728642532,
+          "continuity": 0.9371410754980103,
+          "density_preservation": 0.362351875846133,
+          "knn_accuracy": 0.699462606359158
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9049514177843788,
+          "continuity": 0.8700783437829503,
+          "density_preservation": 0.4772993876584608,
+          "knn_accuracy": 0.6847589192416779
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "region": 10,
+      "n_fit": 1418,
+      "n_all": 7702,
+      "purity": {
+        "level1": 0.7468265162200282,
+        "same": 0.8519040902679831,
+        "new": 0.8772919605077574
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8624038275394784,
+          "continuity": 0.9025553301202517,
+          "density_preservation": -0.0018700170808207425,
+          "knn_accuracy": 0.7186084706116558
+        },
+        "same": {
+          "trustworthiness": 0.9158372239779359,
+          "continuity": 0.9319167615757676,
+          "density_preservation": 0.15095715297983292,
+          "knn_accuracy": 0.7799258448215797
+        },
+        "new": {
+          "trustworthiness": 0.9228619053724837,
+          "continuity": 0.9346371706779903,
+          "density_preservation": 0.01552669532099808,
+          "knn_accuracy": 0.8342631762305281
+        },
+        "same_chart": {
+          "trustworthiness": 0.9054591212045787,
+          "continuity": 0.9334390784137735,
+          "density_preservation": 0.144197102055164,
+          "knn_accuracy": 0.7806524660329469
+        },
+        "new_chart": {
+          "trustworthiness": 0.9106056332008376,
+          "continuity": 0.9343784648107223,
+          "density_preservation": -0.012357996761948131,
+          "knn_accuracy": 0.818760264768825
+        },
+        "umap_same": {
+          "trustworthiness": 0.9397289748057192,
+          "continuity": 0.9635227744130093,
+          "density_preservation": -0.10127798884391152,
+          "knn_accuracy": 0.8215697008908576
+        },
+        "umap_new": {
+          "trustworthiness": 0.9326554183668595,
+          "continuity": 0.9559061619262399,
+          "density_preservation": -0.06313661845884361,
+          "knn_accuracy": 0.861755337679789
+        },
+        "umap_global": {
+          "trustworthiness": 0.8839518389738252,
+          "continuity": 0.936080694106082,
+          "density_preservation": 0.05930712227755622,
+          "knn_accuracy": 0.7982954262678545
+        },
+        "tsne_same": {
+          "trustworthiness": 0.96097242230653,
+          "continuity": 0.9675827217667423,
+          "density_preservation": 0.4186923744309043,
+          "knn_accuracy": 0.8321505001741901
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9566424554178641,
+          "continuity": 0.9592552086868854,
+          "density_preservation": 0.35386126173511157,
+          "knn_accuracy": 0.8723436022495397
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9311081108940563,
+          "continuity": 0.9377651735139497,
+          "density_preservation": 0.22705325533719842,
+          "knn_accuracy": 0.8201587617578261
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "region": 11,
+      "n_fit": 2981,
+      "n_all": 16581,
+      "purity": {
+        "level1": 0.5602146930560215,
+        "same": 0.7286145588728614,
+        "new": 0.7822878228782287
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8695484824899291,
+          "continuity": 0.8907924979373949,
+          "density_preservation": 0.03642331713254364,
+          "knn_accuracy": 0.5296909603948152
+        },
+        "same": {
+          "trustworthiness": 0.9131526589096765,
+          "continuity": 0.8756611125222854,
+          "density_preservation": 0.392422624614234,
+          "knn_accuracy": 0.6514541387024607
+        },
+        "new": {
+          "trustworthiness": 0.932620121897177,
+          "continuity": 0.9063174397780672,
+          "density_preservation": 0.2786860028218334,
+          "knn_accuracy": 0.7289478713477904
+        },
+        "same_chart": {
+          "trustworthiness": 0.8654567445108856,
+          "continuity": 0.8772604282809279,
+          "density_preservation": 0.20033019340778302,
+          "knn_accuracy": 0.5977853473182467
+        },
+        "new_chart": {
+          "trustworthiness": 0.884594620535804,
+          "continuity": 0.9066033510383387,
+          "density_preservation": 0.15280099109475298,
+          "knn_accuracy": 0.6564910683169763
+        },
+        "umap_same": {
+          "trustworthiness": 0.9221941288249964,
+          "continuity": 0.9484460878544501,
+          "density_preservation": 0.13965275491525486,
+          "knn_accuracy": 0.69473317369847
+        },
+        "umap_new": {
+          "trustworthiness": 0.9221489712482999,
+          "continuity": 0.9405454689117176,
+          "density_preservation": 0.1773500121154107,
+          "knn_accuracy": 0.7420272503456882
+        },
+        "umap_global": {
+          "trustworthiness": 0.8429418238174656,
+          "continuity": 0.9039366445533679,
+          "density_preservation": 0.14680843351899114,
+          "knn_accuracy": 0.643408316751543
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9468132998339226,
+          "continuity": 0.9493993176929976,
+          "density_preservation": 0.5523935757468889,
+          "knn_accuracy": 0.726603374815914
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9482906041641462,
+          "continuity": 0.9409416044774326,
+          "density_preservation": 0.42766628533021483,
+          "knn_accuracy": 0.7853068474362866
+        },
+        "tsne_global": {
+          "trustworthiness": 0.914693468910134,
+          "continuity": 0.9021515062715808,
+          "density_preservation": 0.28409748234885757,
+          "knn_accuracy": 0.7376704551841984
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "region": 12,
+      "n_fit": 501,
+      "n_all": 2664
+    },
+    {
+      "seed": 0,
+      "region": 13,
+      "n_fit": 440,
+      "n_all": 2600
+    },
+    {
+      "seed": 0,
+      "region": 14,
+      "n_fit": 249,
+      "n_all": 1369
+    },
+    {
+      "seed": 0,
+      "region": 15,
+      "n_fit": 908,
+      "n_all": 4846
+    },
+    {
+      "seed": 0,
+      "region": 16,
+      "n_fit": 1577,
+      "n_all": 8433,
+      "purity": {
+        "level1": 0.5986049461001902,
+        "same": 0.7767913760304376,
+        "new": 0.8084971464806595
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8401183682096809,
+          "continuity": 0.8464420602679691,
+          "density_preservation": 0.13972114637880853,
+          "knn_accuracy": 0.5808599557966646
+        },
+        "same": {
+          "trustworthiness": 0.851519653618265,
+          "continuity": 0.8630229497798059,
+          "density_preservation": 0.18244174529039123,
+          "knn_accuracy": 0.6423467952581876
+        },
+        "new": {
+          "trustworthiness": 0.8795328947114612,
+          "continuity": 0.8845384876377952,
+          "density_preservation": 0.2042739537166889,
+          "knn_accuracy": 0.7159272654209363
+        },
+        "same_chart": {
+          "trustworthiness": 0.8151320687979686,
+          "continuity": 0.8656903360446183,
+          "density_preservation": 0.15581719905163255,
+          "knn_accuracy": 0.6036648583484026
+        },
+        "new_chart": {
+          "trustworthiness": 0.858064869823599,
+          "continuity": 0.8860744154635631,
+          "density_preservation": 0.17383870887389258,
+          "knn_accuracy": 0.6861181434599156
+        },
+        "umap_same": {
+          "trustworthiness": 0.9107847741641524,
+          "continuity": 0.9308164860260091,
+          "density_preservation": 0.14365927322361585,
+          "knn_accuracy": 0.716562186055857
+        },
+        "umap_new": {
+          "trustworthiness": 0.9071318389488994,
+          "continuity": 0.920028117932065,
+          "density_preservation": 0.26405836366681706,
+          "knn_accuracy": 0.7742616033755274
+        },
+        "umap_global": {
+          "trustworthiness": 0.7905005328965389,
+          "continuity": 0.8781207036549048,
+          "density_preservation": 0.515749473446269,
+          "knn_accuracy": 0.6886578259995982
+        },
+        "tsne_same": {
+          "trustworthiness": 0.7861941928185974,
+          "continuity": 0.9195019828543153,
+          "density_preservation": 0.26347681014836755,
+          "knn_accuracy": 0.5979686558167571
+        },
+        "tsne_new": {
+          "trustworthiness": 0.8414317972633747,
+          "continuity": 0.932432008229084,
+          "density_preservation": 0.2399687804564195,
+          "knn_accuracy": 0.6626481816355233
+        },
+        "tsne_global": {
+          "trustworthiness": 0.8872985038896676,
+          "continuity": 0.8675190980819989,
+          "density_preservation": 0.52359824553852,
+          "knn_accuracy": 0.7628290134619249
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "region": 17,
+      "n_fit": 2065,
+      "n_all": 11642,
+      "purity": {
+        "level1": 0.7346246973365618,
+        "same": 0.8309927360774818,
+        "new": 0.8794188861985472
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8556954598859817,
+          "continuity": 0.8921928516197478,
+          "density_preservation": 0.05326959968407846,
+          "knn_accuracy": 0.7181598062953995
+        },
+        "same": {
+          "trustworthiness": 0.9113641725643826,
+          "continuity": 0.917998732343033,
+          "density_preservation": 0.3473885605619799,
+          "knn_accuracy": 0.7801452784503633
+        },
+        "new": {
+          "trustworthiness": 0.9199011156680865,
+          "continuity": 0.9184215130720479,
+          "density_preservation": 0.3213415593983286,
+          "knn_accuracy": 0.8276029055690073
+        },
+        "same_chart": {
+          "trustworthiness": 0.8928145115415264,
+          "continuity": 0.9204031456322838,
+          "density_preservation": 0.28336770099200853,
+          "knn_accuracy": 0.7699757869249395
+        },
+        "new_chart": {
+          "trustworthiness": 0.8913214172003211,
+          "continuity": 0.9187335480749749,
+          "density_preservation": 0.2626578828299877,
+          "knn_accuracy": 0.7762711864406779
+        },
+        "umap_same": {
+          "trustworthiness": 0.9218629713619397,
+          "continuity": 0.9557511162883288,
+          "density_preservation": -0.0963807526877642,
+          "knn_accuracy": 0.7883777239709444
+        },
+        "umap_new": {
+          "trustworthiness": 0.9152064136590333,
+          "continuity": 0.9444083863837338,
+          "density_preservation": -0.07301760805381152,
+          "knn_accuracy": 0.837772397094431
+        },
+        "umap_global": {
+          "trustworthiness": 0.8313920303009001,
+          "continuity": 0.9198979022226528,
+          "density_preservation": -0.010973349044071464,
+          "knn_accuracy": 0.6978208232445521
+        },
+        "tsne_same": {
+          "trustworthiness": 0.8661645579415519,
+          "continuity": 0.9492849788556472,
+          "density_preservation": 0.10455641246199814,
+          "knn_accuracy": 0.7273607748184019
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9460652010441335,
+          "continuity": 0.9472623512378558,
+          "density_preservation": 0.21632773642967346,
+          "knn_accuracy": 0.8595641646489105
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9174980255622496,
+          "continuity": 0.9130461277096463,
+          "density_preservation": 0.2457055708885657,
+          "knn_accuracy": 0.840677966101695
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 0,
+      "n_fit": 12169,
+      "n_all": 65603,
+      "purity": {
+        "level1": 0.5954474484345468,
+        "same": 0.6839510230914619,
+        "new": 0.7028515079299861
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8999205617413983,
+          "continuity": 0.895130448390009,
+          "density_preservation": 0.12096567341156317,
+          "knn_accuracy": 0.5626
+        },
+        "same": {
+          "trustworthiness": 0.9332558170328017,
+          "continuity": 0.8986125549202528,
+          "density_preservation": 0.5441864702106225,
+          "knn_accuracy": 0.6436
+        },
+        "new": {
+          "trustworthiness": 0.9358049593740596,
+          "continuity": 0.9138060908817334,
+          "density_preservation": 0.5751081877202538,
+          "knn_accuracy": 0.6646000000000001
+        },
+        "same_chart": {
+          "trustworthiness": 0.8645877901494633,
+          "continuity": 0.89991804995486,
+          "density_preservation": 0.3230795192885329,
+          "knn_accuracy": 0.5893999999999999
+        },
+        "new_chart": {
+          "trustworthiness": 0.8818562383388504,
+          "continuity": 0.9147816029692045,
+          "density_preservation": 0.3251520012988778,
+          "knn_accuracy": 0.5967999999999999
+        },
+        "umap_same": {
+          "trustworthiness": 0.9042163346373758,
+          "continuity": 0.95551615608386,
+          "density_preservation": -0.18990241393364513,
+          "knn_accuracy": 0.6394
+        },
+        "umap_new": {
+          "trustworthiness": 0.9132221245862173,
+          "continuity": 0.9488221887852342,
+          "density_preservation": -0.10852400329876248,
+          "knn_accuracy": 0.6998
+        },
+        "umap_global": {
+          "trustworthiness": 0.8772001083358411,
+          "continuity": 0.9439378352893971,
+          "density_preservation": 0.2566721245339549,
+          "knn_accuracy": 0.6256
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9465867750025078,
+          "continuity": 0.9533503460728258,
+          "density_preservation": 0.26295288166503983,
+          "knn_accuracy": 0.7
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9444733995385696,
+          "continuity": 0.9446923904102719,
+          "density_preservation": 0.25775833961720523,
+          "knn_accuracy": 0.7535999999999999
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9336832420503561,
+          "continuity": 0.939610913832882,
+          "density_preservation": 0.4164438144950169,
+          "knn_accuracy": 0.7081999999999999
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 1,
+      "n_fit": 10192,
+      "n_all": 54877,
+      "purity": {
+        "level1": 0.720467032967033,
+        "same": 0.8145604395604396,
+        "new": 0.8378139717425431
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.9105871521717324,
+          "continuity": 0.8853783087571472,
+          "density_preservation": 0.06928350376035375,
+          "knn_accuracy": 0.7081999999999999
+        },
+        "same": {
+          "trustworthiness": 0.9440652382385395,
+          "continuity": 0.9198021025178051,
+          "density_preservation": 0.4438142221698563,
+          "knn_accuracy": 0.779
+        },
+        "new": {
+          "trustworthiness": 0.9431852221887852,
+          "continuity": 0.9142857458120173,
+          "density_preservation": 0.45987073684691654,
+          "knn_accuracy": 0.8160000000000001
+        },
+        "same_chart": {
+          "trustworthiness": 0.8825382164710602,
+          "continuity": 0.9200181241849734,
+          "density_preservation": 0.3776561799840216,
+          "knn_accuracy": 0.7132
+        },
+        "new_chart": {
+          "trustworthiness": 0.8770318948741097,
+          "continuity": 0.9144813241047246,
+          "density_preservation": 0.2810206986525478,
+          "knn_accuracy": 0.7304
+        },
+        "umap_same": {
+          "trustworthiness": 0.925708075032601,
+          "continuity": 0.9459927134115759,
+          "density_preservation": 0.13265219694052155,
+          "knn_accuracy": 0.8338000000000001
+        },
+        "umap_new": {
+          "trustworthiness": 0.9312968963787742,
+          "continuity": 0.9403608987862373,
+          "density_preservation": 0.05912792864318108,
+          "knn_accuracy": 0.8754000000000002
+        },
+        "umap_global": {
+          "trustworthiness": 0.8954562142642191,
+          "continuity": 0.9311438178352894,
+          "density_preservation": 0.2068947228160324,
+          "knn_accuracy": 0.8214
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9567858080048149,
+          "continuity": 0.9487806319590731,
+          "density_preservation": 0.4754419484440442,
+          "knn_accuracy": 0.8460000000000001
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9578989186478082,
+          "continuity": 0.9460229029992978,
+          "density_preservation": 0.36027791551855753,
+          "knn_accuracy": 0.8865999999999999
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9435551609990972,
+          "continuity": 0.9299819921757448,
+          "density_preservation": 0.38619823951017407,
+          "knn_accuracy": 0.8548
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 2,
+      "n_fit": 3381,
+      "n_all": 18466,
+      "purity": {
+        "level1": 0.6285122744750073,
+        "same": 0.7568766637089619,
+        "new": 0.7965099083111505
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8812210087473977,
+          "continuity": 0.8889153387644193,
+          "density_preservation": 0.12631624148524706,
+          "knn_accuracy": 0.5998173284504383
+        },
+        "same": {
+          "trustworthiness": 0.9380160510523317,
+          "continuity": 0.9194525095472875,
+          "density_preservation": 0.11625911128624251,
+          "knn_accuracy": 0.7080720722295544
+        },
+        "new": {
+          "trustworthiness": 0.9365705502679973,
+          "continuity": 0.9191778310026962,
+          "density_preservation": 0.2844825198160466,
+          "knn_accuracy": 0.7583513237132145
+        },
+        "same_chart": {
+          "trustworthiness": 0.9105657819961067,
+          "continuity": 0.9207104327006587,
+          "density_preservation": 0.08691564030033107,
+          "knn_accuracy": 0.6915079580117643
+        },
+        "new_chart": {
+          "trustworthiness": 0.8931486312365179,
+          "continuity": 0.9190602082978231,
+          "density_preservation": 0.031228570709297496,
+          "knn_accuracy": 0.706002377352224
+        },
+        "umap_same": {
+          "trustworthiness": 0.9282421438794427,
+          "continuity": 0.9557114308326601,
+          "density_preservation": -0.035353559732811644,
+          "knn_accuracy": 0.7326234781012648
+        },
+        "umap_new": {
+          "trustworthiness": 0.9284391074225999,
+          "continuity": 0.9483193658568373,
+          "density_preservation": 0.0168177034505999,
+          "knn_accuracy": 0.7808339087341473
+        },
+        "umap_global": {
+          "trustworthiness": 0.8726218785525359,
+          "continuity": 0.9260010991535937,
+          "density_preservation": 0.05699323658169891,
+          "knn_accuracy": 0.6782004667301793
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9555585670155229,
+          "continuity": 0.9558524480115598,
+          "density_preservation": 0.42628064496883683,
+          "knn_accuracy": 0.7704806272014543
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9548006633941647,
+          "continuity": 0.9501417971411724,
+          "density_preservation": 0.2768655643017195,
+          "knn_accuracy": 0.8192858329036037
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9266363707349191,
+          "continuity": 0.9198002540787523,
+          "density_preservation": 0.2794439811395748,
+          "knn_accuracy": 0.7710705951246799
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 3,
+      "n_fit": 2307,
+      "n_all": 12448,
+      "purity": {
+        "level1": 0.6094495015171218,
+        "same": 0.7451235370611183,
+        "new": 0.7923710446467274
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8817169538089589,
+          "continuity": 0.9059846981660139,
+          "density_preservation": 0.08602092518500416,
+          "knn_accuracy": 0.5864833647913908
+        },
+        "same": {
+          "trustworthiness": 0.9146369032536803,
+          "continuity": 0.9113700100283921,
+          "density_preservation": 0.23142232787519434,
+          "knn_accuracy": 0.6653454282521528
+        },
+        "new": {
+          "trustworthiness": 0.933985675373861,
+          "continuity": 0.9087265928123771,
+          "density_preservation": 0.31378237584540236,
+          "knn_accuracy": 0.7230122733376529
+        },
+        "same_chart": {
+          "trustworthiness": 0.8916027750357255,
+          "continuity": 0.9124022260136474,
+          "density_preservation": 0.20332586877214054,
+          "knn_accuracy": 0.6484557380435906
+        },
+        "new_chart": {
+          "trustworthiness": 0.9062618007163732,
+          "continuity": 0.909004225014686,
+          "density_preservation": 0.3098979094768318,
+          "knn_accuracy": 0.6922228169516672
+        },
+        "umap_same": {
+          "trustworthiness": 0.937164892285345,
+          "continuity": 0.9592080038732691,
+          "density_preservation": 0.15079865642304266,
+          "knn_accuracy": 0.7316787334140914
+        },
+        "umap_new": {
+          "trustworthiness": 0.9319542899017789,
+          "continuity": 0.9512314833441959,
+          "density_preservation": 0.11958748403621543,
+          "knn_accuracy": 0.7706942370716774
+        },
+        "umap_global": {
+          "trustworthiness": 0.8834640864293618,
+          "continuity": 0.9252790296322295,
+          "density_preservation": 0.07502778418141258,
+          "knn_accuracy": 0.7065385807251318
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9569053987706967,
+          "continuity": 0.9608967045339436,
+          "density_preservation": 0.4745289326469741,
+          "knn_accuracy": 0.7589880835000141
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9557600642619144,
+          "continuity": 0.9560285788842333,
+          "density_preservation": 0.32468747101170603,
+          "knn_accuracy": 0.7967020687194223
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9181169435564105,
+          "continuity": 0.9107667742900513,
+          "density_preservation": 0.29803652642398537,
+          "knn_accuracy": 0.7399226225690434
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 4,
+      "n_fit": 2980,
+      "n_all": 16395,
+      "purity": {
+        "level1": 0.5473154362416107,
+        "same": 0.7593959731543625,
+        "new": 0.8224832214765101
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8494675471830532,
+          "continuity": 0.8768339670440255,
+          "density_preservation": 0.07766974526554292,
+          "knn_accuracy": 0.5268456375838927
+        },
+        "same": {
+          "trustworthiness": 0.9144192972546499,
+          "continuity": 0.8734629921634193,
+          "density_preservation": 0.3958050688123993,
+          "knn_accuracy": 0.7016778523489933
+        },
+        "new": {
+          "trustworthiness": 0.920122127502063,
+          "continuity": 0.8911511951832705,
+          "density_preservation": 0.2584393749374282,
+          "knn_accuracy": 0.7721476510067113
+        },
+        "same_chart": {
+          "trustworthiness": 0.8534424243933527,
+          "continuity": 0.875123287764271,
+          "density_preservation": 0.23281693524785713,
+          "knn_accuracy": 0.626510067114094
+        },
+        "new_chart": {
+          "trustworthiness": 0.8557080033189159,
+          "continuity": 0.8915204981543341,
+          "density_preservation": 0.2183453356003324,
+          "knn_accuracy": 0.6865771812080537
+        },
+        "umap_same": {
+          "trustworthiness": 0.9286739165131913,
+          "continuity": 0.9449220360394421,
+          "density_preservation": 0.16929034426858586,
+          "knn_accuracy": 0.785234899328859
+        },
+        "umap_new": {
+          "trustworthiness": 0.9238289671628815,
+          "continuity": 0.935222357177382,
+          "density_preservation": 0.14216756741019193,
+          "knn_accuracy": 0.8359060402684563
+        },
+        "umap_global": {
+          "trustworthiness": 0.8484420565053354,
+          "continuity": 0.9126719989676496,
+          "density_preservation": 0.4488430945326571,
+          "knn_accuracy": 0.6855704697986577
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9526633960478639,
+          "continuity": 0.943857379437437,
+          "density_preservation": 0.5512613608280608,
+          "knn_accuracy": 0.8100671140939596
+        },
+        "tsne_new": {
+          "trustworthiness": 0.951572409983462,
+          "continuity": 0.9385290705111153,
+          "density_preservation": 0.3867788712342773,
+          "knn_accuracy": 0.8630872483221476
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9139729075944538,
+          "continuity": 0.9045970947034313,
+          "density_preservation": 0.5084952522855133,
+          "knn_accuracy": 0.7738255033557048
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 5,
+      "n_fit": 3083,
+      "n_all": 16724,
+      "purity": {
+        "level1": 0.4849172883554979,
+        "same": 0.670450859552384,
+        "new": 0.7119688614985403
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8917017659478683,
+          "continuity": 0.8904372454459493,
+          "density_preservation": 0.037850222992189556,
+          "knn_accuracy": 0.4440353406722937
+        },
+        "same": {
+          "trustworthiness": 0.9342011572783524,
+          "continuity": 0.8850368598627328,
+          "density_preservation": 0.11481502548198616,
+          "knn_accuracy": 0.5942321454882233
+        },
+        "new": {
+          "trustworthiness": 0.9387652190509725,
+          "continuity": 0.8734616443038447,
+          "density_preservation": 0.10197296714604097,
+          "knn_accuracy": 0.6383469447894083
+        },
+        "same_chart": {
+          "trustworthiness": 0.8902295919918389,
+          "continuity": 0.8857369580164749,
+          "density_preservation": -0.0394111183642138,
+          "knn_accuracy": 0.580933086362584
+        },
+        "new_chart": {
+          "trustworthiness": 0.8841837232915685,
+          "continuity": 0.8741459448070907,
+          "density_preservation": 0.059633135693586144,
+          "knn_accuracy": 0.5841856279862763
+        },
+        "umap_same": {
+          "trustworthiness": 0.9303835397787007,
+          "continuity": 0.9479275919870807,
+          "density_preservation": 0.16261768228724233,
+          "knn_accuracy": 0.6013671093897999
+        },
+        "umap_new": {
+          "trustworthiness": 0.9185817431924842,
+          "continuity": 0.9367639718402122,
+          "density_preservation": 0.09540858588547406,
+          "knn_accuracy": 0.627313245911301
+        },
+        "umap_global": {
+          "trustworthiness": 0.8589029990951246,
+          "continuity": 0.9153242021010135,
+          "density_preservation": 0.21620739539311973,
+          "knn_accuracy": 0.5536882485423814
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9595764558965074,
+          "continuity": 0.9469013157042551,
+          "density_preservation": 0.4931410702873675,
+          "knn_accuracy": 0.6681833968300742
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9592561357984647,
+          "continuity": 0.9412691783767808,
+          "density_preservation": 0.30467625207269344,
+          "knn_accuracy": 0.7155438969458419
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9334647477914086,
+          "continuity": 0.896842230482328,
+          "density_preservation": 0.32238933531466396,
+          "knn_accuracy": 0.6947841461617799
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 6,
+      "n_fit": 1392,
+      "n_all": 7588,
+      "purity": {
+        "level1": 0.6875,
+        "same": 0.8311781609195402,
+        "new": 0.8469827586206896
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8578335128657975,
+          "continuity": 0.8805727607500282,
+          "density_preservation": 0.17673024237436163,
+          "knn_accuracy": 0.6515896959851474
+        },
+        "same": {
+          "trustworthiness": 0.8964404557619483,
+          "continuity": 0.9201027301460059,
+          "density_preservation": -0.1437315882172027,
+          "knn_accuracy": 0.7543049431422604
+        },
+        "new": {
+          "trustworthiness": 0.894037852123702,
+          "continuity": 0.9260436368267011,
+          "density_preservation": 0.029724185925563036,
+          "knn_accuracy": 0.7751502024187102
+        },
+        "same_chart": {
+          "trustworthiness": 0.8865391359895788,
+          "continuity": 0.9210987178041927,
+          "density_preservation": -0.13887902572578503,
+          "knn_accuracy": 0.7385137051649003
+        },
+        "new_chart": {
+          "trustworthiness": 0.8852162844295252,
+          "continuity": 0.9265109953196304,
+          "density_preservation": 0.05371400482234804,
+          "knn_accuracy": 0.7492973363244888
+        },
+        "umap_same": {
+          "trustworthiness": 0.9214192145663456,
+          "continuity": 0.9619727277661568,
+          "density_preservation": -0.22192782493187288,
+          "knn_accuracy": 0.7550372605141693
+        },
+        "umap_new": {
+          "trustworthiness": 0.9179164004993507,
+          "continuity": 0.9556357536814593,
+          "density_preservation": -0.09676076874973279,
+          "knn_accuracy": 0.7909388618137748
+        },
+        "umap_global": {
+          "trustworthiness": 0.8613409718134031,
+          "continuity": 0.9196356847910951,
+          "density_preservation": 0.19359027344883345,
+          "knn_accuracy": 0.7341997369846058
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9504717946148611,
+          "continuity": 0.9633005373448401,
+          "density_preservation": 0.3023232987526595,
+          "knn_accuracy": 0.790951754725252
+        },
+        "tsne_new": {
+          "trustworthiness": 0.946373131087925,
+          "continuity": 0.9521030349336773,
+          "density_preservation": 0.23834808557951964,
+          "knn_accuracy": 0.8225471235914494
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9095103669560062,
+          "continuity": 0.9094838546037551,
+          "density_preservation": 0.325994001149689,
+          "knn_accuracy": 0.7881024212887755
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 7,
+      "n_fit": 2364,
+      "n_all": 12808,
+      "purity": {
+        "level1": 0.6983925549915397,
+        "same": 0.8197969543147208,
+        "new": 0.8405245346869712
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8983534509372905,
+          "continuity": 0.9080583531195164,
+          "density_preservation": 0.07820667306459002,
+          "knn_accuracy": 0.6844322213064823
+        },
+        "same": {
+          "trustworthiness": 0.9307769620742908,
+          "continuity": 0.9388468608864714,
+          "density_preservation": 0.450499359322768,
+          "knn_accuracy": 0.765220195649837
+        },
+        "new": {
+          "trustworthiness": 0.940420497368987,
+          "continuity": 0.9323620181654633,
+          "density_preservation": 0.15077590299392124,
+          "knn_accuracy": 0.7922976314186405
+        },
+        "same_chart": {
+          "trustworthiness": 0.9054681733345293,
+          "continuity": 0.9392401889530957,
+          "density_preservation": 0.37259727497158335,
+          "knn_accuracy": 0.7343381588848675
+        },
+        "new_chart": {
+          "trustworthiness": 0.9221676038310805,
+          "continuity": 0.9321336079803251,
+          "density_preservation": 0.10840085780686526,
+          "knn_accuracy": 0.769032859139284
+        },
+        "umap_same": {
+          "trustworthiness": 0.9512898213821905,
+          "continuity": 0.9628015254003437,
+          "density_preservation": 0.1614556461006189,
+          "knn_accuracy": 0.7728464184613179
+        },
+        "umap_new": {
+          "trustworthiness": 0.9463358906772404,
+          "continuity": 0.9569678525407909,
+          "density_preservation": 0.17002066309449357,
+          "knn_accuracy": 0.8316417027985809
+        },
+        "umap_global": {
+          "trustworthiness": 0.9059774806758247,
+          "continuity": 0.9232951190719353,
+          "density_preservation": 0.2609609157111115,
+          "knn_accuracy": 0.7901762998530835
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9654574670011135,
+          "continuity": 0.9663977835152004,
+          "density_preservation": 0.5157108541901028,
+          "knn_accuracy": 0.8020263733113555
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9669862716130504,
+          "continuity": 0.9585828445776852,
+          "density_preservation": 0.4122143605659761,
+          "knn_accuracy": 0.8523685813595154
+        },
+        "tsne_global": {
+          "trustworthiness": 0.923863091500605,
+          "continuity": 0.9098785919082166,
+          "density_preservation": 0.3836043040749101,
+          "knn_accuracy": 0.7897588418676318
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 8,
+      "n_fit": 2092,
+      "n_all": 11124,
+      "purity": {
+        "level1": 0.624282982791587,
+        "same": 0.7882409177820268,
+        "new": 0.8413001912045889
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8684507133685295,
+          "continuity": 0.8551380996206754,
+          "density_preservation": 0.05863408802678917,
+          "knn_accuracy": 0.5879412134154001
+        },
+        "same": {
+          "trustworthiness": 0.9047894608656738,
+          "continuity": 0.8934189341805941,
+          "density_preservation": 0.2713131507447568,
+          "knn_accuracy": 0.7031403090064062
+        },
+        "new": {
+          "trustworthiness": 0.916769880926456,
+          "continuity": 0.9110277810645303,
+          "density_preservation": 0.17821064552333585,
+          "knn_accuracy": 0.7753365840289594
+        },
+        "same_chart": {
+          "trustworthiness": 0.8624658900313487,
+          "continuity": 0.8963855518759274,
+          "density_preservation": 0.3073022612486679,
+          "knn_accuracy": 0.6744721426042868
+        },
+        "new_chart": {
+          "trustworthiness": 0.8911891884923658,
+          "continuity": 0.9110969102940628,
+          "density_preservation": 0.1392839151206536,
+          "knn_accuracy": 0.7413812791905997
+        },
+        "umap_same": {
+          "trustworthiness": 0.927032705515007,
+          "continuity": 0.9441908427136226,
+          "density_preservation": 0.21386991912039938,
+          "knn_accuracy": 0.7739011773303949
+        },
+        "umap_new": {
+          "trustworthiness": 0.9142981484047792,
+          "continuity": 0.9337107548322552,
+          "density_preservation": 0.23273780656472076,
+          "knn_accuracy": 0.8130922337303446
+        },
+        "umap_global": {
+          "trustworthiness": 0.8589550321613209,
+          "continuity": 0.8990698515989041,
+          "density_preservation": 0.38127093289022507,
+          "knn_accuracy": 0.7523826380879515
+        },
+        "tsne_same": {
+          "trustworthiness": 0.8469477476946564,
+          "continuity": 0.9403424187357478,
+          "density_preservation": 0.33999444634177906,
+          "knn_accuracy": 0.6285768119582966
+        },
+        "tsne_new": {
+          "trustworthiness": 0.8720972054111865,
+          "continuity": 0.9458201792894076,
+          "density_preservation": 0.13418974828051725,
+          "knn_accuracy": 0.7327893937490721
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9197454994638629,
+          "continuity": 0.8909105076889291,
+          "density_preservation": 0.3905629340542209,
+          "knn_accuracy": 0.7777152253599937
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 9,
+      "n_fit": 641,
+      "n_all": 3611
+    },
+    {
+      "seed": 1,
+      "region": 10,
+      "n_fit": 2776,
+      "n_all": 15179,
+      "purity": {
+        "level1": 0.5367435158501441,
+        "same": 0.7319884726224783,
+        "new": 0.7795389048991355
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8816210518183911,
+          "continuity": 0.9002761789280332,
+          "density_preservation": 0.11765858225245866,
+          "knn_accuracy": 0.5086441117376369
+        },
+        "same": {
+          "trustworthiness": 0.922955644338332,
+          "continuity": 0.902356368427179,
+          "density_preservation": 0.2713048167844546,
+          "knn_accuracy": 0.660303973037786
+        },
+        "new": {
+          "trustworthiness": 0.9352982090388963,
+          "continuity": 0.9214959570140104,
+          "density_preservation": 0.15338031542010758,
+          "knn_accuracy": 0.7190265085229114
+        },
+        "same_chart": {
+          "trustworthiness": 0.8984873579369732,
+          "continuity": 0.903027515584979,
+          "density_preservation": 0.3498069587928154,
+          "knn_accuracy": 0.6480562576965455
+        },
+        "new_chart": {
+          "trustworthiness": 0.9046504647959298,
+          "continuity": 0.9214859480725154,
+          "density_preservation": 0.14684457350522973,
+          "knn_accuracy": 0.6711070062868624
+        },
+        "umap_same": {
+          "trustworthiness": 0.931330818613969,
+          "continuity": 0.9598266404354973,
+          "density_preservation": -0.18468575444340884,
+          "knn_accuracy": 0.6801218484671722
+        },
+        "umap_new": {
+          "trustworthiness": 0.9265537739842686,
+          "continuity": 0.9520822382655274,
+          "density_preservation": -0.15729192823504506,
+          "knn_accuracy": 0.7211847819042063
+        },
+        "umap_global": {
+          "trustworthiness": 0.8707061901975532,
+          "continuity": 0.9086032398173701,
+          "density_preservation": 0.34622244154863974,
+          "knn_accuracy": 0.6239283168060148
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9536984800502353,
+          "continuity": 0.9614944276164312,
+          "density_preservation": 0.3436208878338435,
+          "knn_accuracy": 0.7334337935057359
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9553573674944031,
+          "continuity": 0.9544999783378841,
+          "density_preservation": 0.2988056895640142,
+          "knn_accuracy": 0.7737798950029164
+        },
+        "tsne_global": {
+          "trustworthiness": 0.917299313545817,
+          "continuity": 0.9081675702987858,
+          "density_preservation": 0.4512753104638658,
+          "knn_accuracy": 0.7190206753516106
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 11,
+      "n_fit": 1148,
+      "n_all": 6268,
+      "purity": {
+        "level1": 0.7952961672473867,
+        "same": 0.9059233449477352,
+        "new": 0.9146341463414634
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8845832275730515,
+          "continuity": 0.882797609433048,
+          "density_preservation": 0.2262694720480008,
+          "knn_accuracy": 0.7787583064363016
+        },
+        "same": {
+          "trustworthiness": 0.905789433201806,
+          "continuity": 0.9286242702540555,
+          "density_preservation": 0.22583607139921605,
+          "knn_accuracy": 0.8283956711600531
+        },
+        "new": {
+          "trustworthiness": 0.9097355608371599,
+          "continuity": 0.9272568474975195,
+          "density_preservation": 0.09722461068989562,
+          "knn_accuracy": 0.8658515283842796
+        },
+        "same_chart": {
+          "trustworthiness": 0.9010746013798833,
+          "continuity": 0.9304210412965057,
+          "density_preservation": 0.19457441845982593,
+          "knn_accuracy": 0.8170799316498956
+        },
+        "new_chart": {
+          "trustworthiness": 0.9032782610702171,
+          "continuity": 0.9283557545130796,
+          "density_preservation": 0.10042043463922462,
+          "knn_accuracy": 0.863246629960129
+        },
+        "umap_same": {
+          "trustworthiness": 0.9426665436001569,
+          "continuity": 0.9630757397450985,
+          "density_preservation": 0.13149075354881828,
+          "knn_accuracy": 0.8762825137649516
+        },
+        "umap_new": {
+          "trustworthiness": 0.9382609933005669,
+          "continuity": 0.9549804247332918,
+          "density_preservation": 0.19540043291130027,
+          "knn_accuracy": 0.8867514714258592
+        },
+        "umap_global": {
+          "trustworthiness": 0.8960901000684558,
+          "continuity": 0.9409503042050288,
+          "density_preservation": 0.18653425567953738,
+          "knn_accuracy": 0.8588836149610783
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9066694356631362,
+          "continuity": 0.9468534200952227,
+          "density_preservation": 0.13543471518420724,
+          "knn_accuracy": 0.8414581355610405
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9604363476936567,
+          "continuity": 0.9571946219935237,
+          "density_preservation": 0.5101682071209871,
+          "knn_accuracy": 0.8919802544142776
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9320283668304989,
+          "continuity": 0.9391602249040466,
+          "density_preservation": 0.35988454382253565,
+          "knn_accuracy": 0.8850199354471234
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 12,
+      "n_fit": 1219,
+      "n_all": 6452,
+      "purity": {
+        "level1": 0.6997538966365874,
+        "same": 0.8621821164889254,
+        "new": 0.8925348646431501
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8305325627706719,
+          "continuity": 0.8778110603711556,
+          "density_preservation": 0.05194616801284977,
+          "knn_accuracy": 0.6776124940970114
+        },
+        "same": {
+          "trustworthiness": 0.888135813884374,
+          "continuity": 0.9142193622443154,
+          "density_preservation": 0.24323181802537255,
+          "knn_accuracy": 0.7621129326047358
+        },
+        "new": {
+          "trustworthiness": 0.8988285125452732,
+          "continuity": 0.9227052079779614,
+          "density_preservation": 0.4076391836091028,
+          "knn_accuracy": 0.8269210011468662
+        },
+        "same_chart": {
+          "trustworthiness": 0.8762019990232208,
+          "continuity": 0.9163635731577267,
+          "density_preservation": 0.23679161258224193,
+          "knn_accuracy": 0.7555589286918977
+        },
+        "new_chart": {
+          "trustworthiness": 0.8893074035839548,
+          "continuity": 0.9230400939562045,
+          "density_preservation": 0.3869287847326582,
+          "knn_accuracy": 0.7957228631181273
+        },
+        "umap_same": {
+          "trustworthiness": 0.9296046907212454,
+          "continuity": 0.9522261601638371,
+          "density_preservation": 0.2354432958526271,
+          "knn_accuracy": 0.821979356405586
+        },
+        "umap_new": {
+          "trustworthiness": 0.9287160466141106,
+          "continuity": 0.9468217016747367,
+          "density_preservation": 0.29871491360843216,
+          "knn_accuracy": 0.8843216622815895
+        },
+        "umap_global": {
+          "trustworthiness": 0.864443159188762,
+          "continuity": 0.9051238645282951,
+          "density_preservation": 0.48278830441574766,
+          "knn_accuracy": 0.8260945827430344
+        },
+        "tsne_same": {
+          "trustworthiness": 0.8561625529585741,
+          "continuity": 0.936031461423187,
+          "density_preservation": 0.2035629409021668,
+          "knn_accuracy": 0.7399547999730149
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9487302041182182,
+          "continuity": 0.9516854893762484,
+          "density_preservation": 0.5228237192938765,
+          "knn_accuracy": 0.8867705592660056
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9156676265186343,
+          "continuity": 0.9174562979933084,
+          "density_preservation": 0.5369232398559337,
+          "knn_accuracy": 0.8408655467854012
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 13,
+      "n_fit": 1049,
+      "n_all": 5513,
+      "purity": {
+        "level1": 0.665395614871306,
+        "same": 0.8646329837940896,
+        "new": 0.8903717826501429
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8401497406012038,
+          "continuity": 0.8396392906276533,
+          "density_preservation": 0.05543948709940377,
+          "knn_accuracy": 0.6301526543631807
+        },
+        "same": {
+          "trustworthiness": 0.8700823647097726,
+          "continuity": 0.8970922153611867,
+          "density_preservation": 0.16992231956527698,
+          "knn_accuracy": 0.752157666894509
+        },
+        "new": {
+          "trustworthiness": 0.86503809696428,
+          "continuity": 0.8957317840890695,
+          "density_preservation": 0.21445993041366174,
+          "knn_accuracy": 0.7693050808840283
+        },
+        "same_chart": {
+          "trustworthiness": 0.8635576629065487,
+          "continuity": 0.9009698457258577,
+          "density_preservation": 0.1674310700738578,
+          "knn_accuracy": 0.7407154249259513
+        },
+        "new_chart": {
+          "trustworthiness": 0.85907051800895,
+          "continuity": 0.8972701441647608,
+          "density_preservation": 0.22653750033122183,
+          "knn_accuracy": 0.7569195716564138
+        },
+        "umap_same": {
+          "trustworthiness": 0.9090028377292079,
+          "continuity": 0.9386283063603782,
+          "density_preservation": 0.32300377962202415,
+          "knn_accuracy": 0.7855228981544771
+        },
+        "umap_new": {
+          "trustworthiness": 0.899025357852273,
+          "continuity": 0.9231988628790615,
+          "density_preservation": 0.24377292918541127,
+          "knn_accuracy": 0.7979084073820916
+        },
+        "umap_global": {
+          "trustworthiness": 0.8340048785144744,
+          "continuity": 0.9112150028386516,
+          "density_preservation": 0.24890127526886535,
+          "knn_accuracy": 0.6911323763955343
+        },
+        "tsne_same": {
+          "trustworthiness": 0.8600121847563256,
+          "continuity": 0.9337814298225832,
+          "density_preservation": 0.2313508159907184,
+          "knn_accuracy": 0.6978263841421736
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9336751706304021,
+          "continuity": 0.9253333628497756,
+          "density_preservation": 0.5318016959514654,
+          "knn_accuracy": 0.8646479835953521
+        },
+        "tsne_global": {
+          "trustworthiness": 0.8840874553736758,
+          "continuity": 0.9003996249567053,
+          "density_preservation": 0.27451473227620393,
+          "knn_accuracy": 0.7559671907040328
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 14,
+      "n_fit": 425,
+      "n_all": 2276
+    },
+    {
+      "seed": 1,
+      "region": 15,
+      "n_fit": 1135,
+      "n_all": 6310,
+      "purity": {
+        "level1": 0.6898678414096916,
+        "same": 0.8458149779735683,
+        "new": 0.8819383259911894
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.883430653631164,
+          "continuity": 0.9008150665121505,
+          "density_preservation": -0.037054265328663835,
+          "knn_accuracy": 0.6845814977973569
+        },
+        "same": {
+          "trustworthiness": 0.9080634251052133,
+          "continuity": 0.9346287774002318,
+          "density_preservation": 0.172549613947071,
+          "knn_accuracy": 0.7515418502202643
+        },
+        "new": {
+          "trustworthiness": 0.9221220140363166,
+          "continuity": 0.9327600230593819,
+          "density_preservation": 0.2567695472079184,
+          "knn_accuracy": 0.8
+        },
+        "same_chart": {
+          "trustworthiness": 0.9044232695134117,
+          "continuity": 0.9367459119769092,
+          "density_preservation": 0.1693627389883949,
+          "knn_accuracy": 0.745374449339207
+        },
+        "new_chart": {
+          "trustworthiness": 0.9149712446360376,
+          "continuity": 0.9327615970786203,
+          "density_preservation": 0.23944049499693898,
+          "knn_accuracy": 0.7841409691629956
+        },
+        "umap_same": {
+          "trustworthiness": 0.9472738970552068,
+          "continuity": 0.9630666616822724,
+          "density_preservation": 0.06222432013121429,
+          "knn_accuracy": 0.8017621145374451
+        },
+        "umap_new": {
+          "trustworthiness": 0.9456691057406449,
+          "continuity": 0.9572259484941554,
+          "density_preservation": 0.02759600709449043,
+          "knn_accuracy": 0.8493392070484582
+        },
+        "umap_global": {
+          "trustworthiness": 0.9000331724554503,
+          "continuity": 0.9082163410742288,
+          "density_preservation": 0.24843311800473014,
+          "knn_accuracy": 0.8070484581497798
+        },
+        "tsne_same": {
+          "trustworthiness": 0.959775544856597,
+          "continuity": 0.9676378496536174,
+          "density_preservation": 0.48502733553242705,
+          "knn_accuracy": 0.8176211453744495
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9581572169765845,
+          "continuity": 0.9567983661680305,
+          "density_preservation": 0.3391100886714702,
+          "knn_accuracy": 0.866079295154185
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9205409117112934,
+          "continuity": 0.9021440109551739,
+          "density_preservation": 0.33503599202789747,
+          "knn_accuracy": 0.8035242290748899
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "region": 16,
+      "n_fit": 128,
+      "n_all": 647
+    },
+    {
+      "seed": 1,
+      "region": 17,
+      "n_fit": 1519,
+      "n_all": 8623,
+      "purity": {
+        "level1": 0.7136273864384464,
+        "same": 0.8446346280447663,
+        "new": 0.857801184990125
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.826934957340049,
+          "continuity": 0.8588802121361326,
+          "density_preservation": 0.11608717728456347,
+          "knn_accuracy": 0.6912410977939898
+        },
+        "same": {
+          "trustworthiness": 0.870061758464395,
+          "continuity": 0.9071044017765876,
+          "density_preservation": 0.2849759291781203,
+          "knn_accuracy": 0.7583963001563314
+        },
+        "new": {
+          "trustworthiness": 0.8911356056846074,
+          "continuity": 0.9161780729756528,
+          "density_preservation": 0.0011648134136634516,
+          "knn_accuracy": 0.8031570262289387
+        },
+        "same_chart": {
+          "trustworthiness": 0.8498086864684619,
+          "continuity": 0.9085272393819731,
+          "density_preservation": 0.24515338482648782,
+          "knn_accuracy": 0.736017022754907
+        },
+        "new_chart": {
+          "trustworthiness": 0.871994313028214,
+          "continuity": 0.9162724325706553,
+          "density_preservation": 0.006097363748241315,
+          "knn_accuracy": 0.7821000521104743
+        },
+        "umap_same": {
+          "trustworthiness": 0.91442898323924,
+          "continuity": 0.9460101107072306,
+          "density_preservation": 0.020541826067521227,
+          "knn_accuracy": 0.8064443286433907
+        },
+        "umap_new": {
+          "trustworthiness": 0.9085427397516395,
+          "continuity": 0.9406909443030996,
+          "density_preservation": 0.09697830830602473,
+          "knn_accuracy": 0.8393716345318744
+        },
+        "umap_global": {
+          "trustworthiness": 0.8137785150426928,
+          "continuity": 0.9004310109853397,
+          "density_preservation": 0.17376363711688025,
+          "knn_accuracy": 0.6892826124717735
+        },
+        "tsne_same": {
+          "trustworthiness": 0.8257987014280701,
+          "continuity": 0.931878633856967,
+          "density_preservation": 0.2639981985777893,
+          "knn_accuracy": 0.7241597186034394
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9338842678472635,
+          "continuity": 0.9430470880650875,
+          "density_preservation": 0.3925103870257373,
+          "knn_accuracy": 0.8558276880319611
+        },
+        "tsne_global": {
+          "trustworthiness": 0.903275679109946,
+          "continuity": 0.8951136836081183,
+          "density_preservation": 0.30962697436164355,
+          "knn_accuracy": 0.809749001215911
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 0,
+      "n_fit": 10582,
+      "n_all": 57258,
+      "purity": {
+        "level1": 0.6183141183141183,
+        "same": 0.7101682101682102,
+        "new": 0.7230202230202231
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.9155690721235831,
+          "continuity": 0.9098426241348179,
+          "density_preservation": 0.20044271622116278,
+          "knn_accuracy": 0.5836
+        },
+        "same": {
+          "trustworthiness": 0.9469237395927375,
+          "continuity": 0.9339599077139131,
+          "density_preservation": 0.5196429925526198,
+          "knn_accuracy": 0.6662000000000001
+        },
+        "new": {
+          "trustworthiness": 0.9485116340656033,
+          "continuity": 0.9270055532149664,
+          "density_preservation": 0.4099370782896783,
+          "knn_accuracy": 0.6838
+        },
+        "same_chart": {
+          "trustworthiness": 0.9030922018256595,
+          "continuity": 0.9343863737586519,
+          "density_preservation": 0.2901495021254945,
+          "knn_accuracy": 0.6406000000000001
+        },
+        "new_chart": {
+          "trustworthiness": 0.8993007443073527,
+          "continuity": 0.9272891924967399,
+          "density_preservation": 0.20763679464677504,
+          "knn_accuracy": 0.6432
+        },
+        "umap_same": {
+          "trustworthiness": 0.9316401324104725,
+          "continuity": 0.9659467148159294,
+          "density_preservation": -0.15704024030981922,
+          "knn_accuracy": 0.6759999999999999
+        },
+        "umap_new": {
+          "trustworthiness": 0.9309545430835591,
+          "continuity": 0.9607529541578894,
+          "density_preservation": -0.15470876156153274,
+          "knn_accuracy": 0.7140000000000001
+        },
+        "umap_global": {
+          "trustworthiness": 0.9082260327013743,
+          "continuity": 0.9541336944528037,
+          "density_preservation": 0.10163568579595741,
+          "knn_accuracy": 0.6578
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9588185254288294,
+          "continuity": 0.9660279907713913,
+          "density_preservation": 0.20270785091187107,
+          "knn_accuracy": 0.7233999999999999
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9575520995084763,
+          "continuity": 0.9593068151268933,
+          "density_preservation": 0.14419418284992727,
+          "knn_accuracy": 0.7562000000000001
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9445110121376267,
+          "continuity": 0.9518796388805296,
+          "density_preservation": 0.28141435263486725,
+          "knn_accuracy": 0.7273999999999999
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 1,
+      "n_fit": 6910,
+      "n_all": 37863,
+      "purity": {
+        "level1": 0.5690303907380608,
+        "same": 0.7036179450072358,
+        "new": 0.7486251808972504
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8592012197813221,
+          "continuity": 0.8571406038720032,
+          "density_preservation": 0.11484923817634514,
+          "knn_accuracy": 0.522
+        },
+        "same": {
+          "trustworthiness": 0.9226174340455412,
+          "continuity": 0.8943788704985455,
+          "density_preservation": 0.36866329254032365,
+          "knn_accuracy": 0.6684
+        },
+        "new": {
+          "trustworthiness": 0.9286848630755341,
+          "continuity": 0.8845807964690541,
+          "density_preservation": 0.4490200367924705,
+          "knn_accuracy": 0.7152
+        },
+        "same_chart": {
+          "trustworthiness": 0.8680859103219982,
+          "continuity": 0.895431874811917,
+          "density_preservation": 0.28609779849024497,
+          "knn_accuracy": 0.6366
+        },
+        "new_chart": {
+          "trustworthiness": 0.8522742622128598,
+          "continuity": 0.8851580218677901,
+          "density_preservation": 0.11825427582424791,
+          "knn_accuracy": 0.6418
+        },
+        "umap_same": {
+          "trustworthiness": 0.8936613903099608,
+          "continuity": 0.9381271742401445,
+          "density_preservation": -0.009928562931614333,
+          "knn_accuracy": 0.6732
+        },
+        "umap_new": {
+          "trustworthiness": 0.8960421667168221,
+          "continuity": 0.9286391774500953,
+          "density_preservation": 0.05051042435995454,
+          "knn_accuracy": 0.7416
+        },
+        "umap_global": {
+          "trustworthiness": 0.8379887531347177,
+          "continuity": 0.9172274892165714,
+          "density_preservation": 0.21621003260401092,
+          "knn_accuracy": 0.631
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9316400120373156,
+          "continuity": 0.9350480088273648,
+          "density_preservation": 0.43422204991460933,
+          "knn_accuracy": 0.7183999999999999
+        },
+        "tsne_new": {
+          "trustworthiness": 0.937838041929983,
+          "continuity": 0.9290005055672585,
+          "density_preservation": 0.31970790789626075,
+          "knn_accuracy": 0.7812
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9108526993680409,
+          "continuity": 0.9077010492526834,
+          "density_preservation": 0.36283572551409105,
+          "knn_accuracy": 0.713
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 2,
+      "n_fit": 7066,
+      "n_all": 38503,
+      "purity": {
+        "level1": 0.7193603170110388,
+        "same": 0.8037078969714124,
+        "new": 0.8371072742711576
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.9149625117865383,
+          "continuity": 0.8861547758049955,
+          "density_preservation": 0.09362604958311088,
+          "knn_accuracy": 0.6971999999999999
+        },
+        "same": {
+          "trustworthiness": 0.9489304243153777,
+          "continuity": 0.9262487350787441,
+          "density_preservation": 0.5290533630511346,
+          "knn_accuracy": 0.7718
+        },
+        "new": {
+          "trustworthiness": 0.9533207382886949,
+          "continuity": 0.9196283077540375,
+          "density_preservation": 0.4758252187043031,
+          "knn_accuracy": 0.8082
+        },
+        "same_chart": {
+          "trustworthiness": 0.9042680469455311,
+          "continuity": 0.9267922038318788,
+          "density_preservation": 0.2582504345734781,
+          "knn_accuracy": 0.7444
+        },
+        "new_chart": {
+          "trustworthiness": 0.8922245681613,
+          "continuity": 0.9198905366636574,
+          "density_preservation": 0.2919532729630045,
+          "knn_accuracy": 0.7411999999999999
+        },
+        "umap_same": {
+          "trustworthiness": 0.9417216691744408,
+          "continuity": 0.9595050376166114,
+          "density_preservation": -0.09561968372269357,
+          "knn_accuracy": 0.8102
+        },
+        "umap_new": {
+          "trustworthiness": 0.9409305808004815,
+          "continuity": 0.953510297923563,
+          "density_preservation": -0.1374122435595651,
+          "knn_accuracy": 0.8628
+        },
+        "umap_global": {
+          "trustworthiness": 0.9015164249172435,
+          "continuity": 0.932502610091283,
+          "density_preservation": 0.15142646862664422,
+          "knn_accuracy": 0.8244
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9636821827665764,
+          "continuity": 0.960913696459023,
+          "density_preservation": 0.33900483588644487,
+          "knn_accuracy": 0.8324
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9657320292908015,
+          "continuity": 0.9560254268231517,
+          "density_preservation": 0.20940142345707366,
+          "knn_accuracy": 0.8821999999999999
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9469666807102016,
+          "continuity": 0.9395207061891865,
+          "density_preservation": 0.27766679182563625,
+          "knn_accuracy": 0.8548
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 3,
+      "n_fit": 2531,
+      "n_all": 13920,
+      "purity": {
+        "level1": 0.5772421967601739,
+        "same": 0.7605689450809957,
+        "new": 0.7996839193994468
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8566622852969825,
+          "continuity": 0.8587986094275547,
+          "density_preservation": 0.12250419062949713,
+          "knn_accuracy": 0.5527500370309735
+        },
+        "same": {
+          "trustworthiness": 0.9135542803327391,
+          "continuity": 0.8996978590502613,
+          "density_preservation": 0.3488407250505754,
+          "knn_accuracy": 0.6878709918843698
+        },
+        "new": {
+          "trustworthiness": 0.9190650051859428,
+          "continuity": 0.9067761074542107,
+          "density_preservation": 0.5587825518254809,
+          "knn_accuracy": 0.742010275120643
+        },
+        "same_chart": {
+          "trustworthiness": 0.8818478024160125,
+          "continuity": 0.9018158064017316,
+          "density_preservation": 0.4213238585314012,
+          "knn_accuracy": 0.6637774711353307
+        },
+        "new_chart": {
+          "trustworthiness": 0.8864339868006036,
+          "continuity": 0.9078697457038585,
+          "density_preservation": 0.5099010674066803,
+          "knn_accuracy": 0.6949848367908569
+        },
+        "umap_same": {
+          "trustworthiness": 0.9184413569884888,
+          "continuity": 0.9463606791586356,
+          "density_preservation": 0.06263912879800293,
+          "knn_accuracy": 0.7084188943720717
+        },
+        "umap_new": {
+          "trustworthiness": 0.9086159685885872,
+          "continuity": 0.9365915048548074,
+          "density_preservation": 0.09934353679658604,
+          "knn_accuracy": 0.7562286097403155
+        },
+        "umap_global": {
+          "trustworthiness": 0.8352345681979157,
+          "continuity": 0.9222131202192397,
+          "density_preservation": 0.16028545364637647,
+          "knn_accuracy": 0.5966056240303732
+        },
+        "tsne_same": {
+          "trustworthiness": 0.8229865862863208,
+          "continuity": 0.9381604420039453,
+          "density_preservation": 0.5855914053059617,
+          "knn_accuracy": 0.5863406381801031
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9440686864317565,
+          "continuity": 0.9382163419670426,
+          "density_preservation": 0.31929965054872567,
+          "knn_accuracy": 0.8040289699152575
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9220252844061799,
+          "continuity": 0.9135975207368994,
+          "density_preservation": 0.2371928057759002,
+          "knn_accuracy": 0.7518846816505679
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 4,
+      "n_fit": 3286,
+      "n_all": 17827,
+      "purity": {
+        "level1": 0.5404747413268411,
+        "same": 0.7121119902617163,
+        "new": 0.7787583688374924
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.866041625356162,
+          "continuity": 0.8674666551532293,
+          "density_preservation": 0.03197078462114329,
+          "knn_accuracy": 0.5085157272857652
+        },
+        "same": {
+          "trustworthiness": 0.9135322837929543,
+          "continuity": 0.8643343085326387,
+          "density_preservation": 0.33641741546050724,
+          "knn_accuracy": 0.650942619348332
+        },
+        "new": {
+          "trustworthiness": 0.9301523523655228,
+          "continuity": 0.896516071713206,
+          "density_preservation": 0.2205486446947487,
+          "knn_accuracy": 0.7245899894981795
+        },
+        "same_chart": {
+          "trustworthiness": 0.8606723841180445,
+          "continuity": 0.8651090183246962,
+          "density_preservation": 0.2839421006925408,
+          "knn_accuracy": 0.6244660032476995
+        },
+        "new_chart": {
+          "trustworthiness": 0.8762234709793918,
+          "continuity": 0.8971989128362388,
+          "density_preservation": 0.10174170247488735,
+          "knn_accuracy": 0.6640301083029151
+        },
+        "umap_same": {
+          "trustworthiness": 0.9156885688409725,
+          "continuity": 0.9443453591992379,
+          "density_preservation": 0.1573843627478039,
+          "knn_accuracy": 0.6917257683215128
+        },
+        "umap_new": {
+          "trustworthiness": 0.9134626541717337,
+          "continuity": 0.936058606125341,
+          "density_preservation": 0.08680960052095751,
+          "knn_accuracy": 0.770236360355859
+        },
+        "umap_global": {
+          "trustworthiness": 0.847080334047247,
+          "continuity": 0.9079661385838825,
+          "density_preservation": 0.21293999453159407,
+          "knn_accuracy": 0.6412022965214456
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9443189607981417,
+          "continuity": 0.945332940412472,
+          "density_preservation": 0.5827952609111237,
+          "knn_accuracy": 0.7279348424495612
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9473457510345111,
+          "continuity": 0.9370409765156585,
+          "density_preservation": 0.4070722653489047,
+          "knn_accuracy": 0.8198479780525831
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9132679275803552,
+          "continuity": 0.9068932487554741,
+          "density_preservation": 0.38629936606113563,
+          "knn_accuracy": 0.7401132531123787
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 5,
+      "n_fit": 2439,
+      "n_all": 13461,
+      "purity": {
+        "level1": 0.6174661746617466,
+        "same": 0.7470274702747027,
+        "new": 0.7822878228782287
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8958647952479112,
+          "continuity": 0.888154518846612,
+          "density_preservation": 0.09211683050622463,
+          "knn_accuracy": 0.6051612414582422
+        },
+        "same": {
+          "trustworthiness": 0.9271740516043494,
+          "continuity": 0.927326143077812,
+          "density_preservation": 0.28370868286467393,
+          "knn_accuracy": 0.6846972094119231
+        },
+        "new": {
+          "trustworthiness": 0.9385670225590228,
+          "continuity": 0.9368256344003506,
+          "density_preservation": 0.3509035973697414,
+          "knn_accuracy": 0.7265307839903052
+        },
+        "same_chart": {
+          "trustworthiness": 0.9020117776997865,
+          "continuity": 0.9287641265106689,
+          "density_preservation": 0.2374936689656997,
+          "knn_accuracy": 0.6748535698656881
+        },
+        "new_chart": {
+          "trustworthiness": 0.9176206261753148,
+          "continuity": 0.9370511324259106,
+          "density_preservation": 0.3083644062080895,
+          "knn_accuracy": 0.6842907395563336
+        },
+        "umap_same": {
+          "trustworthiness": 0.9372116997423326,
+          "continuity": 0.9631185620707042,
+          "density_preservation": 0.11485801537317451,
+          "knn_accuracy": 0.6990599858619181
+        },
+        "umap_new": {
+          "trustworthiness": 0.9314713209026045,
+          "continuity": 0.9576716064251627,
+          "density_preservation": 0.09682152428736113,
+          "knn_accuracy": 0.7273454068064766
+        },
+        "umap_global": {
+          "trustworthiness": 0.8798662102569035,
+          "continuity": 0.9200128271140355,
+          "density_preservation": 0.08171676801250516,
+          "knn_accuracy": 0.7019271552159424
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9588786781203896,
+          "continuity": 0.965072083153264,
+          "density_preservation": 0.4607475251966812,
+          "knn_accuracy": 0.7437413740869155
+        },
+        "tsne_new": {
+          "trustworthiness": 0.959025711156637,
+          "continuity": 0.9581119442306452,
+          "density_preservation": 0.33425464561289564,
+          "knn_accuracy": 0.785975527653415
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9220964972183248,
+          "continuity": 0.9040868535361648,
+          "density_preservation": 0.22496209968135805,
+          "knn_accuracy": 0.7441604672299458
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 6,
+      "n_fit": 2602,
+      "n_all": 13818,
+      "purity": {
+        "level1": 0.617217524980784,
+        "same": 0.7628747117601845,
+        "new": 0.8243658724058417
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8888250394906563,
+          "continuity": 0.9014823464767767,
+          "density_preservation": 0.10874957464590812,
+          "knn_accuracy": 0.5926199616122841
+        },
+        "same": {
+          "trustworthiness": 0.9205120657680831,
+          "continuity": 0.9119780721546408,
+          "density_preservation": 0.3702158616633321,
+          "knn_accuracy": 0.7052177764653773
+        },
+        "new": {
+          "trustworthiness": 0.9273556319522834,
+          "continuity": 0.9014285877731193,
+          "density_preservation": 0.1555973132162269,
+          "knn_accuracy": 0.7605736010630444
+        },
+        "same_chart": {
+          "trustworthiness": 0.8907261184239755,
+          "continuity": 0.9137222137115006,
+          "density_preservation": 0.36376337219617,
+          "knn_accuracy": 0.669469954230031
+        },
+        "new_chart": {
+          "trustworthiness": 0.8801380311922322,
+          "continuity": 0.901940588163011,
+          "density_preservation": 0.21612586774720974,
+          "knn_accuracy": 0.6933050346965894
+        },
+        "umap_same": {
+          "trustworthiness": 0.9366659172939135,
+          "continuity": 0.9560424827487013,
+          "density_preservation": 0.04188682900965009,
+          "knn_accuracy": 0.7486564299424184
+        },
+        "umap_new": {
+          "trustworthiness": 0.9338529166028362,
+          "continuity": 0.9494968182365927,
+          "density_preservation": 0.047062197256734356,
+          "knn_accuracy": 0.7959323785619372
+        },
+        "umap_global": {
+          "trustworthiness": 0.8683138503846838,
+          "continuity": 0.9227921301893753,
+          "density_preservation": 0.2974397053601643,
+          "knn_accuracy": 0.7056112505536689
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9591794918123473,
+          "continuity": 0.9586841182851954,
+          "density_preservation": 0.5162764978850001,
+          "knn_accuracy": 0.7774826517053004
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9602274893600709,
+          "continuity": 0.9522661938436626,
+          "density_preservation": 0.3790496045613356,
+          "knn_accuracy": 0.8255278310940499
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9336540628905511,
+          "continuity": 0.9099523883321919,
+          "density_preservation": 0.35104268201469413,
+          "knn_accuracy": 0.7817097298095378
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 7,
+      "n_fit": 1406,
+      "n_all": 7436,
+      "purity": {
+        "level1": 0.6493598862019915,
+        "same": 0.8165007112375533,
+        "new": 0.8328591749644382
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.843523288234581,
+          "continuity": 0.8853392482927486,
+          "density_preservation": 0.17748590596845779,
+          "knn_accuracy": 0.6137830948234523
+        },
+        "same": {
+          "trustworthiness": 0.89749872509198,
+          "continuity": 0.9206815911465887,
+          "density_preservation": 0.07569041801184982,
+          "knn_accuracy": 0.69275131874511
+        },
+        "new": {
+          "trustworthiness": 0.9051780446772781,
+          "continuity": 0.9302501786405721,
+          "density_preservation": 0.1344956122389631,
+          "knn_accuracy": 0.7396708816031903
+        },
+        "same_chart": {
+          "trustworthiness": 0.8892794173836586,
+          "continuity": 0.9225591969076895,
+          "density_preservation": 0.10914837664171587,
+          "knn_accuracy": 0.7012998157542717
+        },
+        "new_chart": {
+          "trustworthiness": 0.8922639553196529,
+          "continuity": 0.9309696513069022,
+          "density_preservation": 0.1360682670258541,
+          "knn_accuracy": 0.7325635395371142
+        },
+        "umap_same": {
+          "trustworthiness": 0.9309359436084015,
+          "continuity": 0.9596422687378232,
+          "density_preservation": 0.0068280339495779335,
+          "knn_accuracy": 0.7510512102168042
+        },
+        "umap_new": {
+          "trustworthiness": 0.9236254650153475,
+          "continuity": 0.9499620724454654,
+          "density_preservation": 0.09769094431355022,
+          "knn_accuracy": 0.8235985967037681
+        },
+        "umap_global": {
+          "trustworthiness": 0.886672518200367,
+          "continuity": 0.922062992987878,
+          "density_preservation": 0.4491563101505163,
+          "knn_accuracy": 0.741104464804018
+        },
+        "tsne_same": {
+          "trustworthiness": 0.8844624389335682,
+          "continuity": 0.9514889442329402,
+          "density_preservation": 0.3038103611180924,
+          "knn_accuracy": 0.6749501526968023
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9473107752617206,
+          "continuity": 0.9541675042441522,
+          "density_preservation": 0.29591075093248287,
+          "knn_accuracy": 0.8399560838949043
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9165641369524865,
+          "continuity": 0.9218961424377878,
+          "density_preservation": 0.43406233399371874,
+          "knn_accuracy": 0.7567577799651699
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 8,
+      "n_fit": 987,
+      "n_all": 5183
+    },
+    {
+      "seed": 2,
+      "region": 9,
+      "n_fit": 1064,
+      "n_all": 5431,
+      "purity": {
+        "level1": 0.7283834586466166,
+        "same": 0.8637218045112782,
+        "new": 0.8947368421052632
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8709441701535671,
+          "continuity": 0.8699015062692497,
+          "density_preservation": -0.05561543508702248,
+          "knn_accuracy": 0.7274559305518646
+        },
+        "same": {
+          "trustworthiness": 0.874229565329633,
+          "continuity": 0.9052800993901061,
+          "density_preservation": 0.130491800656812,
+          "knn_accuracy": 0.7659845867658783
+        },
+        "new": {
+          "trustworthiness": 0.896344043226808,
+          "continuity": 0.9058572755207045,
+          "density_preservation": 0.3226982807577035,
+          "knn_accuracy": 0.8242536982903712
+        },
+        "same_chart": {
+          "trustworthiness": 0.8698306029738151,
+          "continuity": 0.9082291745099516,
+          "density_preservation": 0.13505842111113509,
+          "knn_accuracy": 0.7659934449464081
+        },
+        "new_chart": {
+          "trustworthiness": 0.8909402440292433,
+          "continuity": 0.9070612869799678,
+          "density_preservation": 0.30801995333140886,
+          "knn_accuracy": 0.8101736203383825
+        },
+        "umap_same": {
+          "trustworthiness": 0.939967855977569,
+          "continuity": 0.9499604698441383,
+          "density_preservation": 0.3223746871467678,
+          "knn_accuracy": 0.8261404907432013
+        },
+        "umap_new": {
+          "trustworthiness": 0.9250588918648552,
+          "continuity": 0.9407398144861439,
+          "density_preservation": 0.3012892837510821,
+          "knn_accuracy": 0.846842058641155
+        },
+        "umap_global": {
+          "trustworthiness": 0.8705564877859886,
+          "continuity": 0.8894750287736508,
+          "density_preservation": 0.32661315741093433,
+          "knn_accuracy": 0.8430596155549649
+        },
+        "tsne_same": {
+          "trustworthiness": 0.8795256202021506,
+          "continuity": 0.940622837494308,
+          "density_preservation": 0.36508688494587443,
+          "knn_accuracy": 0.7612897510851271
+        },
+        "tsne_new": {
+          "trustworthiness": 0.8998881323480374,
+          "continuity": 0.9435090766974661,
+          "density_preservation": 0.4294906284966097,
+          "knn_accuracy": 0.808295686066082
+        },
+        "tsne_global": {
+          "trustworthiness": 0.903429711618101,
+          "continuity": 0.8951142161555534,
+          "density_preservation": 0.4266646809866693,
+          "knn_accuracy": 0.8430551864647002
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 10,
+      "n_fit": 2751,
+      "n_all": 15459,
+      "purity": {
+        "level1": 0.5946928389676481,
+        "same": 0.757179207560887,
+        "new": 0.7917121046892039
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8747240215269422,
+          "continuity": 0.8807860168293599,
+          "density_preservation": 0.08058900085388873,
+          "knn_accuracy": 0.5776050156739811
+        },
+        "same": {
+          "trustworthiness": 0.9119275282559554,
+          "continuity": 0.894295801510107,
+          "density_preservation": 0.3289529064184095,
+          "knn_accuracy": 0.6928381455205412
+        },
+        "new": {
+          "trustworthiness": 0.9305288829684638,
+          "continuity": 0.9221808177827494,
+          "density_preservation": 0.4378877530870054,
+          "knn_accuracy": 0.7560884342517736
+        },
+        "same_chart": {
+          "trustworthiness": 0.8609623286485744,
+          "continuity": 0.8959482140423705,
+          "density_preservation": 0.28308159005276823,
+          "knn_accuracy": 0.6699389539679921
+        },
+        "new_chart": {
+          "trustworthiness": 0.8935159850481582,
+          "continuity": 0.9231688634717234,
+          "density_preservation": 0.3837556229857289,
+          "knn_accuracy": 0.7139171753836
+        },
+        "umap_same": {
+          "trustworthiness": 0.9338984491174874,
+          "continuity": 0.9515609517975916,
+          "density_preservation": 0.18697803911877156,
+          "knn_accuracy": 0.7542722323049003
+        },
+        "umap_new": {
+          "trustworthiness": 0.9274095373902685,
+          "continuity": 0.9396066540599617,
+          "density_preservation": 0.21216705752443588,
+          "knn_accuracy": 0.8080745751526152
+        },
+        "umap_global": {
+          "trustworthiness": 0.8856244029771065,
+          "continuity": 0.9062409701169798,
+          "density_preservation": 0.20199086744503922,
+          "knn_accuracy": 0.7346510476819007
+        },
+        "tsne_same": {
+          "trustworthiness": 0.8548757763830717,
+          "continuity": 0.9484308027502469,
+          "density_preservation": 0.3566657376118254,
+          "knn_accuracy": 0.6154185777924435
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9540554369455124,
+          "continuity": 0.9467224992078452,
+          "density_preservation": 0.4511136458469491,
+          "knn_accuracy": 0.8320607160534566
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9212429756687404,
+          "continuity": 0.9000906202433757,
+          "density_preservation": 0.35758822764524717,
+          "knn_accuracy": 0.766996205246659
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 11,
+      "n_fit": 1532,
+      "n_all": 8263,
+      "purity": {
+        "level1": 0.5907310704960835,
+        "same": 0.8211488250652742,
+        "new": 0.8772845953002611
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8245696382438951,
+          "continuity": 0.8678174114333282,
+          "density_preservation": 0.2419359049468754,
+          "knn_accuracy": 0.5711737029230802
+        },
+        "same": {
+          "trustworthiness": 0.8620865432376151,
+          "continuity": 0.899846036505317,
+          "density_preservation": 0.4610455982842649,
+          "knn_accuracy": 0.7069404526197015
+        },
+        "new": {
+          "trustworthiness": 0.8882679558795805,
+          "continuity": 0.9121678507694732,
+          "density_preservation": 0.1948305722858661,
+          "knn_accuracy": 0.8146217879116902
+        },
+        "same_chart": {
+          "trustworthiness": 0.843684698946919,
+          "continuity": 0.901585087966227,
+          "density_preservation": 0.3885284000118115,
+          "knn_accuracy": 0.6684464882587128
+        },
+        "new_chart": {
+          "trustworthiness": 0.8752842750630789,
+          "continuity": 0.9119018042610484,
+          "density_preservation": 0.20701749168175998,
+          "knn_accuracy": 0.778088607864427
+        },
+        "umap_same": {
+          "trustworthiness": 0.9178921334424894,
+          "continuity": 0.9472563765507185,
+          "density_preservation": 0.05735284419485081,
+          "knn_accuracy": 0.8218155883417427
+        },
+        "umap_new": {
+          "trustworthiness": 0.9208495066023094,
+          "continuity": 0.9376009672540264,
+          "density_preservation": 0.18650919968994925,
+          "knn_accuracy": 0.8779523535798684
+        },
+        "umap_global": {
+          "trustworthiness": 0.8151719682276508,
+          "continuity": 0.8953034892940062,
+          "density_preservation": 0.49861714572764276,
+          "knn_accuracy": 0.7088842051478572
+        },
+        "tsne_same": {
+          "trustworthiness": 0.8059108294401273,
+          "continuity": 0.9244210550782128,
+          "density_preservation": 0.3902298272353026,
+          "knn_accuracy": 0.5979519277852292
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9395830374152383,
+          "continuity": 0.9423296738487602,
+          "density_preservation": 0.43539250153007353,
+          "knn_accuracy": 0.8923101488152264
+        },
+        "tsne_global": {
+          "trustworthiness": 0.896423243365624,
+          "continuity": 0.8914871573698886,
+          "density_preservation": 0.5087920103231958,
+          "knn_accuracy": 0.8211790253560707
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 12,
+      "n_fit": 2176,
+      "n_all": 11857,
+      "purity": {
+        "level1": 0.7123161764705882,
+        "same": 0.8239889705882353,
+        "new": 0.8524816176470589
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8760412341573982,
+          "continuity": 0.9014531035163429,
+          "density_preservation": 0.09271795404545886,
+          "knn_accuracy": 0.6824412105873667
+        },
+        "same": {
+          "trustworthiness": 0.9319128665409695,
+          "continuity": 0.9450448263950338,
+          "density_preservation": -0.0013954243827891597,
+          "knn_accuracy": 0.778494147421702
+        },
+        "new": {
+          "trustworthiness": 0.9401817559933022,
+          "continuity": 0.9469925645275468,
+          "density_preservation": 0.030575694220928363,
+          "knn_accuracy": 0.8115807233997681
+        },
+        "same_chart": {
+          "trustworthiness": 0.9141261001334113,
+          "continuity": 0.9466501235416638,
+          "density_preservation": 0.062316656372208,
+          "knn_accuracy": 0.7651703047558789
+        },
+        "new_chart": {
+          "trustworthiness": 0.9151407243353255,
+          "continuity": 0.9475070236669072,
+          "density_preservation": -0.005469769385477744,
+          "knn_accuracy": 0.7913698196773173
+        },
+        "umap_same": {
+          "trustworthiness": 0.9447355893584002,
+          "continuity": 0.9685230815306914,
+          "density_preservation": 0.012925010934605331,
+          "knn_accuracy": 0.8129631973004322
+        },
+        "umap_new": {
+          "trustworthiness": 0.9355711717399294,
+          "continuity": 0.9628934487182977,
+          "density_preservation": -0.01798351822571999,
+          "knn_accuracy": 0.8363998734577665
+        },
+        "umap_global": {
+          "trustworthiness": 0.8884786975713683,
+          "continuity": 0.9393275147365125,
+          "density_preservation": 0.12582306940962226,
+          "knn_accuracy": 0.7527522935779817
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9621838711763344,
+          "continuity": 0.9720358296350246,
+          "density_preservation": 0.46135168256948345,
+          "knn_accuracy": 0.8285858905409681
+        },
+        "tsne_new": {
+          "trustworthiness": 0.962007088330588,
+          "continuity": 0.965633487108104,
+          "density_preservation": 0.3293449936760866,
+          "knn_accuracy": 0.8593757249815459
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9335604503314865,
+          "continuity": 0.9347409666539608,
+          "density_preservation": 0.28718259895637016,
+          "knn_accuracy": 0.8299641463671833
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 13,
+      "n_fit": 1351,
+      "n_all": 7275,
+      "purity": {
+        "level1": 0.6624722427831237,
+        "same": 0.8490007401924501,
+        "new": 0.8763878608438194
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8431913240909503,
+          "continuity": 0.8615918821034989,
+          "density_preservation": 0.11131033131596348,
+          "knn_accuracy": 0.6298974989749897
+        },
+        "same": {
+          "trustworthiness": 0.8734286429260076,
+          "continuity": 0.9033813022010957,
+          "density_preservation": 0.24227350092229283,
+          "knn_accuracy": 0.7350280169468363
+        },
+        "new": {
+          "trustworthiness": 0.8735740764706649,
+          "continuity": 0.8984182162165607,
+          "density_preservation": 0.18536433822185946,
+          "knn_accuracy": 0.7609074757414241
+        },
+        "same_chart": {
+          "trustworthiness": 0.862625324890724,
+          "continuity": 0.9056026554923748,
+          "density_preservation": 0.24750562345358854,
+          "knn_accuracy": 0.7054147874812081
+        },
+        "new_chart": {
+          "trustworthiness": 0.8568412931502962,
+          "continuity": 0.8999408344859293,
+          "density_preservation": 0.16048699805087857,
+          "knn_accuracy": 0.7179909799097992
+        },
+        "umap_same": {
+          "trustworthiness": 0.9284328399363617,
+          "continuity": 0.9449680908050695,
+          "density_preservation": 0.04760597567307943,
+          "knn_accuracy": 0.7853573869072024
+        },
+        "umap_new": {
+          "trustworthiness": 0.9208227969298225,
+          "continuity": 0.9257457556710907,
+          "density_preservation": 0.1390245640205343,
+          "knn_accuracy": 0.8326991936586031
+        },
+        "umap_global": {
+          "trustworthiness": 0.8474982963934532,
+          "continuity": 0.9186552052766217,
+          "density_preservation": 0.23990522738806747,
+          "knn_accuracy": 0.742413557468908
+        },
+        "tsne_same": {
+          "trustworthiness": 0.9467938803737044,
+          "continuity": 0.9474845234377187,
+          "density_preservation": 0.4649480121638753,
+          "knn_accuracy": 0.8016208828754954
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9460549072597887,
+          "continuity": 0.9368122840354816,
+          "density_preservation": 0.36331502615653954,
+          "knn_accuracy": 0.8741615416154161
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9019484159853857,
+          "continuity": 0.9077279029275429,
+          "density_preservation": 0.34715583477323947,
+          "knn_accuracy": 0.7742408090747575
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 14,
+      "n_fit": 1803,
+      "n_all": 9600,
+      "purity": {
+        "level1": 0.8219633943427621,
+        "same": 0.891846921797005,
+        "new": 0.9201331114808652
+      },
+      "quality": {
+        "level1": {
+          "trustworthiness": 0.8542970418378072,
+          "continuity": 0.8659676297080623,
+          "density_preservation": 0.05841967602756678,
+          "knn_accuracy": 0.8086565096952908
+        },
+        "same": {
+          "trustworthiness": 0.9055964069208662,
+          "continuity": 0.9141235780304,
+          "density_preservation": 0.23519569525242265,
+          "knn_accuracy": 0.8558064019698367
+        },
+        "new": {
+          "trustworthiness": 0.9140830550481133,
+          "continuity": 0.9177554115324498,
+          "density_preservation": 0.2487141806372646,
+          "knn_accuracy": 0.8879716835949523
+        },
+        "same_chart": {
+          "trustworthiness": 0.8899555596926645,
+          "continuity": 0.915702453952038,
+          "density_preservation": 0.23241817907991238,
+          "knn_accuracy": 0.8485887965527855
+        },
+        "new_chart": {
+          "trustworthiness": 0.8895730115696838,
+          "continuity": 0.9179522241485636,
+          "density_preservation": 0.22829322982379374,
+          "knn_accuracy": 0.8746568174823022
+        },
+        "umap_same": {
+          "trustworthiness": 0.9262970728661244,
+          "continuity": 0.9530721524731508,
+          "density_preservation": 0.1146153972357125,
+          "knn_accuracy": 0.8907402277623884
+        },
+        "umap_new": {
+          "trustworthiness": 0.9228150130512859,
+          "continuity": 0.9480372805231374,
+          "density_preservation": 0.16942727829261478,
+          "knn_accuracy": 0.9156955986457371
+        },
+        "umap_global": {
+          "trustworthiness": 0.8565156906321632,
+          "continuity": 0.9322195718867932,
+          "density_preservation": 0.26308798838747727,
+          "knn_accuracy": 0.8779732225300092
+        },
+        "tsne_same": {
+          "trustworthiness": 0.8524879358024117,
+          "continuity": 0.9379719426441556,
+          "density_preservation": 0.2444284512544643,
+          "knn_accuracy": 0.8352708525700215
+        },
+        "tsne_new": {
+          "trustworthiness": 0.9497042768656745,
+          "continuity": 0.9498527783918799,
+          "density_preservation": 0.48855778679576123,
+          "knn_accuracy": 0.9195783317943983
+        },
+        "tsne_global": {
+          "trustworthiness": 0.9194663439721676,
+          "continuity": 0.9351856928429307,
+          "density_preservation": 0.4109091896489884,
+          "knn_accuracy": 0.9062634656817483
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "region": 15,
+      "n_fit": 668,
+      "n_all": 3383
+    },
+    {
+      "seed": 2,
+      "region": 16,
+      "n_fit": 165,
+      "n_all": 847
+    },
+    {
+      "seed": 2,
+      "region": 17,
+      "n_fit": 681,
+      "n_all": 3528
+    }
+  ]
+}

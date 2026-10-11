@@ -48,9 +48,11 @@ def main() -> None:
         results[f"{name}_landmarks"] = landmarks
         results[f"{name}_level1"] = level1.fit(X[rows]).transform(X[rows])
         results[f"{name}_level1_landmarks"] = landmark_positions(level1)
+        level1.save(HERE / "models" / name)
         models[name] = model_record(level1)
 
     np.savez(HERE / "embeddings.npz", **results)
+    level0.save(HERE / "models" / "level0")
     record = {"dataset": "mnist", "split": "eval", "n": len(X), "n_features": X.shape[1], "zooms": ZOOMS,
               "environment": environment(level0.device_), "models": models}
     (HERE / "settings.json").write_text(json.dumps(record, indent=2))

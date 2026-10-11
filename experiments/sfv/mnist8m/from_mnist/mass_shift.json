@@ -1,0 +1,48 @@
+{
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "rows": [
+    {
+      "seed": 0,
+      "other_mnist_split": {
+        "total_variation": 0.054830000000000004,
+        "cells_off_by_2x": 0.0,
+        "log_mass_correlation": 0.8787993727967598
+      },
+      "mnist8m": {
+        "total_variation": 0.134439012345679,
+        "cells_off_by_2x": 0.03666666666666667,
+        "log_mass_correlation": 0.5600104559814958
+      }
+    },
+    {
+      "seed": 1,
+      "other_mnist_split": {
+        "total_variation": 0.05369,
+        "cells_off_by_2x": 0.0,
+        "log_mass_correlation": 0.901215854915218
+      },
+      "mnist8m": {
+        "total_variation": 0.13493358024691357,
+        "cells_off_by_2x": 0.04666666666666667,
+        "log_mass_correlation": 0.5776715305259011
+      }
+    },
+    {
+      "seed": 2,
+      "other_mnist_split": {
+        "total_variation": 0.0577,
+        "cells_off_by_2x": 0.0033333333333333335,
+        "log_mass_correlation": 0.8735276830342847
+      },
+      "mnist8m": {
+        "total_variation": 0.1341164197530864,
+        "cells_off_by_2x": 0.04,
+        "log_mass_correlation": 0.5086346205841343
+      }
+    }
+  ]
+}

@@ -20,10 +20,8 @@ class LandmarkMds:
     floor: float                # voltages below it give no distance
 
     def triangulate(self, voltages: torch.Tensor) -> torch.Tensor:
-        """Triangulation (de Silva & Tenenbaum, 2004): an item with squared distances d^2 to the landmarks is placed
-        at y = -1/2 P (d^2 - mean_sq), exact when the distances are Euclidean. ``voltages`` is (m, L)."""
-        d = self.item_distances(voltages)
-        return -0.5 * (d * d - self.mean_sq.to(d.dtype)) @ self.projection.to(d.dtype).T
+        """(m, n_components) coordinates of items from their voltages (m, L) to the landmarks."""
+        return triangulate_distances(self.item_distances(voltages), self.mean_sq, self.projection)
 
     def item_distances(self, voltages: torch.Tensor) -> torch.Tensor:
         """(m, L) distances d = -log v to the landmarks. Below the floor, through the landmarks the item reaches:
@@ -40,7 +38,7 @@ def fit_embedding(maps: torch.Tensor, landmarks: torch.Tensor, *, config: Config
     distances = _reconcile(distances)
     distances = _chain(distances)
     distances = _fill_unreachable(distances, floor)
-    mean_sq, projection = _classical_mds(distances, config.embedding.n_components)
+    mean_sq, projection = classical_mds(distances, config.embedding.n_components)
     return LandmarkMds(distances, mean_sq, projection, floor)
 
 
@@ -73,7 +71,7 @@ def _fill_unreachable(distances: torch.Tensor, floor: float) -> torch.Tensor:
     return torch.where(torch.isfinite(distances), distances, max(-math.log(floor), float(known.max())))
 
 
-def _classical_mds(distances: torch.Tensor, n_components: int) -> tuple[torch.Tensor, torch.Tensor]:
+def classical_mds(distances: torch.Tensor, n_components: int) -> tuple[torch.Tensor, torch.Tensor]:
     """Classical MDS: B = -1/2 H D^2 H with H = I - 1 1^T / L is the Gram matrix of the landmarks' centred positions.
     With B = V Lambda V^T, the landmarks sit at V_k Lambda_k^(1/2); the projection P = Lambda_k^(-1/2) V_k^T is its
     pseudo-inverse. Returns (the mean squared distance of each landmark, P). An axis with an eigenvalue below
@@ -86,6 +84,13 @@ def _classical_mds(distances: torch.Tensor, n_components: int) -> tuple[torch.Te
     usable = eigenvalues > _EIGENVALUE_FLOOR * eigenvalues[0].clamp(min=0.0)
     projection = torch.where(usable, eigenvectors / eigenvalues.clamp(min=1e-300).sqrt(), 0.0).T
     return sq.mean(dim=0), projection
+
+
+def triangulate_distances(distances: torch.Tensor, mean_sq: torch.Tensor, projection: torch.Tensor) -> torch.Tensor:
+    """Triangulation (de Silva & Tenenbaum, 2004): an item with squared distances d^2 to the landmarks (m, L) is
+    placed at y = -1/2 P (d^2 - mean_sq), exact when the distances are Euclidean. ``mean_sq`` and ``projection``
+    come from classical_mds."""
+    return -0.5 * (distances * distances - mean_sq.to(distances.dtype)) @ projection.to(distances.dtype).T
 
 
 @dataclass(frozen=True)

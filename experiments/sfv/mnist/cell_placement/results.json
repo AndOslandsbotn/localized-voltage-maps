@@ -1,0 +1,450 @@
+{
+  "dataset": "mnist",
+  "split": "eval",
+  "n": 50000,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "environment": {
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "lvm": "0.0.1",
+    "torch": "2.14.0+cu130"
+  },
+  "rows": [
+    {
+      "method": "lvm",
+      "placement": "kmeans",
+      "masses": "uniform",
+      "seed": 0,
+      "seconds": 0.4626002649893053,
+      "trustworthiness": 0.9697865783930184,
+      "continuity": 0.9369283017353797,
+      "density_preservation": 0.2704447016377022,
+      "knn_accuracy": 0.8906000000000001,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.305518286271884,
+        "rho_g": 0.00528988527410602,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm",
+      "placement": "kmeans",
+      "masses": "counted",
+      "seed": 0,
+      "seconds": 0.5428395649651065,
+      "trustworthiness": 0.9719899969906711,
+      "continuity": 0.9399218537466145,
+      "density_preservation": 0.27982383286565127,
+      "knn_accuracy": 0.8954000000000001,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.305518286271884,
+        "rho_g": 0.005204159858634534,
+        "largest_mass": 0.00556
+      }
+    },
+    {
+      "method": "lvm",
+      "placement": "farthest",
+      "masses": "uniform",
+      "seed": 0,
+      "seconds": 1.5631495519774035,
+      "trustworthiness": 0.8766647246464039,
+      "continuity": 0.8001563807804193,
+      "density_preservation": 0.32941955109647064,
+      "knn_accuracy": 0.6416000000000001,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.305518286271884,
+        "rho_g": 0.022875732003183956,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm",
+      "placement": "farthest",
+      "masses": "counted",
+      "seed": 0,
+      "seconds": 1.5849507629754953,
+      "trustworthiness": 0.8796323563045441,
+      "continuity": 0.8024711164610292,
+      "density_preservation": 0.3320715197520852,
+      "knn_accuracy": 0.648,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.305518286271884,
+        "rho_g": 0.01785482608025616,
+        "largest_mass": 0.05872
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "placement": "kmeans",
+      "masses": "uniform",
+      "seed": 0,
+      "seconds": 0.6590136829763651,
+      "trustworthiness": 0.90311757648711,
+      "continuity": 0.9381210352091484,
+      "density_preservation": 0.19193443800157478,
+      "knn_accuracy": 0.8024000000000001,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.305518286271884,
+        "rho_g": 0.00528988527410602,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "placement": "kmeans",
+      "masses": "counted",
+      "seed": 0,
+      "seconds": 0.7242868019966409,
+      "trustworthiness": 0.9163215969505467,
+      "continuity": 0.9409663637275554,
+      "density_preservation": 0.2254436307870639,
+      "knn_accuracy": 0.8370000000000001,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.305518286271884,
+        "rho_g": 0.005204159858634534,
+        "largest_mass": 0.00556
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "placement": "farthest",
+      "masses": "uniform",
+      "seed": 0,
+      "seconds": 1.7350231800228357,
+      "trustworthiness": 0.8943433323302237,
+      "continuity": 0.804148676898385,
+      "density_preservation": 0.585403750161529,
+      "knn_accuracy": 0.7215999999999999,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.305518286271884,
+        "rho_g": 0.022875732003183956,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "placement": "farthest",
+      "masses": "counted",
+      "seed": 0,
+      "seconds": 1.7922124679898843,
+      "trustworthiness": 0.8976298324806902,
+      "continuity": 0.8065502377369846,
+      "density_preservation": 0.4144060588705661,
+      "knn_accuracy": 0.7363999999999999,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.305518286271884,
+        "rho_g": 0.01785482608025616,
+        "largest_mass": 0.05872
+      }
+    },
+    {
+      "method": "lvm",
+      "placement": "kmeans",
+      "masses": "uniform",
+      "seed": 1,
+      "seconds": 0.4677788279950619,
+      "trustworthiness": 0.971426726853245,
+      "continuity": 0.939811924967399,
+      "density_preservation": 0.22844749232403486,
+      "knn_accuracy": 0.8994,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.237066201050784,
+        "rho_g": 0.007561089457414745,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm",
+      "placement": "kmeans",
+      "masses": "counted",
+      "seed": 1,
+      "seconds": 0.493012627994176,
+      "trustworthiness": 0.9728780098304745,
+      "continuity": 0.941841849734176,
+      "density_preservation": 0.2526116093233086,
+      "knn_accuracy": 0.9046,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.237066201050784,
+        "rho_g": 0.0063943937709447585,
+        "largest_mass": 0.00598
+      }
+    },
+    {
+      "method": "lvm",
+      "placement": "farthest",
+      "masses": "uniform",
+      "seed": 1,
+      "seconds": 1.5766261160024442,
+      "trustworthiness": 0.8843230614906209,
+      "continuity": 0.8110912629150366,
+      "density_preservation": 0.44368582288367925,
+      "knn_accuracy": 0.6658000000000001,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.237066201050784,
+        "rho_g": 0.022875732003183956,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm",
+      "placement": "farthest",
+      "masses": "counted",
+      "seed": 1,
+      "seconds": 1.5884864300023764,
+      "trustworthiness": 0.8799240325007524,
+      "continuity": 0.7973366877319691,
+      "density_preservation": NaN,
+      "knn_accuracy": 0.6466000000000001,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.237066201050784,
+        "rho_g": 0.007077502049403009,
+        "largest_mass": 0.0857
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "placement": "kmeans",
+      "masses": "uniform",
+      "seed": 1,
+      "seconds": 0.6592533469665796,
+      "trustworthiness": 0.9028896459022971,
+      "continuity": 0.9403347497241449,
+      "density_preservation": 0.14325077531018982,
+      "knn_accuracy": 0.7842,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.237066201050784,
+        "rho_g": 0.007561089457414745,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "placement": "kmeans",
+      "masses": "counted",
+      "seed": 1,
+      "seconds": 0.700825959967915,
+      "trustworthiness": 0.9091243334336443,
+      "continuity": 0.9423756605476978,
+      "density_preservation": 0.16587371222270417,
+      "knn_accuracy": 0.8177999999999999,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.237066201050784,
+        "rho_g": 0.0063943937709447585,
+        "largest_mass": 0.00598
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "placement": "farthest",
+      "masses": "uniform",
+      "seed": 1,
+      "seconds": 1.7401307200198062,
+      "trustworthiness": 0.8846610773397532,
+      "continuity": 0.8177445521115458,
+      "density_preservation": 0.6181818017602443,
+      "knn_accuracy": 0.7182,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.237066201050784,
+        "rho_g": 0.022875732003183956,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "placement": "farthest",
+      "masses": "counted",
+      "seed": 1,
+      "seconds": 1.7638593419687822,
+      "trustworthiness": 0.8896194322399438,
+      "continuity": 0.805167342762564,
+      "density_preservation": 0.6077312556135145,
+      "knn_accuracy": 0.7127999999999999,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.237066201050784,
+        "rho_g": 0.007077502049403009,
+        "largest_mass": 0.0857
+      }
+    },
+    {
+      "method": "lvm",
+      "placement": "kmeans",
+      "masses": "uniform",
+      "seed": 2,
+      "seconds": 0.4788670330308378,
+      "trustworthiness": 0.9717489698063998,
+      "continuity": 0.9367817233423613,
+      "density_preservation": 0.31523738976818216,
+      "knn_accuracy": 0.8962,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.256155148231505,
+        "rho_g": 0.0065692853526210454,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm",
+      "placement": "kmeans",
+      "masses": "counted",
+      "seed": 2,
+      "seconds": 0.5123778169509023,
+      "trustworthiness": 0.968699512488715,
+      "continuity": 0.9318076757949644,
+      "density_preservation": 0.4504879009770239,
+      "knn_accuracy": 0.8977999999999999,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.256155148231505,
+        "rho_g": 0.006787492713204261,
+        "largest_mass": 0.00616
+      }
+    },
+    {
+      "method": "lvm",
+      "placement": "farthest",
+      "masses": "uniform",
+      "seed": 2,
+      "seconds": 1.5971428609918803,
+      "trustworthiness": 0.8765349904704585,
+      "continuity": 0.8172993640284882,
+      "density_preservation": 0.4178781945972277,
+      "knn_accuracy": 0.657,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.256155148231505,
+        "rho_g": 0.021550879596879378,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm",
+      "placement": "farthest",
+      "masses": "counted",
+      "seed": 2,
+      "seconds": 1.591835022030864,
+      "trustworthiness": 0.8742938509379075,
+      "continuity": 0.8089107513291203,
+      "density_preservation": NaN,
+      "knn_accuracy": 0.6592,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.256155148231505,
+        "rho_g": 0.020904480148997505,
+        "largest_mass": 0.13384
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "placement": "kmeans",
+      "masses": "uniform",
+      "seed": 2,
+      "seconds": 0.6587045060005039,
+      "trustworthiness": 0.9082298485304444,
+      "continuity": 0.9374662814725649,
+      "density_preservation": 0.15300999396015083,
+      "knn_accuracy": 0.8042,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.256155148231505,
+        "rho_g": 0.0065692853526210454,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "placement": "kmeans",
+      "masses": "counted",
+      "seed": 2,
+      "seconds": 0.6949267979944125,
+      "trustworthiness": 0.8898995927374862,
+      "continuity": 0.9322612217875413,
+      "density_preservation": 0.4111636689183718,
+      "knn_accuracy": 0.8161999999999999,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.256155148231505,
+        "rho_g": 0.006787492713204261,
+        "largest_mass": 0.00616
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "placement": "farthest",
+      "masses": "uniform",
+      "seed": 2,
+      "seconds": 1.7631010150071234,
+      "trustworthiness": 0.8840952191794563,
+      "continuity": 0.8251989487410973,
+      "density_preservation": 0.5687711520090476,
+      "knn_accuracy": 0.7078,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.256155148231505,
+        "rho_g": 0.021550879596879378,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "placement": "farthest",
+      "masses": "counted",
+      "seed": 2,
+      "seconds": 1.7925269450061023,
+      "trustworthiness": 0.8818186337646705,
+      "continuity": 0.8152925870197613,
+      "density_preservation": 0.5150399833332937,
+      "knn_accuracy": 0.7020000000000001,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.256155148231505,
+        "rho_g": 0.020904480148997505,
+        "largest_mass": 0.13384
+      }
+    }
+  ]
+}

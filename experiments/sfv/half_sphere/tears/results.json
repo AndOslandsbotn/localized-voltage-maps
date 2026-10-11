@@ -1,0 +1,280 @@
+{
+  "n": 20000,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "rows": [
+    {
+      "variant": "before",
+      "landmarks": 3,
+      "seed": 0,
+      "torn_share": 0.04345,
+      "geodesic": 0.8754823927549236,
+      "trustworthiness": 0.9978936984652422,
+      "continuity": 0.9921852141639081
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 3,
+      "seed": 0,
+      "torn_share": 0.0003,
+      "geodesic": 0.9251982669388696,
+      "trustworthiness": 0.9976743665362624,
+      "continuity": 0.9941986036713812
+    },
+    {
+      "variant": "before",
+      "landmarks": 6,
+      "seed": 0,
+      "torn_share": 0.04655,
+      "geodesic": 0.9489479953554909,
+      "trustworthiness": 0.9984362563948239,
+      "continuity": 0.9948128558531447
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 6,
+      "seed": 0,
+      "torn_share": 0.0,
+      "geodesic": 0.97146446855706,
+      "trustworthiness": 0.9984322439562644,
+      "continuity": 0.9958208847427024
+    },
+    {
+      "variant": "before",
+      "landmarks": 9,
+      "seed": 0,
+      "torn_share": 0.01025,
+      "geodesic": 0.9712802817163646,
+      "trustworthiness": 0.9983966736884341,
+      "continuity": 0.9956722559935801
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 9,
+      "seed": 0,
+      "torn_share": 0.0,
+      "geodesic": 0.9729581803480013,
+      "trustworthiness": 0.9984446624536062,
+      "continuity": 0.9958646805095797
+    },
+    {
+      "variant": "before",
+      "landmarks": 12,
+      "seed": 0,
+      "torn_share": 0.00285,
+      "geodesic": 0.9768025203107952,
+      "trustworthiness": 0.9983805797973718,
+      "continuity": 0.9960394703581101
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 12,
+      "seed": 0,
+      "torn_share": 0.0,
+      "geodesic": 0.973880586814254,
+      "trustworthiness": 0.9984546775002507,
+      "continuity": 0.9959989286789046
+    },
+    {
+      "variant": "before",
+      "landmarks": 20,
+      "seed": 0,
+      "torn_share": 0.0,
+      "geodesic": 0.9737865039906528,
+      "trustworthiness": 0.9983980178553515,
+      "continuity": 0.9959309017955662
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 20,
+      "seed": 0,
+      "torn_share": 0.0,
+      "geodesic": 0.972945557061152,
+      "trustworthiness": 0.9984767098003812,
+      "continuity": 0.9959784732671281
+    },
+    {
+      "variant": "before",
+      "landmarks": 3,
+      "seed": 1,
+      "torn_share": 0.0617,
+      "geodesic": 0.863807994852597,
+      "trustworthiness": 0.9981387982746515,
+      "continuity": 0.9910822870899789
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 3,
+      "seed": 1,
+      "torn_share": 0.0008,
+      "geodesic": 0.9666812015915927,
+      "trustworthiness": 0.9982193800782425,
+      "continuity": 0.9950984050556726
+    },
+    {
+      "variant": "before",
+      "landmarks": 6,
+      "seed": 1,
+      "torn_share": 0.0382,
+      "geodesic": 0.9614340245726506,
+      "trustworthiness": 0.9983131026181161,
+      "continuity": 0.9948441368241548
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 6,
+      "seed": 1,
+      "torn_share": 0.0002,
+      "geodesic": 0.9705373502279842,
+      "trustworthiness": 0.9983346133012339,
+      "continuity": 0.99542459624837
+    },
+    {
+      "variant": "before",
+      "landmarks": 9,
+      "seed": 1,
+      "torn_share": 0.0107,
+      "geodesic": 0.9722037937868363,
+      "trustworthiness": 0.9983744166917444,
+      "continuity": 0.9954726893369445
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 9,
+      "seed": 1,
+      "torn_share": 0.0006,
+      "geodesic": 0.9735501447827778,
+      "trustworthiness": 0.9983430915839101,
+      "continuity": 0.99562891363226
+    },
+    {
+      "variant": "before",
+      "landmarks": 12,
+      "seed": 1,
+      "torn_share": 0.00575,
+      "geodesic": 0.9750483852195231,
+      "trustworthiness": 0.9983076938509379,
+      "continuity": 0.995394807904504
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 12,
+      "seed": 1,
+      "torn_share": 0.0,
+      "geodesic": 0.9747725515353394,
+      "trustworthiness": 0.9984336001604975,
+      "continuity": 0.9958123904102718
+    },
+    {
+      "variant": "before",
+      "landmarks": 20,
+      "seed": 1,
+      "torn_share": 0.0006,
+      "geodesic": 0.9751786413724551,
+      "trustworthiness": 0.9981504704584211,
+      "continuity": 0.9956409148359916
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 20,
+      "seed": 1,
+      "torn_share": 0.0,
+      "geodesic": 0.9760165367794278,
+      "trustworthiness": 0.9984683157789146,
+      "continuity": 0.9959134517002708
+    },
+    {
+      "variant": "before",
+      "landmarks": 3,
+      "seed": 2,
+      "torn_share": 0.0406,
+      "geodesic": 0.8633898462280648,
+      "trustworthiness": 0.9981505145952453,
+      "continuity": 0.9914700571772495
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 3,
+      "seed": 2,
+      "torn_share": 0.00115,
+      "geodesic": 0.9450171173026685,
+      "trustworthiness": 0.9979520914835992,
+      "continuity": 0.9947593459725148
+    },
+    {
+      "variant": "before",
+      "landmarks": 6,
+      "seed": 2,
+      "torn_share": 0.0412,
+      "geodesic": 0.9572234404522445,
+      "trustworthiness": 0.9982860266827164,
+      "continuity": 0.9946782586016651
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 6,
+      "seed": 2,
+      "torn_share": 0.0004,
+      "geodesic": 0.9711670521032063,
+      "trustworthiness": 0.9982104564148861,
+      "continuity": 0.9955431878824356
+    },
+    {
+      "variant": "before",
+      "landmarks": 9,
+      "seed": 2,
+      "torn_share": 0.01,
+      "geodesic": 0.9686983222713528,
+      "trustworthiness": 0.9983206460026081,
+      "continuity": 0.9953855110843616
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 9,
+      "seed": 2,
+      "torn_share": 0.00035,
+      "geodesic": 0.9701280709435881,
+      "trustworthiness": 0.9983579376065804,
+      "continuity": 0.9956476115959474
+    },
+    {
+      "variant": "before",
+      "landmarks": 12,
+      "seed": 2,
+      "torn_share": 0.0083,
+      "geodesic": 0.9703200239220972,
+      "trustworthiness": 0.9982828488313773,
+      "continuity": 0.9957109158391012
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 12,
+      "seed": 2,
+      "torn_share": 0.0002,
+      "geodesic": 0.9707706324964094,
+      "trustworthiness": 0.9983559153375464,
+      "continuity": 0.9956448630755341
+    },
+    {
+      "variant": "before",
+      "landmarks": 20,
+      "seed": 2,
+      "torn_share": 0.00015,
+      "geodesic": 0.974949458420326,
+      "trustworthiness": 0.998308367940616,
+      "continuity": 0.9959104303340355
+    },
+    {
+      "variant": "fixed",
+      "landmarks": 20,
+      "seed": 2,
+      "torn_share": 0.00025,
+      "geodesic": 0.9722570868508761,
+      "trustworthiness": 0.9983225840104324,
+      "continuity": 0.9957554298324807
+    }
+  ]
+}

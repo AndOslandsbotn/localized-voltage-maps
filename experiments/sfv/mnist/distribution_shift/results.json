@@ -1,0 +1,1106 @@
+{
+  "dataset": "mnist",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "common": [
+    1,
+    7
+  ],
+  "rows": [
+    {
+      "method": "lvm",
+      "condition": "uniform",
+      "seed": 0,
+      "trustworthiness": 0.9400105005517103,
+      "continuity": 0.9373911485605376,
+      "density_preservation": 0.6480701247126989,
+      "knn_accuracy": 0.909,
+      "room_common": 0.0007145240063426975,
+      "decay_common": 1.0419574768200008,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.007980348850035806,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "balanced",
+      "seed": 0,
+      "trustworthiness": 0.9422720152472666,
+      "continuity": 0.9409923603169826,
+      "density_preservation": 0.646467546217306,
+      "knn_accuracy": 0.9134,
+      "room_common": 0.0007971329032923272,
+      "decay_common": 0.9660956041624903,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.007685639346880289,
+        "largest_mass": 0.00655
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted_1000",
+      "seed": 0,
+      "trustworthiness": 0.9499932350285887,
+      "continuity": 0.9345084642391414,
+      "density_preservation": 0.6679122690374317,
+      "knn_accuracy": 0.9142000000000001,
+      "room_common": 0.000384025586472909,
+      "decay_common": 0.3534454038262485,
+      "fitted": {
+        "n_cells": 218,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.003679896726419304,
+        "largest_mass": 0.028
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted_2000",
+      "seed": 0,
+      "trustworthiness": 0.9396562985254289,
+      "continuity": 0.9115188363928177,
+      "density_preservation": 0.6791134570121942,
+      "knn_accuracy": 0.9113999999999999,
+      "room_common": 0.00012581352480064628,
+      "decay_common": 0.2431211051391467,
+      "fitted": {
+        "n_cells": 278,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.0029698148736260134,
+        "largest_mass": 0.025
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted_5000",
+      "seed": 0,
+      "trustworthiness": 0.9361507192296118,
+      "continuity": 0.9250284562142642,
+      "density_preservation": 0.6703089693750668,
+      "knn_accuracy": 0.914,
+      "room_common": 0.00016175439288243365,
+      "decay_common": 0.24872174205273315,
+      "fitted": {
+        "n_cells": 299,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.002001010555613461,
+        "largest_mass": 0.0224
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted_10000",
+      "seed": 0,
+      "trustworthiness": 0.9358822710402247,
+      "continuity": 0.9207820844618316,
+      "density_preservation": 0.6861950552496997,
+      "knn_accuracy": 0.9094000000000001,
+      "room_common": 0.00015412446217545072,
+      "decay_common": 0.2621114734700695,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.0025259042171084743,
+        "largest_mass": 0.0204
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted",
+      "seed": 0,
+      "trustworthiness": 0.938607551409369,
+      "continuity": 0.9234968562543886,
+      "density_preservation": 0.6926966092824404,
+      "knn_accuracy": 0.9138000000000002,
+      "room_common": 0.0001636484753970729,
+      "decay_common": 0.2693077008521112,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.002444700315227443,
+        "largest_mass": 0.020714285714285713
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "refit_uniform",
+      "seed": 0,
+      "trustworthiness": 0.9698694392617113,
+      "continuity": 0.9495407804192998,
+      "density_preservation": 0.27633608979167773,
+      "knn_accuracy": 0.9178000000000001,
+      "room_common": 1.299030812574085,
+      "decay_common": 1.356478661825007,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 13,
+        "dimension": 11.05619981155679,
+        "rho_g": 0.0058347197571695176,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "refit",
+      "seed": 0,
+      "trustworthiness": 0.9688386036713813,
+      "continuity": 0.9483797933594141,
+      "density_preservation": 0.36237918650028633,
+      "knn_accuracy": 0.9182,
+      "room_common": 1.2192616801145013,
+      "decay_common": 1.1568917697651517,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 13,
+        "dimension": 11.05619981155679,
+        "rho_g": 0.005868032372630647,
+        "largest_mass": 0.007857142857142858
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "uniform",
+      "seed": 0,
+      "trustworthiness": 0.9234256515197111,
+      "continuity": 0.937747766074832,
+      "density_preservation": 0.624905477829687,
+      "knn_accuracy": 0.8865999999999999,
+      "room_common": 0.5931904460640356,
+      "decay_common": 1.0420628695944194,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.007980348850035806,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "balanced",
+      "seed": 0,
+      "trustworthiness": 0.9244406660648009,
+      "continuity": 0.9416646484100712,
+      "density_preservation": 0.6435949619916853,
+      "knn_accuracy": 0.8994,
+      "room_common": 0.43859700302046156,
+      "decay_common": 0.9660956057403969,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.007685639346880289,
+        "largest_mass": 0.00655
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted_1000",
+      "seed": 0,
+      "trustworthiness": 0.9274168883538971,
+      "continuity": 0.9349319851539774,
+      "density_preservation": 0.7177163149095638,
+      "knn_accuracy": 0.8966000000000001,
+      "room_common": 0.15778423231737781,
+      "decay_common": 0.3533388290220785,
+      "fitted": {
+        "n_cells": 218,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.003679896726419304,
+        "largest_mass": 0.028
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted_2000",
+      "seed": 0,
+      "trustworthiness": 0.9165646704784833,
+      "continuity": 0.9126291022168723,
+      "density_preservation": 0.7404830127661342,
+      "knn_accuracy": 0.8916000000000001,
+      "room_common": 0.0721959987205634,
+      "decay_common": 0.24368217294620234,
+      "fitted": {
+        "n_cells": 278,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.0029698148736260134,
+        "largest_mass": 0.025
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted_5000",
+      "seed": 0,
+      "trustworthiness": 0.9207386177149163,
+      "continuity": 0.9257253405557228,
+      "density_preservation": 0.7195069269975862,
+      "knn_accuracy": 0.8994,
+      "room_common": 0.08522703415505835,
+      "decay_common": 0.24833235065619902,
+      "fitted": {
+        "n_cells": 299,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.002001010555613461,
+        "largest_mass": 0.0224
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted_10000",
+      "seed": 0,
+      "trustworthiness": 0.9154174982445581,
+      "continuity": 0.9206294874109741,
+      "density_preservation": 0.7917634670519373,
+      "knn_accuracy": 0.884,
+      "room_common": 0.07898789087461962,
+      "decay_common": 0.26193548592226035,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.0025259042171084743,
+        "largest_mass": 0.0204
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted",
+      "seed": 0,
+      "trustworthiness": 0.920287651720333,
+      "continuity": 0.9239298344869094,
+      "density_preservation": 0.7858403480947528,
+      "knn_accuracy": 0.8902000000000001,
+      "room_common": 0.1039830384191283,
+      "decay_common": 0.26845814037560645,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.253528137057936,
+        "rho_g": 0.002444700315227443,
+        "largest_mass": 0.020714285714285713
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "refit_uniform",
+      "seed": 0,
+      "trustworthiness": 0.9251760136422911,
+      "continuity": 0.9509291122479687,
+      "density_preservation": 0.09071534075074181,
+      "knn_accuracy": 0.8842000000000001,
+      "room_common": 1.8173314357795585,
+      "decay_common": 1.3598649569286736,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 13,
+        "dimension": 11.05619981155679,
+        "rho_g": 0.0058347197571695176,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "refit",
+      "seed": 0,
+      "trustworthiness": 0.9213759534557127,
+      "continuity": 0.9493151248871502,
+      "density_preservation": 0.22048261599079755,
+      "knn_accuracy": 0.8952,
+      "room_common": 1.2175106160056615,
+      "decay_common": 1.157570912789807,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 13,
+        "dimension": 11.05619981155679,
+        "rho_g": 0.005868032372630647,
+        "largest_mass": 0.007857142857142858
+      }
+    },
+    {
+      "method": "umap",
+      "condition": null,
+      "seed": 0,
+      "trustworthiness": 0.950838286688735,
+      "continuity": 0.9699065382686327,
+      "density_preservation": -0.2831300089709536,
+      "knn_accuracy": 0.95,
+      "room_common": 2.962707684137739
+    },
+    {
+      "method": "tsne",
+      "condition": null,
+      "seed": 0,
+      "trustworthiness": 0.9775833042431538,
+      "continuity": 0.9661777831276959,
+      "density_preservation": 0.15732250826062907,
+      "knn_accuracy": 0.9488,
+      "room_common": 2.2428807991739883
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "condition": null,
+      "seed": 0,
+      "trustworthiness": 0.8742463637275554,
+      "continuity": 0.9619256053766677,
+      "density_preservation": -0.4812250354581468,
+      "knn_accuracy": 0.8291999999999999,
+      "room_common": 3.776349548683857
+    },
+    {
+      "method": "landmark_isomap",
+      "condition": null,
+      "seed": 0,
+      "trustworthiness": 0.8064291704283277,
+      "continuity": 0.9581865583308256,
+      "density_preservation": 0.5299342839568325,
+      "knn_accuracy": 0.7130000000000001,
+      "room_common": 1.7704883203879738
+    },
+    {
+      "method": "lvm",
+      "condition": "uniform",
+      "seed": 1,
+      "trustworthiness": 0.9407037656735882,
+      "continuity": 0.9427469074129803,
+      "density_preservation": 0.6869566923483188,
+      "knn_accuracy": 0.9166000000000001,
+      "room_common": 0.0007213771740039801,
+      "decay_common": 1.0341662827349876,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.006821187729896089,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "balanced",
+      "seed": 1,
+      "trustworthiness": 0.9370267148159294,
+      "continuity": 0.9384980880730264,
+      "density_preservation": 0.6844884420157824,
+      "knn_accuracy": 0.9172,
+      "room_common": 0.000885475002860108,
+      "decay_common": 0.958428761762553,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.007980348850035806,
+        "largest_mass": 0.00705
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted_1000",
+      "seed": 1,
+      "trustworthiness": 0.9470283358411075,
+      "continuity": 0.938551738389006,
+      "density_preservation": 0.6630265767105044,
+      "knn_accuracy": 0.9178000000000001,
+      "room_common": 0.0005272016261828703,
+      "decay_common": 0.36391814230109526,
+      "fitted": {
+        "n_cells": 228,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.0054345676999332,
+        "largest_mass": 0.024
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted_2000",
+      "seed": 1,
+      "trustworthiness": 0.9405881111445481,
+      "continuity": 0.9244366696759956,
+      "density_preservation": 0.6964454568456657,
+      "knn_accuracy": 0.9252,
+      "room_common": 0.0001607629288247829,
+      "decay_common": 0.28130008367025444,
+      "fitted": {
+        "n_cells": 276,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.0026488660974521017,
+        "largest_mass": 0.0205
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted_5000",
+      "seed": 1,
+      "trustworthiness": 0.9394602547898485,
+      "continuity": 0.9191747898485304,
+      "density_preservation": 0.7015234011910979,
+      "knn_accuracy": 0.9214,
+      "room_common": 0.00014865464701470718,
+      "decay_common": 0.25552538788693646,
+      "fitted": {
+        "n_cells": 298,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.002497306681199278,
+        "largest_mass": 0.0212
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted_10000",
+      "seed": 1,
+      "trustworthiness": 0.9366080529641889,
+      "continuity": 0.9280675534155883,
+      "density_preservation": 0.6926056494551498,
+      "knn_accuracy": 0.9179999999999999,
+      "room_common": 0.000148710790182691,
+      "decay_common": 0.2757810457455257,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.0025802579719745988,
+        "largest_mass": 0.0204
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted",
+      "seed": 1,
+      "trustworthiness": 0.9435262313170829,
+      "continuity": 0.9325048610693148,
+      "density_preservation": 0.7089764598907444,
+      "knn_accuracy": 0.925,
+      "room_common": 0.0001343316521943765,
+      "decay_common": 0.21934983585571108,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.0017188506045583518,
+        "largest_mass": 0.02007142857142857
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "refit_uniform",
+      "seed": 1,
+      "trustworthiness": 0.9688680790450396,
+      "continuity": 0.9506606159093189,
+      "density_preservation": 0.2703278944217101,
+      "knn_accuracy": 0.9308,
+      "room_common": 1.1076839426387834,
+      "decay_common": 1.3755842597888155,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 13,
+        "dimension": 11.053343929386934,
+        "rho_g": 0.005587346781422316,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "refit",
+      "seed": 1,
+      "trustworthiness": 0.9709014705587321,
+      "continuity": 0.9507422529842512,
+      "density_preservation": 0.32947088586001155,
+      "knn_accuracy": 0.9312000000000001,
+      "room_common": 1.1304336998365359,
+      "decay_common": 1.209760758481248,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 13,
+        "dimension": 11.053343929386934,
+        "rho_g": 0.005901535182376173,
+        "largest_mass": 0.007642857142857143
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "uniform",
+      "seed": 1,
+      "trustworthiness": 0.9257653405557227,
+      "continuity": 0.9438427725950447,
+      "density_preservation": 0.6470098480360634,
+      "knn_accuracy": 0.8878,
+      "room_common": 0.544026159427909,
+      "decay_common": 1.0353618743482464,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.006821187729896089,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "balanced",
+      "seed": 1,
+      "trustworthiness": 0.9245726672685325,
+      "continuity": 0.9394925789948841,
+      "density_preservation": 0.6922862549130373,
+      "knn_accuracy": 0.8902000000000001,
+      "room_common": 0.542410521263112,
+      "decay_common": 0.9572651289211781,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.007980348850035806,
+        "largest_mass": 0.00705
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted_1000",
+      "seed": 1,
+      "trustworthiness": 0.9315738108135219,
+      "continuity": 0.9392588905607383,
+      "density_preservation": 0.6396674340612009,
+      "knn_accuracy": 0.9019999999999999,
+      "room_common": 0.313767642993735,
+      "decay_common": 0.3641993318683174,
+      "fitted": {
+        "n_cells": 228,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.0054345676999332,
+        "largest_mass": 0.024
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted_2000",
+      "seed": 1,
+      "trustworthiness": 0.9280799759253686,
+      "continuity": 0.9250103240044136,
+      "density_preservation": 0.7117898792990047,
+      "knn_accuracy": 0.908,
+      "room_common": 0.10984889691105867,
+      "decay_common": 0.27858077653490787,
+      "fitted": {
+        "n_cells": 276,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.0026488660974521017,
+        "largest_mass": 0.0205
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted_5000",
+      "seed": 1,
+      "trustworthiness": 0.9208242832781623,
+      "continuity": 0.919674543083559,
+      "density_preservation": 0.7428344950099447,
+      "knn_accuracy": 0.9018,
+      "room_common": 0.0906551055095372,
+      "decay_common": 0.2543963397850178,
+      "fitted": {
+        "n_cells": 298,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.002497306681199278,
+        "largest_mass": 0.0212
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted_10000",
+      "seed": 1,
+      "trustworthiness": 0.9224796669675995,
+      "continuity": 0.9284118728056977,
+      "density_preservation": 0.6656893991921241,
+      "knn_accuracy": 0.9034000000000001,
+      "room_common": 0.11085478837506413,
+      "decay_common": 0.27571494966406335,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.0025802579719745988,
+        "largest_mass": 0.0204
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted",
+      "seed": 1,
+      "trustworthiness": 0.9327393961279968,
+      "continuity": 0.9330766415889257,
+      "density_preservation": 0.7518220141479222,
+      "knn_accuracy": 0.9064,
+      "room_common": 0.08344565563017156,
+      "decay_common": 0.21935356475529516,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.274789417777372,
+        "rho_g": 0.0017188506045583518,
+        "largest_mass": 0.02007142857142857
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "refit_uniform",
+      "seed": 1,
+      "trustworthiness": 0.9234282997291604,
+      "continuity": 0.951662208847427,
+      "density_preservation": 0.10964407369207871,
+      "knn_accuracy": 0.8832000000000001,
+      "room_common": 2.0171722831405736,
+      "decay_common": 1.3761147419540267,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 13,
+        "dimension": 11.053343929386934,
+        "rho_g": 0.005587346781422316,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "refit",
+      "seed": 1,
+      "trustworthiness": 0.9199811736382787,
+      "continuity": 0.9518446905406761,
+      "density_preservation": 0.256855199302738,
+      "knn_accuracy": 0.8937999999999999,
+      "room_common": 1.6456877739697566,
+      "decay_common": 1.208972662941393,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 13,
+        "dimension": 11.053343929386934,
+        "rho_g": 0.005901535182376173,
+        "largest_mass": 0.007642857142857143
+      }
+    },
+    {
+      "method": "umap",
+      "condition": null,
+      "seed": 1,
+      "trustworthiness": 0.9509204413682415,
+      "continuity": 0.9713387822248972,
+      "density_preservation": -0.34914009459771506,
+      "knn_accuracy": 0.9593999999999999,
+      "room_common": 3.0999308680663282
+    },
+    {
+      "method": "tsne",
+      "condition": null,
+      "seed": 1,
+      "trustworthiness": 0.9783353194904203,
+      "continuity": 0.9680715658541479,
+      "density_preservation": 0.07133428714217498,
+      "knn_accuracy": 0.9583999999999999,
+      "room_common": 2.218377512414709
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "condition": null,
+      "seed": 1,
+      "trustworthiness": 0.8759390149463336,
+      "continuity": 0.9629020443374461,
+      "density_preservation": -0.43568814099708236,
+      "knn_accuracy": 0.8385999999999999,
+      "room_common": 3.6042327294306924
+    },
+    {
+      "method": "landmark_isomap",
+      "condition": null,
+      "seed": 1,
+      "trustworthiness": 0.7888248169324907,
+      "continuity": 0.95574749322901,
+      "density_preservation": 0.5309126773171509,
+      "knn_accuracy": 0.6971999999999999,
+      "room_common": 1.6587817866319645
+    },
+    {
+      "method": "lvm",
+      "condition": "uniform",
+      "seed": 2,
+      "trustworthiness": 0.9420447908516401,
+      "continuity": 0.9402933935199117,
+      "density_preservation": 0.654800688577446,
+      "knn_accuracy": 0.9108,
+      "room_common": 0.0007521741407227296,
+      "decay_common": 1.01944944004629,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.00700775245420398,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "balanced",
+      "seed": 2,
+      "trustworthiness": 0.9371531828668873,
+      "continuity": 0.9320830895776908,
+      "density_preservation": 0.6606546031587052,
+      "knn_accuracy": 0.9194000000000001,
+      "room_common": 0.00046321886271066495,
+      "decay_common": 0.7984255885765854,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.0064628265757245345,
+        "largest_mass": 0.00825
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted_1000",
+      "seed": 2,
+      "trustworthiness": 0.9477166054769787,
+      "continuity": 0.9326658762162704,
+      "density_preservation": 0.6836971250593038,
+      "knn_accuracy": 0.9216000000000001,
+      "room_common": 0.00023063340196452707,
+      "decay_common": 0.2487025617779552,
+      "fitted": {
+        "n_cells": 226,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.0022607595985060292,
+        "largest_mass": 0.026
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted_2000",
+      "seed": 2,
+      "trustworthiness": 0.938779440264821,
+      "continuity": 0.933389996990671,
+      "density_preservation": 0.6703550921537285,
+      "knn_accuracy": 0.9164000000000001,
+      "room_common": 0.00010639082128355415,
+      "decay_common": 0.24652122731520915,
+      "fitted": {
+        "n_cells": 267,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.0023145483362734787,
+        "largest_mass": 0.033
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted_5000",
+      "seed": 2,
+      "trustworthiness": 0.9366387400942923,
+      "continuity": 0.9311870799478383,
+      "density_preservation": 0.6725554250651417,
+      "knn_accuracy": 0.9228000000000002,
+      "room_common": 0.00012916325409395278,
+      "decay_common": 0.21303291793651463,
+      "fitted": {
+        "n_cells": 294,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.0024326240872756632,
+        "largest_mass": 0.027
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted_10000",
+      "seed": 2,
+      "trustworthiness": 0.9392369906710804,
+      "continuity": 0.9338184692546896,
+      "density_preservation": 0.6767629570852696,
+      "knn_accuracy": 0.9204000000000001,
+      "room_common": 0.00017276744941290443,
+      "decay_common": 0.219129023515076,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.002329488806681548,
+        "largest_mass": 0.0255
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "shifted",
+      "seed": 2,
+      "trustworthiness": 0.9386131768482295,
+      "continuity": 0.9327073086568362,
+      "density_preservation": 0.6726827090576011,
+      "knn_accuracy": 0.9188000000000001,
+      "room_common": 0.00015288590166908305,
+      "decay_common": 0.21359467996400047,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.0023932021150093754,
+        "largest_mass": 0.025285714285714286
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "refit_uniform",
+      "seed": 2,
+      "trustworthiness": 0.9699734095696659,
+      "continuity": 0.9504056495134918,
+      "density_preservation": 0.32798342921937834,
+      "knn_accuracy": 0.9280000000000002,
+      "room_common": 1.4179976427268601,
+      "decay_common": 1.4938972218831679,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 13,
+        "dimension": 11.051615452953886,
+        "rho_g": 0.005740165007978368,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm",
+      "condition": "refit",
+      "seed": 2,
+      "trustworthiness": 0.9697220423312268,
+      "continuity": 0.9498627264520012,
+      "density_preservation": 0.3302241469616819,
+      "knn_accuracy": 0.9284000000000001,
+      "room_common": 1.385451283790915,
+      "decay_common": 1.2241258545734994,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 13,
+        "dimension": 11.051615452953886,
+        "rho_g": 0.006399134677883779,
+        "largest_mass": 0.007142857142857143
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "uniform",
+      "seed": 2,
+      "trustworthiness": 0.921406367739994,
+      "continuity": 0.9423088454208045,
+      "density_preservation": 0.6263308920799107,
+      "knn_accuracy": 0.8888,
+      "room_common": 0.5338987588142913,
+      "decay_common": 1.0187215804464023,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.00700775245420398,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "balanced",
+      "seed": 2,
+      "trustworthiness": 0.919325729762263,
+      "continuity": 0.9332326532249975,
+      "density_preservation": 0.5792018990856596,
+      "knn_accuracy": 0.9032,
+      "room_common": 0.2709108469445969,
+      "decay_common": 0.8005082485784181,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.0064628265757245345,
+        "largest_mass": 0.00825
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted_1000",
+      "seed": 2,
+      "trustworthiness": 0.9228884060587822,
+      "continuity": 0.9339713953255091,
+      "density_preservation": 0.7767952538451016,
+      "knn_accuracy": 0.8952,
+      "room_common": 0.11405486902101919,
+      "decay_common": 0.25000979196116363,
+      "fitted": {
+        "n_cells": 226,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.0022607595985060292,
+        "largest_mass": 0.026
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted_2000",
+      "seed": 2,
+      "trustworthiness": 0.9245666606480089,
+      "continuity": 0.9345311786538268,
+      "density_preservation": 0.678129941758973,
+      "knn_accuracy": 0.9,
+      "room_common": 0.07497557330927618,
+      "decay_common": 0.24597005148322498,
+      "fitted": {
+        "n_cells": 267,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.0023145483362734787,
+        "largest_mass": 0.033
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted_5000",
+      "seed": 2,
+      "trustworthiness": 0.9221187721938008,
+      "continuity": 0.9327647908516401,
+      "density_preservation": 0.6529966498840368,
+      "knn_accuracy": 0.9008,
+      "room_common": 0.09652150155823501,
+      "decay_common": 0.21259454868671449,
+      "fitted": {
+        "n_cells": 294,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.0024326240872756632,
+        "largest_mass": 0.027
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted_10000",
+      "seed": 2,
+      "trustworthiness": 0.9214909740194603,
+      "continuity": 0.9346676176146053,
+      "density_preservation": 0.6939792450418283,
+      "knn_accuracy": 0.9034000000000001,
+      "room_common": 0.09924087243950766,
+      "decay_common": 0.21723751955278522,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.002329488806681548,
+        "largest_mass": 0.0255
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "shifted",
+      "seed": 2,
+      "trustworthiness": 0.9236085344568161,
+      "continuity": 0.9335313832881934,
+      "density_preservation": 0.6647654855965196,
+      "knn_accuracy": 0.901,
+      "room_common": 0.09876123483327545,
+      "decay_common": 0.2135342856610541,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 14,
+        "dimension": 12.21766364396852,
+        "rho_g": 0.0023932021150093754,
+        "largest_mass": 0.025285714285714286
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "refit_uniform",
+      "seed": 2,
+      "trustworthiness": 0.9230083739592737,
+      "continuity": 0.9513513491824657,
+      "density_preservation": 0.050813140344696466,
+      "knn_accuracy": 0.8795999999999999,
+      "room_common": 2.9351663230626013,
+      "decay_common": 1.4936920437578807,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 13,
+        "dimension": 11.051615452953886,
+        "rho_g": 0.005740165007978368,
+        "largest_mass": 0.0033333333333333335
+      }
+    },
+    {
+      "method": "lvm_chart",
+      "condition": "refit",
+      "seed": 2,
+      "trustworthiness": 0.9246420062192797,
+      "continuity": 0.9507029431236834,
+      "density_preservation": 0.09875967438544567,
+      "knn_accuracy": 0.8844,
+      "room_common": 2.0597405857430138,
+      "decay_common": 1.2238748149044654,
+      "fitted": {
+        "n_cells": 300,
+        "n_landmarks": 13,
+        "dimension": 11.051615452953886,
+        "rho_g": 0.006399134677883779,
+        "largest_mass": 0.007142857142857143
+      }
+    },
+    {
+      "method": "umap",
+      "condition": null,
+      "seed": 2,
+      "trustworthiness": 0.9537976166114956,
+      "continuity": 0.9712982606078845,
+      "density_preservation": -0.232992042932401,
+      "knn_accuracy": 0.9536,
+      "room_common": 2.683385191697437
+    },
+    {
+      "method": "tsne",
+      "condition": null,
+      "seed": 2,
+      "trustworthiness": 0.979869322900993,
+      "continuity": 0.9678167840304945,
+      "density_preservation": 0.14522088996146343,
+      "knn_accuracy": 0.9551999999999999,
+      "room_common": 2.008481046877782
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "condition": null,
+      "seed": 2,
+      "trustworthiness": 0.8806591553816832,
+      "continuity": 0.9626297923563045,
+      "density_preservation": -0.45301550338775176,
+      "knn_accuracy": 0.8331999999999999,
+      "room_common": 3.835747743876242
+    },
+    {
+      "method": "landmark_isomap",
+      "condition": null,
+      "seed": 2,
+      "trustworthiness": 0.803794306349684,
+      "continuity": 0.958913058481292,
+      "density_preservation": 0.5618511611762737,
+      "knn_accuracy": 0.7072,
+      "room_common": 1.7495320675316488
+    }
+  ]
+}

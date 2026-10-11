@@ -1,0 +1,1829 @@
+{
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "counted": [
+    0,
+    10,
+    20,
+    50,
+    100,
+    200,
+    500,
+    1000,
+    2000,
+    14000
+  ],
+  "smoothing": "add-one",
+  "rows": [
+    {
+      "method": "lvm",
+      "counted": 0,
+      "seed": 0,
+      "trustworthiness": 0.942263930183569,
+      "continuity": 0.9373915257297623,
+      "density_preservation": 0.6404108028850914,
+      "knn_accuracy": 0.9099999999999999
+    },
+    {
+      "method": "lvm",
+      "counted": 10,
+      "seed": 0,
+      "trustworthiness": 0.941876830173538,
+      "continuity": 0.9359371852743504,
+      "density_preservation": 0.6395741407470632,
+      "knn_accuracy": 0.9096
+    },
+    {
+      "method": "lvm",
+      "counted": 20,
+      "seed": 0,
+      "trustworthiness": 0.9403152572976227,
+      "continuity": 0.9380994041528739,
+      "density_preservation": 0.6331027288053293,
+      "knn_accuracy": 0.9118
+    },
+    {
+      "method": "lvm",
+      "counted": 50,
+      "seed": 0,
+      "trustworthiness": 0.9374224014444779,
+      "continuity": 0.9124549824455813,
+      "density_preservation": 0.6549273199691885,
+      "knn_accuracy": 0.9016
+    },
+    {
+      "method": "lvm",
+      "counted": 100,
+      "seed": 0,
+      "trustworthiness": 0.9405901775504063,
+      "continuity": 0.9333188203430635,
+      "density_preservation": 0.6599662181768274,
+      "knn_accuracy": 0.9122
+    },
+    {
+      "method": "lvm",
+      "counted": 200,
+      "seed": 0,
+      "trustworthiness": 0.9355763145751831,
+      "continuity": 0.9319809288795265,
+      "density_preservation": 0.6669317523670145,
+      "knn_accuracy": 0.9039999999999999
+    },
+    {
+      "method": "lvm",
+      "counted": 500,
+      "seed": 0,
+      "trustworthiness": 0.9387419560637977,
+      "continuity": 0.9323636312568964,
+      "density_preservation": 0.6497271933120663,
+      "knn_accuracy": 0.9134
+    },
+    {
+      "method": "lvm",
+      "counted": 1000,
+      "seed": 0,
+      "trustworthiness": 0.939362724445782,
+      "continuity": 0.9353377028789247,
+      "density_preservation": 0.6530825277380798,
+      "knn_accuracy": 0.9166000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 2000,
+      "seed": 0,
+      "trustworthiness": 0.9404846905406761,
+      "continuity": 0.9307223633263115,
+      "density_preservation": 0.6990624398931128,
+      "knn_accuracy": 0.9126000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 14000,
+      "seed": 0,
+      "trustworthiness": 0.937542746514194,
+      "continuity": 0.9286172655231216,
+      "density_preservation": 0.6620151932253432,
+      "knn_accuracy": 0.9077999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 0,
+      "seed": 0,
+      "trustworthiness": 0.9246978192396429,
+      "continuity": 0.938275790951951,
+      "density_preservation": 0.6140868319842085,
+      "knn_accuracy": 0.8804000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 10,
+      "seed": 0,
+      "trustworthiness": 0.9275794322399438,
+      "continuity": 0.9371744126793058,
+      "density_preservation": 0.637983511455325,
+      "knn_accuracy": 0.882
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 20,
+      "seed": 0,
+      "trustworthiness": 0.922343994382586,
+      "continuity": 0.9387062212859866,
+      "density_preservation": 0.5906702187886296,
+      "knn_accuracy": 0.8872
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 50,
+      "seed": 0,
+      "trustworthiness": 0.9146084020463436,
+      "continuity": 0.9135138409068111,
+      "density_preservation": 0.7749939718721142,
+      "knn_accuracy": 0.8710000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 100,
+      "seed": 0,
+      "trustworthiness": 0.9205992978232521,
+      "continuity": 0.9341706088875514,
+      "density_preservation": 0.737694759844743,
+      "knn_accuracy": 0.8992000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 200,
+      "seed": 0,
+      "trustworthiness": 0.9237742762563949,
+      "continuity": 0.9324928277660748,
+      "density_preservation": 0.747553168478249,
+      "knn_accuracy": 0.8917999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 500,
+      "seed": 0,
+      "trustworthiness": 0.921745406760959,
+      "continuity": 0.9333609710101314,
+      "density_preservation": 0.6920278957211122,
+      "knn_accuracy": 0.8948
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 1000,
+      "seed": 0,
+      "trustworthiness": 0.9282766415889256,
+      "continuity": 0.9355787340756345,
+      "density_preservation": 0.6509241870525186,
+      "knn_accuracy": 0.9064
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 2000,
+      "seed": 0,
+      "trustworthiness": 0.9217729240646002,
+      "continuity": 0.9311559474370549,
+      "density_preservation": 0.8153528801776945,
+      "knn_accuracy": 0.8946000000000002
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 14000,
+      "seed": 0,
+      "trustworthiness": 0.9196241227806199,
+      "continuity": 0.9284420022068411,
+      "density_preservation": 0.7664077437008503,
+      "knn_accuracy": 0.8956
+    },
+    {
+      "method": "lvm",
+      "counted": 0,
+      "seed": 1,
+      "trustworthiness": 0.941592183769686,
+      "continuity": 0.9412337405958471,
+      "density_preservation": 0.6652937673446389,
+      "knn_accuracy": 0.9106
+    },
+    {
+      "method": "lvm",
+      "counted": 10,
+      "seed": 1,
+      "trustworthiness": 0.9378431136523222,
+      "continuity": 0.939661771491624,
+      "density_preservation": 0.658886444388911,
+      "knn_accuracy": 0.9082000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 20,
+      "seed": 1,
+      "trustworthiness": 0.9427461972113552,
+      "continuity": 0.9391566094894171,
+      "density_preservation": 0.6606352355562314,
+      "knn_accuracy": 0.9154
+    },
+    {
+      "method": "lvm",
+      "counted": 50,
+      "seed": 1,
+      "trustworthiness": 0.9435191172635169,
+      "continuity": 0.9400396589427225,
+      "density_preservation": 0.6563314312670864,
+      "knn_accuracy": 0.921
+    },
+    {
+      "method": "lvm",
+      "counted": 100,
+      "seed": 1,
+      "trustworthiness": 0.9415043555020564,
+      "continuity": 0.9431061811616009,
+      "density_preservation": 0.6483029184645396,
+      "knn_accuracy": 0.9187999999999998
+    },
+    {
+      "method": "lvm",
+      "counted": 200,
+      "seed": 1,
+      "trustworthiness": 0.9415237476176146,
+      "continuity": 0.9342131327114054,
+      "density_preservation": 0.6689459362578482,
+      "knn_accuracy": 0.9226000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 500,
+      "seed": 1,
+      "trustworthiness": 0.9360699969906711,
+      "continuity": 0.9402217313672384,
+      "density_preservation": 0.6727860175013041,
+      "knn_accuracy": 0.908
+    },
+    {
+      "method": "lvm",
+      "counted": 1000,
+      "seed": 1,
+      "trustworthiness": 0.9362734637375865,
+      "continuity": 0.9339874811916943,
+      "density_preservation": 0.6734857109197753,
+      "knn_accuracy": 0.915
+    },
+    {
+      "method": "lvm",
+      "counted": 2000,
+      "seed": 1,
+      "trustworthiness": 0.9399491343163808,
+      "continuity": 0.9368982886949544,
+      "density_preservation": 0.6626908312407442,
+      "knn_accuracy": 0.9124000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 14000,
+      "seed": 1,
+      "trustworthiness": 0.9408336402848831,
+      "continuity": 0.9333563968301736,
+      "density_preservation": 0.6529642986972058,
+      "knn_accuracy": 0.9134
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 0,
+      "seed": 1,
+      "trustworthiness": 0.9250990350085264,
+      "continuity": 0.9416631999197512,
+      "density_preservation": 0.6027996461561737,
+      "knn_accuracy": 0.9028
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 10,
+      "seed": 1,
+      "trustworthiness": 0.9170040365131908,
+      "continuity": 0.940203105627445,
+      "density_preservation": 0.5503298378133099,
+      "knn_accuracy": 0.8842000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 20,
+      "seed": 1,
+      "trustworthiness": 0.9301162082455612,
+      "continuity": 0.9397255211154579,
+      "density_preservation": 0.6121758774834996,
+      "knn_accuracy": 0.907
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 50,
+      "seed": 1,
+      "trustworthiness": 0.9282012358310763,
+      "continuity": 0.9405539331928979,
+      "density_preservation": 0.6217812767704125,
+      "knn_accuracy": 0.899
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 100,
+      "seed": 1,
+      "trustworthiness": 0.9232045621426421,
+      "continuity": 0.9434852161701274,
+      "density_preservation": 0.5554736486627151,
+      "knn_accuracy": 0.9088
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 200,
+      "seed": 1,
+      "trustworthiness": 0.9244461510683117,
+      "continuity": 0.9346470939913732,
+      "density_preservation": 0.7100882968538533,
+      "knn_accuracy": 0.9062000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 500,
+      "seed": 1,
+      "trustworthiness": 0.9241733614204033,
+      "continuity": 0.9407336262413482,
+      "density_preservation": 0.6601049523108911,
+      "knn_accuracy": 0.8985999999999998
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 1000,
+      "seed": 1,
+      "trustworthiness": 0.9252513311264922,
+      "continuity": 0.9347585194101715,
+      "density_preservation": 0.6651278924350538,
+      "knn_accuracy": 0.9048
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 2000,
+      "seed": 1,
+      "trustworthiness": 0.929422782626141,
+      "continuity": 0.9374592837797171,
+      "density_preservation": 0.6577041916449176,
+      "knn_accuracy": 0.8966000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 14000,
+      "seed": 1,
+      "trustworthiness": 0.9258180078242552,
+      "continuity": 0.9339769244658441,
+      "density_preservation": 0.5719436036426697,
+      "knn_accuracy": 0.9036
+    },
+    {
+      "method": "lvm",
+      "counted": 0,
+      "seed": 2,
+      "trustworthiness": 0.9339123282174742,
+      "continuity": 0.9364904925268331,
+      "density_preservation": 0.647937104917153,
+      "knn_accuracy": 0.9068000000000002
+    },
+    {
+      "method": "lvm",
+      "counted": 10,
+      "seed": 2,
+      "trustworthiness": 0.9333217935600361,
+      "continuity": 0.9364552994282275,
+      "density_preservation": 0.6545626864676509,
+      "knn_accuracy": 0.9048
+    },
+    {
+      "method": "lvm",
+      "counted": 20,
+      "seed": 2,
+      "trustworthiness": 0.9391439020964991,
+      "continuity": 0.941831646102919,
+      "density_preservation": 0.6439283777479116,
+      "knn_accuracy": 0.8996000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 50,
+      "seed": 2,
+      "trustworthiness": 0.9373007964690541,
+      "continuity": 0.9366673808807302,
+      "density_preservation": 0.6608739343420273,
+      "knn_accuracy": 0.8966000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 100,
+      "seed": 2,
+      "trustworthiness": 0.9354976226301535,
+      "continuity": 0.9380183127695857,
+      "density_preservation": 0.6667362005265856,
+      "knn_accuracy": 0.9074
+    },
+    {
+      "method": "lvm",
+      "counted": 200,
+      "seed": 2,
+      "trustworthiness": 0.9348424676497141,
+      "continuity": 0.9340577550406259,
+      "density_preservation": 0.6665144631639969,
+      "knn_accuracy": 0.9086000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 500,
+      "seed": 2,
+      "trustworthiness": 0.933129702076437,
+      "continuity": 0.908940351088374,
+      "density_preservation": 0.6882026578192704,
+      "knn_accuracy": 0.8997999999999999
+    },
+    {
+      "method": "lvm",
+      "counted": 1000,
+      "seed": 2,
+      "trustworthiness": 0.937793632260006,
+      "continuity": 0.9343190931888855,
+      "density_preservation": 0.6850479993323321,
+      "knn_accuracy": 0.914
+    },
+    {
+      "method": "lvm",
+      "counted": 2000,
+      "seed": 2,
+      "trustworthiness": 0.9334847346775003,
+      "continuity": 0.9353744327414987,
+      "density_preservation": 0.6877242422259187,
+      "knn_accuracy": 0.906
+    },
+    {
+      "method": "lvm",
+      "counted": 14000,
+      "seed": 2,
+      "trustworthiness": 0.9347657738990871,
+      "continuity": 0.9313665723743605,
+      "density_preservation": 0.6766579547271565,
+      "knn_accuracy": 0.906
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 0,
+      "seed": 2,
+      "trustworthiness": 0.906518651820644,
+      "continuity": 0.9379172474671481,
+      "density_preservation": 0.6167175411886447,
+      "knn_accuracy": 0.893
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 10,
+      "seed": 2,
+      "trustworthiness": 0.9215518025880228,
+      "continuity": 0.937001384291303,
+      "density_preservation": 0.622616572219655,
+      "knn_accuracy": 0.8956
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 20,
+      "seed": 2,
+      "trustworthiness": 0.9209118226502157,
+      "continuity": 0.9431879426221286,
+      "density_preservation": 0.5361513082108557,
+      "knn_accuracy": 0.8778
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 50,
+      "seed": 2,
+      "trustworthiness": 0.924109350988063,
+      "continuity": 0.9378076196208246,
+      "density_preservation": 0.6599816135617853,
+      "knn_accuracy": 0.8762000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 100,
+      "seed": 2,
+      "trustworthiness": 0.9213687872404454,
+      "continuity": 0.9391063617213361,
+      "density_preservation": 0.6204046161323198,
+      "knn_accuracy": 0.8927999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 200,
+      "seed": 2,
+      "trustworthiness": 0.9140674731668171,
+      "continuity": 0.935593897080951,
+      "density_preservation": 0.7676399949173516,
+      "knn_accuracy": 0.9
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 500,
+      "seed": 2,
+      "trustworthiness": 0.9151337426020664,
+      "continuity": 0.9097987441067309,
+      "density_preservation": 0.7457462512846291,
+      "knn_accuracy": 0.881
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 1000,
+      "seed": 2,
+      "trustworthiness": 0.9258975825057678,
+      "continuity": 0.9355493750626943,
+      "density_preservation": 0.7495384693304707,
+      "knn_accuracy": 0.9040000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 2000,
+      "seed": 2,
+      "trustworthiness": 0.9220794222088474,
+      "continuity": 0.9365693891062293,
+      "density_preservation": 0.7539003118120595,
+      "knn_accuracy": 0.8950000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 14000,
+      "seed": 2,
+      "trustworthiness": 0.9187046724847026,
+      "continuity": 0.9322449312869897,
+      "density_preservation": 0.7226357487164823,
+      "knn_accuracy": 0.8927999999999999
+    },
+    {
+      "method": "lvm",
+      "counted": 0,
+      "seed": 3,
+      "trustworthiness": 0.9398274771792556,
+      "continuity": 0.941460014043535,
+      "density_preservation": 0.6183389806725731,
+      "knn_accuracy": 0.9036000000000002
+    },
+    {
+      "method": "lvm",
+      "counted": 10,
+      "seed": 3,
+      "trustworthiness": 0.9409713712508777,
+      "continuity": 0.9358417694854048,
+      "density_preservation": 0.621027966428214,
+      "knn_accuracy": 0.9054
+    },
+    {
+      "method": "lvm",
+      "counted": 20,
+      "seed": 3,
+      "trustworthiness": 0.9399976928478283,
+      "continuity": 0.9432732831778513,
+      "density_preservation": 0.6174504540426901,
+      "knn_accuracy": 0.9067999999999999
+    },
+    {
+      "method": "lvm",
+      "counted": 50,
+      "seed": 3,
+      "trustworthiness": 0.9390863878021868,
+      "continuity": 0.9392119490420303,
+      "density_preservation": 0.6334662256827934,
+      "knn_accuracy": 0.9086000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 100,
+      "seed": 3,
+      "trustworthiness": 0.9375517424014445,
+      "continuity": 0.9369996428929682,
+      "density_preservation": 0.6261022815623555,
+      "knn_accuracy": 0.9074
+    },
+    {
+      "method": "lvm",
+      "counted": 200,
+      "seed": 3,
+      "trustworthiness": 0.9363379676998695,
+      "continuity": 0.937626317584512,
+      "density_preservation": 0.6481236208582783,
+      "knn_accuracy": 0.9074
+    },
+    {
+      "method": "lvm",
+      "counted": 500,
+      "seed": 3,
+      "trustworthiness": 0.933805392717424,
+      "continuity": 0.9282893529942823,
+      "density_preservation": 0.6303531936941401,
+      "knn_accuracy": 0.8994000000000002
+    },
+    {
+      "method": "lvm",
+      "counted": 1000,
+      "seed": 3,
+      "trustworthiness": 0.9353729922760557,
+      "continuity": 0.9163205617413983,
+      "density_preservation": 0.6433733384334772,
+      "knn_accuracy": 0.9082000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 2000,
+      "seed": 3,
+      "trustworthiness": 0.9356022830775403,
+      "continuity": 0.9211145992576989,
+      "density_preservation": 0.6365658616077232,
+      "knn_accuracy": 0.8998000000000002
+    },
+    {
+      "method": "lvm",
+      "counted": 14000,
+      "seed": 3,
+      "trustworthiness": 0.9357003912127595,
+      "continuity": 0.9228880128398034,
+      "density_preservation": 0.6496073189727234,
+      "knn_accuracy": 0.9057999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 0,
+      "seed": 3,
+      "trustworthiness": 0.9255094994482898,
+      "continuity": 0.942021233824857,
+      "density_preservation": 0.5629209462419893,
+      "knn_accuracy": 0.8974
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 10,
+      "seed": 3,
+      "trustworthiness": 0.9305220503561039,
+      "continuity": 0.9363255090781423,
+      "density_preservation": 0.5246775544716384,
+      "knn_accuracy": 0.8924
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 20,
+      "seed": 3,
+      "trustworthiness": 0.9275919349984953,
+      "continuity": 0.9434201464540074,
+      "density_preservation": 0.5877589865447047,
+      "knn_accuracy": 0.8939999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 50,
+      "seed": 3,
+      "trustworthiness": 0.9195038539472364,
+      "continuity": 0.9400801243855953,
+      "density_preservation": 0.6787968995914573,
+      "knn_accuracy": 0.8981999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 100,
+      "seed": 3,
+      "trustworthiness": 0.9247547116059786,
+      "continuity": 0.9372874551108437,
+      "density_preservation": 0.5793539704945484,
+      "knn_accuracy": 0.9074
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 200,
+      "seed": 3,
+      "trustworthiness": 0.9178842371351189,
+      "continuity": 0.9383886287491223,
+      "density_preservation": 0.6867917637754557,
+      "knn_accuracy": 0.9023999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 500,
+      "seed": 3,
+      "trustworthiness": 0.9221396569365031,
+      "continuity": 0.9289776747918548,
+      "density_preservation": 0.5808647291774198,
+      "knn_accuracy": 0.8844000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 1000,
+      "seed": 3,
+      "trustworthiness": 0.9216112268030896,
+      "continuity": 0.9168798033905106,
+      "density_preservation": 0.6654357453534628,
+      "knn_accuracy": 0.8956000000000002
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 2000,
+      "seed": 3,
+      "trustworthiness": 0.9233195185073728,
+      "continuity": 0.9216963667368844,
+      "density_preservation": 0.6053143513336001,
+      "knn_accuracy": 0.8892
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 14000,
+      "seed": 3,
+      "trustworthiness": 0.9211375463938208,
+      "continuity": 0.9234574741699267,
+      "density_preservation": 0.6616543822867245,
+      "knn_accuracy": 0.901
+    },
+    {
+      "method": "lvm",
+      "counted": 0,
+      "seed": 4,
+      "trustworthiness": 0.9375323663356405,
+      "continuity": 0.9339711786538268,
+      "density_preservation": 0.6079552984246317,
+      "knn_accuracy": 0.9076000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 10,
+      "seed": 4,
+      "trustworthiness": 0.9366179195506069,
+      "continuity": 0.938447250476477,
+      "density_preservation": 0.6239139702484157,
+      "knn_accuracy": 0.9066000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 20,
+      "seed": 4,
+      "trustworthiness": 0.938931896880329,
+      "continuity": 0.9432446945531147,
+      "density_preservation": 0.6251708132467818,
+      "knn_accuracy": 0.9066000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 50,
+      "seed": 4,
+      "trustworthiness": 0.9405129902698365,
+      "continuity": 0.9418032821747417,
+      "density_preservation": 0.6186400808154645,
+      "knn_accuracy": 0.9074000000000002
+    },
+    {
+      "method": "lvm",
+      "counted": 100,
+      "seed": 4,
+      "trustworthiness": 0.9357045922359314,
+      "continuity": 0.9416097261510683,
+      "density_preservation": 0.6122087940677222,
+      "knn_accuracy": 0.9118
+    },
+    {
+      "method": "lvm",
+      "counted": 200,
+      "seed": 4,
+      "trustworthiness": 0.9394744467850336,
+      "continuity": 0.9420998174340456,
+      "density_preservation": 0.6628291757279515,
+      "knn_accuracy": 0.9136
+    },
+    {
+      "method": "lvm",
+      "counted": 500,
+      "seed": 4,
+      "trustworthiness": 0.9363491864780821,
+      "continuity": 0.9387454187982747,
+      "density_preservation": 0.6205101244754945,
+      "knn_accuracy": 0.9110000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 1000,
+      "seed": 4,
+      "trustworthiness": 0.9373744086668673,
+      "continuity": 0.9367558752131608,
+      "density_preservation": 0.6367751853556662,
+      "knn_accuracy": 0.9192
+    },
+    {
+      "method": "lvm",
+      "counted": 2000,
+      "seed": 4,
+      "trustworthiness": 0.9369512007222389,
+      "continuity": 0.9361508556525229,
+      "density_preservation": 0.6663923405197406,
+      "knn_accuracy": 0.9106
+    },
+    {
+      "method": "lvm",
+      "counted": 14000,
+      "seed": 4,
+      "trustworthiness": 0.935036292506771,
+      "continuity": 0.9343940896780019,
+      "density_preservation": 0.6521492772198599,
+      "knn_accuracy": 0.9166000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 0,
+      "seed": 4,
+      "trustworthiness": 0.921665242250978,
+      "continuity": 0.9343037375865182,
+      "density_preservation": 0.4312956506313211,
+      "knn_accuracy": 0.882
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 10,
+      "seed": 4,
+      "trustworthiness": 0.9170611856755944,
+      "continuity": 0.9388537265523121,
+      "density_preservation": 0.5190911782014875,
+      "knn_accuracy": 0.8722
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 20,
+      "seed": 4,
+      "trustworthiness": 0.9262107894472866,
+      "continuity": 0.9434270438358913,
+      "density_preservation": 0.5000492125418985,
+      "knn_accuracy": 0.8914
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 50,
+      "seed": 4,
+      "trustworthiness": 0.9210207041829672,
+      "continuity": 0.9415827304644397,
+      "density_preservation": 0.5228127618171399,
+      "knn_accuracy": 0.8808
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 100,
+      "seed": 4,
+      "trustworthiness": 0.9233392516802086,
+      "continuity": 0.941951710301936,
+      "density_preservation": 0.6183560257281784,
+      "knn_accuracy": 0.8964000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 200,
+      "seed": 4,
+      "trustworthiness": 0.923847077941619,
+      "continuity": 0.9419215648510382,
+      "density_preservation": 0.7428800765881765,
+      "knn_accuracy": 0.8942
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 500,
+      "seed": 4,
+      "trustworthiness": 0.919765529140335,
+      "continuity": 0.938949996990671,
+      "density_preservation": 0.5925365567671095,
+      "knn_accuracy": 0.8907999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 1000,
+      "seed": 4,
+      "trustworthiness": 0.9205570709198515,
+      "continuity": 0.9371789587721938,
+      "density_preservation": 0.690187332215379,
+      "knn_accuracy": 0.9112
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 2000,
+      "seed": 4,
+      "trustworthiness": 0.9226808666867289,
+      "continuity": 0.9364210813521918,
+      "density_preservation": 0.7712673054721229,
+      "knn_accuracy": 0.8938
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 14000,
+      "seed": 4,
+      "trustworthiness": 0.9170878041929983,
+      "continuity": 0.9350079285785936,
+      "density_preservation": 0.6475889002576032,
+      "knn_accuracy": 0.8991999999999999
+    },
+    {
+      "method": "lvm",
+      "counted": 0,
+      "seed": 5,
+      "trustworthiness": 0.9379855632460627,
+      "continuity": 0.9397980539672987,
+      "density_preservation": 0.679541996439314,
+      "knn_accuracy": 0.9092
+    },
+    {
+      "method": "lvm",
+      "counted": 10,
+      "seed": 5,
+      "trustworthiness": 0.9374197973718528,
+      "continuity": 0.9384199699067108,
+      "density_preservation": 0.6759670852311459,
+      "knn_accuracy": 0.915
+    },
+    {
+      "method": "lvm",
+      "counted": 20,
+      "seed": 5,
+      "trustworthiness": 0.9420542481693249,
+      "continuity": 0.9410960497542381,
+      "density_preservation": 0.6652339035532616,
+      "knn_accuracy": 0.913
+    },
+    {
+      "method": "lvm",
+      "counted": 50,
+      "seed": 5,
+      "trustworthiness": 0.9343948319791353,
+      "continuity": 0.9414456093891063,
+      "density_preservation": 0.6555516427393537,
+      "knn_accuracy": 0.9046000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 100,
+      "seed": 5,
+      "trustworthiness": 0.9334033062493731,
+      "continuity": 0.9409024857056876,
+      "density_preservation": 0.6585288584723423,
+      "knn_accuracy": 0.9082000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 200,
+      "seed": 5,
+      "trustworthiness": 0.9378845661550808,
+      "continuity": 0.9416809228608687,
+      "density_preservation": 0.6686354463154838,
+      "knn_accuracy": 0.9061999999999999
+    },
+    {
+      "method": "lvm",
+      "counted": 500,
+      "seed": 5,
+      "trustworthiness": 0.9415947276557328,
+      "continuity": 0.9357849011937005,
+      "density_preservation": 0.669341683519149,
+      "knn_accuracy": 0.914
+    },
+    {
+      "method": "lvm",
+      "counted": 1000,
+      "seed": 5,
+      "trustworthiness": 0.9403442271040224,
+      "continuity": 0.9406127635670579,
+      "density_preservation": 0.6844211806308008,
+      "knn_accuracy": 0.9088
+    },
+    {
+      "method": "lvm",
+      "counted": 2000,
+      "seed": 5,
+      "trustworthiness": 0.9374900872705386,
+      "continuity": 0.9156629712107534,
+      "density_preservation": 0.6947760837549548,
+      "knn_accuracy": 0.9106
+    },
+    {
+      "method": "lvm",
+      "counted": 14000,
+      "seed": 5,
+      "trustworthiness": 0.9375682335239242,
+      "continuity": 0.933530348079045,
+      "density_preservation": 0.6720094510316261,
+      "knn_accuracy": 0.9108
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 0,
+      "seed": 5,
+      "trustworthiness": 0.9275702798675896,
+      "continuity": 0.9400868853445682,
+      "density_preservation": 0.7123104431050968,
+      "knn_accuracy": 0.8958
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 10,
+      "seed": 5,
+      "trustworthiness": 0.9207966415889257,
+      "continuity": 0.9380262734476879,
+      "density_preservation": 0.7337614823458428,
+      "knn_accuracy": 0.8907999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 20,
+      "seed": 5,
+      "trustworthiness": 0.9294465162002207,
+      "continuity": 0.9414928277660748,
+      "density_preservation": 0.5449936766134067,
+      "knn_accuracy": 0.8854
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 50,
+      "seed": 5,
+      "trustworthiness": 0.9245144146855251,
+      "continuity": 0.9422409990972013,
+      "density_preservation": 0.6126625007143075,
+      "knn_accuracy": 0.89
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 100,
+      "seed": 5,
+      "trustworthiness": 0.9233612599057077,
+      "continuity": 0.940933144748721,
+      "density_preservation": 0.5593425181828152,
+      "knn_accuracy": 0.893
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 200,
+      "seed": 5,
+      "trustworthiness": 0.9254525950446384,
+      "continuity": 0.9421935520112348,
+      "density_preservation": 0.5880550852373461,
+      "knn_accuracy": 0.8901999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 500,
+      "seed": 5,
+      "trustworthiness": 0.9291378112147658,
+      "continuity": 0.936098264620323,
+      "density_preservation": 0.649169411495398,
+      "knn_accuracy": 0.9010000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 1000,
+      "seed": 5,
+      "trustworthiness": 0.9292809348981843,
+      "continuity": 0.9407706610492527,
+      "density_preservation": 0.7329931008940292,
+      "knn_accuracy": 0.897
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 2000,
+      "seed": 5,
+      "trustworthiness": 0.9199458120172535,
+      "continuity": 0.9169150566756946,
+      "density_preservation": 0.7020845378434837,
+      "knn_accuracy": 0.8832000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 14000,
+      "seed": 5,
+      "trustworthiness": 0.9226893329320894,
+      "continuity": 0.9342625579295817,
+      "density_preservation": 0.6964765067375,
+      "knn_accuracy": 0.8974
+    },
+    {
+      "method": "lvm",
+      "counted": 0,
+      "seed": 6,
+      "trustworthiness": 0.937101570869696,
+      "continuity": 0.9414186337646705,
+      "density_preservation": 0.6821175504791869,
+      "knn_accuracy": 0.9026
+    },
+    {
+      "method": "lvm",
+      "counted": 10,
+      "seed": 6,
+      "trustworthiness": 0.9343010171531748,
+      "continuity": 0.9140663055471963,
+      "density_preservation": 0.6834169181412899,
+      "knn_accuracy": 0.9076000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 20,
+      "seed": 6,
+      "trustworthiness": 0.9365170789447287,
+      "continuity": 0.9399314514996489,
+      "density_preservation": 0.6728473819243882,
+      "knn_accuracy": 0.9084
+    },
+    {
+      "method": "lvm",
+      "counted": 50,
+      "seed": 6,
+      "trustworthiness": 0.9378684441769485,
+      "continuity": 0.9404674330424315,
+      "density_preservation": 0.6776940276654984,
+      "knn_accuracy": 0.9112
+    },
+    {
+      "method": "lvm",
+      "counted": 100,
+      "seed": 6,
+      "trustworthiness": 0.936402022269034,
+      "continuity": 0.9313824696559334,
+      "density_preservation": 0.6948835338919757,
+      "knn_accuracy": 0.9096
+    },
+    {
+      "method": "lvm",
+      "counted": 200,
+      "seed": 6,
+      "trustworthiness": 0.9318975142943123,
+      "continuity": 0.920605328518407,
+      "density_preservation": 0.6892728844162992,
+      "knn_accuracy": 0.9022
+    },
+    {
+      "method": "lvm",
+      "counted": 500,
+      "seed": 6,
+      "trustworthiness": 0.9289520312970208,
+      "continuity": 0.9196470177550407,
+      "density_preservation": 0.6916972304441207,
+      "knn_accuracy": 0.908
+    },
+    {
+      "method": "lvm",
+      "counted": 1000,
+      "seed": 6,
+      "trustworthiness": 0.936197540375163,
+      "continuity": 0.927953933192898,
+      "density_preservation": 0.7043059722048304,
+      "knn_accuracy": 0.913
+    },
+    {
+      "method": "lvm",
+      "counted": 2000,
+      "seed": 6,
+      "trustworthiness": 0.9401471642090481,
+      "continuity": 0.9302559775303441,
+      "density_preservation": 0.7037096247972174,
+      "knn_accuracy": 0.9113999999999999
+    },
+    {
+      "method": "lvm",
+      "counted": 14000,
+      "seed": 6,
+      "trustworthiness": 0.9386443976326613,
+      "continuity": 0.9331723021366235,
+      "density_preservation": 0.7149441244518888,
+      "knn_accuracy": 0.9189999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 0,
+      "seed": 6,
+      "trustworthiness": 0.9232560176547296,
+      "continuity": 0.9424232681312067,
+      "density_preservation": 0.612117753377543,
+      "knn_accuracy": 0.8904
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 10,
+      "seed": 6,
+      "trustworthiness": 0.9222277740997091,
+      "continuity": 0.9152078443173839,
+      "density_preservation": 0.6655903363436294,
+      "knn_accuracy": 0.8958
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 20,
+      "seed": 6,
+      "trustworthiness": 0.9249834848028889,
+      "continuity": 0.941171896880329,
+      "density_preservation": 0.6451627433386405,
+      "knn_accuracy": 0.8950000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 50,
+      "seed": 6,
+      "trustworthiness": 0.9239488293710503,
+      "continuity": 0.9417097201324105,
+      "density_preservation": 0.6318388295637936,
+      "knn_accuracy": 0.8960000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 100,
+      "seed": 6,
+      "trustworthiness": 0.9220752893971311,
+      "continuity": 0.9322281071321096,
+      "density_preservation": 0.7605986252301762,
+      "knn_accuracy": 0.8914
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 200,
+      "seed": 6,
+      "trustworthiness": 0.9164974862072425,
+      "continuity": 0.9216846223292205,
+      "density_preservation": 0.6537228155334316,
+      "knn_accuracy": 0.8812
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 500,
+      "seed": 6,
+      "trustworthiness": 0.9105913291202729,
+      "continuity": 0.9210732831778513,
+      "density_preservation": 0.6877218762163981,
+      "knn_accuracy": 0.8936
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 1000,
+      "seed": 6,
+      "trustworthiness": 0.9200971331126492,
+      "continuity": 0.9292410031096399,
+      "density_preservation": 0.7182480718001065,
+      "knn_accuracy": 0.9082000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 2000,
+      "seed": 6,
+      "trustworthiness": 0.9252537105025579,
+      "continuity": 0.93179855150968,
+      "density_preservation": 0.7753304368301166,
+      "knn_accuracy": 0.8936
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 14000,
+      "seed": 6,
+      "trustworthiness": 0.9266190711204735,
+      "continuity": 0.9345000421306049,
+      "density_preservation": 0.739544946883299,
+      "knn_accuracy": 0.9113999999999999
+    },
+    {
+      "method": "lvm",
+      "counted": 0,
+      "seed": 7,
+      "trustworthiness": 0.9393119550606881,
+      "continuity": 0.9353339311866787,
+      "density_preservation": 0.6194836022078738,
+      "knn_accuracy": 0.9084
+    },
+    {
+      "method": "lvm",
+      "counted": 10,
+      "seed": 7,
+      "trustworthiness": 0.9351102056374762,
+      "continuity": 0.9349043274149864,
+      "density_preservation": 0.6114619827548016,
+      "knn_accuracy": 0.9074
+    },
+    {
+      "method": "lvm",
+      "counted": 20,
+      "seed": 7,
+      "trustworthiness": 0.9371917303641288,
+      "continuity": 0.9354552833784733,
+      "density_preservation": 0.6194290796294625,
+      "knn_accuracy": 0.905
+    },
+    {
+      "method": "lvm",
+      "counted": 50,
+      "seed": 7,
+      "trustworthiness": 0.9398976788042933,
+      "continuity": 0.9378418457217373,
+      "density_preservation": 0.6001627963093817,
+      "knn_accuracy": 0.9132000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 100,
+      "seed": 7,
+      "trustworthiness": 0.93615612799679,
+      "continuity": 0.9362578553515899,
+      "density_preservation": 0.6271215233691015,
+      "knn_accuracy": 0.9038
+    },
+    {
+      "method": "lvm",
+      "counted": 200,
+      "seed": 7,
+      "trustworthiness": 0.9356299929782326,
+      "continuity": 0.937151481592938,
+      "density_preservation": 0.6336889093126324,
+      "knn_accuracy": 0.9012
+    },
+    {
+      "method": "lvm",
+      "counted": 500,
+      "seed": 7,
+      "trustworthiness": 0.9387149042030294,
+      "continuity": 0.932469623833885,
+      "density_preservation": 0.6527494780513817,
+      "knn_accuracy": 0.9108
+    },
+    {
+      "method": "lvm",
+      "counted": 1000,
+      "seed": 7,
+      "trustworthiness": 0.9405947116059785,
+      "continuity": 0.9340990911826663,
+      "density_preservation": 0.6469112468661102,
+      "knn_accuracy": 0.9126
+    },
+    {
+      "method": "lvm",
+      "counted": 2000,
+      "seed": 7,
+      "trustworthiness": 0.9414811957066908,
+      "continuity": 0.93758217273548,
+      "density_preservation": 0.6449821979511848,
+      "knn_accuracy": 0.9077999999999999
+    },
+    {
+      "method": "lvm",
+      "counted": 14000,
+      "seed": 7,
+      "trustworthiness": 0.9418191553816833,
+      "continuity": 0.9370931006118969,
+      "density_preservation": 0.6500822056147072,
+      "knn_accuracy": 0.9103999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 0,
+      "seed": 7,
+      "trustworthiness": 0.9247882355301434,
+      "continuity": 0.9362031176647607,
+      "density_preservation": 0.6120252565429842,
+      "knn_accuracy": 0.8940000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 10,
+      "seed": 7,
+      "trustworthiness": 0.9205100050155481,
+      "continuity": 0.936072484702578,
+      "density_preservation": 0.5773934584397334,
+      "knn_accuracy": 0.8982000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 20,
+      "seed": 7,
+      "trustworthiness": 0.9204700892767579,
+      "continuity": 0.9359404393620223,
+      "density_preservation": 0.6321207252637605,
+      "knn_accuracy": 0.8968
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 50,
+      "seed": 7,
+      "trustworthiness": 0.9301783769686026,
+      "continuity": 0.9382825519109239,
+      "density_preservation": 0.6064011354267599,
+      "knn_accuracy": 0.9002000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 100,
+      "seed": 7,
+      "trustworthiness": 0.9254364851038218,
+      "continuity": 0.9370742180760357,
+      "density_preservation": 0.6459371295262173,
+      "knn_accuracy": 0.8968000000000002
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 200,
+      "seed": 7,
+      "trustworthiness": 0.923829952853847,
+      "continuity": 0.9376087350787441,
+      "density_preservation": 0.6843547467471879,
+      "knn_accuracy": 0.8950000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 500,
+      "seed": 7,
+      "trustworthiness": 0.9246103641287993,
+      "continuity": 0.9335370408265623,
+      "density_preservation": 0.6958966396805555,
+      "knn_accuracy": 0.9057999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 1000,
+      "seed": 7,
+      "trustworthiness": 0.9276689417193299,
+      "continuity": 0.9353206299528538,
+      "density_preservation": 0.6853428167484593,
+      "knn_accuracy": 0.9071999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 2000,
+      "seed": 7,
+      "trustworthiness": 0.9355614083659344,
+      "continuity": 0.9380970849633865,
+      "density_preservation": 0.6717530410633012,
+      "knn_accuracy": 0.9106
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 14000,
+      "seed": 7,
+      "trustworthiness": 0.935406704784833,
+      "continuity": 0.9377312548901595,
+      "density_preservation": 0.7062304587416286,
+      "knn_accuracy": 0.907
+    },
+    {
+      "method": "lvm",
+      "counted": 0,
+      "seed": 8,
+      "trustworthiness": 0.9382184130805497,
+      "continuity": 0.9434091804594242,
+      "density_preservation": 0.6812026762696255,
+      "knn_accuracy": 0.9156000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 10,
+      "seed": 8,
+      "trustworthiness": 0.938559799378072,
+      "continuity": 0.940712219881633,
+      "density_preservation": 0.6810905267295368,
+      "knn_accuracy": 0.9120000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 20,
+      "seed": 8,
+      "trustworthiness": 0.9350447507272545,
+      "continuity": 0.9402871381281974,
+      "density_preservation": 0.6819924157750155,
+      "knn_accuracy": 0.9104000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 50,
+      "seed": 8,
+      "trustworthiness": 0.9367843916140034,
+      "continuity": 0.9423906309559635,
+      "density_preservation": 0.6978471900465658,
+      "knn_accuracy": 0.9146000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 100,
+      "seed": 8,
+      "trustworthiness": 0.9395311947035812,
+      "continuity": 0.9409642852843816,
+      "density_preservation": 0.6853768825277846,
+      "knn_accuracy": 0.9144000000000002
+    },
+    {
+      "method": "lvm",
+      "counted": 200,
+      "seed": 8,
+      "trustworthiness": 0.9371089978934698,
+      "continuity": 0.9252515518106129,
+      "density_preservation": 0.7073009133498015,
+      "knn_accuracy": 0.9172
+    },
+    {
+      "method": "lvm",
+      "counted": 500,
+      "seed": 8,
+      "trustworthiness": 0.9384659444277259,
+      "continuity": 0.92490119771291,
+      "density_preservation": 0.7105115685533935,
+      "knn_accuracy": 0.9186
+    },
+    {
+      "method": "lvm",
+      "counted": 1000,
+      "seed": 8,
+      "trustworthiness": 0.9386459584712609,
+      "continuity": 0.9245579095195104,
+      "density_preservation": 0.7077103244002824,
+      "knn_accuracy": 0.9132
+    },
+    {
+      "method": "lvm",
+      "counted": 2000,
+      "seed": 8,
+      "trustworthiness": 0.9393933032400441,
+      "continuity": 0.9265772574982445,
+      "density_preservation": 0.7023381375958618,
+      "knn_accuracy": 0.9156000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 14000,
+      "seed": 8,
+      "trustworthiness": 0.9433084602267028,
+      "continuity": 0.9243472243956264,
+      "density_preservation": 0.7063155825662768,
+      "knn_accuracy": 0.9144
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 0,
+      "seed": 8,
+      "trustworthiness": 0.9250653666365733,
+      "continuity": 0.9444393941217775,
+      "density_preservation": 0.668621456767647,
+      "knn_accuracy": 0.8906000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 10,
+      "seed": 8,
+      "trustworthiness": 0.9248660648008827,
+      "continuity": 0.9418081051258903,
+      "density_preservation": 0.66035260189315,
+      "knn_accuracy": 0.8831999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 20,
+      "seed": 8,
+      "trustworthiness": 0.9215879305848129,
+      "continuity": 0.9416183248069014,
+      "density_preservation": 0.6696033984471969,
+      "knn_accuracy": 0.8836
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 50,
+      "seed": 8,
+      "trustworthiness": 0.9246222208847427,
+      "continuity": 0.9438838880529642,
+      "density_preservation": 0.7378070331867017,
+      "knn_accuracy": 0.8936
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 100,
+      "seed": 8,
+      "trustworthiness": 0.9271768963787742,
+      "continuity": 0.9422893730564751,
+      "density_preservation": 0.6172529116022956,
+      "knn_accuracy": 0.8934000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 200,
+      "seed": 8,
+      "trustworthiness": 0.9178655752833784,
+      "continuity": 0.9267748781221787,
+      "density_preservation": 0.7033863265590317,
+      "knn_accuracy": 0.9022
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 500,
+      "seed": 8,
+      "trustworthiness": 0.9189410372153677,
+      "continuity": 0.9265299949844518,
+      "density_preservation": 0.7442346420034752,
+      "knn_accuracy": 0.9022000000000002
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 1000,
+      "seed": 8,
+      "trustworthiness": 0.9231769284782827,
+      "continuity": 0.9255763466746916,
+      "density_preservation": 0.7554865559561516,
+      "knn_accuracy": 0.8927999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 2000,
+      "seed": 8,
+      "trustworthiness": 0.9175470919851539,
+      "continuity": 0.927696679707092,
+      "density_preservation": 0.7168782893623549,
+      "knn_accuracy": 0.9062000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 14000,
+      "seed": 8,
+      "trustworthiness": 0.9249086528237537,
+      "continuity": 0.9256356344668473,
+      "density_preservation": 0.7751178644800244,
+      "knn_accuracy": 0.8960000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 0,
+      "seed": 9,
+      "trustworthiness": 0.930219548600662,
+      "continuity": 0.9237980820543685,
+      "density_preservation": 0.605025711465132,
+      "knn_accuracy": 0.8928
+    },
+    {
+      "method": "lvm",
+      "counted": 10,
+      "seed": 9,
+      "trustworthiness": 0.9386095977530344,
+      "continuity": 0.9406215708696961,
+      "density_preservation": 0.6123098017137871,
+      "knn_accuracy": 0.9052000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 20,
+      "seed": 9,
+      "trustworthiness": 0.9362918326813121,
+      "continuity": 0.9395691603972314,
+      "density_preservation": 0.6224622432903786,
+      "knn_accuracy": 0.9008
+    },
+    {
+      "method": "lvm",
+      "counted": 50,
+      "seed": 9,
+      "trustworthiness": 0.9385137405958471,
+      "continuity": 0.9414452081452502,
+      "density_preservation": 0.6355147626447889,
+      "knn_accuracy": 0.9020000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 100,
+      "seed": 9,
+      "trustworthiness": 0.9339688032901996,
+      "continuity": 0.9376300491523724,
+      "density_preservation": 0.6053871287761077,
+      "knn_accuracy": 0.9040000000000001
+    },
+    {
+      "method": "lvm",
+      "counted": 200,
+      "seed": 9,
+      "trustworthiness": 0.9375949643896078,
+      "continuity": 0.9421293128698967,
+      "density_preservation": 0.6204820565827318,
+      "knn_accuracy": 0.9052
+    },
+    {
+      "method": "lvm",
+      "counted": 500,
+      "seed": 9,
+      "trustworthiness": 0.9328133533955261,
+      "continuity": 0.9342863837897482,
+      "density_preservation": 0.6324163262153639,
+      "knn_accuracy": 0.9054
+    },
+    {
+      "method": "lvm",
+      "counted": 1000,
+      "seed": 9,
+      "trustworthiness": 0.934024367539372,
+      "continuity": 0.9293276798074029,
+      "density_preservation": 0.6257148805104321,
+      "knn_accuracy": 0.9038
+    },
+    {
+      "method": "lvm",
+      "counted": 2000,
+      "seed": 9,
+      "trustworthiness": 0.9341903420603872,
+      "continuity": 0.9271904824957368,
+      "density_preservation": 0.6482299229762266,
+      "knn_accuracy": 0.9064
+    },
+    {
+      "method": "lvm",
+      "counted": 14000,
+      "seed": 9,
+      "trustworthiness": 0.9383260708195406,
+      "continuity": 0.9319864780820544,
+      "density_preservation": 0.6465326109975733,
+      "knn_accuracy": 0.9110000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 0,
+      "seed": 9,
+      "trustworthiness": 0.9068037837295616,
+      "continuity": 0.9242410071220785,
+      "density_preservation": 0.6042841567595703,
+      "knn_accuracy": 0.8657999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 10,
+      "seed": 9,
+      "trustworthiness": 0.922101598956766,
+      "continuity": 0.9410117484201023,
+      "density_preservation": 0.646843950235271,
+      "knn_accuracy": 0.8948
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 20,
+      "seed": 9,
+      "trustworthiness": 0.9184829812418497,
+      "continuity": 0.940168927675795,
+      "density_preservation": 0.6267940638200764,
+      "knn_accuracy": 0.8848
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 50,
+      "seed": 9,
+      "trustworthiness": 0.9220555802989266,
+      "continuity": 0.9420690059183469,
+      "density_preservation": 0.7308081843797127,
+      "knn_accuracy": 0.8677999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 100,
+      "seed": 9,
+      "trustworthiness": 0.9196171491624034,
+      "continuity": 0.9384282275052663,
+      "density_preservation": 0.5892787141987748,
+      "knn_accuracy": 0.8803999999999998
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 200,
+      "seed": 9,
+      "trustworthiness": 0.9200000641990169,
+      "continuity": 0.9431845842110542,
+      "density_preservation": 0.6998165430888152,
+      "knn_accuracy": 0.8882
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 500,
+      "seed": 9,
+      "trustworthiness": 0.9193197753034407,
+      "continuity": 0.9351414866084863,
+      "density_preservation": 0.6999273489702483,
+      "knn_accuracy": 0.8888
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 1000,
+      "seed": 9,
+      "trustworthiness": 0.9192075233222992,
+      "continuity": 0.9296650737285586,
+      "density_preservation": 0.6753443281587574,
+      "knn_accuracy": 0.8928
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 2000,
+      "seed": 9,
+      "trustworthiness": 0.9235569826462032,
+      "continuity": 0.9274506851238841,
+      "density_preservation": 0.7016325603144692,
+      "knn_accuracy": 0.8789999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "counted": 14000,
+      "seed": 9,
+      "trustworthiness": 0.9215699347978734,
+      "continuity": 0.9325352151670178,
+      "density_preservation": 0.7104287998110305,
+      "knn_accuracy": 0.8992000000000001
+    }
+  ]
+}

@@ -59,17 +59,21 @@ class KMeansConfig(_Section):
 
 
 class RefineConfig(_Section):
+    strategy: Literal["minibatch", "lloyd"]
     passes: int = Field(ge=0)
+    tolerance: float = Field(gt=0)
     max_points: int | None = Field(ge=1)
 
 
 class MassesConfig(_Section):
-    rel_error: float = Field(gt=0, lt=1)
+    rel_error: float | None = Field(gt=0, lt=1)
     max_points: int | None = Field(ge=1)
 
 
 class CellsConfig(_Section):
     n_cells: int = Field(ge=2)
+    min_points_per_cell: int = Field(ge=1)
+    placement: Literal["kmeans", "farthest"]
     kmeans: KMeansConfig
     refine: RefineConfig
     masses: MassesConfig

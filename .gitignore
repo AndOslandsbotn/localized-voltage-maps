@@ -13,3 +13,5 @@ papers/
 *.npy
 # ...except the small pinned references of the old code's regression test (python/tests_old/regression/test_regression.py)
 !python/tests_old/regression/reference/*.npz
+# fitted LVM models saved by experiment runs (large)
+experiments/sfv/**/models/

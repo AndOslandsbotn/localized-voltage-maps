@@ -15,7 +15,7 @@ def main() -> None:
     fig, axes = style.figure("full", aspect=0.55, ncols=len(PANELS))
     for ax, (key, title) in zip(axes, PANELS.items()):
         Z = embedding[key]
-        ax.scatter(Z[:, 0], Z[:, 1], c=embedding["labels"], cmap=colours, vmin=-0.5, vmax=9.5, s=0.15, linewidths=0,
+        ax.scatter(Z[:, 0], Z[:, 1], c=embedding["labels"], cmap=colours, vmin=-0.5, vmax=9.5, s=1.35, linewidths=0,
                    rasterized=True)
         ax.set_title(title, loc="left")
         ax.set_aspect("equal", adjustable="datalim")

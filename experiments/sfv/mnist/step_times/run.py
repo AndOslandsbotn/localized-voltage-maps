@@ -9,7 +9,7 @@ from experiments.common.record import environment, fitted
 from experiments.common.timing import StepTimer
 from lvm.config import load_config
 from lvm.data import as_chunks
-from lvm.region import fit_region
+from lvm.region import fit_region, save_region
 
 HERE = Path(__file__).resolve().parent
 N, SEEDS, DEVICE = 50_000, (0, 1, 2), "cuda"
@@ -28,6 +28,8 @@ def main() -> None:
         for step, s in timer.seconds.items():
             seconds.setdefault(step, []).append(s)
         fits.append(fitted(region))
+        (HERE / "models").mkdir(exist_ok=True)
+        save_region(region, HERE / "models" / f"seed{seed}.npz")
     off = ["refine"] if config.cells.refine.passes == 0 else []
     results = {"dataset": "mnist", "split": "eval", "n": N, "n_features": X.shape[1], "seeds": list(SEEDS),
                "environment": environment(DEVICE), "settings": config.model_dump(mode="json"), "fitted": fits,

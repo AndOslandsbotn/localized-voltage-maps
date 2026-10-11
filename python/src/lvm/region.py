@@ -8,7 +8,7 @@ from typing import Callable
 import numpy as np
 import torch
 
-from lvm.cells import assign_cells, cell_masses, fit_cells, refine_cells
+from lvm.cells import assign_cells, cell_masses, fit_cells, refine_cells, split_cells
 from lvm.compute import rows_per_block
 from lvm.config import Config
 from lvm.data import sample_region
@@ -32,6 +32,7 @@ class RegionModel:
     embedding: LandmarkMds        # places items from their voltages to the landmarks
     chart: LocalChart | None = None   # places points within their cell; None: no chart
     children: tuple["RegionModel", ...] = ()
+    refine_passes: int = 0        # passes over the data the cells' refinement made
 
     def transform_chunk(self, points: torch.Tensor, *, config: Config) -> torch.Tensor:
         bytes_per_point = 4 * len(self.centroids) * points.element_size()
@@ -53,8 +54,10 @@ class RegionModel:
 
 
 def fit_region(chunks, config: Config, *, device: str, region_id: tuple[int, ...], seed: int,
-               timer: Callable[[str], AbstractContextManager] | None = None) -> RegionModel:
-    """``timer(step)``, if given, is entered around each step, e.g. to time it; by default nothing is done."""
+               timer: Callable[[str], AbstractContextManager] | None = None,
+               parents: torch.Tensor | None = None) -> RegionModel:
+    """``timer(step)``, if given, is entered around each step, e.g. to time it; by default nothing is done. With
+    ``parents`` (the parent region's centroids), the cells are split from them instead of fitted from scratch."""
     timer = timer or _no_timer
     with timer("sample"):
         sample = sample_region(chunks, config=config, device=device, seed=seed)
@@ -62,9 +65,12 @@ def fit_region(chunks, config: Config, *, device: str, region_id: tuple[int, ...
         dimension = estimate_dimension(sample, config=config, device=device, seed=seed)
 
     with timer("cells"):
-        centroids = fit_cells(sample, config=config, device=device, seed=seed)
+        if parents is None:
+            centroids = fit_cells(sample, config=config, device=device, seed=seed)
+        else:
+            centroids = split_cells(sample, parents, config=config, device=device, seed=seed)
     with timer("refine"):
-        centroids = refine_cells(chunks, sample, centroids, config=config, device=device)
+        centroids, refine_passes = refine_cells(chunks, sample, centroids, config=config, device=device)
     with timer("masses"):
         masses = cell_masses(chunks, centroids, config=config, device=device)
         keep = masses > 0
@@ -79,9 +85,8 @@ def fit_region(chunks, config: Config, *, device: str, region_id: tuple[int, ...
 
     with timer("embedding"):
         embedding = fit_embedding(maps, landmarks, config=config)
-    region = RegionModel(region_id, sample.shape[1], dimension, centroids, 
-                         masses, radius, rho_g, landmarks, maps, embedding
-                         )
+    region = RegionModel(region_id, sample.shape[1], dimension, centroids,
+                         masses, radius, rho_g, landmarks, maps, embedding, refine_passes=refine_passes)
     if config.embedding.local_chart != "none":
         with timer("chart"):
             coordinates = region.transform_chunk(sample, config=config)

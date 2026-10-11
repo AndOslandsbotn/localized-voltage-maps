@@ -1,0 +1,554 @@
+{
+  "n": 50000,
+  "sample": 10000,
+  "k": 10,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "rows": [
+    {
+      "method": "lvm",
+      "seeds": [
+        0,
+        1
+      ],
+      "procrustes": 0.3212504500514113,
+      "neighbour_agreement": 0.08952435674920195
+    },
+    {
+      "method": "lvm",
+      "seeds": [
+        0,
+        2
+      ],
+      "procrustes": 0.5787971524310905,
+      "neighbour_agreement": 0.0851773904028548
+    },
+    {
+      "method": "lvm",
+      "seeds": [
+        0,
+        3
+      ],
+      "procrustes": 0.3210808283402294,
+      "neighbour_agreement": 0.08147780877533199
+    },
+    {
+      "method": "lvm",
+      "seeds": [
+        0,
+        4
+      ],
+      "procrustes": 0.1769861617827917,
+      "neighbour_agreement": 0.08119708660792252
+    },
+    {
+      "method": "lvm",
+      "seeds": [
+        1,
+        2
+      ],
+      "procrustes": 0.4677302845777085,
+      "neighbour_agreement": 0.09099381096199982
+    },
+    {
+      "method": "lvm",
+      "seeds": [
+        1,
+        3
+      ],
+      "procrustes": 0.1493545901175486,
+      "neighbour_agreement": 0.08958042079179851
+    },
+    {
+      "method": "lvm",
+      "seeds": [
+        1,
+        4
+      ],
+      "procrustes": 0.41249470629317525,
+      "neighbour_agreement": 0.08717934986410218
+    },
+    {
+      "method": "lvm",
+      "seeds": [
+        2,
+        3
+      ],
+      "procrustes": 0.5701563792656061,
+      "neighbour_agreement": 0.07827479360165118
+    },
+    {
+      "method": "lvm",
+      "seeds": [
+        2,
+        4
+      ],
+      "procrustes": 0.5281732463528269,
+      "neighbour_agreement": 0.07930914078181879
+    },
+    {
+      "method": "lvm",
+      "seeds": [
+        3,
+        4
+      ],
+      "procrustes": 0.41475897634462255,
+      "neighbour_agreement": 0.08381479008607491
+    },
+    {
+      "method": "lvm_chart",
+      "seeds": [
+        0,
+        1
+      ],
+      "procrustes": 0.3215202472802374,
+      "neighbour_agreement": 0.08433099793223632
+    },
+    {
+      "method": "lvm_chart",
+      "seeds": [
+        0,
+        2
+      ],
+      "procrustes": 0.5782381332405823,
+      "neighbour_agreement": 0.08411752278509244
+    },
+    {
+      "method": "lvm_chart",
+      "seeds": [
+        0,
+        3
+      ],
+      "procrustes": 0.3206158079548269,
+      "neighbour_agreement": 0.08145763663581
+    },
+    {
+      "method": "lvm_chart",
+      "seeds": [
+        0,
+        4
+      ],
+      "procrustes": 0.17603465106099994,
+      "neighbour_agreement": 0.08104182079530375
+    },
+    {
+      "method": "lvm_chart",
+      "seeds": [
+        1,
+        2
+      ],
+      "procrustes": 0.46883172189304545,
+      "neighbour_agreement": 0.08541746570423041
+    },
+    {
+      "method": "lvm_chart",
+      "seeds": [
+        1,
+        3
+      ],
+      "procrustes": 0.14929277134009483,
+      "neighbour_agreement": 0.08165141218430692
+    },
+    {
+      "method": "lvm_chart",
+      "seeds": [
+        1,
+        4
+      ],
+      "procrustes": 0.4121913205163795,
+      "neighbour_agreement": 0.08219394082010181
+    },
+    {
+      "method": "lvm_chart",
+      "seeds": [
+        2,
+        3
+      ],
+      "procrustes": 0.5702780966416583,
+      "neighbour_agreement": 0.07807102919440381
+    },
+    {
+      "method": "lvm_chart",
+      "seeds": [
+        2,
+        4
+      ],
+      "procrustes": 0.5285443678353284,
+      "neighbour_agreement": 0.0831769205596605
+    },
+    {
+      "method": "lvm_chart",
+      "seeds": [
+        3,
+        4
+      ],
+      "procrustes": 0.41469015998265973,
+      "neighbour_agreement": 0.07958710152077025
+    },
+    {
+      "method": "umap",
+      "seeds": [
+        0,
+        1
+      ],
+      "procrustes": 0.006477772220765374,
+      "neighbour_agreement": 0.42668540608857947
+    },
+    {
+      "method": "umap",
+      "seeds": [
+        0,
+        2
+      ],
+      "procrustes": 0.007177981574878829,
+      "neighbour_agreement": 0.4349644014224509
+    },
+    {
+      "method": "umap",
+      "seeds": [
+        0,
+        3
+      ],
+      "procrustes": 0.008102709293653936,
+      "neighbour_agreement": 0.43793620710215136
+    },
+    {
+      "method": "umap",
+      "seeds": [
+        0,
+        4
+      ],
+      "procrustes": 0.008540373443587322,
+      "neighbour_agreement": 0.4298828123974408
+    },
+    {
+      "method": "umap",
+      "seeds": [
+        1,
+        2
+      ],
+      "procrustes": 0.007480506376755758,
+      "neighbour_agreement": 0.4319015714849305
+    },
+    {
+      "method": "umap",
+      "seeds": [
+        1,
+        3
+      ],
+      "procrustes": 0.007837522094713313,
+      "neighbour_agreement": 0.43060090565609144
+    },
+    {
+      "method": "umap",
+      "seeds": [
+        1,
+        4
+      ],
+      "procrustes": 0.007504434204733793,
+      "neighbour_agreement": 0.42756211418440515
+    },
+    {
+      "method": "umap",
+      "seeds": [
+        2,
+        3
+      ],
+      "procrustes": 0.007216627458536587,
+      "neighbour_agreement": 0.4338510032451209
+    },
+    {
+      "method": "umap",
+      "seeds": [
+        2,
+        4
+      ],
+      "procrustes": 0.007997893663916237,
+      "neighbour_agreement": 0.4319691651485769
+    },
+    {
+      "method": "umap",
+      "seeds": [
+        3,
+        4
+      ],
+      "procrustes": 0.0070308721868724685,
+      "neighbour_agreement": 0.43792981970729644
+    },
+    {
+      "method": "tsne",
+      "seeds": [
+        0,
+        1
+      ],
+      "procrustes": 2.334506205546565e-31,
+      "neighbour_agreement": 1.0
+    },
+    {
+      "method": "tsne",
+      "seeds": [
+        0,
+        2
+      ],
+      "procrustes": 2.334506205546565e-31,
+      "neighbour_agreement": 1.0
+    },
+    {
+      "method": "tsne",
+      "seeds": [
+        0,
+        3
+      ],
+      "procrustes": 2.334506205546565e-31,
+      "neighbour_agreement": 1.0
+    },
+    {
+      "method": "tsne",
+      "seeds": [
+        0,
+        4
+      ],
+      "procrustes": 2.334506205546565e-31,
+      "neighbour_agreement": 1.0
+    },
+    {
+      "method": "tsne",
+      "seeds": [
+        1,
+        2
+      ],
+      "procrustes": 2.334506205546565e-31,
+      "neighbour_agreement": 1.0
+    },
+    {
+      "method": "tsne",
+      "seeds": [
+        1,
+        3
+      ],
+      "procrustes": 2.334506205546565e-31,
+      "neighbour_agreement": 1.0
+    },
+    {
+      "method": "tsne",
+      "seeds": [
+        1,
+        4
+      ],
+      "procrustes": 2.334506205546565e-31,
+      "neighbour_agreement": 1.0
+    },
+    {
+      "method": "tsne",
+      "seeds": [
+        2,
+        3
+      ],
+      "procrustes": 2.334506205546565e-31,
+      "neighbour_agreement": 1.0
+    },
+    {
+      "method": "tsne",
+      "seeds": [
+        2,
+        4
+      ],
+      "procrustes": 2.334506205546565e-31,
+      "neighbour_agreement": 1.0
+    },
+    {
+      "method": "tsne",
+      "seeds": [
+        3,
+        4
+      ],
+      "procrustes": 2.334506205546565e-31,
+      "neighbour_agreement": 1.0
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seeds": [
+        0,
+        1
+      ],
+      "procrustes": 5.090238249106555e-08,
+      "neighbour_agreement": 0.9919454545454546
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seeds": [
+        0,
+        2
+      ],
+      "procrustes": 3.1647304562949975e-07,
+      "neighbour_agreement": 0.9843151515151516
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seeds": [
+        0,
+        3
+      ],
+      "procrustes": 2.0706573299999066e-08,
+      "neighbour_agreement": 0.9933090909090908
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seeds": [
+        0,
+        4
+      ],
+      "procrustes": 3.2835391028337834e-06,
+      "neighbour_agreement": 0.9554801864801866
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seeds": [
+        1,
+        2
+      ],
+      "procrustes": 1.654060639530152e-07,
+      "neighbour_agreement": 0.9865333333333333
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seeds": [
+        1,
+        3
+      ],
+      "procrustes": 1.0137372426317211e-07,
+      "neighbour_agreement": 0.9890757575757576
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seeds": [
+        1,
+        4
+      ],
+      "procrustes": 4.017791075921735e-06,
+      "neighbour_agreement": 0.9514696969696969
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seeds": [
+        2,
+        3
+      ],
+      "procrustes": 4.1800039689043393e-07,
+      "neighbour_agreement": 0.982778787878788
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seeds": [
+        2,
+        4
+      ],
+      "procrustes": 5.590261245014956e-06,
+      "neighbour_agreement": 0.9436682650682651
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "seeds": [
+        3,
+        4
+      ],
+      "procrustes": 2.9793082576071907e-06,
+      "neighbour_agreement": 0.9568240093240095
+    },
+    {
+      "method": "landmark_isomap",
+      "seeds": [
+        0,
+        1
+      ],
+      "procrustes": 0.44799764389226693,
+      "neighbour_agreement": 0.0045129276811939345
+    },
+    {
+      "method": "landmark_isomap",
+      "seeds": [
+        0,
+        2
+      ],
+      "procrustes": 0.7744923092536149,
+      "neighbour_agreement": 0.0028234950120399034
+    },
+    {
+      "method": "landmark_isomap",
+      "seeds": [
+        0,
+        3
+      ],
+      "procrustes": 0.7300188179663207,
+      "neighbour_agreement": 0.002756140350877193
+    },
+    {
+      "method": "landmark_isomap",
+      "seeds": [
+        0,
+        4
+      ],
+      "procrustes": 0.33817467162880543,
+      "neighbour_agreement": 0.0044932060543515645
+    },
+    {
+      "method": "landmark_isomap",
+      "seeds": [
+        1,
+        2
+      ],
+      "procrustes": 0.5745463611963362,
+      "neighbour_agreement": 0.0036135534915720667
+    },
+    {
+      "method": "landmark_isomap",
+      "seeds": [
+        1,
+        3
+      ],
+      "procrustes": 0.7937507768790116,
+      "neighbour_agreement": 0.004306699346405229
+    },
+    {
+      "method": "landmark_isomap",
+      "seeds": [
+        1,
+        4
+      ],
+      "procrustes": 0.31455406323149004,
+      "neighbour_agreement": 0.005792002063983488
+    },
+    {
+      "method": "landmark_isomap",
+      "seeds": [
+        2,
+        3
+      ],
+      "procrustes": 0.632390425144687,
+      "neighbour_agreement": 0.003181389748882009
+    },
+    {
+      "method": "landmark_isomap",
+      "seeds": [
+        2,
+        4
+      ],
+      "procrustes": 0.48624056385602477,
+      "neighbour_agreement": 0.004375679394564843
+    },
+    {
+      "method": "landmark_isomap",
+      "seeds": [
+        3,
+        4
+      ],
+      "procrustes": 0.7239742402584596,
+      "neighbour_agreement": 0.004356071551427588
+    }
+  ]
+}

@@ -54,6 +54,9 @@ def download(dataset: str = "mnist") -> None:
     """Fetch a dataset into data/ if it is missing, then check it against its fingerprints."""
     if dataset == "mnist8m":
         return _download_mnist8m()
+    if dataset in SHUFFLED_N:
+        _download_shuffled(dataset)
+        return _verify_shuffled(dataset)
     if dataset != "mnist":
         return                                   # the others are generated
     X_path, y_path = DATA / "mnist_X.npy", DATA / "mnist_y.npy"
@@ -74,6 +77,8 @@ def verify(dataset: str = "mnist") -> None:
 
     if dataset == "mnist8m":
         return _verify_mnist8m()
+    if dataset in SHUFFLED_N:
+        return _verify_shuffled(dataset)
     if dataset != "mnist":
         return
 
@@ -130,6 +135,46 @@ def _half_sphere(split: str, n: int | None, seed: int) -> tuple[np.ndarray, None
 def _height_and_angle(X: np.ndarray, labels: np.ndarray | None) -> dict[str, Colouring]:
     return {"height": Colouring(X[:, 2], "viridis", False),
             "angle": Colouring(np.arctan2(X[:, 1], X[:, 0]), "hsv", False)}
+
+
+# --- swiss roll ---------------------------------------------------------------
+
+SWISS_ROLL_STREAMS = {"tune": 3, "eval": 4}
+
+
+def swiss_roll(n: int, seed) -> np.ndarray:
+    """n points on a swiss roll, as scikit-learn's make_swiss_roll: angle t uniform in [1.5 pi, 4.5 pi], height
+    uniform in [0, 21], at (t cos t, height, t sin t)."""
+    rng = np.random.default_rng(seed)
+    t = 1.5 * np.pi * (1 + 2 * rng.random(n))
+    height = 21 * rng.random(n)
+    return np.column_stack([t * np.cos(t), height, t * np.sin(t)])
+
+
+def swiss_roll_even(n: int, seed) -> np.ndarray:
+    """n points on the same swiss roll with even density on the sheet: the arc length, not the angle, is uniform."""
+    rng = np.random.default_rng(seed)
+    grid = np.linspace(1.5 * np.pi, 4.5 * np.pi, 100_001)
+    arc = 0.5 * (grid * np.sqrt(1 + grid ** 2) + np.arcsinh(grid))
+    t = np.interp(arc[0] + (arc[-1] - arc[0]) * rng.random(n), arc, grid)
+    height = 21 * rng.random(n)
+    return np.column_stack([t * np.cos(t), height, t * np.sin(t)])
+
+
+def unrolled(X: np.ndarray) -> np.ndarray:
+    """(n, 2) positions on the flat sheet the roll is made of: the arc length of the spiral up to the point's angle,
+    1/2 (t sqrt(1 + t^2) + asinh t), and its height. The sheet is rolled up without stretching, so distances between
+    these positions are the roll's exact geodesic distances."""
+    t = np.hypot(X[:, 0], X[:, 2])
+    return np.column_stack([0.5 * (t * np.sqrt(1 + t ** 2) + np.arcsinh(t)), X[:, 1]])
+
+
+def _swiss_roll(split: str, n: int | None, seed: int) -> tuple[np.ndarray, None]:
+    return swiss_roll(20000 if n is None else n, seed=[SWISS_ROLL_STREAMS[split], seed]), None
+
+
+def _swiss_roll_even(split: str, n: int | None, seed: int) -> tuple[np.ndarray, None]:
+    return swiss_roll_even(20000 if n is None else n, seed=[SWISS_ROLL_STREAMS[split], seed]), None
 
 
 # --- MNIST8M -------------------------------------------------------------------
@@ -282,7 +327,8 @@ def _verify_mnist8m() -> None:
 
 
 def _mnist8m(split: str, n: int | None, seed: int) -> tuple[np.ndarray, np.ndarray]:
-    """n consecutive rows of the shuffled file (a random sample), window ``seed``; in memory, so keep n small."""
+    """n consecutive rows of the shuffled file (a random sample), window ``seed``, as float32 in [0, 1]; in memory,
+    so keep n small."""
     download("mnist8m")
     n = MNIST8M_N if n is None else n
     start = (seed * n) % MNIST8M_N
@@ -292,7 +338,9 @@ def _mnist8m(split: str, n: int | None, seed: int) -> tuple[np.ndarray, np.ndarr
         X = np.concatenate([mnist8m_rows(start, MNIST8M_N), mnist8m_rows(0, start + n - MNIST8M_N)])
     _, y = _mnist8m_arrays()
     rows = np.arange(start, start + n) % MNIST8M_N
-    return X.astype(np.float64) / 255.0, y[rows].astype(np.int64)
+    X = X.astype(np.float32)
+    X /= 255.0
+    return X, y[rows].astype(np.int64)
 
 
 def mnist8m_labels(n: int | None = None) -> np.ndarray:
@@ -301,25 +349,110 @@ def mnist8m_labels(n: int | None = None) -> np.ndarray:
     return np.fromfile(MNIST8M_DIR / "y.i8", dtype=np.int8, count=MNIST8M_N if n is None else n).astype(np.int64)
 
 
-def stream(dataset: str, *, n: int | None = None, chunk_size: int = 10_000) -> "FileChunks":
-    """A re-iterable over the first n points, read from disk chunk by chunk with plain file reads, so only the current
-    chunk is in memory. Chunks are float32 in [0, 1]. Only datasets stored on disk stream this way (``mnist8m``)."""
-    if dataset != "mnist8m":
+def stream(dataset: str, *, start: int = 0, n: int | None = None, chunk_size: int = 10_000) -> "FileChunks":
+    """A re-iterable over n points from row ``start`` (all the rest by default), read from disk chunk by chunk with
+    plain file reads, so only the current chunk is in memory. Chunks are float32 in [0, 1]. Only datasets stored on
+    disk stream this way (``mnist8m``, ``kuzushiji49``)."""
+    if dataset == "mnist8m":
+        path, total = MNIST8M_DIR / "X.u8", MNIST8M_N
+    elif dataset in SHUFFLED_N:
+        path, total = DATA / dataset / "X.u8", SHUFFLED_N[dataset]
+    else:
         raise ValueError(f"{dataset} is held in memory; use load(...)")
+    download(dataset)
+    n = total - start if n is None else n
+    return FileChunks(path, start, n, MNIST8M_D, chunk_size)
+
+
+def mnist8m_points(rows: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """The images (float32 in [0, 1]) and labels at the given rows of the shuffled file, in increasing row order;
+    for a few thousand rows."""
     download("mnist8m")
-    return FileChunks(MNIST8M_DIR / "X.u8", MNIST8M_N if n is None else n, MNIST8M_D, chunk_size)
+    X, y = _mnist8m_arrays()
+    rows = np.sort(rows)
+    return np.asarray(X[rows], dtype=np.float32) / 255.0, np.asarray(y[rows], dtype=np.int64)
 
 
 class FileChunks:
-    def __init__(self, path: Path, n: int, n_features: int, chunk_size: int):
-        self.path, self.n, self.n_features, self.chunk_size = path, n, n_features, chunk_size
+    def __init__(self, path: Path, first: int, n: int, n_features: int, chunk_size: int):
+        self.path, self.first, self.n = path, first, n
+        self.n_features, self.chunk_size = n_features, chunk_size
 
     def __iter__(self):
         with open(self.path, "rb") as f:
+            f.seek(self.first * self.n_features)
             for start in range(0, self.n, self.chunk_size):
                 k = min(self.chunk_size, self.n - start)
                 chunk = np.fromfile(f, dtype=np.uint8, count=k * self.n_features).reshape(k, self.n_features)
                 yield chunk.astype(np.float32) / 255.0
+
+
+# --- Kuzushiji-49 -------------------------------------------------------------------------------------------------
+# Stored like MNIST8M: shuffled once (SPLIT_SEED) into data/<name>/X.u8 (rows of 784 uint8) and y.i8, then read as one
+# window of consecutive rows per seed, so only the requested points are ever in memory.
+
+SHUFFLED_N = {"kuzushiji49": 270_912}
+SHUFFLED_SHA256 = {
+    "kuzushiji49": {"X.u8": "894e5772ab161cb1fc2a55c8ac89bdefd62cca61c6195b5048696e7ba2b70d76",
+                    "y.i8": "d5245647d244e9bd230c1c35bd8e267cf374d254cd1adf51f7ebd205434e4c7f"},
+}
+_ROW = 784
+
+
+def _download_shuffled(name: str) -> None:
+    folder = DATA / name
+    if (folder / "X.u8").exists() and (folder / "y.i8").exists():
+        return
+    print(f"downloading {name} ...", flush=True)
+    X, y = _fetch_kuzushiji49()
+    if len(X) != SHUFFLED_N[name]:
+        raise RuntimeError(f"{name}: expected {SHUFFLED_N[name]} images, got {len(X)}")
+    order = np.random.default_rng(SPLIT_SEED).permutation(len(X))
+    folder.mkdir(parents=True, exist_ok=True)
+    X[order].tofile(folder / "X.u8.part")
+    y[order].astype(np.int8).tofile(folder / "y.i8.part")
+    (folder / "X.u8.part").rename(folder / "X.u8")
+    (folder / "y.i8.part").rename(folder / "y.i8")
+
+
+def _fetch_kuzushiji49() -> tuple[np.ndarray, np.ndarray]:
+    import io
+    import urllib.request
+
+    base = "https://codh.rois.ac.jp/kmnist/dataset/k49/"
+    read = lambda file: np.load(io.BytesIO(urllib.request.urlopen(base + file).read()))["arr_0"]
+    X = np.concatenate([read(f"k49-{split}-imgs.npz") for split in ("train", "test")])
+    y = np.concatenate([read(f"k49-{split}-labels.npz") for split in ("train", "test")])
+    return X.reshape(len(X), _ROW).astype(np.uint8), y.astype(np.int64)
+
+
+def _verify_shuffled(name: str) -> None:
+    for file, expected in SHUFFLED_SHA256.get(name, {}).items():
+        got = _sha256_file(DATA / name / file)
+        if got != expected:
+            raise RuntimeError(f"data/{name}/{file} differs from the data the results were made with "
+                               f"(sha256 {got[:12]}..., expected {expected[:12]}...); delete it and download again")
+
+
+def _shuffled(name: str):
+    def loader(split: str, n: int | None, seed: int) -> tuple[np.ndarray, np.ndarray]:
+        """n consecutive rows of the shuffled file (a random sample), window ``seed``, as float32 in [0, 1]."""
+        download(name)
+        total = SHUFFLED_N[name]
+        n = total if n is None else n
+        start = (seed * n) % total
+        rows = np.arange(start, start + n) % total
+        with open(DATA / name / "X.u8", "rb") as f:
+            if start + n <= total:
+                f.seek(start * _ROW)
+                X = np.fromfile(f, dtype=np.uint8, count=n * _ROW).reshape(n, _ROW)
+            else:
+                X = np.fromfile(f, dtype=np.uint8).reshape(total, _ROW)[rows]
+        y = np.fromfile(DATA / name / "y.i8", dtype=np.int8)[rows].astype(np.int64)
+        X = X.astype(np.float32)
+        X /= 255.0
+        return X, y
+    return loader
 
 
 DATASETS: dict[str, Dataset] = {
@@ -328,7 +461,13 @@ DATASETS: dict[str, Dataset] = {
     "half_sphere": Dataset("half_sphere", "half sphere", {"tune": None, "eval": None}, _half_sphere,
                            colourings=_height_and_angle,
                            reference=lambda X: X[:, :2]),
+    "swiss_roll": Dataset("swiss_roll", "swiss roll", {"tune": None, "eval": None}, _swiss_roll,
+                          reference=unrolled),
+    "swiss_roll_even": Dataset("swiss_roll_even", "swiss roll, even density", {"tune": None, "eval": None},
+                               _swiss_roll_even, reference=unrolled),
     "mnist8m": Dataset("mnist8m", "MNIST8M", {"eval": MNIST8M_N}, _mnist8m, colourings=_digits),
+    "kuzushiji49": Dataset("kuzushiji49", "Kuzushiji-49", {"eval": SHUFFLED_N["kuzushiji49"]},
+                           _shuffled("kuzushiji49")),
 }
 
 

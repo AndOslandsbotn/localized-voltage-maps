@@ -1,0 +1,3596 @@
+{
+  "dataset": "mnist",
+  "split": "eval",
+  "sizes": [
+    5000,
+    10000,
+    20000,
+    40000,
+    50000
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "environment": {
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "lvm": "0.0.1",
+    "torch": "2.14.0+cu130"
+  },
+  "settings": {
+    "lvm": {
+      "compute": {
+        "device": "auto",
+        "seed": 0
+      },
+      "data": {
+        "chunk_size": 10000
+      },
+      "sample": {
+        "strategy": "prefix",
+        "size": 50000
+      },
+      "dimension": {
+        "strategy": "mle",
+        "sample_size": 10000,
+        "mle": {
+          "k": 20
+        },
+        "fixed": {
+          "d": 12.0
+        }
+      },
+      "cells": {
+        "n_cells": 300,
+        "min_points_per_cell": 10,
+        "placement": "kmeans",
+        "kmeans": {
+          "strategy": "auto",
+          "cuml": {
+            "init": "random",
+            "max_iter": 30,
+            "tol": 0.0001
+          },
+          "lloyd": {
+            "iterations": 25
+          }
+        },
+        "refine": {
+          "strategy": "minibatch",
+          "passes": 0,
+          "tolerance": 0.01,
+          "max_points": null
+        },
+        "masses": {
+          "rel_error": 0.05,
+          "max_points": null
+        }
+      },
+      "graph": {
+        "radius": {
+          "strategy": "adaptive_per_cell",
+          "adaptive_per_cell": {
+            "k": 10
+          },
+          "knn": {
+            "k": 10
+          },
+          "point_knn": {
+            "k": 10,
+            "sample_size": 5000
+          },
+          "centroid_spacing": {
+            "multiplier": 3.0
+          }
+        },
+        "kernel": {
+          "strategy": "radial",
+          "gaussian": {
+            "sigma": 0.3333,
+            "cutoff": 3.0
+          }
+        },
+        "connect": true
+      },
+      "voltage": {
+        "threshold": 0.001
+      },
+      "landmarks": {
+        "count": {
+          "strategy": "dimension",
+          "dimension": {
+            "multiplier": 1.0
+          },
+          "fixed": {
+            "n": 20
+          }
+        },
+        "mutual_information": {
+          "noise_std": 0.01
+        },
+        "reach": {
+          "k": null,
+          "share": 0.9,
+          "rel_tolerance": 0.05,
+          "rho_g_bounds": [
+            1e-06,
+            1000000.0
+          ]
+        }
+      },
+      "extension": {
+        "strategy": "average",
+        "kernel": "nearest",
+        "nearest": {
+          "k": 3,
+          "sharpness": 16.0
+        }
+      },
+      "embedding": {
+        "n_components": 2,
+        "distance_floor": 1e-10,
+        "local_chart": "last",
+        "chart": {
+          "fill": 0.6,
+          "max_points": 256,
+          "origin": "anchor"
+        }
+      },
+      "hierarchy": {
+        "levels": 1
+      }
+    },
+    "lvm_chart": {
+      "compute": {
+        "device": "auto",
+        "seed": 0
+      },
+      "data": {
+        "chunk_size": 10000
+      },
+      "sample": {
+        "strategy": "prefix",
+        "size": 50000
+      },
+      "dimension": {
+        "strategy": "mle",
+        "sample_size": 10000,
+        "mle": {
+          "k": 20
+        },
+        "fixed": {
+          "d": 12.0
+        }
+      },
+      "cells": {
+        "n_cells": 300,
+        "min_points_per_cell": 10,
+        "placement": "kmeans",
+        "kmeans": {
+          "strategy": "auto",
+          "cuml": {
+            "init": "random",
+            "max_iter": 30,
+            "tol": 0.0001
+          },
+          "lloyd": {
+            "iterations": 25
+          }
+        },
+        "refine": {
+          "strategy": "minibatch",
+          "passes": 0,
+          "tolerance": 0.01,
+          "max_points": null
+        },
+        "masses": {
+          "rel_error": 0.05,
+          "max_points": null
+        }
+      },
+      "graph": {
+        "radius": {
+          "strategy": "adaptive_per_cell",
+          "adaptive_per_cell": {
+            "k": 10
+          },
+          "knn": {
+            "k": 10
+          },
+          "point_knn": {
+            "k": 10,
+            "sample_size": 5000
+          },
+          "centroid_spacing": {
+            "multiplier": 3.0
+          }
+        },
+        "kernel": {
+          "strategy": "radial",
+          "gaussian": {
+            "sigma": 0.3333,
+            "cutoff": 3.0
+          }
+        },
+        "connect": true
+      },
+      "voltage": {
+        "threshold": 0.001
+      },
+      "landmarks": {
+        "count": {
+          "strategy": "dimension",
+          "dimension": {
+            "multiplier": 1.0
+          },
+          "fixed": {
+            "n": 20
+          }
+        },
+        "mutual_information": {
+          "noise_std": 0.01
+        },
+        "reach": {
+          "k": null,
+          "share": 0.9,
+          "rel_tolerance": 0.05,
+          "rho_g_bounds": [
+            1e-06,
+            1000000.0
+          ]
+        }
+      },
+      "extension": {
+        "strategy": "average",
+        "kernel": "nearest",
+        "nearest": {
+          "k": 3,
+          "sharpness": 16.0
+        }
+      },
+      "embedding": {
+        "n_components": 2,
+        "distance_floor": 1e-10,
+        "local_chart": "last",
+        "chart": {
+          "fill": 0.6,
+          "max_points": 256,
+          "origin": "anchor"
+        }
+      },
+      "hierarchy": {
+        "levels": 1
+      }
+    },
+    "umap": {
+      "n_components": 2,
+      "n_neighbors": 30,
+      "min_dist": 0.0,
+      "build_algo": "brute_force_knn"
+    },
+    "tsne": {
+      "perplexity": 15.0,
+      "late_exaggeration": 2.0
+    },
+    "laplacian_eigenmaps": {
+      "n_components": 2,
+      "n_neighbors": 5
+    },
+    "landmark_isomap": {
+      "n_components": 2,
+      "n_neighbors": 10,
+      "n_landmarks": 60
+    }
+  },
+  "rows": [
+    {
+      "method": "lvm",
+      "n": 5000,
+      "seed": 0,
+      "seconds": 0.19706913898698986,
+      "trustworthiness": 0.9701178894573177,
+      "continuity": 0.9412660327013742,
+      "density_preservation": 0.2617722207470394,
+      "density_slope": 2.2479574615537405,
+      "knn_accuracy": 0.8523999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "n": 5000,
+      "seed": 0,
+      "seconds": 0.3452904279110953,
+      "trustworthiness": 0.9073468953756646,
+      "continuity": 0.9425941458521416,
+      "density_preservation": 0.11356662244736147,
+      "density_slope": 0.4008593479594758,
+      "knn_accuracy": 0.8204
+    },
+    {
+      "method": "umap",
+      "n": 5000,
+      "seed": 0,
+      "seconds": 0.18123492307495326,
+      "trustworthiness": 0.9604214946333635,
+      "continuity": 0.967334320393219,
+      "density_preservation": 0.0817837628182915,
+      "density_slope": 0.1200547971304961,
+      "knn_accuracy": 0.8775999999999999
+    },
+    {
+      "method": "tsne",
+      "n": 5000,
+      "seed": 0,
+      "seconds": 0.6248780329478905,
+      "trustworthiness": 0.978351947035811,
+      "continuity": 0.9683524044538068,
+      "density_preservation": 0.41154678441592485,
+      "density_slope": 0.5153899613085605,
+      "knn_accuracy": 0.921
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 5000,
+      "seed": 0,
+      "seconds": 0.09457222104538232,
+      "trustworthiness": 0.8490497181261911,
+      "continuity": 0.9546303300230715,
+      "density_preservation": -0.06987134275079962,
+      "density_slope": -0.14275700604762795,
+      "knn_accuracy": 0.737
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 5000,
+      "seed": 0,
+      "seconds": 1.269052173011005,
+      "trustworthiness": 0.7585047286588424,
+      "continuity": 0.946857690841609,
+      "density_preservation": 0.49088234784957285,
+      "density_slope": 0.8426817417793386,
+      "knn_accuracy": 0.45199999999999996
+    },
+    {
+      "method": "lvm",
+      "n": 5000,
+      "seed": 1,
+      "seconds": 0.18582761602010578,
+      "trustworthiness": 0.9689513572073427,
+      "continuity": 0.941861061289999,
+      "density_preservation": 0.47656195487120023,
+      "density_slope": 4.461075857483454,
+      "knn_accuracy": 0.8789999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "n": 5000,
+      "seed": 1,
+      "seconds": 0.32415825489442796,
+      "trustworthiness": 0.9105717925569264,
+      "continuity": 0.9433397933594142,
+      "density_preservation": 0.33830160698671746,
+      "density_slope": 1.0269941069194402,
+      "knn_accuracy": 0.8161999999999999
+    },
+    {
+      "method": "umap",
+      "n": 5000,
+      "seed": 1,
+      "seconds": 0.16992138989735395,
+      "trustworthiness": 0.9611079626843214,
+      "continuity": 0.9675730685123884,
+      "density_preservation": 0.08322502416687001,
+      "density_slope": 0.11866853166221089,
+      "knn_accuracy": 0.9122000000000001
+    },
+    {
+      "method": "tsne",
+      "n": 5000,
+      "seed": 1,
+      "seconds": 0.6179515309631824,
+      "trustworthiness": 0.9783519590731267,
+      "continuity": 0.9683524044538068,
+      "density_preservation": 0.41154678441592496,
+      "density_slope": 0.5153899613085606,
+      "knn_accuracy": 0.9208000000000001
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 5000,
+      "seed": 1,
+      "seconds": 0.08473846910055727,
+      "trustworthiness": 0.8490460627946634,
+      "continuity": 0.9546247567459123,
+      "density_preservation": -0.07002084802502685,
+      "density_slope": -0.14305339566558492,
+      "knn_accuracy": 0.7357999999999999
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 5000,
+      "seed": 1,
+      "seconds": 1.2310648340499029,
+      "trustworthiness": 0.7368873868993882,
+      "continuity": 0.9380773317283579,
+      "density_preservation": 0.49202574616479317,
+      "density_slope": 0.8945937861719755,
+      "knn_accuracy": 0.38760000000000006
+    },
+    {
+      "method": "lvm",
+      "n": 5000,
+      "seed": 2,
+      "seconds": 0.1896738160867244,
+      "trustworthiness": 0.9705109880629953,
+      "continuity": 0.9385793479787341,
+      "density_preservation": 0.1618903159430386,
+      "density_slope": 1.3021827943848143,
+      "knn_accuracy": 0.8737999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "n": 5000,
+      "seed": 2,
+      "seconds": 0.3218059790087864,
+      "trustworthiness": 0.9085848490319992,
+      "continuity": 0.9400443133714514,
+      "density_preservation": 0.15005817560479465,
+      "density_slope": 0.41068325608216477,
+      "knn_accuracy": 0.8151999999999999
+    },
+    {
+      "method": "umap",
+      "n": 5000,
+      "seed": 2,
+      "seconds": 0.16444592596963048,
+      "trustworthiness": 0.9607761500652021,
+      "continuity": 0.9675470679105226,
+      "density_preservation": 0.08114199948319716,
+      "density_slope": 0.11553096007402937,
+      "knn_accuracy": 0.8818000000000001
+    },
+    {
+      "method": "tsne",
+      "n": 5000,
+      "seed": 2,
+      "seconds": 0.6327761219581589,
+      "trustworthiness": 0.9783519590731267,
+      "continuity": 0.9683524044538068,
+      "density_preservation": 0.41154678441592474,
+      "density_slope": 0.5153899613085605,
+      "knn_accuracy": 0.9214
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 5000,
+      "seed": 2,
+      "seconds": 0.08287652803119272,
+      "trustworthiness": 0.8489699347978734,
+      "continuity": 0.9546267188283679,
+      "density_preservation": -0.06985728642368907,
+      "density_slope": -0.1427091880936246,
+      "knn_accuracy": 0.736
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 5000,
+      "seed": 2,
+      "seconds": 1.2682485349941999,
+      "trustworthiness": 0.7431947677801183,
+      "continuity": 0.9416453405557227,
+      "density_preservation": 0.5482724894368848,
+      "density_slope": 0.9992227333983698,
+      "knn_accuracy": 0.5728
+    },
+    {
+      "method": "lvm",
+      "n": 5000,
+      "seed": 3,
+      "seconds": 0.18973526789341122,
+      "trustworthiness": 0.9714820503561039,
+      "continuity": 0.942471874811917,
+      "density_preservation": 0.26579604748273017,
+      "density_slope": 2.2373547646427445,
+      "knn_accuracy": 0.852
+    },
+    {
+      "method": "lvm_chart",
+      "n": 5000,
+      "seed": 3,
+      "seconds": 0.3388169649988413,
+      "trustworthiness": 0.9169304323402547,
+      "continuity": 0.944041211756445,
+      "density_preservation": 0.22729779688846632,
+      "density_slope": 0.7758298641414308,
+      "knn_accuracy": 0.8012
+    },
+    {
+      "method": "umap",
+      "n": 5000,
+      "seed": 3,
+      "seconds": 0.16105193400289863,
+      "trustworthiness": 0.9612971571872806,
+      "continuity": 0.9678509700070218,
+      "density_preservation": 0.08288153326437175,
+      "density_slope": 0.11898889625066661,
+      "knn_accuracy": 0.8802
+    },
+    {
+      "method": "tsne",
+      "n": 5000,
+      "seed": 3,
+      "seconds": 0.5876984769711271,
+      "trustworthiness": 0.9783519550606882,
+      "continuity": 0.9683524044538068,
+      "density_preservation": 0.41154678441592485,
+      "density_slope": 0.5153899613085603,
+      "knn_accuracy": 0.9214
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 5000,
+      "seed": 3,
+      "seconds": 0.09076311800163239,
+      "trustworthiness": 0.8489727435048651,
+      "continuity": 0.9546465964489919,
+      "density_preservation": -0.0695224054164994,
+      "density_slope": -0.14202794697126025,
+      "knn_accuracy": 0.7376
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 5000,
+      "seed": 3,
+      "seconds": 1.300633962964639,
+      "trustworthiness": 0.7578858421105427,
+      "continuity": 0.9468607122078443,
+      "density_preservation": 0.5360880072246237,
+      "density_slope": 0.8689537774681357,
+      "knn_accuracy": 0.47139999999999993
+    },
+    {
+      "method": "lvm",
+      "n": 5000,
+      "seed": 4,
+      "seconds": 0.19283413793891668,
+      "trustworthiness": 0.9706718507372856,
+      "continuity": 0.9412483418597652,
+      "density_preservation": 0.36205011962731903,
+      "density_slope": 2.9323189501394094,
+      "knn_accuracy": 0.8573999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "n": 5000,
+      "seed": 4,
+      "seconds": 0.3255506179993972,
+      "trustworthiness": 0.9109840746313572,
+      "continuity": 0.9419528337847327,
+      "density_preservation": 0.3029586737501389,
+      "density_slope": 1.0994162018249174,
+      "knn_accuracy": 0.8062000000000001
+    },
+    {
+      "method": "umap",
+      "n": 5000,
+      "seed": 4,
+      "seconds": 0.1628842109348625,
+      "trustworthiness": 0.959976579396128,
+      "continuity": 0.9675446724847026,
+      "density_preservation": 0.0707582852884959,
+      "density_slope": 0.1017756609453141,
+      "knn_accuracy": 0.9112
+    },
+    {
+      "method": "tsne",
+      "n": 5000,
+      "seed": 4,
+      "seconds": 0.6295777619816363,
+      "trustworthiness": 0.9783519630855653,
+      "continuity": 0.9683524044538068,
+      "density_preservation": 0.41154678441592485,
+      "density_slope": 0.5153899613085606,
+      "knn_accuracy": 0.9202
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 5000,
+      "seed": 4,
+      "seconds": 0.07709068001713604,
+      "trustworthiness": 0.8490082816731869,
+      "continuity": 0.9546464961380279,
+      "density_preservation": -0.0694477102118901,
+      "density_slope": -0.14189113451568083,
+      "knn_accuracy": 0.737
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 5000,
+      "seed": 4,
+      "seconds": 1.3486463889712468,
+      "trustworthiness": 0.7679928498344869,
+      "continuity": 0.9518497863376467,
+      "density_preservation": 0.5612873738273911,
+      "density_slope": 0.8963157319243175,
+      "knn_accuracy": 0.48439999999999994
+    },
+    {
+      "method": "lvm",
+      "n": 5000,
+      "seed": 5,
+      "seconds": 0.1881762620760128,
+      "trustworthiness": 0.9691410733273147,
+      "continuity": 0.939223629250677,
+      "density_preservation": 0.5677836049417071,
+      "density_slope": 5.451613065522984,
+      "knn_accuracy": 0.8737999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "n": 5000,
+      "seed": 5,
+      "seconds": 0.32386786106508225,
+      "trustworthiness": 0.9087009128297723,
+      "continuity": 0.9408101474571171,
+      "density_preservation": 0.1861495230844068,
+      "density_slope": 0.4818666617612678,
+      "knn_accuracy": 0.8152000000000001
+    },
+    {
+      "method": "umap",
+      "n": 5000,
+      "seed": 5,
+      "seconds": 0.17771838197950274,
+      "trustworthiness": 0.9625726030695155,
+      "continuity": 0.9675126813120674,
+      "density_preservation": 0.09163204781735172,
+      "density_slope": 0.13044503540376534,
+      "knn_accuracy": 0.8872
+    },
+    {
+      "method": "tsne",
+      "n": 5000,
+      "seed": 5,
+      "seconds": 0.6096966040786356,
+      "trustworthiness": 0.9783519550606882,
+      "continuity": 0.9683524044538068,
+      "density_preservation": 0.41154678441592474,
+      "density_slope": 0.5153899613085606,
+      "knn_accuracy": 0.9206
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 5000,
+      "seed": 5,
+      "seconds": 0.1005062049953267,
+      "trustworthiness": 0.848924409669977,
+      "continuity": 0.9546496980639984,
+      "density_preservation": -0.06936436391538953,
+      "density_slope": -0.14170318479853147,
+      "knn_accuracy": 0.7378000000000001
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 5000,
+      "seed": 5,
+      "seconds": 1.3287889179773629,
+      "trustworthiness": 0.7556348199418196,
+      "continuity": 0.9464231437456114,
+      "density_preservation": 0.4356472998933729,
+      "density_slope": 0.7219627281447484,
+      "knn_accuracy": 0.41100000000000003
+    },
+    {
+      "method": "lvm",
+      "n": 5000,
+      "seed": 6,
+      "seconds": 0.18859706295188516,
+      "trustworthiness": 0.9703944026482094,
+      "continuity": 0.9439035490019059,
+      "density_preservation": 0.271635649925686,
+      "density_slope": 2.2914379615148177,
+      "knn_accuracy": 0.8762000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "n": 5000,
+      "seed": 6,
+      "seconds": 0.31218843697570264,
+      "trustworthiness": 0.9182259765272345,
+      "continuity": 0.9450930123382486,
+      "density_preservation": 0.09308257476501132,
+      "density_slope": 0.27761782199481305,
+      "knn_accuracy": 0.8304
+    },
+    {
+      "method": "umap",
+      "n": 5000,
+      "seed": 6,
+      "seconds": 0.18870732106734067,
+      "trustworthiness": 0.9603779516501153,
+      "continuity": 0.9673774019460327,
+      "density_preservation": 0.10116415517657915,
+      "density_slope": 0.1453671709834314,
+      "knn_accuracy": 0.914
+    },
+    {
+      "method": "tsne",
+      "n": 5000,
+      "seed": 6,
+      "seconds": 0.5698754959739745,
+      "trustworthiness": 0.9783519510482496,
+      "continuity": 0.9683524044538068,
+      "density_preservation": 0.4115467844159249,
+      "density_slope": 0.5153899613085603,
+      "knn_accuracy": 0.9228
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 5000,
+      "seed": 6,
+      "seconds": 0.10619890794623643,
+      "trustworthiness": 0.8490977751028187,
+      "continuity": 0.954623958270639,
+      "density_preservation": -0.06994738375489924,
+      "density_slope": -0.14290910173033627,
+      "knn_accuracy": 0.7343999999999999
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 5000,
+      "seed": 6,
+      "seconds": 1.2795260889688507,
+      "trustworthiness": 0.7621815829070118,
+      "continuity": 0.9491457197311666,
+      "density_preservation": 0.454575899633334,
+      "density_slope": 0.7214880836916405,
+      "knn_accuracy": 0.45599999999999996
+    },
+    {
+      "method": "lvm",
+      "n": 5000,
+      "seed": 7,
+      "seconds": 0.1935022270772606,
+      "trustworthiness": 0.970774793860969,
+      "continuity": 0.9397483639281774,
+      "density_preservation": 0.35380495185795274,
+      "density_slope": 2.872256353738156,
+      "knn_accuracy": 0.8635999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "n": 5000,
+      "seed": 7,
+      "seconds": 0.3204904820304364,
+      "trustworthiness": 0.9040732270037115,
+      "continuity": 0.9409954579195506,
+      "density_preservation": 0.2060461233633002,
+      "density_slope": 0.5482601885823976,
+      "knn_accuracy": 0.8116
+    },
+    {
+      "method": "umap",
+      "n": 5000,
+      "seed": 7,
+      "seconds": 0.16399666597135365,
+      "trustworthiness": 0.9610328498344869,
+      "continuity": 0.9673058962784632,
+      "density_preservation": 0.07037752230736183,
+      "density_slope": 0.1014568062821194,
+      "knn_accuracy": 0.8815999999999999
+    },
+    {
+      "method": "tsne",
+      "n": 5000,
+      "seed": 7,
+      "seconds": 0.5839202030329034,
+      "trustworthiness": 0.9783519630855653,
+      "continuity": 0.9683524044538068,
+      "density_preservation": 0.41154678441592485,
+      "density_slope": 0.5153899613085607,
+      "knn_accuracy": 0.9196000000000002
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 5000,
+      "seed": 7,
+      "seconds": 0.10401989403180778,
+      "trustworthiness": 0.8490563025378673,
+      "continuity": 0.9546478001805597,
+      "density_preservation": -0.06949144277129912,
+      "density_slope": -0.14198977547921088,
+      "knn_accuracy": 0.7314
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 5000,
+      "seed": 7,
+      "seconds": 1.3152227690443397,
+      "trustworthiness": 0.7544215307453104,
+      "continuity": 0.9484091082355302,
+      "density_preservation": 0.4891101273392286,
+      "density_slope": 0.8185125628314974,
+      "knn_accuracy": 0.42279999999999995
+    },
+    {
+      "method": "lvm",
+      "n": 5000,
+      "seed": 8,
+      "seconds": 0.18969867296982557,
+      "trustworthiness": 0.9690049072123583,
+      "continuity": 0.938462947136122,
+      "density_preservation": 0.32815710292858374,
+      "density_slope": 2.7723102458345132,
+      "knn_accuracy": 0.8657999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "n": 5000,
+      "seed": 8,
+      "seconds": 0.3116861319867894,
+      "trustworthiness": 0.9040516882335239,
+      "continuity": 0.9393207463135721,
+      "density_preservation": 0.304754976013773,
+      "density_slope": 0.7794519455403653,
+      "knn_accuracy": 0.8139999999999998
+    },
+    {
+      "method": "umap",
+      "n": 5000,
+      "seed": 8,
+      "seconds": 0.15654940297827125,
+      "trustworthiness": 0.9600997090982044,
+      "continuity": 0.9674186578393018,
+      "density_preservation": 0.07883383676903448,
+      "density_slope": 0.1123984037519003,
+      "knn_accuracy": 0.9120000000000001
+    },
+    {
+      "method": "tsne",
+      "n": 5000,
+      "seed": 8,
+      "seconds": 0.6031560759292915,
+      "trustworthiness": 0.9783519590731267,
+      "continuity": 0.9683524044538068,
+      "density_preservation": 0.41154678441592485,
+      "density_slope": 0.5153899613085606,
+      "knn_accuracy": 0.9214
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 5000,
+      "seed": 8,
+      "seconds": 0.10571211099158973,
+      "trustworthiness": 0.8489914896178152,
+      "continuity": 0.9546470017052864,
+      "density_preservation": -0.06946849531683089,
+      "density_slope": -0.14192715341819104,
+      "knn_accuracy": 0.7356
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 5000,
+      "seed": 8,
+      "seconds": 1.3229258130304515,
+      "trustworthiness": 0.7530322921055271,
+      "continuity": 0.9477765111846724,
+      "density_preservation": 0.48820642844245643,
+      "density_slope": 0.7376371733666249,
+      "knn_accuracy": 0.526
+    },
+    {
+      "method": "lvm",
+      "n": 5000,
+      "seed": 9,
+      "seconds": 0.19510461401659995,
+      "trustworthiness": 0.9697573357407965,
+      "continuity": 0.9328189306851239,
+      "density_preservation": 0.31142477049447154,
+      "density_slope": 2.3429255040916432,
+      "knn_accuracy": 0.881
+    },
+    {
+      "method": "lvm_chart",
+      "n": 5000,
+      "seed": 9,
+      "seconds": 0.3165371210779995,
+      "trustworthiness": 0.8932236613501856,
+      "continuity": 0.9341721456515197,
+      "density_preservation": 0.20593754214333215,
+      "density_slope": 0.5455869981637115,
+      "knn_accuracy": 0.7962000000000001
+    },
+    {
+      "method": "umap",
+      "n": 5000,
+      "seed": 9,
+      "seconds": 0.15097342897206545,
+      "trustworthiness": 0.9609984190992076,
+      "continuity": 0.9674848711004113,
+      "density_preservation": 0.07703887671303897,
+      "density_slope": 0.10918809182608431,
+      "knn_accuracy": 0.9108
+    },
+    {
+      "method": "tsne",
+      "n": 5000,
+      "seed": 9,
+      "seconds": 0.5785654679639265,
+      "trustworthiness": 0.9783519590731267,
+      "continuity": 0.9683524044538068,
+      "density_preservation": 0.41154678441592485,
+      "density_slope": 0.5153899613085603,
+      "knn_accuracy": 0.9204000000000001
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 5000,
+      "seed": 9,
+      "seconds": 0.09973480098415166,
+      "trustworthiness": 0.8489171591934999,
+      "continuity": 0.9546451800581803,
+      "density_preservation": -0.0694835955901117,
+      "density_slope": -0.141945346851288,
+      "knn_accuracy": 0.7386
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 5000,
+      "seed": 9,
+      "seconds": 1.2334197099553421,
+      "trustworthiness": 0.749593531949042,
+      "continuity": 0.9471961641087371,
+      "density_preservation": 0.4764667768193872,
+      "density_slope": 0.694300684629391,
+      "knn_accuracy": 0.4182
+    },
+    {
+      "method": "lvm",
+      "n": 10000,
+      "seed": 0,
+      "seconds": 0.27153149398509413,
+      "trustworthiness": 0.9715743484802889,
+      "continuity": 0.9384225539171431,
+      "density_preservation": 0.35798947420738664,
+      "density_slope": 2.0691692480186203,
+      "knn_accuracy": 0.8924
+    },
+    {
+      "method": "lvm_chart",
+      "n": 10000,
+      "seed": 0,
+      "seconds": 0.38678054802585393,
+      "trustworthiness": 0.9044824515999599,
+      "continuity": 0.9392682596047748,
+      "density_preservation": 0.345514154341162,
+      "density_slope": 1.027416526738055,
+      "knn_accuracy": 0.8263999999999999
+    },
+    {
+      "method": "umap",
+      "n": 10000,
+      "seed": 0,
+      "seconds": 0.3032091980567202,
+      "trustworthiness": 0.9559284702577991,
+      "continuity": 0.9637442913030394,
+      "density_preservation": 0.005696604733174984,
+      "density_slope": 0.006601569580165812,
+      "knn_accuracy": 0.9336
+    },
+    {
+      "method": "tsne",
+      "n": 10000,
+      "seed": 0,
+      "seconds": 0.6651654510060325,
+      "trustworthiness": 0.978640064199017,
+      "continuity": 0.9656222890961982,
+      "density_preservation": 0.322567207074586,
+      "density_slope": 0.3365548751144739,
+      "knn_accuracy": 0.9330000000000002
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 10000,
+      "seed": 0,
+      "seconds": 0.22222051199059933,
+      "trustworthiness": 0.845001111445481,
+      "continuity": 0.9495064018457218,
+      "density_preservation": 0.012152647702869411,
+      "density_slope": 0.025304695865523103,
+      "knn_accuracy": 0.7550000000000001
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 10000,
+      "seed": 0,
+      "seconds": 1.7311965739354491,
+      "trustworthiness": 0.769682860868693,
+      "continuity": 0.9473586799077139,
+      "density_preservation": 0.543001311827265,
+      "density_slope": 0.8681905331111633,
+      "knn_accuracy": 0.45499999999999996
+    },
+    {
+      "method": "lvm",
+      "n": 10000,
+      "seed": 1,
+      "seconds": 0.2683175280690193,
+      "trustworthiness": 0.9711252603069516,
+      "continuity": 0.9413687471160598,
+      "density_preservation": 0.5178642889145135,
+      "density_slope": 3.152099464453094,
+      "knn_accuracy": 0.8939999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "n": 10000,
+      "seed": 1,
+      "seconds": 0.3860091669484973,
+      "trustworthiness": 0.911471818637777,
+      "continuity": 0.9421239723141739,
+      "density_preservation": 0.39937950812143436,
+      "density_slope": 1.3614349972294355,
+      "knn_accuracy": 0.8306000000000001
+    },
+    {
+      "method": "umap",
+      "n": 10000,
+      "seed": 1,
+      "seconds": 0.27087293891236186,
+      "trustworthiness": 0.9573048530444378,
+      "continuity": 0.9652064118768181,
+      "density_preservation": 0.038255648595052504,
+      "density_slope": 0.04297577217098977,
+      "knn_accuracy": 0.9342
+    },
+    {
+      "method": "tsne",
+      "n": 10000,
+      "seed": 1,
+      "seconds": 0.6538372830254957,
+      "trustworthiness": 0.9786824154880128,
+      "continuity": 0.9664673166817133,
+      "density_preservation": 0.33664023690322337,
+      "density_slope": 0.339559102517573,
+      "knn_accuracy": 0.9342
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 10000,
+      "seed": 1,
+      "seconds": 0.3209102679975331,
+      "trustworthiness": 0.8493173558029893,
+      "continuity": 0.9502222971210753,
+      "density_preservation": 0.009686432677473478,
+      "density_slope": 0.019627152350397546,
+      "knn_accuracy": 0.7676000000000001
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 10000,
+      "seed": 1,
+      "seconds": 1.7716449990402907,
+      "trustworthiness": 0.731258810311967,
+      "continuity": 0.9343076778011836,
+      "density_preservation": 0.546084033702987,
+      "density_slope": 1.0999037672782834,
+      "knn_accuracy": 0.394
+    },
+    {
+      "method": "lvm",
+      "n": 10000,
+      "seed": 2,
+      "seconds": 0.26342998596373945,
+      "trustworthiness": 0.9697443795766877,
+      "continuity": 0.9406692346273448,
+      "density_preservation": 0.34078935072522804,
+      "density_slope": 2.0828027005917433,
+      "knn_accuracy": 0.8827999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "n": 10000,
+      "seed": 2,
+      "seconds": 0.39495898701716214,
+      "trustworthiness": 0.9130873868993881,
+      "continuity": 0.9413885244257197,
+      "density_preservation": 0.2572692741735179,
+      "density_slope": 0.6619499495666081,
+      "knn_accuracy": 0.8156000000000001
+    },
+    {
+      "method": "umap",
+      "n": 10000,
+      "seed": 2,
+      "seconds": 0.2651360100135207,
+      "trustworthiness": 0.9574945450897783,
+      "continuity": 0.9647161881833685,
+      "density_preservation": 0.05220874340483106,
+      "density_slope": 0.05839134639570727,
+      "knn_accuracy": 0.9296
+    },
+    {
+      "method": "tsne",
+      "n": 10000,
+      "seed": 2,
+      "seconds": 0.7365265620173886,
+      "trustworthiness": 0.9778035951449493,
+      "continuity": 0.9660459624836994,
+      "density_preservation": 0.3505435219032247,
+      "density_slope": 0.35490240387020366,
+      "knn_accuracy": 0.9338000000000001
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 10000,
+      "seed": 2,
+      "seconds": 0.382647541933693,
+      "trustworthiness": 0.8450477119069114,
+      "continuity": 0.9500694914234126,
+      "density_preservation": 0.02823101542475441,
+      "density_slope": 0.05637990833180035,
+      "knn_accuracy": 0.7602
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 10000,
+      "seed": 2,
+      "seconds": 1.494066074024886,
+      "trustworthiness": 0.7200833784732671,
+      "continuity": 0.9340364810913833,
+      "density_preservation": 0.5123965539603876,
+      "density_slope": 0.8631058712251088,
+      "knn_accuracy": 0.40659999999999996
+    },
+    {
+      "method": "lvm",
+      "n": 10000,
+      "seed": 3,
+      "seconds": 0.26831137493718415,
+      "trustworthiness": 0.9736729060086268,
+      "continuity": 0.9397006359715117,
+      "density_preservation": 0.5288112172086636,
+      "density_slope": 3.8861764196028368,
+      "knn_accuracy": 0.8792
+    },
+    {
+      "method": "lvm_chart",
+      "n": 10000,
+      "seed": 3,
+      "seconds": 0.3859459430677816,
+      "trustworthiness": 0.9078172615106831,
+      "continuity": 0.940337526331628,
+      "density_preservation": 0.34693487653707383,
+      "density_slope": 1.0238835380818836,
+      "knn_accuracy": 0.8109999999999999
+    },
+    {
+      "method": "umap",
+      "n": 10000,
+      "seed": 3,
+      "seconds": 0.27593488595448434,
+      "trustworthiness": 0.9566731307051861,
+      "continuity": 0.9632818457217374,
+      "density_preservation": 0.05014565951027348,
+      "density_slope": 0.05720450907089148,
+      "knn_accuracy": 0.9306000000000001
+    },
+    {
+      "method": "tsne",
+      "n": 10000,
+      "seed": 3,
+      "seconds": 0.706969092017971,
+      "trustworthiness": 0.977222710402247,
+      "continuity": 0.9650041127495235,
+      "density_preservation": 0.3498800568107171,
+      "density_slope": 0.3544416455725589,
+      "knn_accuracy": 0.9324
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 10000,
+      "seed": 3,
+      "seconds": 0.3155298229539767,
+      "trustworthiness": 0.8451476216270438,
+      "continuity": 0.9489457478182365,
+      "density_preservation": 0.025935496665578872,
+      "density_slope": 0.052188658882733475,
+      "knn_accuracy": 0.7667999999999999
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 10000,
+      "seed": 3,
+      "seconds": 1.4059265680843964,
+      "trustworthiness": 0.7506158009830475,
+      "continuity": 0.9375171912930084,
+      "density_preservation": 0.513585545321105,
+      "density_slope": 0.9381530356904868,
+      "knn_accuracy": 0.4502
+    },
+    {
+      "method": "lvm",
+      "n": 10000,
+      "seed": 4,
+      "seconds": 0.2601378719555214,
+      "trustworthiness": 0.9723175082756546,
+      "continuity": 0.9368776928478283,
+      "density_preservation": 0.44106253151427627,
+      "density_slope": 3.53098704124776,
+      "knn_accuracy": 0.8834
+    },
+    {
+      "method": "lvm_chart",
+      "n": 10000,
+      "seed": 4,
+      "seconds": 0.3959983759559691,
+      "trustworthiness": 0.9069655893269134,
+      "continuity": 0.9374416531246865,
+      "density_preservation": 0.34914646215342804,
+      "density_slope": 1.224285779007395,
+      "knn_accuracy": 0.7916000000000001
+    },
+    {
+      "method": "umap",
+      "n": 10000,
+      "seed": 4,
+      "seconds": 0.26072121097240597,
+      "trustworthiness": 0.954930047146153,
+      "continuity": 0.9638994723643294,
+      "density_preservation": 0.030810904063067194,
+      "density_slope": 0.035206590775425116,
+      "knn_accuracy": 0.9264000000000001
+    },
+    {
+      "method": "tsne",
+      "n": 10000,
+      "seed": 4,
+      "seconds": 0.6805900209583342,
+      "trustworthiness": 0.9766182365332531,
+      "continuity": 0.964929264720634,
+      "density_preservation": 0.3289751615365428,
+      "density_slope": 0.34544186240839264,
+      "knn_accuracy": 0.9326000000000001
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 10000,
+      "seed": 4,
+      "seconds": 0.27801475510932505,
+      "trustworthiness": 0.8410723964289297,
+      "continuity": 0.9490368181362223,
+      "density_preservation": 0.044280665249676804,
+      "density_slope": 0.09043315584061866,
+      "knn_accuracy": 0.7528
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 10000,
+      "seed": 4,
+      "seconds": 1.649311381042935,
+      "trustworthiness": 0.7436343504865082,
+      "continuity": 0.9364890961982144,
+      "density_preservation": 0.5480230784473681,
+      "density_slope": 1.0252399494851192,
+      "knn_accuracy": 0.4948
+    },
+    {
+      "method": "lvm",
+      "n": 10000,
+      "seed": 5,
+      "seconds": 0.2651313189417124,
+      "trustworthiness": 0.9724110783428629,
+      "continuity": 0.939157275554218,
+      "density_preservation": 0.5946772184965947,
+      "density_slope": 4.628761976450212,
+      "knn_accuracy": 0.8767999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "n": 10000,
+      "seed": 5,
+      "seconds": 0.38305938499979675,
+      "trustworthiness": 0.9011254408666867,
+      "continuity": 0.940136751930986,
+      "density_preservation": 0.31469202251811523,
+      "density_slope": 0.8719264307170322,
+      "knn_accuracy": 0.8056000000000001
+    },
+    {
+      "method": "umap",
+      "n": 10000,
+      "seed": 5,
+      "seconds": 0.2611099020577967,
+      "trustworthiness": 0.956656944528037,
+      "continuity": 0.963419648911626,
+      "density_preservation": 0.048410412207138404,
+      "density_slope": 0.05463199361090565,
+      "knn_accuracy": 0.9282
+    },
+    {
+      "method": "tsne",
+      "n": 10000,
+      "seed": 5,
+      "seconds": 0.6874533920781687,
+      "trustworthiness": 0.977007988765172,
+      "continuity": 0.964670907814224,
+      "density_preservation": 0.3576103861981062,
+      "density_slope": 0.36411549751845074,
+      "knn_accuracy": 0.9352
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 10000,
+      "seed": 5,
+      "seconds": 0.3247056449763477,
+      "trustworthiness": 0.8437483880028087,
+      "continuity": 0.9491682415488013,
+      "density_preservation": 0.02717421515382748,
+      "density_slope": 0.05527216817838915,
+      "knn_accuracy": 0.7574
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 10000,
+      "seed": 5,
+      "seconds": 1.5692848860053346,
+      "trustworthiness": 0.7340807222389407,
+      "continuity": 0.9345135118868493,
+      "density_preservation": 0.47940534717997946,
+      "density_slope": 0.9520143989653226,
+      "knn_accuracy": 0.4176
+    },
+    {
+      "method": "lvm",
+      "n": 10000,
+      "seed": 6,
+      "seconds": 0.26164069294463843,
+      "trustworthiness": 0.9725623914133815,
+      "continuity": 0.9430083859965894,
+      "density_preservation": 0.48524384973570445,
+      "density_slope": 3.5066681024388977,
+      "knn_accuracy": 0.8846
+    },
+    {
+      "method": "lvm_chart",
+      "n": 10000,
+      "seed": 6,
+      "seconds": 0.3909762060502544,
+      "trustworthiness": 0.9122276457016751,
+      "continuity": 0.9435807202327214,
+      "density_preservation": 0.25708415940246004,
+      "density_slope": 0.6626417646027247,
+      "knn_accuracy": 0.8118000000000001
+    },
+    {
+      "method": "umap",
+      "n": 10000,
+      "seed": 6,
+      "seconds": 0.27411057602148503,
+      "trustworthiness": 0.9603195706690741,
+      "continuity": 0.9649325549202528,
+      "density_preservation": 0.01763904736257195,
+      "density_slope": 0.02056838961304798,
+      "knn_accuracy": 0.9326000000000001
+    },
+    {
+      "method": "tsne",
+      "n": 10000,
+      "seed": 6,
+      "seconds": 0.6901739289751276,
+      "trustworthiness": 0.979599835490019,
+      "continuity": 0.9661761500652021,
+      "density_preservation": 0.32467644877809315,
+      "density_slope": 0.33441359517682345,
+      "knn_accuracy": 0.9408
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 10000,
+      "seed": 6,
+      "seconds": 0.3686291570775211,
+      "trustworthiness": 0.8490784953355401,
+      "continuity": 0.9497808285685625,
+      "density_preservation": 0.006162831655555883,
+      "density_slope": 0.01281028987443486,
+      "knn_accuracy": 0.7706000000000002
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 10000,
+      "seed": 6,
+      "seconds": 1.866022780071944,
+      "trustworthiness": 0.7501582224897181,
+      "continuity": 0.9379321215768883,
+      "density_preservation": 0.529651980255164,
+      "density_slope": 0.9663844102500376,
+      "knn_accuracy": 0.5212
+    },
+    {
+      "method": "lvm",
+      "n": 10000,
+      "seed": 7,
+      "seconds": 0.26301929994951934,
+      "trustworthiness": 0.9713875092787642,
+      "continuity": 0.9419577971712308,
+      "density_preservation": 0.4850720937216926,
+      "density_slope": 3.452209496634729,
+      "knn_accuracy": 0.8812000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "n": 10000,
+      "seed": 7,
+      "seconds": 0.38937606511171907,
+      "trustworthiness": 0.9148667067910523,
+      "continuity": 0.9424685444879125,
+      "density_preservation": 0.1746667537669459,
+      "density_slope": 0.45462196229397206,
+      "knn_accuracy": 0.8116
+    },
+    {
+      "method": "umap",
+      "n": 10000,
+      "seed": 7,
+      "seconds": 0.2847354019759223,
+      "trustworthiness": 0.9567393078543485,
+      "continuity": 0.964880609890661,
+      "density_preservation": -0.002383065489990001,
+      "density_slope": -0.00275431724213703,
+      "knn_accuracy": 0.9308
+    },
+    {
+      "method": "tsne",
+      "n": 10000,
+      "seed": 7,
+      "seconds": 0.6936497350689024,
+      "trustworthiness": 0.9767061370247768,
+      "continuity": 0.966026389808406,
+      "density_preservation": 0.3028461723855359,
+      "density_slope": 0.3135520562907628,
+      "knn_accuracy": 0.9334
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 10000,
+      "seed": 7,
+      "seconds": 0.3388610068941489,
+      "trustworthiness": 0.8466532410472465,
+      "continuity": 0.9500109700070217,
+      "density_preservation": 0.023347511365585046,
+      "density_slope": 0.04706163835082837,
+      "knn_accuracy": 0.7598
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 10000,
+      "seed": 7,
+      "seconds": 2.0139102520188317,
+      "trustworthiness": 0.7629588644798876,
+      "continuity": 0.9446495817032802,
+      "density_preservation": 0.5406497024955456,
+      "density_slope": 0.9014542337723569,
+      "knn_accuracy": 0.4378
+    },
+    {
+      "method": "lvm",
+      "n": 10000,
+      "seed": 8,
+      "seconds": 0.25837310997303575,
+      "trustworthiness": 0.9699448811315077,
+      "continuity": 0.9336323362423513,
+      "density_preservation": 0.18863129344206356,
+      "density_slope": 1.1958800843053137,
+      "knn_accuracy": 0.8880000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "n": 10000,
+      "seed": 8,
+      "seconds": 0.391550628002733,
+      "trustworthiness": 0.8977797973718528,
+      "continuity": 0.9347768723041429,
+      "density_preservation": 0.11001766864564179,
+      "density_slope": 0.30649059892348696,
+      "knn_accuracy": 0.7958000000000001
+    },
+    {
+      "method": "umap",
+      "n": 10000,
+      "seed": 8,
+      "seconds": 0.26152441604062915,
+      "trustworthiness": 0.9559037456113954,
+      "continuity": 0.9634486026682716,
+      "density_preservation": -0.011579727015306613,
+      "density_slope": -0.013931306988482814,
+      "knn_accuracy": 0.9364000000000001
+    },
+    {
+      "method": "tsne",
+      "n": 10000,
+      "seed": 8,
+      "seconds": 0.7138104770565405,
+      "trustworthiness": 0.9778513632260006,
+      "continuity": 0.965179448289698,
+      "density_preservation": 0.30062446520796987,
+      "density_slope": 0.314920490528803,
+      "knn_accuracy": 0.9324000000000001
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 10000,
+      "seed": 8,
+      "seconds": 0.34853871003724635,
+      "trustworthiness": 0.8441190691142542,
+      "continuity": 0.9488104443775704,
+      "density_preservation": 0.006542427861255873,
+      "density_slope": 0.013996304740065349,
+      "knn_accuracy": 0.761
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 10000,
+      "seed": 8,
+      "seconds": 1.8227203759597614,
+      "trustworthiness": 0.7635535319490421,
+      "continuity": 0.946528390009028,
+      "density_preservation": 0.5109636432486511,
+      "density_slope": 0.7699127454983743,
+      "knn_accuracy": 0.44960000000000006
+    },
+    {
+      "method": "lvm",
+      "n": 10000,
+      "seed": 9,
+      "seconds": 0.2595826700562611,
+      "trustworthiness": 0.972250247768081,
+      "continuity": 0.9398403932189788,
+      "density_preservation": 0.35615498368408866,
+      "density_slope": 2.4508908647095806,
+      "knn_accuracy": 0.8852
+    },
+    {
+      "method": "lvm_chart",
+      "n": 10000,
+      "seed": 9,
+      "seconds": 0.38836843392346054,
+      "trustworthiness": 0.9137768201424415,
+      "continuity": 0.9407532912027284,
+      "density_preservation": 0.11255110434673124,
+      "density_slope": 0.36719760722162964,
+      "knn_accuracy": 0.8328
+    },
+    {
+      "method": "umap",
+      "n": 10000,
+      "seed": 9,
+      "seconds": 0.2582797900540754,
+      "trustworthiness": 0.9546625338549504,
+      "continuity": 0.9651637676798074,
+      "density_preservation": 0.10462227144628836,
+      "density_slope": 0.1137309606352112,
+      "knn_accuracy": 0.9288000000000001
+    },
+    {
+      "method": "tsne",
+      "n": 10000,
+      "seed": 9,
+      "seconds": 0.7023660499835387,
+      "trustworthiness": 0.9777095877219381,
+      "continuity": 0.966343083559033,
+      "density_preservation": 0.37469232466385033,
+      "density_slope": 0.3726649448713024,
+      "knn_accuracy": 0.9332
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 10000,
+      "seed": 9,
+      "seconds": 0.3355135399615392,
+      "trustworthiness": 0.8471356685725749,
+      "continuity": 0.9499065422810713,
+      "density_preservation": 0.036230905932631584,
+      "density_slope": 0.07180136359834988,
+      "knn_accuracy": 0.7558
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 10000,
+      "seed": 9,
+      "seconds": 1.562905314960517,
+      "trustworthiness": 0.7387301033202929,
+      "continuity": 0.9386500912829773,
+      "density_preservation": 0.5304805241434862,
+      "density_slope": 0.9787921278620119,
+      "knn_accuracy": 0.42939999999999995
+    },
+    {
+      "method": "lvm",
+      "n": 20000,
+      "seed": 0,
+      "seconds": 0.3326854039914906,
+      "trustworthiness": 0.9719139813421607,
+      "continuity": 0.9339935680609891,
+      "density_preservation": 0.1346729145176973,
+      "density_slope": 0.8101979705551435,
+      "knn_accuracy": 0.8985999999999998
+    },
+    {
+      "method": "lvm_chart",
+      "n": 20000,
+      "seed": 0,
+      "seconds": 0.4476657839259133,
+      "trustworthiness": 0.891493854950346,
+      "continuity": 0.9347531106429933,
+      "density_preservation": -0.006547221509219407,
+      "density_slope": -0.0177095113122783,
+      "knn_accuracy": 0.7906000000000001
+    },
+    {
+      "method": "umap",
+      "n": 20000,
+      "seed": 0,
+      "seconds": 0.5031327970791608,
+      "trustworthiness": 0.9573228247567459,
+      "continuity": 0.9627004754739693,
+      "density_preservation": 0.044839792707750716,
+      "density_slope": 0.04517121051378716,
+      "knn_accuracy": 0.9488
+    },
+    {
+      "method": "tsne",
+      "n": 20000,
+      "seed": 0,
+      "seconds": 0.9823096339823678,
+      "trustworthiness": 0.9782567398936703,
+      "continuity": 0.9646183729561641,
+      "density_preservation": 0.24630231765409874,
+      "density_slope": 0.22637071250213744,
+      "knn_accuracy": 0.9458
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 20000,
+      "seed": 0,
+      "seconds": 0.488428785931319,
+      "trustworthiness": 0.8340456053766676,
+      "continuity": 0.9454951991172635,
+      "density_preservation": 0.006716710768635611,
+      "density_slope": 0.014450124133442814,
+      "knn_accuracy": 0.7622
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 20000,
+      "seed": 0,
+      "seconds": 2.4239809819264337,
+      "trustworthiness": 0.7464198615708697,
+      "continuity": 0.9383339512488715,
+      "density_preservation": 0.40134554280166346,
+      "density_slope": 0.6315503427707884,
+      "knn_accuracy": 0.46820000000000006
+    },
+    {
+      "method": "lvm",
+      "n": 20000,
+      "seed": 1,
+      "seconds": 0.3280050640460104,
+      "trustworthiness": 0.972662208847427,
+      "continuity": 0.9412911666165111,
+      "density_preservation": 0.5034090521899431,
+      "density_slope": 2.8343714757172025,
+      "knn_accuracy": 0.89
+    },
+    {
+      "method": "lvm_chart",
+      "n": 20000,
+      "seed": 1,
+      "seconds": 0.4642781199654564,
+      "trustworthiness": 0.9092845380680108,
+      "continuity": 0.9422616190189588,
+      "density_preservation": 0.23269094021625472,
+      "density_slope": 0.6581684685800298,
+      "knn_accuracy": 0.8089999999999999
+    },
+    {
+      "method": "umap",
+      "n": 20000,
+      "seed": 1,
+      "seconds": 0.47451818094123155,
+      "trustworthiness": 0.9574259002909018,
+      "continuity": 0.9634889196509179,
+      "density_preservation": 0.08585531247456016,
+      "density_slope": 0.08515763185486719,
+      "knn_accuracy": 0.9456
+    },
+    {
+      "method": "tsne",
+      "n": 20000,
+      "seed": 1,
+      "seconds": 1.007327630999498,
+      "trustworthiness": 0.9777516340656034,
+      "continuity": 0.965575102818738,
+      "density_preservation": 0.273383116767813,
+      "density_slope": 0.2385457301978662,
+      "knn_accuracy": 0.9438000000000001
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 20000,
+      "seed": 1,
+      "seconds": 0.38875036302488297,
+      "trustworthiness": 0.8296691463536965,
+      "continuity": 0.9462547176246363,
+      "density_preservation": 0.016799141086702253,
+      "density_slope": 0.035585266622980394,
+      "knn_accuracy": 0.7702
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 20000,
+      "seed": 1,
+      "seconds": 2.4908513840055093,
+      "trustworthiness": 0.7472889316882335,
+      "continuity": 0.940037030795466,
+      "density_preservation": 0.36480342578271385,
+      "density_slope": 0.5885937492812374,
+      "knn_accuracy": 0.39899999999999997
+    },
+    {
+      "method": "lvm",
+      "n": 20000,
+      "seed": 2,
+      "seconds": 0.3080678340047598,
+      "trustworthiness": 0.9687149042030294,
+      "continuity": 0.9394324004413682,
+      "density_preservation": 0.5360408043240432,
+      "density_slope": 3.9122244930858567,
+      "knn_accuracy": 0.8904
+    },
+    {
+      "method": "lvm_chart",
+      "n": 20000,
+      "seed": 2,
+      "seconds": 0.44383508001919836,
+      "trustworthiness": 0.9030810151469556,
+      "continuity": 0.939825442872906,
+      "density_preservation": 0.47943108181999816,
+      "density_slope": 1.5280853093133433,
+      "knn_accuracy": 0.7954000000000001
+    },
+    {
+      "method": "umap",
+      "n": 20000,
+      "seed": 2,
+      "seconds": 0.4693525379989296,
+      "trustworthiness": 0.958373080549704,
+      "continuity": 0.9653739151369245,
+      "density_preservation": -0.047832133078450904,
+      "density_slope": -0.04810852139594188,
+      "knn_accuracy": 0.9491999999999999
+    },
+    {
+      "method": "tsne",
+      "n": 20000,
+      "seed": 2,
+      "seconds": 0.9556880319723859,
+      "trustworthiness": 0.9788080690139432,
+      "continuity": 0.9668980760357107,
+      "density_preservation": 0.19626532823479684,
+      "density_slope": 0.17342180312517486,
+      "knn_accuracy": 0.9516
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 20000,
+      "seed": 2,
+      "seconds": 0.4138793289894238,
+      "trustworthiness": 0.8358177229411174,
+      "continuity": 0.9470134216069817,
+      "density_preservation": -0.00704337123562591,
+      "density_slope": -0.01515803236035384,
+      "knn_accuracy": 0.7674
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 20000,
+      "seed": 2,
+      "seconds": 2.334912820952013,
+      "trustworthiness": 0.7384239703079547,
+      "continuity": 0.9332948339853546,
+      "density_preservation": 0.4927901839853121,
+      "density_slope": 0.9733475315526599,
+      "knn_accuracy": 0.37560000000000004
+    },
+    {
+      "method": "lvm",
+      "n": 20000,
+      "seed": 3,
+      "seconds": 0.32959060196299106,
+      "trustworthiness": 0.9729294974420705,
+      "continuity": 0.9467788905607383,
+      "density_preservation": 0.5029600914744984,
+      "density_slope": 3.23636802410404,
+      "knn_accuracy": 0.8987999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "n": 20000,
+      "seed": 3,
+      "seconds": 0.451941201929003,
+      "trustworthiness": 0.9170392175744809,
+      "continuity": 0.9473161079345972,
+      "density_preservation": 0.49208524580438245,
+      "density_slope": 1.4521700897776602,
+      "knn_accuracy": 0.8370000000000001
+    },
+    {
+      "method": "umap",
+      "n": 20000,
+      "seed": 3,
+      "seconds": 0.45446832198649645,
+      "trustworthiness": 0.955937991774501,
+      "continuity": 0.9618056735881232,
+      "density_preservation": -0.008156409348998625,
+      "density_slope": -0.0080802191617523,
+      "knn_accuracy": 0.9478
+    },
+    {
+      "method": "tsne",
+      "n": 20000,
+      "seed": 3,
+      "seconds": 0.9993048650212586,
+      "trustworthiness": 0.9778305507071923,
+      "continuity": 0.9640090239743204,
+      "density_preservation": 0.2157960058469144,
+      "density_slope": 0.1856848663372359,
+      "knn_accuracy": 0.9494
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 20000,
+      "seed": 3,
+      "seconds": 0.43955351295880973,
+      "trustworthiness": 0.8315156665663557,
+      "continuity": 0.9455123803791754,
+      "density_preservation": 0.023351026855450797,
+      "density_slope": 0.04927395558223533,
+      "knn_accuracy": 0.7545999999999999
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 20000,
+      "seed": 3,
+      "seconds": 2.375648400047794,
+      "trustworthiness": 0.7655197472163707,
+      "continuity": 0.945083743605176,
+      "density_preservation": 0.4944946653479568,
+      "density_slope": 0.7699908864232287,
+      "knn_accuracy": 0.5158
+    },
+    {
+      "method": "lvm",
+      "n": 20000,
+      "seed": 4,
+      "seconds": 0.34200683992821723,
+      "trustworthiness": 0.9721811254890159,
+      "continuity": 0.9408693469756244,
+      "density_preservation": 0.25186597930126414,
+      "density_slope": 1.1449524993340787,
+      "knn_accuracy": 0.8928
+    },
+    {
+      "method": "lvm_chart",
+      "n": 20000,
+      "seed": 4,
+      "seconds": 0.4527790059801191,
+      "trustworthiness": 0.9084349403149764,
+      "continuity": 0.9413979616812117,
+      "density_preservation": 0.17579715716851044,
+      "density_slope": 0.5635940350714225,
+      "knn_accuracy": 0.8444
+    },
+    {
+      "method": "umap",
+      "n": 20000,
+      "seed": 4,
+      "seconds": 0.4668694760184735,
+      "trustworthiness": 0.9532071260908818,
+      "continuity": 0.9617766315578292,
+      "density_preservation": -0.05519096946866144,
+      "density_slope": -0.056300063765581006,
+      "knn_accuracy": 0.9475999999999999
+    },
+    {
+      "method": "tsne",
+      "n": 20000,
+      "seed": 4,
+      "seconds": 0.9731585870031267,
+      "trustworthiness": 0.9761093991373258,
+      "continuity": 0.9636080609890662,
+      "density_preservation": 0.196271351375905,
+      "density_slope": 0.1757425051153908,
+      "knn_accuracy": 0.9446
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 20000,
+      "seed": 4,
+      "seconds": 0.4295014750678092,
+      "trustworthiness": 0.8329225198114154,
+      "continuity": 0.944367278563547,
+      "density_preservation": 0.00390294881569772,
+      "density_slope": 0.008568688624680685,
+      "knn_accuracy": 0.7684
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 20000,
+      "seed": 4,
+      "seconds": 2.504381112055853,
+      "trustworthiness": 0.7433192536864279,
+      "continuity": 0.9355701474571171,
+      "density_preservation": 0.5483875981142721,
+      "density_slope": 1.0408305060551946,
+      "knn_accuracy": 0.42800000000000005
+    },
+    {
+      "method": "lvm",
+      "n": 20000,
+      "seed": 5,
+      "seconds": 0.3210079219425097,
+      "trustworthiness": 0.9738911626040726,
+      "continuity": 0.9456165071722339,
+      "density_preservation": 0.4321889600382003,
+      "density_slope": 2.383420872833102,
+      "knn_accuracy": 0.9018
+    },
+    {
+      "method": "lvm_chart",
+      "n": 20000,
+      "seed": 5,
+      "seconds": 0.45765482098795474,
+      "trustworthiness": 0.9209552091483599,
+      "continuity": 0.9460916160096299,
+      "density_preservation": 0.15647031179792537,
+      "density_slope": 0.4887508183292895,
+      "knn_accuracy": 0.8446
+    },
+    {
+      "method": "umap",
+      "n": 20000,
+      "seed": 5,
+      "seconds": 0.45204450690653175,
+      "trustworthiness": 0.9560947256495135,
+      "continuity": 0.9637764911224797,
+      "density_preservation": -0.0022935415203760266,
+      "density_slope": -0.002344825020717029,
+      "knn_accuracy": 0.9507999999999999
+    },
+    {
+      "method": "tsne",
+      "n": 20000,
+      "seed": 5,
+      "seconds": 0.9780050329864025,
+      "trustworthiness": 0.9784878844417695,
+      "continuity": 0.9662574942321196,
+      "density_preservation": 0.20044697985139856,
+      "density_slope": 0.18479887806690853,
+      "knn_accuracy": 0.9501999999999999
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 20000,
+      "seed": 5,
+      "seconds": 0.40409548208117485,
+      "trustworthiness": 0.8357436974621326,
+      "continuity": 0.9464067007723944,
+      "density_preservation": -0.04578291927150069,
+      "density_slope": -0.10002397863103209,
+      "knn_accuracy": 0.7654000000000002
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 20000,
+      "seed": 5,
+      "seconds": 2.4394762580050156,
+      "trustworthiness": 0.7457672585013542,
+      "continuity": 0.9372965513090581,
+      "density_preservation": 0.47730592286616674,
+      "density_slope": 0.8374517585079505,
+      "knn_accuracy": 0.47759999999999997
+    },
+    {
+      "method": "lvm",
+      "n": 20000,
+      "seed": 6,
+      "seconds": 0.3100124900229275,
+      "trustworthiness": 0.9744324646403852,
+      "continuity": 0.9454628067007724,
+      "density_preservation": 0.5746146997139822,
+      "density_slope": 3.5523682671513015,
+      "knn_accuracy": 0.8934000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "n": 20000,
+      "seed": 6,
+      "seconds": 0.4526410310063511,
+      "trustworthiness": 0.9241693208947738,
+      "continuity": 0.9458458782224897,
+      "density_preservation": 0.33684483079350624,
+      "density_slope": 1.0216614148197645,
+      "knn_accuracy": 0.8427999999999999
+    },
+    {
+      "method": "umap",
+      "n": 20000,
+      "seed": 6,
+      "seconds": 0.46058497799094766,
+      "trustworthiness": 0.9582527996790049,
+      "continuity": 0.9632544327414987,
+      "density_preservation": -0.02505902332965404,
+      "density_slope": -0.024001511383228626,
+      "knn_accuracy": 0.9538
+    },
+    {
+      "method": "tsne",
+      "n": 20000,
+      "seed": 6,
+      "seconds": 0.9917709790170193,
+      "trustworthiness": 0.9777718407061892,
+      "continuity": 0.9651797411977129,
+      "density_preservation": 0.23877505512516684,
+      "density_slope": 0.20592449789728137,
+      "knn_accuracy": 0.952
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 20000,
+      "seed": 6,
+      "seconds": 0.42674882197752595,
+      "trustworthiness": 0.8334654268231517,
+      "continuity": 0.9460105446885344,
+      "density_preservation": 0.002155159222207866,
+      "density_slope": 0.004511288527743238,
+      "knn_accuracy": 0.7802
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 20000,
+      "seed": 6,
+      "seconds": 2.4906205849256366,
+      "trustworthiness": 0.7642205075734778,
+      "continuity": 0.9429205015548199,
+      "density_preservation": 0.411890592483881,
+      "density_slope": 0.622060499419934,
+      "knn_accuracy": 0.5316
+    },
+    {
+      "method": "lvm",
+      "n": 20000,
+      "seed": 7,
+      "seconds": 0.3334584969561547,
+      "trustworthiness": 0.9714742261009128,
+      "continuity": 0.9428987340756345,
+      "density_preservation": 0.47604308734013945,
+      "density_slope": 2.834237935165633,
+      "knn_accuracy": 0.8865999999999999
+    },
+    {
+      "method": "lvm_chart",
+      "n": 20000,
+      "seed": 7,
+      "seconds": 0.45179841306526214,
+      "trustworthiness": 0.9096034908215468,
+      "continuity": 0.944014055572274,
+      "density_preservation": 0.3687523909216986,
+      "density_slope": 1.095385919775022,
+      "knn_accuracy": 0.8036
+    },
+    {
+      "method": "umap",
+      "n": 20000,
+      "seed": 7,
+      "seconds": 0.4802741380408406,
+      "trustworthiness": 0.9542393941217775,
+      "continuity": 0.962500150466446,
+      "density_preservation": -0.048833554426401936,
+      "density_slope": -0.04826026351454965,
+      "knn_accuracy": 0.944
+    },
+    {
+      "method": "tsne",
+      "n": 20000,
+      "seed": 7,
+      "seconds": 0.9663799959234893,
+      "trustworthiness": 0.9774426482094493,
+      "continuity": 0.9637649914735681,
+      "density_preservation": 0.15643967642114195,
+      "density_slope": 0.13688058349996268,
+      "knn_accuracy": 0.9453999999999999
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 20000,
+      "seed": 7,
+      "seconds": 0.4572265500901267,
+      "trustworthiness": 0.8273646945531147,
+      "continuity": 0.9443233503861972,
+      "density_preservation": -0.0024874162574490015,
+      "density_slope": -0.005264385132891688,
+      "knn_accuracy": 0.7618
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 20000,
+      "seed": 7,
+      "seconds": 2.5121137839742005,
+      "trustworthiness": 0.7116086106931487,
+      "continuity": 0.9285848650817534,
+      "density_preservation": 0.38045462946359665,
+      "density_slope": 0.6188520490217638,
+      "knn_accuracy": 0.3288
+    },
+    {
+      "method": "lvm",
+      "n": 20000,
+      "seed": 8,
+      "seconds": 0.3331481140339747,
+      "trustworthiness": 0.972004245159996,
+      "continuity": 0.9452815247266526,
+      "density_preservation": 0.5911223342287202,
+      "density_slope": 4.029709820537778,
+      "knn_accuracy": 0.9018
+    },
+    {
+      "method": "lvm_chart",
+      "n": 20000,
+      "seed": 8,
+      "seconds": 0.4796483489917591,
+      "trustworthiness": 0.9099182024275253,
+      "continuity": 0.9458867930584813,
+      "density_preservation": 0.22602942911547164,
+      "density_slope": 0.6529211842105452,
+      "knn_accuracy": 0.8140000000000001
+    },
+    {
+      "method": "umap",
+      "n": 20000,
+      "seed": 8,
+      "seconds": 0.5047151539474726,
+      "trustworthiness": 0.9554962744507974,
+      "continuity": 0.9633808406058783,
+      "density_preservation": -0.02567065011058417,
+      "density_slope": -0.026154619484328182,
+      "knn_accuracy": 0.9491999999999999
+    },
+    {
+      "method": "tsne",
+      "n": 20000,
+      "seed": 8,
+      "seconds": 1.0021228879923,
+      "trustworthiness": 0.9772388323803791,
+      "continuity": 0.9653355481994181,
+      "density_preservation": 0.21200542816345005,
+      "density_slope": 0.1944051064592249,
+      "knn_accuracy": 0.9468
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 20000,
+      "seed": 8,
+      "seconds": 0.41815887100528926,
+      "trustworthiness": 0.8373426662654229,
+      "continuity": 0.9462852322198816,
+      "density_preservation": -0.012705991805857126,
+      "density_slope": -0.027635724201516977,
+      "knn_accuracy": 0.774
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 20000,
+      "seed": 8,
+      "seconds": 2.5687122979434207,
+      "trustworthiness": 0.7641264239141338,
+      "continuity": 0.9447260226702778,
+      "density_preservation": 0.40667174502633163,
+      "density_slope": 0.6174161428755347,
+      "knn_accuracy": 0.40199999999999997
+    },
+    {
+      "method": "lvm",
+      "n": 20000,
+      "seed": 9,
+      "seconds": 0.3431854660157114,
+      "trustworthiness": 0.972316328618718,
+      "continuity": 0.9357703240044137,
+      "density_preservation": 0.2842744892598522,
+      "density_slope": 1.7960317881608776,
+      "knn_accuracy": 0.892
+    },
+    {
+      "method": "lvm_chart",
+      "n": 20000,
+      "seed": 9,
+      "seconds": 0.4770886190235615,
+      "trustworthiness": 0.9085180339051058,
+      "continuity": 0.9359884120774401,
+      "density_preservation": 0.35700035913088213,
+      "density_slope": 1.1708238172335577,
+      "knn_accuracy": 0.8394
+    },
+    {
+      "method": "umap",
+      "n": 20000,
+      "seed": 9,
+      "seconds": 0.48654828791040927,
+      "trustworthiness": 0.956039735179055,
+      "continuity": 0.9623143384491925,
+      "density_preservation": -0.04922848636741911,
+      "density_slope": -0.04875479007128857,
+      "knn_accuracy": 0.9532
+    },
+    {
+      "method": "tsne",
+      "n": 20000,
+      "seed": 9,
+      "seconds": 0.9540567121002823,
+      "trustworthiness": 0.9777597151168622,
+      "continuity": 0.9651078423111646,
+      "density_preservation": 0.18971506944475663,
+      "density_slope": 0.16870277516282162,
+      "knn_accuracy": 0.9479999999999998
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 20000,
+      "seed": 9,
+      "seconds": 0.4082290519727394,
+      "trustworthiness": 0.8324638057979737,
+      "continuity": 0.9445616450998094,
+      "density_preservation": 0.0029785471853448126,
+      "density_slope": 0.006519672212428219,
+      "knn_accuracy": 0.7718
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 20000,
+      "seed": 9,
+      "seconds": 2.447172952000983,
+      "trustworthiness": 0.7533119630855653,
+      "continuity": 0.940042186779015,
+      "density_preservation": 0.4184583385378943,
+      "density_slope": 0.633193684968236,
+      "knn_accuracy": 0.4104
+    },
+    {
+      "method": "lvm",
+      "n": 40000,
+      "seed": 0,
+      "seconds": 0.42652454203926027,
+      "trustworthiness": 0.9704937145149964,
+      "continuity": 0.9403419400140436,
+      "density_preservation": 0.48460011862466945,
+      "density_slope": 2.480196676669601,
+      "knn_accuracy": 0.9052
+    },
+    {
+      "method": "lvm_chart",
+      "n": 40000,
+      "seed": 0,
+      "seconds": 0.6465305059682578,
+      "trustworthiness": 0.9139247146153074,
+      "continuity": 0.9408276376767981,
+      "density_preservation": 0.24802792015462927,
+      "density_slope": 0.812658225372373,
+      "knn_accuracy": 0.8126
+    },
+    {
+      "method": "umap",
+      "n": 40000,
+      "seed": 0,
+      "seconds": 1.5908877180190757,
+      "trustworthiness": 0.9565730885745812,
+      "continuity": 0.959871136523222,
+      "density_preservation": -0.056241585605795744,
+      "density_slope": -0.0525893791859036,
+      "knn_accuracy": 0.9655999999999999
+    },
+    {
+      "method": "tsne",
+      "n": 40000,
+      "seed": 0,
+      "seconds": 1.8265896640950814,
+      "trustworthiness": 0.9778432781623031,
+      "continuity": 0.9628040244758752,
+      "density_preservation": 0.17703413218344305,
+      "density_slope": 0.1391121699133678,
+      "knn_accuracy": 0.9621999999999999
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 40000,
+      "seed": 0,
+      "seconds": 1.4292205800302327,
+      "trustworthiness": 0.8310822670277861,
+      "continuity": 0.9444939351991173,
+      "density_preservation": -0.021408819283232017,
+      "density_slope": -0.046459076364099766,
+      "knn_accuracy": 0.7836000000000001
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 40000,
+      "seed": 0,
+      "seconds": 4.17857969191391,
+      "trustworthiness": 0.7397591052262011,
+      "continuity": 0.9387235831076337,
+      "density_preservation": 0.5526611133203272,
+      "density_slope": 0.9428313341268564,
+      "knn_accuracy": 0.4034
+    },
+    {
+      "method": "lvm",
+      "n": 40000,
+      "seed": 1,
+      "seconds": 0.4288125119637698,
+      "trustworthiness": 0.9704318346875314,
+      "continuity": 0.9370290580800481,
+      "density_preservation": 0.38086499936760787,
+      "density_slope": 2.1370096553113465,
+      "knn_accuracy": 0.9002000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "n": 40000,
+      "seed": 1,
+      "seconds": 0.6038735939655453,
+      "trustworthiness": 0.911905944427726,
+      "continuity": 0.9373927254488915,
+      "density_preservation": 0.2653294756296131,
+      "density_slope": 0.7937306006613675,
+      "knn_accuracy": 0.833
+    },
+    {
+      "method": "umap",
+      "n": 40000,
+      "seed": 1,
+      "seconds": 1.5662992139114067,
+      "trustworthiness": 0.9552513592135621,
+      "continuity": 0.9574940114354499,
+      "density_preservation": -0.0937924900267564,
+      "density_slope": -0.0914267421377257,
+      "knn_accuracy": 0.9608000000000001
+    },
+    {
+      "method": "tsne",
+      "n": 40000,
+      "seed": 1,
+      "seconds": 1.8058367510093376,
+      "trustworthiness": 0.9765190972013241,
+      "continuity": 0.9605195425820042,
+      "density_preservation": 0.13535446328620485,
+      "density_slope": 0.11669795070654283,
+      "knn_accuracy": 0.9582
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 40000,
+      "seed": 1,
+      "seconds": 1.333979115006514,
+      "trustworthiness": 0.833565902297121,
+      "continuity": 0.942116091884843,
+      "density_preservation": -0.027354448130122548,
+      "density_slope": -0.06109463484077264,
+      "knn_accuracy": 0.7844000000000001
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 40000,
+      "seed": 1,
+      "seconds": 4.048620272078551,
+      "trustworthiness": 0.7253782927073928,
+      "continuity": 0.9321257618617715,
+      "density_preservation": 0.4049368452842333,
+      "density_slope": 0.5887776455667767,
+      "knn_accuracy": 0.4418
+    },
+    {
+      "method": "lvm",
+      "n": 40000,
+      "seed": 2,
+      "seconds": 0.4153291960246861,
+      "trustworthiness": 0.9709555461931989,
+      "continuity": 0.9408626742902999,
+      "density_preservation": 0.32265877179345936,
+      "density_slope": 1.307995830086094,
+      "knn_accuracy": 0.9
+    },
+    {
+      "method": "lvm_chart",
+      "n": 40000,
+      "seed": 2,
+      "seconds": 0.5827691640006378,
+      "trustworthiness": 0.9120196448991875,
+      "continuity": 0.9417597913531949,
+      "density_preservation": 0.2389880063938694,
+      "density_slope": 0.6941272961002438,
+      "knn_accuracy": 0.8093999999999999
+    },
+    {
+      "method": "umap",
+      "n": 40000,
+      "seed": 2,
+      "seconds": 1.5359191389288753,
+      "trustworthiness": 0.9567864138830374,
+      "continuity": 0.9595338268632762,
+      "density_preservation": -0.11606916994804166,
+      "density_slope": -0.1109402680470841,
+      "knn_accuracy": 0.9578
+    },
+    {
+      "method": "tsne",
+      "n": 40000,
+      "seed": 2,
+      "seconds": 1.8319707190385088,
+      "trustworthiness": 0.9776180198615708,
+      "continuity": 0.9620100712207844,
+      "density_preservation": 0.10645186378459319,
+      "density_slope": 0.08879068136429683,
+      "knn_accuracy": 0.96
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 40000,
+      "seed": 2,
+      "seconds": 1.3059160409029573,
+      "trustworthiness": 0.8323639201524726,
+      "continuity": 0.9435865583308256,
+      "density_preservation": -0.018924036886915536,
+      "density_slope": -0.04177470497109588,
+      "knn_accuracy": 0.7682
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 40000,
+      "seed": 2,
+      "seconds": 3.9979445850476623,
+      "trustworthiness": 0.7324216270438358,
+      "continuity": 0.9329075213160798,
+      "density_preservation": 0.5308199673672269,
+      "density_slope": 0.961870663189685,
+      "knn_accuracy": 0.38780000000000003
+    },
+    {
+      "method": "lvm",
+      "n": 40000,
+      "seed": 3,
+      "seconds": 0.4126302660442889,
+      "trustworthiness": 0.9710794061590932,
+      "continuity": 0.9379601524726653,
+      "density_preservation": 0.2142625238665133,
+      "density_slope": 0.9000549316728975,
+      "knn_accuracy": 0.8940000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "n": 40000,
+      "seed": 3,
+      "seconds": 0.5799679040210322,
+      "trustworthiness": 0.9109072685324506,
+      "continuity": 0.9387289036011636,
+      "density_preservation": 0.19575908133392858,
+      "density_slope": 0.5920767759707077,
+      "knn_accuracy": 0.8193999999999999
+    },
+    {
+      "method": "umap",
+      "n": 40000,
+      "seed": 3,
+      "seconds": 1.5025955509627238,
+      "trustworthiness": 0.9547493068512388,
+      "continuity": 0.9588297562443575,
+      "density_preservation": -0.12288473022933125,
+      "density_slope": -0.11863210130191162,
+      "knn_accuracy": 0.9646000000000001
+    },
+    {
+      "method": "tsne",
+      "n": 40000,
+      "seed": 3,
+      "seconds": 1.8293699990026653,
+      "trustworthiness": 0.9767733052462634,
+      "continuity": 0.9617499448289698,
+      "density_preservation": 0.11420734605929196,
+      "density_slope": 0.09188028198966676,
+      "knn_accuracy": 0.959
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 40000,
+      "seed": 3,
+      "seconds": 1.3639304159441963,
+      "trustworthiness": 0.8344042491724345,
+      "continuity": 0.943759662955161,
+      "density_preservation": -0.03243028539877935,
+      "density_slope": -0.07012666715384949,
+      "knn_accuracy": 0.781
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 40000,
+      "seed": 3,
+      "seconds": 4.027881957008503,
+      "trustworthiness": 0.7478445059685024,
+      "continuity": 0.9386191874811917,
+      "density_preservation": 0.44765227842514993,
+      "density_slope": 0.7217165044657101,
+      "knn_accuracy": 0.5158
+    },
+    {
+      "method": "lvm",
+      "n": 40000,
+      "seed": 4,
+      "seconds": 0.4361609850311652,
+      "trustworthiness": 0.9718524265222189,
+      "continuity": 0.9364374521015146,
+      "density_preservation": 0.16255669937095052,
+      "density_slope": 0.7088188239038403,
+      "knn_accuracy": 0.8988000000000002
+    },
+    {
+      "method": "lvm_chart",
+      "n": 40000,
+      "seed": 4,
+      "seconds": 0.5899571889312938,
+      "trustworthiness": 0.9045431236834186,
+      "continuity": 0.9369365232219882,
+      "density_preservation": 0.09626826420746765,
+      "density_slope": 0.28272430052922715,
+      "knn_accuracy": 0.7916000000000001
+    },
+    {
+      "method": "umap",
+      "n": 40000,
+      "seed": 4,
+      "seconds": 1.4856352839851752,
+      "trustworthiness": 0.9537377590530645,
+      "continuity": 0.9603299668973819,
+      "density_preservation": -0.12265914553406873,
+      "density_slope": -0.11524631939006626,
+      "knn_accuracy": 0.961
+    },
+    {
+      "method": "tsne",
+      "n": 40000,
+      "seed": 4,
+      "seconds": 1.9544480959884822,
+      "trustworthiness": 0.9768339412177751,
+      "continuity": 0.9622734356505166,
+      "density_preservation": 0.13382228995032225,
+      "density_slope": 0.11208591895369047,
+      "knn_accuracy": 0.9587999999999999
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 40000,
+      "seed": 4,
+      "seconds": 1.3658250239677727,
+      "trustworthiness": 0.8373043033403551,
+      "continuity": 0.9449384532049353,
+      "density_preservation": -0.00719054599845556,
+      "density_slope": -0.016115568064458546,
+      "knn_accuracy": 0.791
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 40000,
+      "seed": 4,
+      "seconds": 4.208457375993021,
+      "trustworthiness": 0.7252231276958572,
+      "continuity": 0.9307147557428027,
+      "density_preservation": 0.43820345069623856,
+      "density_slope": 0.7026499079354984,
+      "knn_accuracy": 0.4184
+    },
+    {
+      "method": "lvm",
+      "n": 40000,
+      "seed": 5,
+      "seconds": 0.40232807700522244,
+      "trustworthiness": 0.9736471140535661,
+      "continuity": 0.9383824295315478,
+      "density_preservation": 0.471548196025937,
+      "density_slope": 2.560439077475603,
+      "knn_accuracy": 0.9042
+    },
+    {
+      "method": "lvm_chart",
+      "n": 40000,
+      "seed": 5,
+      "seconds": 0.6180699190590531,
+      "trustworthiness": 0.9147153576085866,
+      "continuity": 0.9387820403250076,
+      "density_preservation": 0.3963001250038311,
+      "density_slope": 1.3694089731980954,
+      "knn_accuracy": 0.8368
+    },
+    {
+      "method": "umap",
+      "n": 40000,
+      "seed": 5,
+      "seconds": 1.4832986179972067,
+      "trustworthiness": 0.9561760497542381,
+      "continuity": 0.9590488554519009,
+      "density_preservation": -0.1335915225036647,
+      "density_slope": -0.12193441315777856,
+      "knn_accuracy": 0.959
+    },
+    {
+      "method": "tsne",
+      "n": 40000,
+      "seed": 5,
+      "seconds": 1.8380285509629175,
+      "trustworthiness": 0.9768781703280168,
+      "continuity": 0.9616999177450095,
+      "density_preservation": 0.1471199451710079,
+      "density_slope": 0.11810071374116843,
+      "knn_accuracy": 0.9591999999999998
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 40000,
+      "seed": 5,
+      "seconds": 1.3502999240299687,
+      "trustworthiness": 0.837426253385495,
+      "continuity": 0.9437877420002007,
+      "density_preservation": -0.01953059203336054,
+      "density_slope": -0.04189659061886995,
+      "knn_accuracy": 0.7860000000000001
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 40000,
+      "seed": 5,
+      "seconds": 4.284274012083188,
+      "trustworthiness": 0.7245069395124887,
+      "continuity": 0.9392715297422009,
+      "density_preservation": 0.47001431807416966,
+      "density_slope": 0.6997714727635901,
+      "knn_accuracy": 0.4332
+    },
+    {
+      "method": "lvm",
+      "n": 40000,
+      "seed": 6,
+      "seconds": 0.4350382079137489,
+      "trustworthiness": 0.9714570207643696,
+      "continuity": 0.9391844477881433,
+      "density_preservation": 0.34903454555015595,
+      "density_slope": 2.149145027377055,
+      "knn_accuracy": 0.8936
+    },
+    {
+      "method": "lvm_chart",
+      "n": 40000,
+      "seed": 6,
+      "seconds": 0.5707815400091931,
+      "trustworthiness": 0.9094550065202126,
+      "continuity": 0.9396982806700772,
+      "density_preservation": 0.3171795050220833,
+      "density_slope": 0.9967590364374056,
+      "knn_accuracy": 0.8018000000000001
+    },
+    {
+      "method": "umap",
+      "n": 40000,
+      "seed": 6,
+      "seconds": 1.492689422913827,
+      "trustworthiness": 0.9569250516601464,
+      "continuity": 0.9590400280870699,
+      "density_preservation": -0.07416039744528172,
+      "density_slope": -0.07068696129912136,
+      "knn_accuracy": 0.9643999999999998
+    },
+    {
+      "method": "tsne",
+      "n": 40000,
+      "seed": 6,
+      "seconds": 1.789962174021639,
+      "trustworthiness": 0.9772167559434246,
+      "continuity": 0.9618306550305948,
+      "density_preservation": 0.14714248601917193,
+      "density_slope": 0.12503482726646636,
+      "knn_accuracy": 0.96
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 40000,
+      "seed": 6,
+      "seconds": 1.3491394970333204,
+      "trustworthiness": 0.8361483117664761,
+      "continuity": 0.9444985535158993,
+      "density_preservation": -0.03629137346181673,
+      "density_slope": -0.08048970793453496,
+      "knn_accuracy": 0.7842
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 40000,
+      "seed": 6,
+      "seconds": 3.92582498898264,
+      "trustworthiness": 0.7541593860969004,
+      "continuity": 0.9369420844618317,
+      "density_preservation": 0.517394367900681,
+      "density_slope": 0.9558661136805017,
+      "knn_accuracy": 0.5262
+    },
+    {
+      "method": "lvm",
+      "n": 40000,
+      "seed": 7,
+      "seconds": 0.410153824952431,
+      "trustworthiness": 0.9703560236733875,
+      "continuity": 0.9410319871601966,
+      "density_preservation": 0.3104145100145118,
+      "density_slope": 1.3190796489945242,
+      "knn_accuracy": 0.8990000000000002
+    },
+    {
+      "method": "lvm_chart",
+      "n": 40000,
+      "seed": 7,
+      "seconds": 0.5725666469661519,
+      "trustworthiness": 0.9053379797371852,
+      "continuity": 0.9412339532550907,
+      "density_preservation": 0.15205467235785766,
+      "density_slope": 0.4468356299353512,
+      "knn_accuracy": 0.8357999999999999
+    },
+    {
+      "method": "umap",
+      "n": 40000,
+      "seed": 7,
+      "seconds": 1.5207684159977362,
+      "trustworthiness": 0.9568526271441469,
+      "continuity": 0.9600852001203731,
+      "density_preservation": -0.11269614067115366,
+      "density_slope": -0.1061284362957143,
+      "knn_accuracy": 0.9623999999999999
+    },
+    {
+      "method": "tsne",
+      "n": 40000,
+      "seed": 7,
+      "seconds": 1.8635961229447275,
+      "trustworthiness": 0.9775456916440967,
+      "continuity": 0.9633079466345672,
+      "density_preservation": 0.13054200089117216,
+      "density_slope": 0.10980750878098187,
+      "knn_accuracy": 0.9579999999999999
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 40000,
+      "seed": 7,
+      "seconds": 1.3407575309975073,
+      "trustworthiness": 0.8395404714615308,
+      "continuity": 0.9456381903902097,
+      "density_preservation": -0.03823560739342301,
+      "density_slope": -0.0835861086844077,
+      "knn_accuracy": 0.7864000000000001
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 40000,
+      "seed": 7,
+      "seconds": 3.9616831629537046,
+      "trustworthiness": 0.738415066706791,
+      "continuity": 0.9392089838499348,
+      "density_preservation": 0.5849219887843653,
+      "density_slope": 1.1294862205329204,
+      "knn_accuracy": 0.44580000000000003
+    },
+    {
+      "method": "lvm",
+      "n": 40000,
+      "seed": 8,
+      "seconds": 0.4162292309338227,
+      "trustworthiness": 0.9727532069415187,
+      "continuity": 0.9378338489316882,
+      "density_preservation": 0.3756097950887949,
+      "density_slope": 1.6330530228510933,
+      "knn_accuracy": 0.9008
+    },
+    {
+      "method": "lvm_chart",
+      "n": 40000,
+      "seed": 8,
+      "seconds": 0.5603931889636442,
+      "trustworthiness": 0.9120232320192597,
+      "continuity": 0.9385851820643997,
+      "density_preservation": 0.40927045513162624,
+      "density_slope": 1.240687884554907,
+      "knn_accuracy": 0.8385999999999999
+    },
+    {
+      "method": "umap",
+      "n": 40000,
+      "seed": 8,
+      "seconds": 1.522447664057836,
+      "trustworthiness": 0.9564299689036011,
+      "continuity": 0.9587915056675694,
+      "density_preservation": -0.09065727762885777,
+      "density_slope": -0.08094586232871301,
+      "knn_accuracy": 0.9621999999999999
+    },
+    {
+      "method": "tsne",
+      "n": 40000,
+      "seed": 8,
+      "seconds": 1.8445080800447613,
+      "trustworthiness": 0.9777070719229611,
+      "continuity": 0.9616136743906109,
+      "density_preservation": 0.12994960701942315,
+      "density_slope": 0.09798651603118558,
+      "knn_accuracy": 0.9618
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 40000,
+      "seed": 8,
+      "seconds": 1.3634573710151017,
+      "trustworthiness": 0.8379026421907915,
+      "continuity": 0.9437926452001204,
+      "density_preservation": -0.019197856764450637,
+      "density_slope": -0.04007839166990989,
+      "knn_accuracy": 0.7792000000000001
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 40000,
+      "seed": 8,
+      "seconds": 4.126061088987626,
+      "trustworthiness": 0.7496617032801685,
+      "continuity": 0.9373031477580499,
+      "density_preservation": 0.46167888515118444,
+      "density_slope": 0.7691720569436477,
+      "knn_accuracy": 0.4518
+    },
+    {
+      "method": "lvm",
+      "n": 40000,
+      "seed": 9,
+      "seconds": 0.43941947002895176,
+      "trustworthiness": 0.9686627425017554,
+      "continuity": 0.9386375925368643,
+      "density_preservation": 0.4081722169101177,
+      "density_slope": 2.104280285131584,
+      "knn_accuracy": 0.9
+    },
+    {
+      "method": "lvm_chart",
+      "n": 40000,
+      "seed": 9,
+      "seconds": 0.5658518429845572,
+      "trustworthiness": 0.8978686648610693,
+      "continuity": 0.9393704162905006,
+      "density_preservation": 0.41644075292053323,
+      "density_slope": 1.289341421338298,
+      "knn_accuracy": 0.8029999999999999
+    },
+    {
+      "method": "umap",
+      "n": 40000,
+      "seed": 9,
+      "seconds": 1.5183111830847338,
+      "trustworthiness": 0.9550723763667369,
+      "continuity": 0.9586490560738289,
+      "density_preservation": -0.11679857749795067,
+      "density_slope": -0.10752852698839986,
+      "knn_accuracy": 0.9576
+    },
+    {
+      "method": "tsne",
+      "n": 40000,
+      "seed": 9,
+      "seconds": 1.8344180969288573,
+      "trustworthiness": 0.977651595947437,
+      "continuity": 0.9611968141237838,
+      "density_preservation": 0.14228385542064423,
+      "density_slope": 0.11334760775599276,
+      "knn_accuracy": 0.9568
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 40000,
+      "seed": 9,
+      "seconds": 1.331700342008844,
+      "trustworthiness": 0.836845091784532,
+      "continuity": 0.944801785535159,
+      "density_preservation": -0.027903000881248925,
+      "density_slope": -0.05974072303861247,
+      "knn_accuracy": 0.7788
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 40000,
+      "seed": 9,
+      "seconds": 3.9584460080368444,
+      "trustworthiness": 0.7453117544387602,
+      "continuity": 0.9354334396629551,
+      "density_preservation": 0.48227465098675526,
+      "density_slope": 0.7891821078210984,
+      "knn_accuracy": 0.42939999999999995
+    },
+    {
+      "method": "lvm",
+      "n": 50000,
+      "seed": 0,
+      "seconds": 0.47852760495152324,
+      "trustworthiness": 0.9719899969906711,
+      "continuity": 0.9399218778212458,
+      "density_preservation": 0.279823837396992,
+      "density_slope": 0.9526539748459686,
+      "knn_accuracy": 0.8954000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "n": 50000,
+      "seed": 0,
+      "seconds": 0.6914966709446162,
+      "trustworthiness": 0.9163215969505467,
+      "continuity": 0.9409663837897482,
+      "density_preservation": 0.22544252247106383,
+      "density_slope": 0.610355203189562,
+      "knn_accuracy": 0.8370000000000001
+    },
+    {
+      "method": "umap",
+      "n": 50000,
+      "seed": 0,
+      "seconds": 2.3812198400264606,
+      "trustworthiness": 0.9534342301133514,
+      "continuity": 0.9575590089276758,
+      "density_preservation": -0.08165793024138297,
+      "density_slope": -0.07275368939657138,
+      "knn_accuracy": 0.9597999999999999
+    },
+    {
+      "method": "tsne",
+      "n": 50000,
+      "seed": 0,
+      "seconds": 2.643400685978122,
+      "trustworthiness": 0.9769250155481994,
+      "continuity": 0.9605580218677902,
+      "density_preservation": 0.14538186153067492,
+      "density_slope": 0.10881216679484916,
+      "knn_accuracy": 0.9555999999999999
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 50000,
+      "seed": 0,
+      "seconds": 2.073096105013974,
+      "trustworthiness": 0.8401266486106931,
+      "continuity": 0.9436332470659043,
+      "density_preservation": -0.06682809115336039,
+      "density_slope": -0.14544960464357004,
+      "knn_accuracy": 0.7777999999999999
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 50000,
+      "seed": 0,
+      "seconds": 5.066874045995064,
+      "trustworthiness": 0.7409356164108737,
+      "continuity": 0.93265974922259,
+      "density_preservation": 0.5211383955798103,
+      "density_slope": 0.9708734602093123,
+      "knn_accuracy": 0.37479999999999997
+    },
+    {
+      "method": "lvm",
+      "n": 50000,
+      "seed": 1,
+      "seconds": 0.4634010950103402,
+      "trustworthiness": 0.9713242010231719,
+      "continuity": 0.9416605998595646,
+      "density_preservation": 0.2460586318573702,
+      "density_slope": 1.0802927218918672,
+      "knn_accuracy": 0.9022
+    },
+    {
+      "method": "lvm_chart",
+      "n": 50000,
+      "seed": 1,
+      "seconds": 0.6405958039686084,
+      "trustworthiness": 0.905858437155181,
+      "continuity": 0.9420957969706089,
+      "density_preservation": 0.2067958360624734,
+      "density_slope": 0.53067963257949,
+      "knn_accuracy": 0.8155999999999999
+    },
+    {
+      "method": "umap",
+      "n": 50000,
+      "seed": 1,
+      "seconds": 2.305548046948388,
+      "trustworthiness": 0.9555335339552613,
+      "continuity": 0.9587577730965995,
+      "density_preservation": -0.17480932688351516,
+      "density_slope": -0.17524629187562102,
+      "knn_accuracy": 0.9673999999999999
+    },
+    {
+      "method": "tsne",
+      "n": 50000,
+      "seed": 1,
+      "seconds": 2.5295995000051335,
+      "trustworthiness": 0.9769855833082556,
+      "continuity": 0.9613907071922961,
+      "density_preservation": 0.03234527260242397,
+      "density_slope": 0.02636519920978237,
+      "knn_accuracy": 0.9635999999999999
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 50000,
+      "seed": 1,
+      "seconds": 1.9437488589901477,
+      "trustworthiness": 0.8392705547196309,
+      "continuity": 0.9438281111445481,
+      "density_preservation": -0.09710030529862584,
+      "density_slope": -0.22652415945681736,
+      "knn_accuracy": 0.7659999999999999
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 50000,
+      "seed": 1,
+      "seconds": 5.005655849003233,
+      "trustworthiness": 0.7447323583107633,
+      "continuity": 0.9379006199217574,
+      "density_preservation": 0.3851563034292528,
+      "density_slope": 0.6006953262753791,
+      "knn_accuracy": 0.4144
+    },
+    {
+      "method": "lvm",
+      "n": 50000,
+      "seed": 2,
+      "seconds": 0.5024792830226943,
+      "trustworthiness": 0.9687371571872806,
+      "continuity": 0.9283666566355703,
+      "density_preservation": 0.2529014414823757,
+      "density_slope": 1.3020797319256965,
+      "knn_accuracy": 0.9054
+    },
+    {
+      "method": "lvm_chart",
+      "n": 50000,
+      "seed": 2,
+      "seconds": 0.6520598890492693,
+      "trustworthiness": 0.8904482816731869,
+      "continuity": 0.9287682535861169,
+      "density_preservation": 0.035152899329800986,
+      "density_slope": 0.11054213458298885,
+      "knn_accuracy": 0.8042000000000001
+    },
+    {
+      "method": "umap",
+      "n": 50000,
+      "seed": 2,
+      "seconds": 2.248374542919919,
+      "trustworthiness": 0.9552653425619421,
+      "continuity": 0.9596860347075935,
+      "density_preservation": -0.13201270716749366,
+      "density_slope": -0.11598698495407657,
+      "knn_accuracy": 0.9644
+    },
+    {
+      "method": "tsne",
+      "n": 50000,
+      "seed": 2,
+      "seconds": 2.567816323018633,
+      "trustworthiness": 0.9768271000100311,
+      "continuity": 0.9619841508676898,
+      "density_preservation": 0.16824189473564097,
+      "density_slope": 0.12412649866798825,
+      "knn_accuracy": 0.9607999999999999
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 50000,
+      "seed": 2,
+      "seconds": 1.9598910709610209,
+      "trustworthiness": 0.8381529019961882,
+      "continuity": 0.9454123783729561,
+      "density_preservation": -0.09170683543565834,
+      "density_slope": -0.18716946998925063,
+      "knn_accuracy": 0.7754000000000001
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 50000,
+      "seed": 2,
+      "seconds": 5.224629619042389,
+      "trustworthiness": 0.7231465944427726,
+      "continuity": 0.9275602888955763,
+      "density_preservation": 0.5606195331979649,
+      "density_slope": 1.1533931201657965,
+      "knn_accuracy": 0.4192
+    },
+    {
+      "method": "lvm",
+      "n": 50000,
+      "seed": 3,
+      "seconds": 0.4568962149787694,
+      "trustworthiness": 0.9703591734376568,
+      "continuity": 0.9405820844618317,
+      "density_preservation": 0.19701729230765583,
+      "density_slope": 0.7706833688557181,
+      "knn_accuracy": 0.9028
+    },
+    {
+      "method": "lvm_chart",
+      "n": 50000,
+      "seed": 3,
+      "seconds": 0.6588377780281007,
+      "trustworthiness": 0.9068070097301635,
+      "continuity": 0.9416355662553917,
+      "density_preservation": 0.08787538288369363,
+      "density_slope": 0.24207745853468776,
+      "knn_accuracy": 0.8064
+    },
+    {
+      "method": "umap",
+      "n": 50000,
+      "seed": 3,
+      "seconds": 2.229748424026184,
+      "trustworthiness": 0.9553362142642191,
+      "continuity": 0.9586578714013442,
+      "density_preservation": -0.14719320662700747,
+      "density_slope": -0.13994305619200303,
+      "knn_accuracy": 0.9666
+    },
+    {
+      "method": "tsne",
+      "n": 50000,
+      "seed": 3,
+      "seconds": 2.5311050469754264,
+      "trustworthiness": 0.9763005196107934,
+      "continuity": 0.9612169244658442,
+      "density_preservation": 0.0883525538032882,
+      "density_slope": 0.0713280607414462,
+      "knn_accuracy": 0.9621999999999999
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 50000,
+      "seed": 3,
+      "seconds": 2.0136894379975274,
+      "trustworthiness": 0.8397194422710402,
+      "continuity": 0.9432587982746514,
+      "density_preservation": -0.07234148577753113,
+      "density_slope": -0.1611238365224527,
+      "knn_accuracy": 0.7698
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 50000,
+      "seed": 3,
+      "seconds": 4.939952332992107,
+      "trustworthiness": 0.7372331828668873,
+      "continuity": 0.9357201925970509,
+      "density_preservation": 0.5604839202227186,
+      "density_slope": 1.0670427191834484,
+      "knn_accuracy": 0.4024
+    },
+    {
+      "method": "lvm",
+      "n": 50000,
+      "seed": 4,
+      "seconds": 0.46329455403611064,
+      "trustworthiness": 0.9721288434145852,
+      "continuity": 0.9397809288795266,
+      "density_preservation": 0.5423980639692049,
+      "density_slope": 3.229457035985419,
+      "knn_accuracy": 0.9044000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "n": 50000,
+      "seed": 4,
+      "seconds": 0.625959319062531,
+      "trustworthiness": 0.9119270338047949,
+      "continuity": 0.940186381783529,
+      "density_preservation": 0.43336046120198124,
+      "density_slope": 1.5312488745159891,
+      "knn_accuracy": 0.8496
+    },
+    {
+      "method": "umap",
+      "n": 50000,
+      "seed": 4,
+      "seconds": 2.2104082939913496,
+      "trustworthiness": 0.9577327314675494,
+      "continuity": 0.9582292988263618,
+      "density_preservation": -0.07979758451364483,
+      "density_slope": -0.0774607753453896,
+      "knn_accuracy": 0.9627999999999999
+    },
+    {
+      "method": "tsne",
+      "n": 50000,
+      "seed": 4,
+      "seconds": 2.5243875649757683,
+      "trustworthiness": 0.9779316039723142,
+      "continuity": 0.9610468331828669,
+      "density_preservation": 0.11668011839651118,
+      "density_slope": 0.09306307093533601,
+      "knn_accuracy": 0.9595999999999998
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 50000,
+      "seed": 4,
+      "seconds": 1.9782285450492054,
+      "trustworthiness": 0.8425655331527736,
+      "continuity": 0.9435421125489016,
+      "density_preservation": -0.11500990466235063,
+      "density_slope": -0.24817620458387313,
+      "knn_accuracy": 0.7836000000000001
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 50000,
+      "seed": 4,
+      "seconds": 5.271355779957958,
+      "trustworthiness": 0.7269216691744407,
+      "continuity": 0.9306071622028288,
+      "density_preservation": 0.3453541094000777,
+      "density_slope": 0.5192517854455556,
+      "knn_accuracy": 0.4528
+    },
+    {
+      "method": "lvm",
+      "n": 50000,
+      "seed": 5,
+      "seconds": 0.5063235559500754,
+      "trustworthiness": 0.9727777028789246,
+      "continuity": 0.9456179917745009,
+      "density_preservation": 0.46972926078586547,
+      "density_slope": 2.0592611356488404,
+      "knn_accuracy": 0.9020000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "n": 50000,
+      "seed": 5,
+      "seconds": 0.640128051978536,
+      "trustworthiness": 0.9157505868191393,
+      "continuity": 0.9464711846724847,
+      "density_preservation": 0.3420809695104769,
+      "density_slope": 1.0529468101042516,
+      "knn_accuracy": 0.8288
+    },
+    {
+      "method": "umap",
+      "n": 50000,
+      "seed": 5,
+      "seconds": 2.2339130640029907,
+      "trustworthiness": 0.9556613180860668,
+      "continuity": 0.9605416872304143,
+      "density_preservation": -0.1507241782845802,
+      "density_slope": -0.14389443525097007,
+      "knn_accuracy": 0.9632
+    },
+    {
+      "method": "tsne",
+      "n": 50000,
+      "seed": 5,
+      "seconds": 2.518828543019481,
+      "trustworthiness": 0.9781356244357509,
+      "continuity": 0.962369264720634,
+      "density_preservation": 0.09351989507753895,
+      "density_slope": 0.07451235377568015,
+      "knn_accuracy": 0.9597999999999999
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 50000,
+      "seed": 5,
+      "seconds": 1.9461338160326704,
+      "trustworthiness": 0.8433496318587621,
+      "continuity": 0.9466529361019159,
+      "density_preservation": -0.08978538646330399,
+      "density_slope": -0.1962233872345421,
+      "knn_accuracy": 0.7757999999999999
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 50000,
+      "seed": 5,
+      "seconds": 5.44134196091909,
+      "trustworthiness": 0.7500042491724346,
+      "continuity": 0.9412938389005918,
+      "density_preservation": 0.3597746153081741,
+      "density_slope": 0.5179797097987114,
+      "knn_accuracy": 0.4534000000000001
+    },
+    {
+      "method": "lvm",
+      "n": 50000,
+      "seed": 6,
+      "seconds": 0.4664473959710449,
+      "trustworthiness": 0.9717173678403049,
+      "continuity": 0.9434947737987762,
+      "density_preservation": 0.5279674569038122,
+      "density_slope": 2.731346413718614,
+      "knn_accuracy": 0.8922000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "n": 50000,
+      "seed": 6,
+      "seconds": 0.6429968430893496,
+      "trustworthiness": 0.9146800641990169,
+      "continuity": 0.9443560036111946,
+      "density_preservation": 0.3349308448216907,
+      "density_slope": 1.0912697314723,
+      "knn_accuracy": 0.8315999999999999
+    },
+    {
+      "method": "umap",
+      "n": 50000,
+      "seed": 6,
+      "seconds": 2.2207548309816048,
+      "trustworthiness": 0.9537953535961481,
+      "continuity": 0.9599945912328217,
+      "density_preservation": -0.10079792286636034,
+      "density_slope": -0.08982662839124632,
+      "knn_accuracy": 0.9625999999999999
+    },
+    {
+      "method": "tsne",
+      "n": 50000,
+      "seed": 6,
+      "seconds": 2.5597221130738035,
+      "trustworthiness": 0.9768822630153475,
+      "continuity": 0.9618587300631959,
+      "density_preservation": 0.16290589430061483,
+      "density_slope": 0.12489146861753038,
+      "knn_accuracy": 0.9570000000000001
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 50000,
+      "seed": 6,
+      "seconds": 1.9936027720104903,
+      "trustworthiness": 0.844499448289698,
+      "continuity": 0.945709186478082,
+      "density_preservation": -0.09393903889348808,
+      "density_slope": -0.19241160693364676,
+      "knn_accuracy": 0.7772
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 50000,
+      "seed": 6,
+      "seconds": 5.105949563905597,
+      "trustworthiness": 0.7475226361721337,
+      "continuity": 0.9388159855552212,
+      "density_preservation": 0.5449627724679684,
+      "density_slope": 0.8554788789273815,
+      "knn_accuracy": 0.4178
+    },
+    {
+      "method": "lvm",
+      "n": 50000,
+      "seed": 7,
+      "seconds": 0.444327222998254,
+      "trustworthiness": 0.9724678984853045,
+      "continuity": 0.9431791353194904,
+      "density_preservation": 0.4625599465718516,
+      "density_slope": 2.3731768490118244,
+      "knn_accuracy": 0.9084
+    },
+    {
+      "method": "lvm_chart",
+      "n": 50000,
+      "seed": 7,
+      "seconds": 0.6453586280113086,
+      "trustworthiness": 0.9180573658340857,
+      "continuity": 0.9437546995686629,
+      "density_preservation": 0.3021250746031485,
+      "density_slope": 0.9639591551833288,
+      "knn_accuracy": 0.8346
+    },
+    {
+      "method": "umap",
+      "n": 50000,
+      "seed": 7,
+      "seconds": 2.2111602569930255,
+      "trustworthiness": 0.9552725769886649,
+      "continuity": 0.9572140154478884,
+      "density_preservation": -0.15923756356649013,
+      "density_slope": -0.1477946274099343,
+      "knn_accuracy": 0.9618
+    },
+    {
+      "method": "tsne",
+      "n": 50000,
+      "seed": 7,
+      "seconds": 2.5574902649968863,
+      "trustworthiness": 0.976531660146454,
+      "continuity": 0.9602641187681814,
+      "density_preservation": 0.05166059355463275,
+      "density_slope": 0.0398802785475042,
+      "knn_accuracy": 0.9607999999999999
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 50000,
+      "seed": 7,
+      "seconds": 1.9792308869073167,
+      "trustworthiness": 0.835665242250978,
+      "continuity": 0.943026618517404,
+      "density_preservation": -0.10271503993861067,
+      "density_slope": -0.22605523712910258,
+      "knn_accuracy": 0.7704000000000001
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 50000,
+      "seed": 7,
+      "seconds": 5.145236999960616,
+      "trustworthiness": 0.7222640024074631,
+      "continuity": 0.9358429050055171,
+      "density_preservation": 0.3515296839730787,
+      "density_slope": 0.4885894118707708,
+      "knn_accuracy": 0.36479999999999996
+    },
+    {
+      "method": "lvm",
+      "n": 50000,
+      "seed": 8,
+      "seconds": 0.4700018120929599,
+      "trustworthiness": 0.9705096920453405,
+      "continuity": 0.9355788825358612,
+      "density_preservation": 0.5578162741503351,
+      "density_slope": 3.0111875872462743,
+      "knn_accuracy": 0.9122000000000001
+    },
+    {
+      "method": "lvm_chart",
+      "n": 50000,
+      "seed": 8,
+      "seconds": 0.6427776450291276,
+      "trustworthiness": 0.9018322158691945,
+      "continuity": 0.9364554840004012,
+      "density_preservation": 0.20167490915876735,
+      "density_slope": 0.5865169000061049,
+      "knn_accuracy": 0.7882
+    },
+    {
+      "method": "umap",
+      "n": 50000,
+      "seed": 8,
+      "seconds": 2.2221713569015265,
+      "trustworthiness": 0.9555725669575684,
+      "continuity": 0.9590737004714616,
+      "density_preservation": -0.12511000529147365,
+      "density_slope": -0.10591119044961768,
+      "knn_accuracy": 0.9686
+    },
+    {
+      "method": "tsne",
+      "n": 50000,
+      "seed": 8,
+      "seconds": 2.5999203129904345,
+      "trustworthiness": 0.9769523482796669,
+      "continuity": 0.9613916059785335,
+      "density_preservation": 0.13619288544354308,
+      "density_slope": 0.10344793214386008,
+      "knn_accuracy": 0.9623999999999999
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 50000,
+      "seed": 8,
+      "seconds": 2.0327756110345945,
+      "trustworthiness": 0.8408157207342762,
+      "continuity": 0.9446671842712409,
+      "density_preservation": -0.10774525570236039,
+      "density_slope": -0.22420803903561468,
+      "knn_accuracy": 0.7762
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 50000,
+      "seed": 8,
+      "seconds": 4.944309983984567,
+      "trustworthiness": 0.7188637817233423,
+      "continuity": 0.9374341819640887,
+      "density_preservation": 0.34146955069819757,
+      "density_slope": 0.4181531400837712,
+      "knn_accuracy": 0.392
+    },
+    {
+      "method": "lvm",
+      "n": 50000,
+      "seed": 9,
+      "seconds": 0.45333741896320134,
+      "trustworthiness": 0.9694591794563145,
+      "continuity": 0.9376976667669776,
+      "density_preservation": 0.5069468152784554,
+      "density_slope": 2.999152398101641,
+      "knn_accuracy": 0.8924
+    },
+    {
+      "method": "lvm_chart",
+      "n": 50000,
+      "seed": 9,
+      "seconds": 0.6403601359343156,
+      "trustworthiness": 0.9034871020162504,
+      "continuity": 0.9381362864881131,
+      "density_preservation": 0.3321846306796741,
+      "density_slope": 1.3362451933717965,
+      "knn_accuracy": 0.8078000000000001
+    },
+    {
+      "method": "umap",
+      "n": 50000,
+      "seed": 9,
+      "seconds": 2.239426097017713,
+      "trustworthiness": 0.9533120954960377,
+      "continuity": 0.9554158009830475,
+      "density_preservation": -0.09659316157475756,
+      "density_slope": -0.09238708801418784,
+      "knn_accuracy": 0.9634
+    },
+    {
+      "method": "tsne",
+      "n": 50000,
+      "seed": 9,
+      "seconds": 2.5501623899908736,
+      "trustworthiness": 0.9770096499147357,
+      "continuity": 0.9592588704985455,
+      "density_preservation": 0.15651811285670553,
+      "density_slope": 0.12244685997916517,
+      "knn_accuracy": 0.958
+    },
+    {
+      "method": "laplacian_eigenmaps",
+      "n": 50000,
+      "seed": 9,
+      "seconds": 2.0372865649405867,
+      "trustworthiness": 0.8383535720734276,
+      "continuity": 0.9415058120172535,
+      "density_preservation": -0.06398675193647271,
+      "density_slope": -0.13734641187812444,
+      "knn_accuracy": 0.7776000000000001
+    },
+    {
+      "method": "landmark_isomap",
+      "n": 50000,
+      "seed": 9,
+      "seconds": 5.050950500997715,
+      "trustworthiness": 0.734156292506771,
+      "continuity": 0.932893790751329,
+      "density_preservation": 0.4649688872253248,
+      "density_slope": 0.837046008116539,
+      "knn_accuracy": 0.3886
+    }
+  ]
+}

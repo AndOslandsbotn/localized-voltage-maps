@@ -23,6 +23,8 @@ def main() -> None:
     lvm_chart_embedding = lvm_chart.fit(X).transform(X)
 
     np.savez(HERE / "embeddings.npz", labels=labels, lvm=lvm_embedding, lvm_chart=lvm_chart_embedding)
+    lvm.save(HERE / "models" / "lvm")
+    lvm_chart.save(HERE / "models" / "lvm_chart")
     record = {"dataset": "mnist", "split": "eval", "n": len(X), "n_features": X.shape[1],
               "environment": environment(lvm.device_),
               "models": {"lvm": model_record(lvm), "lvm_chart": model_record(lvm_chart)}}
