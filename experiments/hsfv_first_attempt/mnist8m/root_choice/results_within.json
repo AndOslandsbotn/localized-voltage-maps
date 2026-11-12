@@ -1,0 +1,127 @@
+{
+  "dataset": "mnist8m",
+  "n": 100000,
+  "queries": 2000,
+  "rows": [
+    {
+      "seed": 0,
+      "method": "level1_300_within",
+      "recall": 0.4764000475406647,
+      "knn_accuracy": 0.9275000691413879,
+      "recall_wide": 0.4197950065135956,
+      "global_rank": 0.4748785899028975
+    },
+    {
+      "seed": 0,
+      "method": "hierarchy",
+      "recall": 0.14980001747608185,
+      "knn_accuracy": 0.8945000171661377,
+      "recall_wide": 0.22783499956130981,
+      "global_rank": 0.42397870283717565
+    },
+    {
+      "seed": 0,
+      "method": "hierarchy_within_per_cell",
+      "recall": 0.3663500249385834,
+      "knn_accuracy": 0.9170000553131104,
+      "recall_wide": 0.24446500837802887,
+      "global_rank": 0.4098266461476615
+    },
+    {
+      "seed": 0,
+      "method": "hierarchy_within_dimension",
+      "recall": 0.3683500289916992,
+      "knn_accuracy": 0.9190000295639038,
+      "recall_wide": 0.24411001801490784,
+      "global_rank": 0.4096523245288311
+    },
+    {
+      "seed": 0,
+      "method": "hierarchy_within_root",
+      "recall": 0.47645002603530884,
+      "knn_accuracy": 0.9275000691413879,
+      "recall_wide": 0.4195050001144409,
+      "global_rank": 0.43622888692322176
+    },
+    {
+      "seed": 1,
+      "method": "level1_300_within",
+      "recall": 0.46640002727508545,
+      "knn_accuracy": 0.9255000352859497,
+      "recall_wide": 0.41318002343177795,
+      "global_rank": 0.45700123341580834
+    },
+    {
+      "seed": 1,
+      "method": "hierarchy",
+      "recall": 0.14480000734329224,
+      "knn_accuracy": 0.8920000195503235,
+      "recall_wide": 0.22074000537395477,
+      "global_rank": 0.37150397526649387
+    },
+    {
+      "seed": 1,
+      "method": "hierarchy_within_per_cell",
+      "recall": 0.3587000370025635,
+      "knn_accuracy": 0.9180000424385071,
+      "recall_wide": 0.24130500853061676,
+      "global_rank": 0.3616505620771405
+    },
+    {
+      "seed": 1,
+      "method": "hierarchy_within_dimension",
+      "recall": 0.3599500358104706,
+      "knn_accuracy": 0.9160000681877136,
+      "recall_wide": 0.24095499515533447,
+      "global_rank": 0.3615273911985978
+    },
+    {
+      "seed": 1,
+      "method": "hierarchy_within_root",
+      "recall": 0.46640002727508545,
+      "knn_accuracy": 0.9255000352859497,
+      "recall_wide": 0.4127250015735626,
+      "global_rank": 0.3834124314023578
+    },
+    {
+      "seed": 2,
+      "method": "level1_300_within",
+      "recall": 0.4782000482082367,
+      "knn_accuracy": 0.921000063419342,
+      "recall_wide": 0.41886499524116516,
+      "global_rank": 0.5238477005376752
+    },
+    {
+      "seed": 2,
+      "method": "hierarchy",
+      "recall": 0.15300001204013824,
+      "knn_accuracy": 0.8865000605583191,
+      "recall_wide": 0.22865000367164612,
+      "global_rank": 0.4302024972148743
+    },
+    {
+      "seed": 2,
+      "method": "hierarchy_within_per_cell",
+      "recall": 0.3681500256061554,
+      "knn_accuracy": 0.9050000309944153,
+      "recall_wide": 0.24915499985218048,
+      "global_rank": 0.43170452489663125
+    },
+    {
+      "seed": 2,
+      "method": "hierarchy_within_dimension",
+      "recall": 0.3700000047683716,
+      "knn_accuracy": 0.9050000309944153,
+      "recall_wide": 0.24882499873638153,
+      "global_rank": 0.43149231458757864
+    },
+    {
+      "seed": 2,
+      "method": "hierarchy_within_root",
+      "recall": 0.478300005197525,
+      "knn_accuracy": 0.921000063419342,
+      "recall_wide": 0.4183499813079834,
+      "global_rank": 0.4474679230267308
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "regions": {
+    "1": {
+      "regions": 1,
+      "cells_min_median_max": [
+        300,
+        300,
+        300
+      ],
+      "points_per_cell_median": 2880.0
+    },
+    "2": {
+      "regions": 12,
+      "cells_min_median_max": [
+        300,
+        300,
+        300
+      ],
+      "points_per_cell_median": 236.3
+    },
+    "3": {
+      "regions": 144,
+      "cells_min_median_max": [
+        190,
+        300,
+        300
+      ],
+      "points_per_cell_median": 18.15833333333333
+    }
+  },
+  "scores": {
+    "level-2 centres placed by level 1": {
+      "within level-2 region": 0.8291328219676883,
+      "whole all": 0.9778018040038033,
+      "whole close": 0.8785817907951537,
+      "whole middle": 0.7969760755798703,
+      "whole far": 0.9054458146477077
+    },
+    "level-2 centres placed by level 2": {
+      "within level-2 region": 0.9716883041469163,
+      "whole all": 0.9770484451840852,
+      "whole close": 0.8750525702415786,
+      "whole middle": 0.7944933281064985,
+      "whole far": 0.8876061856614268
+    },
+    "level-3 centres placed by level 1": {
+      "within level-2 region": 0.8430695071687938,
+      "within level-3 region": 0.6029459118709112,
+      "whole all": 0.976183109749421,
+      "whole close": 0.8762453230993271,
+      "whole middle": 0.785165422796892,
+      "whole far": 0.9008435428158019
+    },
+    "level-3 centres placed by level 2": {
+      "within level-2 region": 0.9711400533841544,
+      "within level-3 region": 0.8273923912550554,
+      "whole all": 0.9746225150734725,
+      "whole close": 0.8658049055751181,
+      "whole middle": 0.7775933798565571,
+      "whole far": 0.8830508385263345
+    },
+    "level-3 centres placed by level 3": {
+      "within level-2 region": 0.9784166757936309,
+      "within level-3 region": 0.9701153021979786,
+      "whole all": 0.9750646981396832,
+      "whole close": 0.8677789070020072,
+      "whole middle": 0.780735659887407,
+      "whole far": 0.8852389673481484
+    }
+  },
+  "seed": 0,
+  "group_sample": 1500,
+  "whole_sample": 3000,
+  "fit_seconds": 120.43330373708159,
+  "config": {
+    "landmarks": {
+      "count": {
+        "strategy": "fixed",
+        "fixed": {
+          "n": 12
+        }
+      }
+    }
+  }
+}

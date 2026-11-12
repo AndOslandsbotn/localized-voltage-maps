@@ -1,0 +1,761 @@
+{
+  "n": 100000,
+  "rows": [
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "n_cells": 5,
+      "cell_size": 6.641834530137481,
+      "dimension": 2.361177098655315
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "n_cells": 10,
+      "cell_size": 5.19477107858596,
+      "dimension": 2.8688401240491537
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "n_cells": 20,
+      "cell_size": 4.0484607978049105,
+      "dimension": 1.9881860086760064
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "n_cells": 50,
+      "cell_size": 2.3978470789124353,
+      "dimension": 1.9905563180093577
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "n_cells": 100,
+      "cell_size": 1.763203032783387,
+      "dimension": 1.9853759504639616
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "n_cells": 200,
+      "cell_size": 1.2415534768949301,
+      "dimension": 1.971552828901769
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "n_cells": 500,
+      "cell_size": 0.7701181144074338,
+      "dimension": 1.9578969425467494
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "n_cells": 1000,
+      "cell_size": 0.5360462697957874,
+      "dimension": 1.9391324267340946
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "n_cells": 2000,
+      "cell_size": 0.3733529922871179,
+      "dimension": 1.9109594190653922
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "n_cells": 5,
+      "cell_size": 6.631635421122363,
+      "dimension": 2.2969023193500644
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "n_cells": 10,
+      "cell_size": 5.182788152904914,
+      "dimension": 2.934454933649076
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "n_cells": 20,
+      "cell_size": 4.085346697409658,
+      "dimension": 1.9960367480462446
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "n_cells": 50,
+      "cell_size": 2.4272114675998098,
+      "dimension": 1.989780178067916
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "n_cells": 100,
+      "cell_size": 1.7079544498490078,
+      "dimension": 1.9776449741940456
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "n_cells": 200,
+      "cell_size": 1.2429615663767644,
+      "dimension": 1.9799123358631938
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "n_cells": 500,
+      "cell_size": 0.7758290105552281,
+      "dimension": 1.9558022828261437
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "n_cells": 1000,
+      "cell_size": 0.5415730714235216,
+      "dimension": 1.9348100907313062
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "n_cells": 2000,
+      "cell_size": 0.3732597908237348,
+      "dimension": 1.9158169095035706
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "n_cells": 5,
+      "cell_size": 6.643178278917844,
+      "dimension": 2.294249166559421
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "n_cells": 10,
+      "cell_size": 5.166585507659224,
+      "dimension": 2.9180054652458396
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "n_cells": 20,
+      "cell_size": 4.091020998975931,
+      "dimension": 2.002806038338502
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "n_cells": 50,
+      "cell_size": 2.465765876202621,
+      "dimension": 1.9828039198077914
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "n_cells": 100,
+      "cell_size": 1.7514357229149264,
+      "dimension": 1.9806990041920478
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "n_cells": 200,
+      "cell_size": 1.2549872101045145,
+      "dimension": 1.9780748023953607
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "n_cells": 500,
+      "cell_size": 0.7692391218421006,
+      "dimension": 1.9622180048936495
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "n_cells": 1000,
+      "cell_size": 0.5371031037254927,
+      "dimension": 1.9424605705061513
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "n_cells": 2000,
+      "cell_size": 0.3726346308474916,
+      "dimension": 1.9092991246062265
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "n_cells": 5,
+      "cell_size": 6.613416473623252,
+      "dimension": 2.2962389662895197
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "n_cells": 10,
+      "cell_size": 5.205054695460874,
+      "dimension": 2.7367812996695524
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "n_cells": 20,
+      "cell_size": 4.024080955982022,
+      "dimension": 2.0235814388289413
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "n_cells": 50,
+      "cell_size": 2.476713467574265,
+      "dimension": 2.026321368147664
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "n_cells": 100,
+      "cell_size": 1.7990516206800038,
+      "dimension": 2.090607904789916
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "n_cells": 200,
+      "cell_size": 1.2714889762189425,
+      "dimension": 2.194392617314162
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "n_cells": 500,
+      "cell_size": 0.8337649941850798,
+      "dimension": 2.451788555409079
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "n_cells": 1000,
+      "cell_size": 0.6210595982295959,
+      "dimension": 2.735492743041254
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "n_cells": 2000,
+      "cell_size": 0.48051411022437507,
+      "dimension": 2.7744079444242944
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "n_cells": 5,
+      "cell_size": 6.668380839392299,
+      "dimension": 2.335389272832835
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "n_cells": 10,
+      "cell_size": 5.192154664970397,
+      "dimension": 2.8959370932988833
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "n_cells": 20,
+      "cell_size": 4.068748027770361,
+      "dimension": 2.031981514430533
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "n_cells": 50,
+      "cell_size": 2.4519341722305725,
+      "dimension": 2.032837457973292
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "n_cells": 100,
+      "cell_size": 1.7858455258498576,
+      "dimension": 2.0918931896924686
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "n_cells": 200,
+      "cell_size": 1.2755603763392076,
+      "dimension": 2.185833541654521
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "n_cells": 500,
+      "cell_size": 0.8375721616249787,
+      "dimension": 2.455266094696521
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "n_cells": 1000,
+      "cell_size": 0.6180238636353204,
+      "dimension": 2.741274112868175
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "n_cells": 2000,
+      "cell_size": 0.48058476053204213,
+      "dimension": 2.7732662891751634
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "n_cells": 5,
+      "cell_size": 6.670016673754946,
+      "dimension": 2.3301203792033713
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "n_cells": 10,
+      "cell_size": 5.190967670149518,
+      "dimension": 2.888570829747043
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "n_cells": 20,
+      "cell_size": 4.01571072200957,
+      "dimension": 2.013174531033598
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "n_cells": 50,
+      "cell_size": 2.482741617791492,
+      "dimension": 2.037784534745425
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "n_cells": 100,
+      "cell_size": 1.7665119323177847,
+      "dimension": 2.0811037816653926
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "n_cells": 200,
+      "cell_size": 1.269271553095932,
+      "dimension": 2.18898660655794
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "n_cells": 500,
+      "cell_size": 0.8286371284073863,
+      "dimension": 2.4491514203119253
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "n_cells": 1000,
+      "cell_size": 0.6192492737934393,
+      "dimension": 2.7397849156299907
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "n_cells": 2000,
+      "cell_size": 0.4784964167213982,
+      "dimension": 2.7731222867130194
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "n_cells": 5,
+      "cell_size": 6.698990530455271,
+      "dimension": 2.378369388453202
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "n_cells": 10,
+      "cell_size": 5.248846887800301,
+      "dimension": 2.9194305749347844
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "n_cells": 20,
+      "cell_size": 4.084551074064145,
+      "dimension": 2.06019349883735
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "n_cells": 50,
+      "cell_size": 2.5676982811098554,
+      "dimension": 2.1831850221298694
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "n_cells": 100,
+      "cell_size": 1.87191101413302,
+      "dimension": 2.392107714331959
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "n_cells": 200,
+      "cell_size": 1.3907311793175023,
+      "dimension": 2.6887036786913914
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "n_cells": 500,
+      "cell_size": 0.9832243136401236,
+      "dimension": 2.892890150749124
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "n_cells": 1000,
+      "cell_size": 0.7989324962551574,
+      "dimension": 2.8039626132228905
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "n_cells": 2000,
+      "cell_size": 0.6339460646373427,
+      "dimension": 2.769004457608002
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "n_cells": 5,
+      "cell_size": 6.929147385765633,
+      "dimension": 2.2140685591466958
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "n_cells": 10,
+      "cell_size": 5.226922942667414,
+      "dimension": 2.9074409006423876
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "n_cells": 20,
+      "cell_size": 4.064886292713929,
+      "dimension": 2.0859100912094855
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "n_cells": 50,
+      "cell_size": 2.563740716337071,
+      "dimension": 2.2019633900865814
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "n_cells": 100,
+      "cell_size": 1.8889081601418196,
+      "dimension": 2.380808549972159
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "n_cells": 200,
+      "cell_size": 1.3916856367749417,
+      "dimension": 2.6656256026536314
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "n_cells": 500,
+      "cell_size": 0.991642202226598,
+      "dimension": 2.8956718860451813
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "n_cells": 1000,
+      "cell_size": 0.8005663962468597,
+      "dimension": 2.795124292629643
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "n_cells": 2000,
+      "cell_size": 0.6363989466878531,
+      "dimension": 2.7652818107422794
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "n_cells": 5,
+      "cell_size": 6.695456480251627,
+      "dimension": 2.324966323967104
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "n_cells": 10,
+      "cell_size": 5.229992378334178,
+      "dimension": 2.9269794443899473
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "n_cells": 20,
+      "cell_size": 4.101275672926109,
+      "dimension": 2.088474344794754
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "n_cells": 50,
+      "cell_size": 2.523887915434445,
+      "dimension": 2.198737836409454
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "n_cells": 100,
+      "cell_size": 1.8773448226977139,
+      "dimension": 2.3857483409920173
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "n_cells": 200,
+      "cell_size": 1.396469076469511,
+      "dimension": 2.66013046326682
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "n_cells": 500,
+      "cell_size": 0.9946919843087922,
+      "dimension": 2.8998505669159482
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "n_cells": 1000,
+      "cell_size": 0.8016072098084115,
+      "dimension": 2.7963945896959927
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "n_cells": 2000,
+      "cell_size": 0.6342555346662558,
+      "dimension": 2.76755758621657
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "n_cells": 5,
+      "cell_size": 6.748543540596361,
+      "dimension": 2.34522990891507
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "n_cells": 10,
+      "cell_size": 5.339472437656232,
+      "dimension": 2.8720902581433596
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "n_cells": 20,
+      "cell_size": 4.208044645580004,
+      "dimension": 2.232701963704523
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "n_cells": 50,
+      "cell_size": 2.6779104229029893,
+      "dimension": 2.51191658296171
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "n_cells": 100,
+      "cell_size": 2.0693145345539716,
+      "dimension": 2.8368208918517013
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "n_cells": 200,
+      "cell_size": 1.6228588812793814,
+      "dimension": 2.9193031937103884
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "n_cells": 500,
+      "cell_size": 1.2304834729796492,
+      "dimension": 2.8747391602900887
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "n_cells": 1000,
+      "cell_size": 0.9830557955518946,
+      "dimension": 2.8440002896594585
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "n_cells": 2000,
+      "cell_size": 0.7701265174332022,
+      "dimension": 2.7750070141611802
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "n_cells": 5,
+      "cell_size": 6.790937441355919,
+      "dimension": 2.3579561830817948
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "n_cells": 10,
+      "cell_size": 5.34449480195553,
+      "dimension": 2.9216336015698037
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "n_cells": 20,
+      "cell_size": 4.229204130051618,
+      "dimension": 2.2605339015028014
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "n_cells": 50,
+      "cell_size": 2.713603037414271,
+      "dimension": 2.5168289565538204
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "n_cells": 100,
+      "cell_size": 2.0889728872517956,
+      "dimension": 2.805419218490769
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "n_cells": 200,
+      "cell_size": 1.6380674758188571,
+      "dimension": 2.930092100661038
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "n_cells": 500,
+      "cell_size": 1.2354461363335263,
+      "dimension": 2.8758104384115146
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "n_cells": 1000,
+      "cell_size": 0.9833074478119777,
+      "dimension": 2.848355526989529
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "n_cells": 2000,
+      "cell_size": 0.7682966420212727,
+      "dimension": 2.769220629878769
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "n_cells": 5,
+      "cell_size": 7.388248947663767,
+      "dimension": 2.3684692265992724
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "n_cells": 10,
+      "cell_size": 5.3406035214660665,
+      "dimension": 2.92429320249986
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "n_cells": 20,
+      "cell_size": 4.25402256446889,
+      "dimension": 2.2719680718985513
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "n_cells": 50,
+      "cell_size": 2.666634558913732,
+      "dimension": 2.5243180452961633
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "n_cells": 100,
+      "cell_size": 2.077891373135116,
+      "dimension": 2.8239138683309415
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "n_cells": 200,
+      "cell_size": 1.6209030319608204,
+      "dimension": 2.9240665669503407
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "n_cells": 500,
+      "cell_size": 1.2324878267806922,
+      "dimension": 2.877463703234623
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "n_cells": 1000,
+      "cell_size": 0.9917797818383967,
+      "dimension": 2.8434555177544056
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "n_cells": 2000,
+      "cell_size": 0.7708299575130311,
+      "dimension": 2.7767055314491547
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "dataset": "kuzushiji49",
+  "n": 100000,
+  "queries": 2000,
+  "rows": [
+    {
+      "seed": 0,
+      "method": "level1_300_within",
+      "recall": 0.4473000168800354,
+      "knn_accuracy": 0.8010000586509705,
+      "recall_wide": 0.39362001419067383,
+      "global_rank": 0.28085875451518866
+    },
+    {
+      "seed": 0,
+      "method": "hierarchy",
+      "recall": 0.11490000784397125,
+      "knn_accuracy": 0.70250004529953,
+      "recall_wide": 0.20821501314640045,
+      "global_rank": 0.37616363651765916
+    },
+    {
+      "seed": 0,
+      "method": "hierarchy_within_per_cell",
+      "recall": 0.3639000356197357,
+      "knn_accuracy": 0.7895000576972961,
+      "recall_wide": 0.26908499002456665,
+      "global_rank": 0.3374192711940678
+    },
+    {
+      "seed": 0,
+      "method": "hierarchy_within_dimension",
+      "recall": 0.3795500099658966,
+      "knn_accuracy": 0.7885000109672546,
+      "recall_wide": 0.2688699960708618,
+      "global_rank": 0.33710267763866947
+    },
+    {
+      "seed": 0,
+      "method": "hierarchy_within_root",
+      "recall": 0.4474000334739685,
+      "knn_accuracy": 0.8010000586509705,
+      "recall_wide": 0.3937250077724457,
+      "global_rank": 0.39109397084599273
+    },
+    {
+      "seed": 1,
+      "method": "level1_300_within",
+      "recall": 0.45170003175735474,
+      "knn_accuracy": 0.7985000610351562,
+      "recall_wide": 0.3877750039100647,
+      "global_rank": 0.48016333269558326
+    },
+    {
+      "seed": 1,
+      "method": "hierarchy",
+      "recall": 0.14205001294612885,
+      "knn_accuracy": 0.7115000486373901,
+      "recall_wide": 0.21496500074863434,
+      "global_rank": 0.3164518047104512
+    },
+    {
+      "seed": 1,
+      "method": "hierarchy_within_per_cell",
+      "recall": 0.3615000247955322,
+      "knn_accuracy": 0.7740000486373901,
+      "recall_wide": 0.2531350255012512,
+      "global_rank": 0.28564797941099485
+    },
+    {
+      "seed": 1,
+      "method": "hierarchy_within_dimension",
+      "recall": 0.36785000562667847,
+      "knn_accuracy": 0.7735000252723694,
+      "recall_wide": 0.25201499462127686,
+      "global_rank": 0.2857146383341596
+    },
+    {
+      "seed": 1,
+      "method": "hierarchy_within_root",
+      "recall": 0.4517500102519989,
+      "knn_accuracy": 0.7985000610351562,
+      "recall_wide": 0.3875100016593933,
+      "global_rank": 0.3365711949985487
+    },
+    {
+      "seed": 2,
+      "method": "level1_300_within",
+      "recall": 0.45000001788139343,
+      "knn_accuracy": 0.8025000095367432,
+      "recall_wide": 0.3927299976348877,
+      "global_rank": 0.581415855837214
+    },
+    {
+      "seed": 2,
+      "method": "hierarchy",
+      "recall": 0.13500000536441803,
+      "knn_accuracy": 0.7250000238418579,
+      "recall_wide": 0.21638500690460205,
+      "global_rank": 0.3369158261289565
+    },
+    {
+      "seed": 2,
+      "method": "hierarchy_within_per_cell",
+      "recall": 0.3589000403881073,
+      "knn_accuracy": 0.7780000567436218,
+      "recall_wide": 0.24521999061107635,
+      "global_rank": 0.3307490538740135
+    },
+    {
+      "seed": 2,
+      "method": "hierarchy_within_dimension",
+      "recall": 0.3657500147819519,
+      "knn_accuracy": 0.7730000615119934,
+      "recall_wide": 0.24413001537322998,
+      "global_rank": 0.3302630963000241
+    },
+    {
+      "seed": 2,
+      "method": "hierarchy_within_root",
+      "recall": 0.4501500427722931,
+      "knn_accuracy": 0.8025000095367432,
+      "recall_wide": 0.39243000745773315,
+      "global_rank": 0.35874910327877585
+    }
+  ]
+}

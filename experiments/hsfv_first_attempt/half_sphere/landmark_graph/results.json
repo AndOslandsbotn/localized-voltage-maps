@@ -1,0 +1,1516 @@
+{
+  "dataset": "half_sphere",
+  "rows": [
+    {
+      "seed": 0,
+      "method": "coarse_level1",
+      "group": "all",
+      "rank": 0.8221496447343968,
+      "relative_error": 0.19591452139765506
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1",
+      "group": "within",
+      "rank": 0.7658898227281739,
+      "relative_error": 0.37760001367700524
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1",
+      "group": "across",
+      "rank": 0.7870449616572933,
+      "relative_error": 0.181036305458044
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1",
+      "group": "short",
+      "rank": 0.4726401632362123,
+      "relative_error": 0.4797121606832071
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1",
+      "group": "middle",
+      "rank": 0.4278711682617524,
+      "relative_error": 0.12864235835272322
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1",
+      "group": "long",
+      "rank": 0.43974330425421515,
+      "relative_error": 0.18894255623233014
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2",
+      "group": "all",
+      "rank": 0.9043484164643798,
+      "relative_error": 0.18532036425494455
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2",
+      "group": "within",
+      "rank": 0.956848294703964,
+      "relative_error": 0.2223347304621828
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2",
+      "group": "across",
+      "rank": 0.8662126137652731,
+      "relative_error": 0.1777412410469462
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2",
+      "group": "short",
+      "rank": 0.7017420336938123,
+      "relative_error": 0.3334664059142795
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2",
+      "group": "middle",
+      "rank": 0.5392502011055808,
+      "relative_error": 0.09408174708462923
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2",
+      "group": "long",
+      "rank": 0.6011666841242024,
+      "relative_error": 0.20238830565135635
+    },
+    {
+      "seed": 0,
+      "method": "graph_route",
+      "group": "all",
+      "rank": 0.8989116503978336,
+      "relative_error": 0.145721078870819
+    },
+    {
+      "seed": 0,
+      "method": "graph_route",
+      "group": "within",
+      "rank": 0.8356279554658164,
+      "relative_error": 0.21833649134846236
+    },
+    {
+      "seed": 0,
+      "method": "graph_route",
+      "group": "across",
+      "rank": 0.8713361301871652,
+      "relative_error": 0.13293429308361193
+    },
+    {
+      "seed": 0,
+      "method": "graph_route",
+      "group": "short",
+      "rank": 0.6325531614561114,
+      "relative_error": 0.2798971840482244
+    },
+    {
+      "seed": 0,
+      "method": "graph_route",
+      "group": "middle",
+      "rank": 0.5032761279243183,
+      "relative_error": 0.12097396710931324
+    },
+    {
+      "seed": 0,
+      "method": "graph_route",
+      "group": "long",
+      "rank": 0.6955389378142683,
+      "relative_error": 0.10978682672077553
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame",
+      "group": "all",
+      "rank": 0.9043793985885175,
+      "relative_error": 0.1492289164869727
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame",
+      "group": "within",
+      "rank": 0.8743005853568434,
+      "relative_error": 0.20813589570759097
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame",
+      "group": "across",
+      "rank": 0.8712723230030455,
+      "relative_error": 0.13798902131394752
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame",
+      "group": "short",
+      "rank": 0.6536367442904265,
+      "relative_error": 0.30183809440253506
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame",
+      "group": "middle",
+      "rank": 0.5206533409930725,
+      "relative_error": 0.13112848207602906
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame",
+      "group": "long",
+      "rank": 0.6992813426631952,
+      "relative_error": 0.10187453633762766
+    },
+    {
+      "seed": 0,
+      "method": "graph_route_level2",
+      "group": "all",
+      "rank": 0.9126156523938286,
+      "relative_error": 0.11912727986732699
+    },
+    {
+      "seed": 0,
+      "method": "graph_route_level2",
+      "group": "within",
+      "rank": 0.9663385991725526,
+      "relative_error": 0.11587802852691129
+    },
+    {
+      "seed": 0,
+      "method": "graph_route_level2",
+      "group": "across",
+      "rank": 0.8732481285581167,
+      "relative_error": 0.12007420493190306
+    },
+    {
+      "seed": 0,
+      "method": "graph_route_level2",
+      "group": "short",
+      "rank": 0.7848609685464875,
+      "relative_error": 0.1561383978037818
+    },
+    {
+      "seed": 0,
+      "method": "graph_route_level2",
+      "group": "middle",
+      "rank": 0.5329604115428502,
+      "relative_error": 0.12395759372010712
+    },
+    {
+      "seed": 0,
+      "method": "graph_route_level2",
+      "group": "long",
+      "rank": 0.6970474917236745,
+      "relative_error": 0.09574567338988312
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2",
+      "group": "all",
+      "rank": 0.9224013097967277,
+      "relative_error": 0.12528164865392075
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2",
+      "group": "within",
+      "rank": 0.9663385991725526,
+      "relative_error": 0.14293130235069412
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2",
+      "group": "across",
+      "rank": 0.8896329610992076,
+      "relative_error": 0.12104285288941243
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2",
+      "group": "short",
+      "rank": 0.786340439985663,
+      "relative_error": 0.18900666766915336
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2",
+      "group": "middle",
+      "rank": 0.5570188848913833,
+      "relative_error": 0.10491226148524296
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2",
+      "group": "long",
+      "rank": 0.7335311778451611,
+      "relative_error": 0.10702166327505418
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_calibrated",
+      "group": "all",
+      "rank": 0.8828358987026366,
+      "relative_error": 0.16090557630783892
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_calibrated",
+      "group": "within",
+      "rank": 0.8687041694184268,
+      "relative_error": 0.2108508774411658
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_calibrated",
+      "group": "across",
+      "rank": 0.8351369629419273,
+      "relative_error": 0.15140188254754833
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_calibrated",
+      "group": "short",
+      "rank": 0.654701442231525,
+      "relative_error": 0.31744835226689394
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_calibrated",
+      "group": "middle",
+      "rank": 0.4737344804577291,
+      "relative_error": 0.13165711057672713
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_calibrated",
+      "group": "long",
+      "rank": 0.6455476457462976,
+      "relative_error": 0.1287476490579482
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2_calibrated",
+      "group": "all",
+      "rank": 0.8425508812280814,
+      "relative_error": 0.16816881707949913
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2_calibrated",
+      "group": "within",
+      "rank": 0.9201974316035918,
+      "relative_error": 0.1483237448577529
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2_calibrated",
+      "group": "across",
+      "rank": 0.7558731440133489,
+      "relative_error": 0.17426585252900628
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2_calibrated",
+      "group": "short",
+      "rank": 0.7444077201818909,
+      "relative_error": 0.21006979463442604
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2_calibrated",
+      "group": "middle",
+      "rank": 0.4108074461205208,
+      "relative_error": 0.1842221068745061
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2_calibrated",
+      "group": "long",
+      "rank": 0.5223402914532005,
+      "relative_error": 0.13004595340425518
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_lengths",
+      "group": "all",
+      "rank": 0.9343370352837234,
+      "relative_error": 0.1253097307283711
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_lengths",
+      "group": "within",
+      "rank": 0.8921856249738905,
+      "relative_error": 0.19163530992419678
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_lengths",
+      "group": "across",
+      "rank": 0.9157328810303548,
+      "relative_error": 0.11380241561155843
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_lengths",
+      "group": "short",
+      "rank": 0.7056076182128074,
+      "relative_error": 0.25590950317984196
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_lengths",
+      "group": "middle",
+      "rank": 0.6045306320706931,
+      "relative_error": 0.10885156175534091
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_lengths",
+      "group": "long",
+      "rank": 0.7996921466777696,
+      "relative_error": 0.08953155424694126
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2_lengths",
+      "group": "all",
+      "rank": 0.9186984264419104,
+      "relative_error": 0.13465759434838181
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2_lengths",
+      "group": "within",
+      "rank": 0.9010421846417579,
+      "relative_error": 0.13536571000037828
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2_lengths",
+      "group": "across",
+      "rank": 0.9025068570705691,
+      "relative_error": 0.13449120132478015
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2_lengths",
+      "group": "short",
+      "rank": 0.7852481149585211,
+      "relative_error": 0.16389620439693445
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2_lengths",
+      "group": "middle",
+      "rank": 0.6203343647444065,
+      "relative_error": 0.07456716474667305
+    },
+    {
+      "seed": 0,
+      "method": "graph_frame_level2_lengths",
+      "group": "long",
+      "rank": 0.5992781447295706,
+      "relative_error": 0.18528579102873594
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1",
+      "group": "all",
+      "rank": 0.9523926914357421,
+      "relative_error": 0.10032523252808187
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1",
+      "group": "within",
+      "rank": 0.9441436845467923,
+      "relative_error": 0.15409331467331
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1",
+      "group": "across",
+      "rank": 0.9317261478349907,
+      "relative_error": 0.09031944819061083
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1",
+      "group": "short",
+      "rank": 0.8716207228693231,
+      "relative_error": 0.15475879799574005
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1",
+      "group": "middle",
+      "rank": 0.6875067388932405,
+      "relative_error": 0.07137453137384085
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1",
+      "group": "long",
+      "rank": 0.7684691918901294,
+      "relative_error": 0.09849000943992378
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1",
+      "group": "all",
+      "rank": 0.9181892948292197,
+      "relative_error": 0.14382879889450825
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1",
+      "group": "within",
+      "rank": 0.8672879878073525,
+      "relative_error": 0.2121268937629157
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1",
+      "group": "across",
+      "rank": 0.9080783252997122,
+      "relative_error": 0.1319258923614862
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1",
+      "group": "short",
+      "rank": 0.6477108703708184,
+      "relative_error": 0.28094120159421937
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1",
+      "group": "middle",
+      "rank": 0.5778875349487153,
+      "relative_error": 0.10641413424042805
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1",
+      "group": "long",
+      "rank": 0.690205987799838,
+      "relative_error": 0.12428822667677558
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2",
+      "group": "all",
+      "rank": 0.9155172484774083,
+      "relative_error": 0.14579127241298093
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2",
+      "group": "within",
+      "rank": 0.963671119810329,
+      "relative_error": 0.12226706205851065
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2",
+      "group": "across",
+      "rank": 0.8920966782531722,
+      "relative_error": 0.1522410436920621
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2",
+      "group": "short",
+      "rank": 0.6560322511811122,
+      "relative_error": 0.2589945205590338
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2",
+      "group": "middle",
+      "rank": 0.5531517770588125,
+      "relative_error": 0.10938370727806757
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2",
+      "group": "long",
+      "rank": 0.7066317704310234,
+      "relative_error": 0.12870720809478856
+    },
+    {
+      "seed": 1,
+      "method": "graph_route",
+      "group": "all",
+      "rank": 0.9389350787666231,
+      "relative_error": 0.12095997282715092
+    },
+    {
+      "seed": 1,
+      "method": "graph_route",
+      "group": "within",
+      "rank": 0.880608983088446,
+      "relative_error": 0.17577542188479484
+    },
+    {
+      "seed": 1,
+      "method": "graph_route",
+      "group": "across",
+      "rank": 0.9347463697878308,
+      "relative_error": 0.11124629902050848
+    },
+    {
+      "seed": 1,
+      "method": "graph_route",
+      "group": "short",
+      "rank": 0.7062129977902516,
+      "relative_error": 0.2387352845415622
+    },
+    {
+      "seed": 1,
+      "method": "graph_route",
+      "group": "middle",
+      "rank": 0.6092079031121682,
+      "relative_error": 0.10205687714774773
+    },
+    {
+      "seed": 1,
+      "method": "graph_route",
+      "group": "long",
+      "rank": 0.8050268700619058,
+      "relative_error": 0.09217080612840917
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame",
+      "group": "all",
+      "rank": 0.9493041320841591,
+      "relative_error": 0.12029637866727347
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame",
+      "group": "within",
+      "rank": 0.9394703225653133,
+      "relative_error": 0.14406962825814507
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame",
+      "group": "across",
+      "rank": 0.9400695182907604,
+      "relative_error": 0.11539051574366398
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame",
+      "group": "short",
+      "rank": 0.7596875600349208,
+      "relative_error": 0.25585698828856224
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame",
+      "group": "middle",
+      "rank": 0.6339894375945034,
+      "relative_error": 0.09419307488000431
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame",
+      "group": "long",
+      "rank": 0.8283618480148669,
+      "relative_error": 0.09197360998795778
+    },
+    {
+      "seed": 1,
+      "method": "graph_route_level2",
+      "group": "all",
+      "rank": 0.9539047270776575,
+      "relative_error": 0.09482762124285357
+    },
+    {
+      "seed": 1,
+      "method": "graph_route_level2",
+      "group": "within",
+      "rank": 0.9722902401732793,
+      "relative_error": 0.09959739911492352
+    },
+    {
+      "seed": 1,
+      "method": "graph_route_level2",
+      "group": "across",
+      "rank": 0.9397036965585249,
+      "relative_error": 0.09358204470036115
+    },
+    {
+      "seed": 1,
+      "method": "graph_route_level2",
+      "group": "short",
+      "rank": 0.8418252388639423,
+      "relative_error": 0.12909605266421936
+    },
+    {
+      "seed": 1,
+      "method": "graph_route_level2",
+      "group": "middle",
+      "rank": 0.6605909074091562,
+      "relative_error": 0.09113328219844857
+    },
+    {
+      "seed": 1,
+      "method": "graph_route_level2",
+      "group": "long",
+      "rank": 0.8056489567297078,
+      "relative_error": 0.07747771714362059
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2",
+      "group": "all",
+      "rank": 0.9581110095938208,
+      "relative_error": 0.10399415781928595
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2",
+      "group": "within",
+      "rank": 0.9722902401732793,
+      "relative_error": 0.11008077529133081
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2",
+      "group": "across",
+      "rank": 0.9435884760038228,
+      "relative_error": 0.10252590989517998
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2",
+      "group": "short",
+      "rank": 0.8597560934073877,
+      "relative_error": 0.15321179284488565
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2",
+      "group": "middle",
+      "rank": 0.6737099457001843,
+      "relative_error": 0.08668577239207775
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2",
+      "group": "long",
+      "rank": 0.8322868893350588,
+      "relative_error": 0.09374278201439395
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_calibrated",
+      "group": "all",
+      "rank": 0.9361719370576354,
+      "relative_error": 0.12378233746317778
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_calibrated",
+      "group": "within",
+      "rank": 0.919474958125141,
+      "relative_error": 0.17124095865904432
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_calibrated",
+      "group": "across",
+      "rank": 0.9270049833640046,
+      "relative_error": 0.11333924137605453
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_calibrated",
+      "group": "short",
+      "rank": 0.7264117443952028,
+      "relative_error": 0.2718591824821661
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_calibrated",
+      "group": "middle",
+      "rank": 0.5810817059712287,
+      "relative_error": 0.1014017025384884
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_calibrated",
+      "group": "long",
+      "rank": 0.8051828753687518,
+      "relative_error": 0.08814457891424052
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2_calibrated",
+      "group": "all",
+      "rank": 0.9454002149059413,
+      "relative_error": 0.11191876270497664
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2_calibrated",
+      "group": "within",
+      "rank": 0.9595591217591084,
+      "relative_error": 0.12702594833592426
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2_calibrated",
+      "group": "across",
+      "rank": 0.9297240093067995,
+      "relative_error": 0.10825576194784009
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2_calibrated",
+      "group": "short",
+      "rank": 0.8380486909612047,
+      "relative_error": 0.17632991693103928
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2_calibrated",
+      "group": "middle",
+      "rank": 0.6006575965970615,
+      "relative_error": 0.098194539599666
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2_calibrated",
+      "group": "long",
+      "rank": 0.802646428454241,
+      "relative_error": 0.09341319205143125
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_lengths",
+      "group": "all",
+      "rank": 0.9621883661725746,
+      "relative_error": 0.10464685421788956
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_lengths",
+      "group": "within",
+      "rank": 0.9491902590882478,
+      "relative_error": 0.13463706329534594
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_lengths",
+      "group": "across",
+      "rank": 0.9566568808645317,
+      "relative_error": 0.09859067539358499
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_lengths",
+      "group": "short",
+      "rank": 0.7973919466764778,
+      "relative_error": 0.226241092197202
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_lengths",
+      "group": "middle",
+      "rank": 0.6989846183617056,
+      "relative_error": 0.0835360463419692
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_lengths",
+      "group": "long",
+      "rank": 0.8592505913729647,
+      "relative_error": 0.0792505886537321
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2_lengths",
+      "group": "all",
+      "rank": 0.8625922547479945,
+      "relative_error": 0.1604467457975597
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2_lengths",
+      "group": "within",
+      "rank": 0.8983901798429893,
+      "relative_error": 0.21520563734837939
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2_lengths",
+      "group": "across",
+      "rank": 0.8703693698689686,
+      "relative_error": 0.15459126513009888
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2_lengths",
+      "group": "short",
+      "rank": 0.8022309183597713,
+      "relative_error": 0.21374065109818632
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2_lengths",
+      "group": "middle",
+      "rank": 0.42585161952462264,
+      "relative_error": 0.10495737458460991
+    },
+    {
+      "seed": 1,
+      "method": "graph_frame_level2_lengths",
+      "group": "long",
+      "rank": 0.6847181628522006,
+      "relative_error": 0.17725075558311335
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1",
+      "group": "all",
+      "rank": 0.9840051468820473,
+      "relative_error": 0.09462224495322609
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1",
+      "group": "within",
+      "rank": 0.9683720469734962,
+      "relative_error": 0.1286905225533771
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1",
+      "group": "across",
+      "rank": 0.9820925278515358,
+      "relative_error": 0.08779892092043691
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1",
+      "group": "short",
+      "rank": 0.9130840021792673,
+      "relative_error": 0.16196578348245871
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1",
+      "group": "middle",
+      "rank": 0.8401307558557904,
+      "relative_error": 0.059926635679705145
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1",
+      "group": "long",
+      "rank": 0.9222492676949066,
+      "relative_error": 0.09591327509504172
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1",
+      "group": "all",
+      "rank": 0.9038357943157141,
+      "relative_error": 0.15716873127586586
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1",
+      "group": "within",
+      "rank": 0.8179987929789192,
+      "relative_error": 0.24116454929196324
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1",
+      "group": "across",
+      "rank": 0.8816921035807906,
+      "relative_error": 0.14590646189196094
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1",
+      "group": "short",
+      "rank": 0.5947575604290009,
+      "relative_error": 0.3171157646272721
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1",
+      "group": "middle",
+      "rank": 0.5493269434478909,
+      "relative_error": 0.12030780838172073
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1",
+      "group": "long",
+      "rank": 0.5972868740550655,
+      "relative_error": 0.13329229656868985
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2",
+      "group": "all",
+      "rank": 0.9088037220715883,
+      "relative_error": 0.15611728674737388
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2",
+      "group": "within",
+      "rank": 0.9404150271896141,
+      "relative_error": 0.17032055990214587
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2",
+      "group": "across",
+      "rank": 0.877559783460792,
+      "relative_error": 0.153346541165168
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2",
+      "group": "short",
+      "rank": 0.6866997807075789,
+      "relative_error": 0.2711962388653845
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2",
+      "group": "middle",
+      "rank": 0.5176036152162397,
+      "relative_error": 0.11172185759975041
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2",
+      "group": "long",
+      "rank": 0.6345134180433902,
+      "relative_error": 0.1483072957852622
+    },
+    {
+      "seed": 2,
+      "method": "graph_route",
+      "group": "all",
+      "rank": 0.9134188699097698,
+      "relative_error": 0.12742877790368157
+    },
+    {
+      "seed": 2,
+      "method": "graph_route",
+      "group": "within",
+      "rank": 0.86773926256993,
+      "relative_error": 0.1803598992504128
+    },
+    {
+      "seed": 2,
+      "method": "graph_route",
+      "group": "across",
+      "rank": 0.8837153229489627,
+      "relative_error": 0.11933909344908376
+    },
+    {
+      "seed": 2,
+      "method": "graph_route",
+      "group": "short",
+      "rank": 0.6931333318094162,
+      "relative_error": 0.24265079216785115
+    },
+    {
+      "seed": 2,
+      "method": "graph_route",
+      "group": "middle",
+      "rank": 0.5642305571135818,
+      "relative_error": 0.10037241340234043
+    },
+    {
+      "seed": 2,
+      "method": "graph_route",
+      "group": "long",
+      "rank": 0.7160565633267502,
+      "relative_error": 0.10719392604126618
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame",
+      "group": "all",
+      "rank": 0.9287512465792043,
+      "relative_error": 0.1280584562624487
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame",
+      "group": "within",
+      "rank": 0.920701333823719,
+      "relative_error": 0.15590425996180296
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame",
+      "group": "across",
+      "rank": 0.9060559908674667,
+      "relative_error": 0.12283733335997962
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame",
+      "group": "short",
+      "rank": 0.7331397040319717,
+      "relative_error": 0.24986522626989124
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame",
+      "group": "middle",
+      "rank": 0.6098925566645474,
+      "relative_error": 0.09049621235995332
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame",
+      "group": "long",
+      "rank": 0.763252395659987,
+      "relative_error": 0.1150915462384898
+    },
+    {
+      "seed": 2,
+      "method": "graph_route_level2",
+      "group": "all",
+      "rank": 0.9140247227753603,
+      "relative_error": 0.10896026774089344
+    },
+    {
+      "seed": 2,
+      "method": "graph_route_level2",
+      "group": "within",
+      "rank": 0.9685732045281982,
+      "relative_error": 0.10200194647693273
+    },
+    {
+      "seed": 2,
+      "method": "graph_route_level2",
+      "group": "across",
+      "rank": 0.8761749370513383,
+      "relative_error": 0.11088350343847345
+    },
+    {
+      "seed": 2,
+      "method": "graph_route_level2",
+      "group": "short",
+      "rank": 0.7959260133918681,
+      "relative_error": 0.13309499091389076
+    },
+    {
+      "seed": 2,
+      "method": "graph_route_level2",
+      "group": "middle",
+      "rank": 0.5541790878716746,
+      "relative_error": 0.12118421933500681
+    },
+    {
+      "seed": 2,
+      "method": "graph_route_level2",
+      "group": "long",
+      "rank": 0.7115700752757721,
+      "relative_error": 0.08202045698897165
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2",
+      "group": "all",
+      "rank": 0.9260914290064467,
+      "relative_error": 0.1132763669500986
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2",
+      "group": "within",
+      "rank": 0.9685732045281982,
+      "relative_error": 0.10525941072924502
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2",
+      "group": "across",
+      "rank": 0.8952375728779387,
+      "relative_error": 0.1151861178622603
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2",
+      "group": "short",
+      "rank": 0.7934242417863073,
+      "relative_error": 0.15541757891525326
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2",
+      "group": "middle",
+      "rank": 0.5900056515580523,
+      "relative_error": 0.09739244690519042
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2",
+      "group": "long",
+      "rank": 0.753377546609905,
+      "relative_error": 0.10329540141509087
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_calibrated",
+      "group": "all",
+      "rank": 0.9054205908123552,
+      "relative_error": 0.14363823291307262
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_calibrated",
+      "group": "within",
+      "rank": 0.8973833183460331,
+      "relative_error": 0.1715277338561354
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_calibrated",
+      "group": "across",
+      "rank": 0.8706361478088069,
+      "relative_error": 0.13875052680955868
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_calibrated",
+      "group": "short",
+      "rank": 0.7119256689657337,
+      "relative_error": 0.2690043184423339
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_calibrated",
+      "group": "middle",
+      "rank": 0.5218815320942275,
+      "relative_error": 0.11017859753346797
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_calibrated",
+      "group": "long",
+      "rank": 0.708402262395711,
+      "relative_error": 0.12158524861689589
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2_calibrated",
+      "group": "all",
+      "rank": 0.9138638754048269,
+      "relative_error": 0.12532342393686585
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2_calibrated",
+      "group": "within",
+      "rank": 0.961087644063071,
+      "relative_error": 0.13136327535324582
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2_calibrated",
+      "group": "across",
+      "rank": 0.8739628240256688,
+      "relative_error": 0.1240059609190522
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2_calibrated",
+      "group": "short",
+      "rank": 0.7943326540791966,
+      "relative_error": 0.18034097101832547
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2_calibrated",
+      "group": "middle",
+      "rank": 0.5781325208372706,
+      "relative_error": 0.09189186478609238
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2_calibrated",
+      "group": "long",
+      "rank": 0.70120265767276,
+      "relative_error": 0.12061302207007649
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_lengths",
+      "group": "all",
+      "rank": 0.9520316099787416,
+      "relative_error": 0.1149043312570109
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_lengths",
+      "group": "within",
+      "rank": 0.9251308393939052,
+      "relative_error": 0.1551414936397803
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_lengths",
+      "group": "across",
+      "rank": 0.9417417357226134,
+      "relative_error": 0.10844105801576667
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_lengths",
+      "group": "short",
+      "rank": 0.7688721164115682,
+      "relative_error": 0.2295907851224138
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_lengths",
+      "group": "middle",
+      "rank": 0.6638293260171658,
+      "relative_error": 0.0839808968199697
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_lengths",
+      "group": "long",
+      "rank": 0.8584049699688856,
+      "relative_error": 0.09798714404779937
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2_lengths",
+      "group": "all",
+      "rank": 0.8811055835187632,
+      "relative_error": 0.13526015670088698
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2_lengths",
+      "group": "within",
+      "rank": 0.8273965186906922,
+      "relative_error": 0.13930829125881267
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2_lengths",
+      "group": "across",
+      "rank": 0.8585018742355257,
+      "relative_error": 0.1346642278824982
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2_lengths",
+      "group": "short",
+      "rank": 0.7031127804800896,
+      "relative_error": 0.2080040918739944
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2_lengths",
+      "group": "middle",
+      "rank": 0.5763906674162205,
+      "relative_error": 0.07741534377916047
+    },
+    {
+      "seed": 2,
+      "method": "graph_frame_level2_lengths",
+      "group": "long",
+      "rank": 0.7548155211593359,
+      "relative_error": 0.15541822849903503
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1",
+      "group": "all",
+      "rank": 0.9814553491053241,
+      "relative_error": 0.08375733445827127
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1",
+      "group": "within",
+      "rank": 0.9669077347718301,
+      "relative_error": 0.1341273880194373
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1",
+      "group": "across",
+      "rank": 0.9756261105678204,
+      "relative_error": 0.07661761228872858
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1",
+      "group": "short",
+      "rank": 0.9175443795219717,
+      "relative_error": 0.14005844984657972
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1",
+      "group": "middle",
+      "rank": 0.8297169770131767,
+      "relative_error": 0.05885914137339898
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1",
+      "group": "long",
+      "rank": 0.8796087007169745,
+      "relative_error": 0.07986583630345367
+    }
+  ],
+  "checks": [
+    {
+      "seed": 0,
+      "what": "overlap_disagreement_lengths",
+      "median": 0.32261640517823126,
+      "max": 0.6021492636057743
+    },
+    {
+      "seed": 0,
+      "what": "overlap_disagreement_root_scales",
+      "median": 0.5562510306872419,
+      "max": 1.1806978355527242
+    },
+    {
+      "seed": 0,
+      "what": "overlap_disagreement_graph_scales",
+      "median": 0.34625779412733176,
+      "max": 0.5319206101074708
+    },
+    {
+      "seed": 0,
+      "what": "bridge_edges",
+      "pairs": 768,
+      "rank": 0.8138181920677898,
+      "relative_error": 0.1475603905268172,
+      "overestimate": 1.000000023515364
+    },
+    {
+      "seed": 0,
+      "what": "shortest_paths",
+      "pairs": 1792,
+      "rank": 0.848286407704472,
+      "relative_error": 0.1497281451976131,
+      "overestimate": 1.0000000119558106
+    },
+    {
+      "seed": 0,
+      "what": "bridges",
+      "region_pairs": 28,
+      "without_bridge": 16,
+      "median_shared_points": 0.0
+    },
+    {
+      "seed": 1,
+      "what": "overlap_disagreement_lengths",
+      "median": 0.2836494109601084,
+      "max": 0.745862695263824
+    },
+    {
+      "seed": 1,
+      "what": "overlap_disagreement_root_scales",
+      "median": 0.2875605414619542,
+      "max": 0.6252527091248681
+    },
+    {
+      "seed": 1,
+      "what": "overlap_disagreement_graph_scales",
+      "median": 0.2946581763904134,
+      "max": 0.6049517990337755
+    },
+    {
+      "seed": 1,
+      "what": "bridge_edges",
+      "pairs": 768,
+      "rank": 0.8448841591036632,
+      "relative_error": 0.10522816248613517,
+      "overestimate": 1.0000000012158305
+    },
+    {
+      "seed": 1,
+      "what": "shortest_paths",
+      "pairs": 1792,
+      "rank": 0.9550520622093015,
+      "relative_error": 0.09743329396366421,
+      "overestimate": 1.0000000048850137
+    },
+    {
+      "seed": 1,
+      "what": "bridges",
+      "region_pairs": 28,
+      "without_bridge": 16,
+      "median_shared_points": 0.0
+    },
+    {
+      "seed": 2,
+      "what": "overlap_disagreement_lengths",
+      "median": 0.31079179137055357,
+      "max": 0.716070111250486
+    },
+    {
+      "seed": 2,
+      "what": "overlap_disagreement_root_scales",
+      "median": 0.2922363838549249,
+      "max": 0.7028450998844974
+    },
+    {
+      "seed": 2,
+      "what": "overlap_disagreement_graph_scales",
+      "median": 0.23629190513469145,
+      "max": 0.5473359236688417
+    },
+    {
+      "seed": 2,
+      "what": "bridge_edges",
+      "pairs": 640,
+      "rank": 0.8918297682611532,
+      "relative_error": 0.10332223073889416,
+      "overestimate": 1.0000000009416603
+    },
+    {
+      "seed": 2,
+      "what": "shortest_paths",
+      "pairs": 1792,
+      "rank": 0.9172297441013527,
+      "relative_error": 0.10024959866838135,
+      "overestimate": 1.0000000028590958
+    },
+    {
+      "seed": 2,
+      "what": "bridges",
+      "region_pairs": 28,
+      "without_bridge": 18,
+      "median_shared_points": 0.0
+    }
+  ]
+}

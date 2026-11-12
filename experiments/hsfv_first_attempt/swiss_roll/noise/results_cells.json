@@ -1,0 +1,1300 @@
+{
+  "rows": [
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "all",
+      "cell_spacing": 0.8706559062268433,
+      "rank": 0.9891270170153652,
+      "relative_error": 0.06285145525930069
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "short",
+      "cell_spacing": 0.8706559062268433,
+      "rank": 0.8744623790000077,
+      "relative_error": 0.15665817310905705
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "middle",
+      "cell_spacing": 0.8706559062268433,
+      "rank": 0.9243214772234666,
+      "relative_error": 0.05964490490605799
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "long",
+      "cell_spacing": 0.8706559062268433,
+      "rank": 0.9727316510568079,
+      "relative_error": 0.03537339004705658
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "all",
+      "cell_spacing": 2.9873964881266675,
+      "rank": 0.9694813781032281,
+      "relative_error": 0.11395194712287007
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "short",
+      "cell_spacing": 2.9873964881266675,
+      "rank": 0.7456127678827892,
+      "relative_error": 0.25285896542686537
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "middle",
+      "cell_spacing": 2.9873964881266675,
+      "rank": 0.778865510425748,
+      "relative_error": 0.13164369456228853
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "long",
+      "cell_spacing": 2.9873964881266675,
+      "rank": 0.9266922640164301,
+      "relative_error": 0.05705095738057834
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "all",
+      "cell_spacing": 1.6208102756231964,
+      "rank": 0.9891665650622273,
+      "relative_error": 0.06416996896259856
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "short",
+      "cell_spacing": 1.6208102756231964,
+      "rank": 0.868871667697086,
+      "relative_error": 0.16593213326491002
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "middle",
+      "cell_spacing": 1.6208102756231964,
+      "rank": 0.9268853109293296,
+      "relative_error": 0.05957772161954414
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "long",
+      "cell_spacing": 1.6208102756231964,
+      "rank": 0.9699253239653347,
+      "relative_error": 0.03614663954901872
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "all",
+      "cell_spacing": 1.0513148518638613,
+      "rank": 0.9621825069348318,
+      "relative_error": 0.1308074618738963
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "short",
+      "cell_spacing": 1.0513148518638613,
+      "rank": 0.8552996728071529,
+      "relative_error": 0.19125985465117276
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "middle",
+      "cell_spacing": 1.0513148518638613,
+      "rank": 0.7594650414758987,
+      "relative_error": 0.10702759572579477
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "long",
+      "cell_spacing": 1.0513148518638613,
+      "rank": 0.7377734122860278,
+      "relative_error": 0.11575420826697036
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "all",
+      "cell_spacing": 3.5382831672973385,
+      "rank": 0.903753600253529,
+      "relative_error": 0.22601495124592358
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "short",
+      "cell_spacing": 3.5382831672973385,
+      "rank": 0.6813523816190526,
+      "relative_error": 0.3266353335312237
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "middle",
+      "cell_spacing": 3.5382831672973385,
+      "rank": 0.554017300958391,
+      "relative_error": 0.19284867870367137
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "long",
+      "cell_spacing": 3.5382831672973385,
+      "rank": 0.5554453199502338,
+      "relative_error": 0.2008499934103697
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "all",
+      "cell_spacing": 1.950843085547886,
+      "rank": 0.9757229892155541,
+      "relative_error": 0.10339606582937946
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "short",
+      "cell_spacing": 1.950843085547886,
+      "rank": 0.8192267476085415,
+      "relative_error": 0.19595765966641238
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "middle",
+      "cell_spacing": 1.950843085547886,
+      "rank": 0.8334372610845189,
+      "relative_error": 0.09101464225730627
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "long",
+      "cell_spacing": 1.950843085547886,
+      "rank": 0.8795890650582019,
+      "relative_error": 0.06756519905363452
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "all",
+      "cell_spacing": 1.0551419425845663,
+      "rank": 0.9906382177088825,
+      "relative_error": 0.05590141099395682
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "short",
+      "cell_spacing": 1.0551419425845663,
+      "rank": 0.879990944580277,
+      "relative_error": 0.14672712288116774
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "middle",
+      "cell_spacing": 1.0551419425845663,
+      "rank": 0.937910834308524,
+      "relative_error": 0.054790799694696773
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "long",
+      "cell_spacing": 1.0551419425845663,
+      "rank": 0.9792596050305833,
+      "relative_error": 0.03012803095016378
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "all",
+      "cell_spacing": 3.5009709561614097,
+      "rank": 0.9706605743648634,
+      "relative_error": 0.11503464003199348
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "short",
+      "cell_spacing": 3.5009709561614097,
+      "rank": 0.7397124295900006,
+      "relative_error": 0.2580475475315501
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "middle",
+      "cell_spacing": 3.5009709561614097,
+      "rank": 0.803038271045009,
+      "relative_error": 0.11085523776351826
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "long",
+      "cell_spacing": 3.5009709561614097,
+      "rank": 0.9111195974931158,
+      "relative_error": 0.06857363398775501
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "all",
+      "cell_spacing": 1.9342780314580854,
+      "rank": 0.984857899843299,
+      "relative_error": 0.07592386854199701
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "short",
+      "cell_spacing": 1.9342780314580854,
+      "rank": 0.8314002855106456,
+      "relative_error": 0.18990835114492974
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "middle",
+      "cell_spacing": 1.9342780314580854,
+      "rank": 0.8965839264089204,
+      "relative_error": 0.07973456430049264
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "long",
+      "cell_spacing": 1.9342780314580854,
+      "rank": 0.9639702455158683,
+      "relative_error": 0.04164653777253967
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "all",
+      "cell_spacing": 0.983565420999766,
+      "rank": 0.9839765645831059,
+      "relative_error": 0.07030656887283819
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "short",
+      "cell_spacing": 0.983565420999766,
+      "rank": 0.8678372933431855,
+      "relative_error": 0.14577782555904661
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "middle",
+      "cell_spacing": 0.983565420999766,
+      "rank": 0.8728864827801516,
+      "relative_error": 0.07763487307813147
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "long",
+      "cell_spacing": 0.983565420999766,
+      "rank": 0.9600284527126193,
+      "relative_error": 0.03663361048478313
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "all",
+      "cell_spacing": 3.3763413893081395,
+      "rank": 0.9418693535696562,
+      "relative_error": 0.15995637561835524
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "short",
+      "cell_spacing": 3.3763413893081395,
+      "rank": 0.7221229482745155,
+      "relative_error": 0.29531066024933117
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "middle",
+      "cell_spacing": 3.3763413893081395,
+      "rank": 0.5908849427541333,
+      "relative_error": 0.17980237193603288
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "long",
+      "cell_spacing": 3.3763413893081395,
+      "rank": 0.8492519350993182,
+      "relative_error": 0.09127154095470044
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "all",
+      "cell_spacing": 1.7738674129680985,
+      "rank": 0.9870824479250782,
+      "relative_error": 0.06638770075869321
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "short",
+      "cell_spacing": 1.7738674129680985,
+      "rank": 0.8739538161851163,
+      "relative_error": 0.14287668412807647
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "middle",
+      "cell_spacing": 1.7738674129680985,
+      "rank": 0.9054416113658572,
+      "relative_error": 0.06519218953353459
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "long",
+      "cell_spacing": 1.7738674129680985,
+      "rank": 0.9566276678719995,
+      "relative_error": 0.03902870486490608
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "all",
+      "cell_spacing": 1.0205023949587488,
+      "rank": 0.9180516646933553,
+      "relative_error": 0.1780456895480151
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "short",
+      "cell_spacing": 1.0205023949587488,
+      "rank": 0.7824333487985345,
+      "relative_error": 0.27620723727767216
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "middle",
+      "cell_spacing": 1.0205023949587488,
+      "rank": 0.7197324894858821,
+      "relative_error": 0.09625898444519272
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "long",
+      "cell_spacing": 1.0205023949587488,
+      "rank": 0.5244698432788966,
+      "relative_error": 0.22438364731074045
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "all",
+      "cell_spacing": 3.3105367108569856,
+      "rank": 0.7003949458878933,
+      "relative_error": 0.3043248075140076
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "short",
+      "cell_spacing": 3.3105367108569856,
+      "rank": 0.7157815263930472,
+      "relative_error": 0.37156838404410364
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "middle",
+      "cell_spacing": 3.3105367108569856,
+      "rank": 0.2849610056547137,
+      "relative_error": 0.17748119337300447
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "long",
+      "cell_spacing": 3.3105367108569856,
+      "rank": 0.24804110570081706,
+      "relative_error": 0.4370308069157411
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "all",
+      "cell_spacing": 1.7845677337065147,
+      "rank": 0.8260692881576639,
+      "relative_error": 0.21217147410323306
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "short",
+      "cell_spacing": 1.7845677337065147,
+      "rank": 0.7848585513924878,
+      "relative_error": 0.2638877489393511
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "middle",
+      "cell_spacing": 1.7845677337065147,
+      "rank": 0.6082376471889582,
+      "relative_error": 0.12176442863569437
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "long",
+      "cell_spacing": 1.7845677337065147,
+      "rank": 0.28808531039613683,
+      "relative_error": 0.36388183002389396
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "all",
+      "cell_spacing": 1.0898173193729281,
+      "rank": 0.9811681388325785,
+      "relative_error": 0.07075070623099511
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "short",
+      "cell_spacing": 1.0898173193729281,
+      "rank": 0.8672911658220162,
+      "relative_error": 0.1325917202076682
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "middle",
+      "cell_spacing": 1.0898173193729281,
+      "rank": 0.8591072906647591,
+      "relative_error": 0.06644356489751299
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "long",
+      "cell_spacing": 1.0898173193729281,
+      "rank": 0.943602001770127,
+      "relative_error": 0.047806227617238184
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "all",
+      "cell_spacing": 3.6848787652224178,
+      "rank": 0.9659130296257765,
+      "relative_error": 0.11414435082669613
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "short",
+      "cell_spacing": 3.6848787652224178,
+      "rank": 0.719948045012909,
+      "relative_error": 0.24756474863481762
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "middle",
+      "cell_spacing": 3.6848787652224178,
+      "rank": 0.7965419085669916,
+      "relative_error": 0.1058335723019424
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "long",
+      "cell_spacing": 3.6848787652224178,
+      "rank": 0.8828795688392761,
+      "relative_error": 0.07117082022971168
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "all",
+      "cell_spacing": 1.9468355882742086,
+      "rank": 0.98301679374682,
+      "relative_error": 0.06652487269677708
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "short",
+      "cell_spacing": 1.9468355882742086,
+      "rank": 0.8376761942259887,
+      "relative_error": 0.15867607819254212
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "middle",
+      "cell_spacing": 1.9468355882742086,
+      "rank": 0.8769798032150451,
+      "relative_error": 0.07184730812439818
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "long",
+      "cell_spacing": 1.9468355882742086,
+      "rank": 0.9675237978792937,
+      "relative_error": 0.032099384779137215
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "all",
+      "cell_spacing": 1.1233404998618277,
+      "rank": 0.9708886938554662,
+      "relative_error": 0.09508107968554286
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "short",
+      "cell_spacing": 1.1233404998618277,
+      "rank": 0.7903138873433735,
+      "relative_error": 0.1846038076115279
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "middle",
+      "cell_spacing": 1.1233404998618277,
+      "rank": 0.7803861592355613,
+      "relative_error": 0.11067680384112848
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "long",
+      "cell_spacing": 1.1233404998618277,
+      "rank": 0.9377416776986448,
+      "relative_error": 0.051667719914703425
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "all",
+      "cell_spacing": 2.9094907748641554,
+      "rank": 0.915633544345865,
+      "relative_error": 0.19299274143865575
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "short",
+      "cell_spacing": 2.9094907748641554,
+      "rank": 0.6002840807444269,
+      "relative_error": 0.37395616451393965
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "middle",
+      "cell_spacing": 2.9094907748641554,
+      "rank": 0.46793173244866165,
+      "relative_error": 0.26031732318457534
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "long",
+      "cell_spacing": 2.9094907748641554,
+      "rank": 0.8964527628090183,
+      "relative_error": 0.10056245511501417
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "all",
+      "cell_spacing": 1.6346519220890983,
+      "rank": 0.9692580828306884,
+      "relative_error": 0.0999483047672718
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "short",
+      "cell_spacing": 1.6346519220890983,
+      "rank": 0.7861955441972116,
+      "relative_error": 0.19586396271198703
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "middle",
+      "cell_spacing": 1.6346519220890983,
+      "rank": 0.7891306449003754,
+      "relative_error": 0.09869440298369012
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "long",
+      "cell_spacing": 1.6346519220890983,
+      "rank": 0.9117725390788225,
+      "relative_error": 0.06490617876870984
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "all",
+      "cell_spacing": 1.2009534393327965,
+      "rank": 0.9139954855373066,
+      "relative_error": 0.10795763528870825
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "short",
+      "cell_spacing": 1.2009534393327965,
+      "rank": 0.7192612693372694,
+      "relative_error": 0.20749788428229549
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "middle",
+      "cell_spacing": 1.2009534393327965,
+      "rank": 0.6799122154028522,
+      "relative_error": 0.0910171875994972
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "long",
+      "cell_spacing": 1.2009534393327965,
+      "rank": 0.7556888192708101,
+      "relative_error": 0.07506330934771296
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "all",
+      "cell_spacing": 3.312826826754908,
+      "rank": 0.7943742554802427,
+      "relative_error": 0.2297894699310886
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "short",
+      "cell_spacing": 3.312826826754908,
+      "rank": 0.5074583798095473,
+      "relative_error": 0.4007033749911951
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "middle",
+      "cell_spacing": 3.312826826754908,
+      "rank": 0.44713544341821054,
+      "relative_error": 0.23444387950226805
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "long",
+      "cell_spacing": 3.312826826754908,
+      "rank": 0.5760825272459084,
+      "relative_error": 0.17220964976203973
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "all",
+      "cell_spacing": 1.8929125105319267,
+      "rank": 0.9129864410836862,
+      "relative_error": 0.11426969904097202
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "short",
+      "cell_spacing": 1.8929125105319267,
+      "rank": 0.693449814061721,
+      "relative_error": 0.23995295068960254
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "middle",
+      "cell_spacing": 1.8929125105319267,
+      "rank": 0.6800565931318165,
+      "relative_error": 0.10833582306090016
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "long",
+      "cell_spacing": 1.8929125105319267,
+      "rank": 0.7660831354805364,
+      "relative_error": 0.06432935603206064
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "all",
+      "cell_spacing": 1.2280999145438294,
+      "rank": 0.6402541978996985,
+      "relative_error": 0.2826723837229336
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "short",
+      "cell_spacing": 1.2280999145438294,
+      "rank": 0.8065418845865376,
+      "relative_error": 0.3571543887830414
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "middle",
+      "cell_spacing": 1.2280999145438294,
+      "rank": 0.8262951509288775,
+      "relative_error": 0.10377729193463629
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "long",
+      "cell_spacing": 1.2280999145438294,
+      "rank": -0.5656001945682606,
+      "relative_error": 0.52126278997248
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "all",
+      "cell_spacing": 3.493502940803414,
+      "rank": 0.31539353740220155,
+      "relative_error": 0.35131367776410893
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "short",
+      "cell_spacing": 3.493502940803414,
+      "rank": 0.7459211124511376,
+      "relative_error": 0.40378145600468807
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "middle",
+      "cell_spacing": 3.493502940803414,
+      "rank": 0.5056839412090187,
+      "relative_error": 0.15319665063352175
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "long",
+      "cell_spacing": 3.493502940803414,
+      "rank": -0.6206853950989912,
+      "relative_error": 0.6369323741029852
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "all",
+      "cell_spacing": 1.903563083810668,
+      "rank": 0.6958315914805605,
+      "relative_error": 0.27429689503698984
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "short",
+      "cell_spacing": 1.903563083810668,
+      "rank": 0.7898788464456871,
+      "relative_error": 0.34660699783944765
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "middle",
+      "cell_spacing": 1.903563083810668,
+      "rank": 0.7383607619425838,
+      "relative_error": 0.12304577653905294
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "long",
+      "cell_spacing": 1.903563083810668,
+      "rank": -0.38419393950615044,
+      "relative_error": 0.5080946563599078
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "all",
+      "cell_spacing": 1.4303646276298392,
+      "rank": 0.36837962229126636,
+      "relative_error": 0.4176339201929879
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "short",
+      "cell_spacing": 1.4303646276298392,
+      "rank": 0.7198097972932922,
+      "relative_error": 0.4917735230845065
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "middle",
+      "cell_spacing": 1.4303646276298392,
+      "rank": 0.2513762729077418,
+      "relative_error": 0.19719492205249534
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "level2_cells": 300,
+      "group": "long",
+      "cell_spacing": 1.4303646276298392,
+      "rank": -0.2407060878053956,
+      "relative_error": 0.6094823911792935
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "all",
+      "cell_spacing": 3.30684375401792,
+      "rank": 0.17500148360998316,
+      "relative_error": 0.47591899626426826
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "short",
+      "cell_spacing": 3.30684375401792,
+      "rank": 0.6832149517948061,
+      "relative_error": 0.5714916283697765
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "middle",
+      "cell_spacing": 3.30684375401792,
+      "rank": 0.18496391346566213,
+      "relative_error": 0.20013483154747108
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "level2_cells": 30,
+      "group": "long",
+      "cell_spacing": 3.30684375401792,
+      "rank": -0.16638593442920985,
+      "relative_error": 0.6673098706226424
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "all",
+      "cell_spacing": 2.0213803865294135,
+      "rank": 0.347888268764144,
+      "relative_error": 0.38614392505173845
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "short",
+      "cell_spacing": 2.0213803865294135,
+      "rank": 0.7461499257429326,
+      "relative_error": 0.4280663712286782
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "middle",
+      "cell_spacing": 2.0213803865294135,
+      "rank": 0.35472136347477967,
+      "relative_error": 0.16911712743945503
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "level2_cells": 100,
+      "group": "long",
+      "cell_spacing": 2.0213803865294135,
+      "rank": -0.34776196414089355,
+      "relative_error": 0.6415760837894471
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "all",
+      "cell_spacing": 1.5197460463750578,
+      "rank": 0.392627045302071,
+      "relative_error": 0.396736365968562
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "short",
+      "cell_spacing": 1.5197460463750578,
+      "rank": 0.6478428719422569,
+      "relative_error": 0.512529673410993
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "middle",
+      "cell_spacing": 1.5197460463750578,
+      "rank": 0.34505517749026215,
+      "relative_error": 0.1754240871322239
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "level2_cells": 300,
+      "group": "long",
+      "cell_spacing": 1.5197460463750578,
+      "rank": -0.3042496120313275,
+      "relative_error": 0.5464839414496001
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "all",
+      "cell_spacing": 3.4448305494960696,
+      "rank": 0.13971699129710827,
+      "relative_error": 0.4990113129200311
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "short",
+      "cell_spacing": 3.4448305494960696,
+      "rank": 0.5653051381687231,
+      "relative_error": 0.6099405301323928
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "middle",
+      "cell_spacing": 3.4448305494960696,
+      "rank": 0.26239789118123585,
+      "relative_error": 0.23614680504070884
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "level2_cells": 30,
+      "group": "long",
+      "cell_spacing": 3.4448305494960696,
+      "rank": -0.373483543484261,
+      "relative_error": 0.6607439329878528
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "all",
+      "cell_spacing": 2.1560881236090714,
+      "rank": 0.3241633446205763,
+      "relative_error": 0.39638570717489696
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "short",
+      "cell_spacing": 2.1560881236090714,
+      "rank": 0.6263689436114753,
+      "relative_error": 0.5361343441078977
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "middle",
+      "cell_spacing": 2.1560881236090714,
+      "rank": 0.39712813199860914,
+      "relative_error": 0.16491589910468532
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "level2_cells": 100,
+      "group": "long",
+      "cell_spacing": 2.1560881236090714,
+      "rank": -0.4566784376752253,
+      "relative_error": 0.5712296502840256
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "all",
+      "cell_spacing": 1.481433461420345,
+      "rank": 0.41248426774788544,
+      "relative_error": 0.3917182556084069
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "short",
+      "cell_spacing": 1.481433461420345,
+      "rank": 0.7277811073536906,
+      "relative_error": 0.4943866191754831
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "middle",
+      "cell_spacing": 1.481433461420345,
+      "rank": 0.3194489445510461,
+      "relative_error": 0.1641242867762157
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "level2_cells": 300,
+      "group": "long",
+      "cell_spacing": 1.481433461420345,
+      "rank": -0.2361608153421999,
+      "relative_error": 0.5866088932944927
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "all",
+      "cell_spacing": 3.258492068318896,
+      "rank": 0.1970393429099229,
+      "relative_error": 0.5130203694001527
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "short",
+      "cell_spacing": 3.258492068318896,
+      "rank": 0.6488948267908785,
+      "relative_error": 0.7303831139169039
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "middle",
+      "cell_spacing": 3.258492068318896,
+      "rank": 0.07854804826486675,
+      "relative_error": 0.24807552870693583
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "level2_cells": 30,
+      "group": "long",
+      "cell_spacing": 3.258492068318896,
+      "rank": -0.17881530664354237,
+      "relative_error": 0.5985542631253158
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "all",
+      "cell_spacing": 2.086350941767622,
+      "rank": 0.46709091610237674,
+      "relative_error": 0.37117490201382175
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "short",
+      "cell_spacing": 2.086350941767622,
+      "rank": 0.7458715778095321,
+      "relative_error": 0.4781306386648443
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "middle",
+      "cell_spacing": 2.086350941767622,
+      "rank": 0.39852350317278756,
+      "relative_error": 0.15190957178898118
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "level2_cells": 100,
+      "group": "long",
+      "cell_spacing": 2.086350941767622,
+      "rank": -0.30679942458663423,
+      "relative_error": 0.5661793061823662
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "dataset": "mnist8m",
+  "n": 100000,
+  "cap": 256,
+  "rows": [
+    {
+      "seed": 0,
+      "method": "root_cells",
+      "recall": 0.47645002603530884,
+      "knn_accuracy": 0.9275000691413879,
+      "recall_wide": 0.41952502727508545,
+      "global_rank": 0.43634901117650277
+    },
+    {
+      "seed": 0,
+      "method": "leaf_cells_extra0",
+      "recall": 0.3663500249385834,
+      "knn_accuracy": 0.9170000553131104,
+      "recall_wide": 0.24446500837802887,
+      "global_rank": 0.4098266461476615,
+      "streamed_kept": 0
+    },
+    {
+      "seed": 0,
+      "method": "leaf_cells_extra300000",
+      "recall": 0.3621000349521637,
+      "knn_accuracy": 0.9175000190734863,
+      "recall_wide": 0.24473002552986145,
+      "global_rank": 0.40977499754074936,
+      "streamed_kept": 294146
+    },
+    {
+      "seed": 0,
+      "method": "leaf_cells_extra1000000",
+      "recall": 0.36160001158714294,
+      "knn_accuracy": 0.9175000190734863,
+      "recall_wide": 0.24456000328063965,
+      "global_rank": 0.40975559257214816,
+      "streamed_kept": 580350
+    },
+    {
+      "seed": 1,
+      "method": "root_cells",
+      "recall": 0.46640002727508545,
+      "knn_accuracy": 0.9255000352859497,
+      "recall_wide": 0.412740021944046,
+      "global_rank": 0.38365698511399626
+    },
+    {
+      "seed": 1,
+      "method": "leaf_cells_extra0",
+      "recall": 0.3587000370025635,
+      "knn_accuracy": 0.9180000424385071,
+      "recall_wide": 0.24130500853061676,
+      "global_rank": 0.3616505620771405,
+      "streamed_kept": 0
+    },
+    {
+      "seed": 1,
+      "method": "leaf_cells_extra300000",
+      "recall": 0.3539000451564789,
+      "knn_accuracy": 0.9200000166893005,
+      "recall_wide": 0.2411850094795227,
+      "global_rank": 0.36172706115426523,
+      "streamed_kept": 289032
+    },
+    {
+      "seed": 1,
+      "method": "leaf_cells_extra1000000",
+      "recall": 0.3536500334739685,
+      "knn_accuracy": 0.921000063419342,
+      "recall_wide": 0.24145999550819397,
+      "global_rank": 0.3617474363913591,
+      "streamed_kept": 603683
+    },
+    {
+      "seed": 2,
+      "method": "root_cells",
+      "recall": 0.478300005197525,
+      "knn_accuracy": 0.921000063419342,
+      "recall_wide": 0.4183650016784668,
+      "global_rank": 0.4475450534555133
+    },
+    {
+      "seed": 2,
+      "method": "leaf_cells_extra0",
+      "recall": 0.3681500256061554,
+      "knn_accuracy": 0.9050000309944153,
+      "recall_wide": 0.24915499985218048,
+      "global_rank": 0.43170452489663125,
+      "streamed_kept": 0
+    },
+    {
+      "seed": 2,
+      "method": "leaf_cells_extra300000",
+      "recall": 0.36365005373954773,
+      "knn_accuracy": 0.909000039100647,
+      "recall_wide": 0.24931001663208008,
+      "global_rank": 0.4315291926082982,
+      "streamed_kept": 276184
+    },
+    {
+      "seed": 2,
+      "method": "leaf_cells_extra1000000",
+      "recall": 0.3631000220775604,
+      "knn_accuracy": 0.9085000157356262,
+      "recall_wide": 0.24921000003814697,
+      "global_rank": 0.4316481020015256,
+      "streamed_kept": 604766
+    }
+  ]
+}

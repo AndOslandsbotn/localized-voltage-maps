@@ -1,0 +1,151 @@
+{
+  "sigma": 0.0,
+  "n": 12000000,
+  "fit_seconds": 1299.003998212982,
+  "levels": {
+    "1": {
+      "regions": 1,
+      "cells": 300,
+      "points_per_cell_median": 37858.0,
+      "cell_dimension_median": 1.957360899522505,
+      "region_dimension_quartiles": [
+        1.957360899522505,
+        1.957360899522505,
+        1.957360899522505
+      ],
+      "library_dimension_mean": 1.9769513538808345
+    },
+    "2": {
+      "regions": 12,
+      "cells": 3600,
+      "points_per_cell_median": 3223.0,
+      "cell_dimension_median": 1.9408049535637444,
+      "region_dimension_quartiles": [
+        1.9379376465921896,
+        1.9400719998741494,
+        1.9448140796506341
+      ],
+      "library_dimension_mean": 1.978337510276057
+    },
+    "3": {
+      "regions": 144,
+      "cells": 43200,
+      "points_per_cell_median": 248.0,
+      "cell_dimension_median": 1.9349472190190573,
+      "region_dimension_quartiles": [
+        1.9283253402195808,
+        1.934795570899162,
+        1.9391546348611532
+      ],
+      "library_dimension_mean": 1.9775227200267953
+    },
+    "4": {
+      "regions": 1728,
+      "cells": 488237,
+      "points_per_cell_median": 21.0,
+      "cell_dimension_median": 1.8530276852978698,
+      "region_dimension_quartiles": [
+        1.753629509248198,
+        1.8199609850057774,
+        1.8596544570554157
+      ],
+      "library_dimension_mean": 1.9679270871959322
+    }
+  },
+  "rule": {
+    "0.05": {
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0,
+      "4": 1.0
+    },
+    "0.1": {
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0,
+      "4": 1.0
+    },
+    "0.2": {
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0,
+      "4": 1.0
+    }
+  },
+  "scores": {
+    "level-2 centres by level 1": {
+      "within level-2 region": 0.7862550334284487,
+      "whole all": 0.9308784999095282,
+      "whole close": 0.8082123713223213,
+      "whole middle": 0.906492496852092,
+      "whole far": 0.17684963006702292
+    },
+    "level-2 centres by level 2": {
+      "within level-2 region": 0.9650597650909908,
+      "whole all": 0.9187293775949763,
+      "whole close": 0.7807020259868446,
+      "whole middle": 0.8406482990944045,
+      "whole far": 0.17645852791949707
+    },
+    "level-3 centres by level 1": {
+      "within level-2 region": 0.8018523740775697,
+      "within level-3 region": 0.5779375973099067,
+      "whole all": 0.9355409004852382,
+      "whole close": 0.8087790013679084,
+      "whole middle": 0.904538820993651,
+      "whole far": 0.23764946272890716
+    },
+    "level-3 centres by level 2": {
+      "within level-2 region": 0.9653962727098258,
+      "within level-3 region": 0.8403479989030681,
+      "whole all": 0.9190929765225215,
+      "whole close": 0.7753264486116876,
+      "whole middle": 0.8384240557290007,
+      "whole far": 0.2075561274260993
+    },
+    "level-3 centres by level 3": {
+      "within level-2 region": 0.9703810149746052,
+      "within level-3 region": 0.97479973839953,
+      "whole all": 0.9191755807128318,
+      "whole close": 0.7750080431431339,
+      "whole middle": 0.8393847394913404,
+      "whole far": 0.20808252220138562
+    },
+    "level-4 centres by level 1": {
+      "within level-2 region": 0.8017204305484567,
+      "within level-3 region": 0.6020212375627481,
+      "within level-4 region": 0.41602547997030076,
+      "whole all": 0.9306130702957102,
+      "whole close": 0.8036986236910648,
+      "whole middle": 0.9021377134068486,
+      "whole far": 0.21416323076223956
+    },
+    "level-4 centres by level 2": {
+      "within level-2 region": 0.9639260096164808,
+      "within level-3 region": 0.854664175344464,
+      "within level-4 region": 0.5966603431388696,
+      "whole all": 0.9175497993647788,
+      "whole close": 0.7651000936210529,
+      "whole middle": 0.8299431528631289,
+      "whole far": 0.2121871933547639
+    },
+    "level-4 centres by level 3": {
+      "within level-2 region": 0.9693218521437019,
+      "within level-3 region": 0.9746058166733821,
+      "within level-4 region": 0.8425048149720885,
+      "whole all": 0.9175250383781799,
+      "whole close": 0.7655914993240281,
+      "whole middle": 0.8302678724215694,
+      "whole far": 0.21242984144806937
+    },
+    "level-4 centres by level 4": {
+      "within level-2 region": 0.9696390744183445,
+      "within level-3 region": 0.9802190218802197,
+      "within level-4 region": 0.9725785113408869,
+      "whole all": 0.9175477662470689,
+      "whole close": 0.7656046461573696,
+      "whole middle": 0.830325240545835,
+      "whole far": 0.21278928748528106
+    }
+  }
+}

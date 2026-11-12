@@ -1,0 +1,1540 @@
+{
+  "rows": [
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "all",
+      "rank": 0.934336947303305,
+      "relative_error": 0.12530966817893935
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "short",
+      "rank": 0.705607435150162,
+      "relative_error": 0.25591163031815406
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "middle",
+      "rank": 0.604530369114316,
+      "relative_error": 0.10885226542537124
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "long",
+      "rank": 0.7996920911926345,
+      "relative_error": 0.08953060476940701
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "all",
+      "rank": 0.8667223681942863,
+      "relative_error": 0.1819155757731321
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "short",
+      "rank": 0.5458035289124282,
+      "relative_error": 0.46956672272262495
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "middle",
+      "rank": 0.47233058257658495,
+      "relative_error": 0.10320379994391415
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "long",
+      "rank": 0.7170612873187429,
+      "relative_error": 0.18119722077556905
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "all",
+      "rank": 0.9805475042973822,
+      "relative_error": 0.09120553027347397
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "short",
+      "rank": 0.9209068936752444,
+      "relative_error": 0.1421486608954028
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "middle",
+      "rank": 0.8069029616463029,
+      "relative_error": 0.06528336067349423
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "long",
+      "rank": 0.8933259975558752,
+      "relative_error": 0.08931632698447811
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "all",
+      "rank": 0.9999219204043881,
+      "relative_error": 0.004475828537919688
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "short",
+      "rank": 0.9994378030480888,
+      "relative_error": 0.007703407843639824
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "middle",
+      "rank": 0.9989635405620152,
+      "relative_error": 0.004056510023783428
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "long",
+      "rank": 0.999529273395143,
+      "relative_error": 0.003345995833887872
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "all",
+      "rank": 0.9621883046462437,
+      "relative_error": 0.10464689279574191
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "short",
+      "rank": 0.7973916941598694,
+      "relative_error": 0.22624164579960898
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "middle",
+      "rank": 0.6989842451438202,
+      "relative_error": 0.08353539716603492
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "long",
+      "rank": 0.8592505166928275,
+      "relative_error": 0.0792504138042206
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "all",
+      "rank": 0.887336851800053,
+      "relative_error": 0.16646277460739994
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "short",
+      "rank": 0.5724938114389014,
+      "relative_error": 0.4743491241481803
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "middle",
+      "rank": 0.5131456506907351,
+      "relative_error": 0.09441680716979098
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "long",
+      "rank": 0.7753096887524277,
+      "relative_error": 0.1599746711255774
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "all",
+      "rank": 0.9842052867634431,
+      "relative_error": 0.09651698272592782
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "short",
+      "rank": 0.917660637843551,
+      "relative_error": 0.16020035997375215
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "middle",
+      "rank": 0.844111337794371,
+      "relative_error": 0.060745279867613106
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "long",
+      "rank": 0.9185722232595864,
+      "relative_error": 0.09912152164054189
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "all",
+      "rank": 0.9999224878192656,
+      "relative_error": 0.0043781725480295085
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "short",
+      "rank": 0.9994287053664918,
+      "relative_error": 0.007645817987619126
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "middle",
+      "rank": 0.9989782323778597,
+      "relative_error": 0.003959880286176933
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "long",
+      "rank": 0.9995389431748617,
+      "relative_error": 0.0032502395669939807
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "all",
+      "rank": 0.9635792262957733,
+      "relative_error": 0.1024568617654321
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "short",
+      "rank": 0.7973026735677963,
+      "relative_error": 0.19584187183631319
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "middle",
+      "rank": 0.7155751284468481,
+      "relative_error": 0.08393651820983017
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "long",
+      "rank": 0.8775118850425845,
+      "relative_error": 0.08161724475845951
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "all",
+      "rank": 0.7820341156728845,
+      "relative_error": 0.20225825788136464
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "short",
+      "rank": 0.47212618741762546,
+      "relative_error": 0.511244823706416
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "middle",
+      "rank": 0.38837911143025655,
+      "relative_error": 0.12215349353999305
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "long",
+      "rank": 0.5959309921754022,
+      "relative_error": 0.20133666682274867
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "all",
+      "rank": 0.9815595141201294,
+      "relative_error": 0.08365167434293447
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "short",
+      "rank": 0.9176525088270715,
+      "relative_error": 0.14029762921861988
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "middle",
+      "rank": 0.830440426820056,
+      "relative_error": 0.058818033122174165
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "long",
+      "rank": 0.8805136253350394,
+      "relative_error": 0.0796204975295161
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "all",
+      "rank": 0.9999261102132649,
+      "relative_error": 0.004434788205506957
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "short",
+      "rank": 0.9994744809414879,
+      "relative_error": 0.007653181647760705
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "middle",
+      "rank": 0.9990225990724221,
+      "relative_error": 0.00404875947645587
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "long",
+      "rank": 0.9995431774668629,
+      "relative_error": 0.00324880065540335
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "all",
+      "rank": 0.9583391130508387,
+      "relative_error": 0.10667373808578443
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "short",
+      "rank": 0.8050438335632555,
+      "relative_error": 0.22599286914090833
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "middle",
+      "rank": 0.6656802279656869,
+      "relative_error": 0.09055263499713034
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "long",
+      "rank": 0.853455133780538,
+      "relative_error": 0.07636360949244066
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "all",
+      "rank": 0.8565780334910632,
+      "relative_error": 0.17465421784838098
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "short",
+      "rank": 0.5093015958150473,
+      "relative_error": 0.4973647689013927
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "middle",
+      "rank": 0.47065632475717634,
+      "relative_error": 0.1021708185684782
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "long",
+      "rank": 0.7458384744352724,
+      "relative_error": 0.16755671047727483
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "all",
+      "rank": 0.9734527604301046,
+      "relative_error": 0.10388732642423745
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "short",
+      "rank": 0.9031009846367413,
+      "relative_error": 0.16440492289565317
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "middle",
+      "rank": 0.7610399408007414,
+      "relative_error": 0.07559599428385415
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "long",
+      "rank": 0.8430781315924605,
+      "relative_error": 0.09754022608578738
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "all",
+      "rank": 0.9972909506696895,
+      "relative_error": 0.026223030850581447
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "short",
+      "rank": 0.9799985192064724,
+      "relative_error": 0.05355566399904417
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "middle",
+      "rank": 0.9681553489289786,
+      "relative_error": 0.024595105600133445
+    },
+    {
+      "noise": 0.03,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "long",
+      "rank": 0.9860319284813643,
+      "relative_error": 0.016812572265192588
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "all",
+      "rank": 0.952423082544241,
+      "relative_error": 0.11315370119314147
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "short",
+      "rank": 0.758556515301613,
+      "relative_error": 0.23324720974009677
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "middle",
+      "rank": 0.660796267985008,
+      "relative_error": 0.09013820924709234
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "long",
+      "rank": 0.8384192338001552,
+      "relative_error": 0.0871445654394673
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "all",
+      "rank": 0.9269872128527119,
+      "relative_error": 0.1467431274338582
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "short",
+      "rank": 0.6546784927361666,
+      "relative_error": 0.39160652246981187
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "middle",
+      "rank": 0.585796735512174,
+      "relative_error": 0.08381409753356545
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "long",
+      "rank": 0.8403400804623835,
+      "relative_error": 0.14221298046744557
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "all",
+      "rank": 0.9828379514657269,
+      "relative_error": 0.09615635536151024
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "short",
+      "rank": 0.9111301608965222,
+      "relative_error": 0.16157136324017016
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "middle",
+      "rank": 0.8401719850627952,
+      "relative_error": 0.058860697707545845
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "long",
+      "rank": 0.898258955372025,
+      "relative_error": 0.10039358439809681
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "all",
+      "rank": 0.9974094635763725,
+      "relative_error": 0.025454224614824418
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "short",
+      "rank": 0.9804117143782617,
+      "relative_error": 0.0525607186843612
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "middle",
+      "rank": 0.9692799155732517,
+      "relative_error": 0.024012078923765702
+    },
+    {
+      "noise": 0.03,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "long",
+      "rank": 0.9871251945344417,
+      "relative_error": 0.016104250382326595
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "all",
+      "rank": 0.8644006981071283,
+      "relative_error": 0.14560325428018345
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "short",
+      "rank": 0.6858875129047791,
+      "relative_error": 0.2544705050782934
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "middle",
+      "rank": 0.47695434647386803,
+      "relative_error": 0.12717519293524662
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "long",
+      "rank": 0.6546796974119252,
+      "relative_error": 0.11636245305218693
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "all",
+      "rank": 0.8835172315813574,
+      "relative_error": 0.1806239158580337
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "short",
+      "rank": 0.6160055457261316,
+      "relative_error": 0.4199798652496748
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "middle",
+      "rank": 0.49269946262423997,
+      "relative_error": 0.09576163452669509
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "long",
+      "rank": 0.6875727562334859,
+      "relative_error": 0.18586743114721804
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "all",
+      "rank": 0.9805863472935347,
+      "relative_error": 0.08922263820787271
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "short",
+      "rank": 0.905450894219331,
+      "relative_error": 0.15442690660951797
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "middle",
+      "rank": 0.818685269931466,
+      "relative_error": 0.06404184931651624
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "long",
+      "rank": 0.8876457583744662,
+      "relative_error": 0.08227763086319168
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "all",
+      "rank": 0.9971790280242085,
+      "relative_error": 0.026530888696325097
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "short",
+      "rank": 0.9789640758835932,
+      "relative_error": 0.054494763777890136
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "middle",
+      "rank": 0.9666685950411027,
+      "relative_error": 0.025184693594878918
+    },
+    {
+      "noise": 0.03,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "long",
+      "rank": 0.9860425292478868,
+      "relative_error": 0.016847825241392785
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "all",
+      "rank": 0.9517758952445992,
+      "relative_error": 0.11965770619699298
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "short",
+      "rank": 0.7455143179462599,
+      "relative_error": 0.26139401505390003
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "middle",
+      "rank": 0.6636368318773685,
+      "relative_error": 0.0967512376946115
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "long",
+      "rank": 0.8211452961136564,
+      "relative_error": 0.08682902788059024
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "all",
+      "rank": 0.9109572423958995,
+      "relative_error": 0.1668862985265797
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "short",
+      "rank": 0.6280042143444883,
+      "relative_error": 0.4279915868370462
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "middle",
+      "rank": 0.5607229029620718,
+      "relative_error": 0.08596862379473039
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "long",
+      "rank": 0.7679423353252904,
+      "relative_error": 0.1685454761459019
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "all",
+      "rank": 0.961958325694486,
+      "relative_error": 0.1127559605856733
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "short",
+      "rank": 0.8475962226565891,
+      "relative_error": 0.19130147545493012
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "middle",
+      "rank": 0.6932603892024554,
+      "relative_error": 0.091108500856251
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "long",
+      "rank": 0.8150408278787923,
+      "relative_error": 0.09398103954192688
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "all",
+      "rank": 0.9891713496945022,
+      "relative_error": 0.05203210005361594
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "short",
+      "rank": 0.9284563939462888,
+      "relative_error": 0.10724412941314726
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "middle",
+      "rank": 0.8878259168003526,
+      "relative_error": 0.0480811428794288
+    },
+    {
+      "noise": 0.06,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "long",
+      "rank": 0.9503013570940362,
+      "relative_error": 0.03394259147109913
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "all",
+      "rank": 0.9557812082700818,
+      "relative_error": 0.10979095361961137
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "short",
+      "rank": 0.7681002848521811,
+      "relative_error": 0.24446208601099478
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "middle",
+      "rank": 0.6797040476730143,
+      "relative_error": 0.08884597310600117
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "long",
+      "rank": 0.8389004998355621,
+      "relative_error": 0.08015039038132786
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "all",
+      "rank": 0.8084834561132536,
+      "relative_error": 0.18681993572464617
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "short",
+      "rank": 0.47271570800147855,
+      "relative_error": 0.49536961173019334
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "middle",
+      "rank": 0.4181800427872825,
+      "relative_error": 0.11111602417637603
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "long",
+      "rank": 0.6672786362303376,
+      "relative_error": 0.18157043694150993
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "all",
+      "rank": 0.9723884878220682,
+      "relative_error": 0.10966505482997477
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "short",
+      "rank": 0.858504120108454,
+      "relative_error": 0.2004792023944191
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "middle",
+      "rank": 0.7658683790150068,
+      "relative_error": 0.07519530840330726
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "long",
+      "rank": 0.8587479297281262,
+      "relative_error": 0.0997826659550318
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "all",
+      "rank": 0.9892947423769064,
+      "relative_error": 0.051765054750061316
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "short",
+      "rank": 0.9289441952984191,
+      "relative_error": 0.10635873482469553
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "middle",
+      "rank": 0.8879579216784396,
+      "relative_error": 0.0476438103976171
+    },
+    {
+      "noise": 0.06,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "long",
+      "rank": 0.9512913686158506,
+      "relative_error": 0.03390711620649015
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "all",
+      "rank": 0.8211060516603922,
+      "relative_error": 0.16108516098163722
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "short",
+      "rank": 0.6561716914361435,
+      "relative_error": 0.24639123735716467
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "middle",
+      "rank": 0.4208014433066427,
+      "relative_error": 0.16674001488280848
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "long",
+      "rank": 0.5176907242896391,
+      "relative_error": 0.12447791416346193
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "all",
+      "rank": 0.5550432021678147,
+      "relative_error": 0.26838500184106673
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "short",
+      "rank": 0.2990198216342098,
+      "relative_error": 0.5985372356954957
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "middle",
+      "rank": 0.2296188249724869,
+      "relative_error": 0.19679964593741012
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "long",
+      "rank": 0.31896707897414545,
+      "relative_error": 0.2586248586627071
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "all",
+      "rank": 0.9759387898314978,
+      "relative_error": 0.09422043134073532
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "short",
+      "rank": 0.8744065380254745,
+      "relative_error": 0.17810606482104255
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "middle",
+      "rank": 0.7894681149396898,
+      "relative_error": 0.0671454931489898
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "long",
+      "rank": 0.8771889942029603,
+      "relative_error": 0.08251864086560493
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "all",
+      "rank": 0.9887676732902312,
+      "relative_error": 0.05312180518325833
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "short",
+      "rank": 0.9257471653759239,
+      "relative_error": 0.1090895782853501
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "middle",
+      "rank": 0.8835694761668488,
+      "relative_error": 0.04911894796719557
+    },
+    {
+      "noise": 0.06,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "long",
+      "rank": 0.9494174322591196,
+      "relative_error": 0.0347646662499176
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "all",
+      "rank": 0.9254904516596029,
+      "relative_error": 0.1361650721994832
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "short",
+      "rank": 0.6667252498394413,
+      "relative_error": 0.29897798982892154
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "middle",
+      "rank": 0.5727999470134579,
+      "relative_error": 0.11353567528153381
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "voltage_lengths",
+      "group": "long",
+      "rank": 0.7376806337135737,
+      "relative_error": 0.09705032874191816
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "all",
+      "rank": 0.8701430495624232,
+      "relative_error": 0.17962891389046254
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "short",
+      "rank": 0.553811781069743,
+      "relative_error": 0.466932323499741
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "middle",
+      "rank": 0.45934733750456197,
+      "relative_error": 0.10374594849117247
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "graph_paths",
+      "group": "long",
+      "rank": 0.6848957217588496,
+      "relative_error": 0.16962733364625288
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "all",
+      "rank": 0.9447806270129262,
+      "relative_error": 0.1274256677089493
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "short",
+      "rank": 0.7673631347457858,
+      "relative_error": 0.24838198462971472
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "middle",
+      "rank": 0.6178291090119784,
+      "relative_error": 0.1001916526889776
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "fine_lvm",
+      "group": "long",
+      "rank": 0.7869147188340243,
+      "relative_error": 0.10277474656487659
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "all",
+      "rank": 0.9666337296616069,
+      "relative_error": 0.09114860167888107
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "short",
+      "rank": 0.8255274910721462,
+      "relative_error": 0.18468384057305998
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "middle",
+      "rank": 0.726502120759759,
+      "relative_error": 0.0808087468015265
+    },
+    {
+      "noise": 0.1,
+      "seed": 0,
+      "method": "isomap_paths",
+      "group": "long",
+      "rank": 0.8629141497642846,
+      "relative_error": 0.06302313107471769
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "all",
+      "rank": 0.934139353297751,
+      "relative_error": 0.1292982554209059
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "short",
+      "rank": 0.6614699483499786,
+      "relative_error": 0.30609264724979335
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "middle",
+      "rank": 0.5983775164826863,
+      "relative_error": 0.10619822257950046
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "voltage_lengths",
+      "group": "long",
+      "rank": 0.7995868811475613,
+      "relative_error": 0.09100345989324958
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "all",
+      "rank": 0.9033564168736872,
+      "relative_error": 0.16639423339991283
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "short",
+      "rank": 0.6247349291649147,
+      "relative_error": 0.40641696426270685
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "middle",
+      "rank": 0.5197143210100184,
+      "relative_error": 0.09396574590797659
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "graph_paths",
+      "group": "long",
+      "rank": 0.7437128632970338,
+      "relative_error": 0.1619547004322144
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "all",
+      "rank": 0.9616996908876794,
+      "relative_error": 0.11657079988222954
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "short",
+      "rank": 0.7958213647450756,
+      "relative_error": 0.2331190043807025
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "middle",
+      "rank": 0.7061957565823487,
+      "relative_error": 0.08750996751711053
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "fine_lvm",
+      "group": "long",
+      "rank": 0.8379331548225392,
+      "relative_error": 0.09471564207997551
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "all",
+      "rank": 0.9680176969872125,
+      "relative_error": 0.08922264196669086
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "short",
+      "rank": 0.8279352660952425,
+      "relative_error": 0.18046609626944415
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "middle",
+      "rank": 0.7325494940104618,
+      "relative_error": 0.07946648292750069
+    },
+    {
+      "noise": 0.1,
+      "seed": 1,
+      "method": "isomap_paths",
+      "group": "long",
+      "rank": 0.8694858753110122,
+      "relative_error": 0.061552262344092876
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "all",
+      "rank": 0.9111555713742386,
+      "relative_error": 0.14144833932926837
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "short",
+      "rank": 0.6518180252120643,
+      "relative_error": 0.3072217048214243
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "middle",
+      "rank": 0.5299356106298733,
+      "relative_error": 0.12376482635689104
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "voltage_lengths",
+      "group": "long",
+      "rank": 0.745214071354604,
+      "relative_error": 0.09940880274589911
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "all",
+      "rank": 0.8293729553957122,
+      "relative_error": 0.19532335669351997
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "short",
+      "rank": 0.48640934531474284,
+      "relative_error": 0.4991684006574588
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "middle",
+      "rank": 0.407843389380607,
+      "relative_error": 0.11454739269986328
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "graph_paths",
+      "group": "long",
+      "rank": 0.6290983339991385,
+      "relative_error": 0.18673431002156146
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "all",
+      "rank": 0.9630961870712144,
+      "relative_error": 0.11226298074834823
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "short",
+      "rank": 0.8013556160186969,
+      "relative_error": 0.22940631900652003
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "middle",
+      "rank": 0.7135959792652522,
+      "relative_error": 0.08181066043220186
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "fine_lvm",
+      "group": "long",
+      "rank": 0.8503272249975521,
+      "relative_error": 0.09295307942996281
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "all",
+      "rank": 0.9664256554539375,
+      "relative_error": 0.09136487449421607
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "short",
+      "rank": 0.8207459937066505,
+      "relative_error": 0.18516785367976535
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "middle",
+      "rank": 0.725083547008627,
+      "relative_error": 0.08162881939081007
+    },
+    {
+      "noise": 0.1,
+      "seed": 2,
+      "method": "isomap_paths",
+      "group": "long",
+      "rank": 0.8637523949451543,
+      "relative_error": 0.06256771783391513
+    }
+  ]
+}

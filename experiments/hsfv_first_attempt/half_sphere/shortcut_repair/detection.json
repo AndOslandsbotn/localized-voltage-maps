@@ -1,0 +1,58 @@
+{
+  "rows": [
+    {
+      "setting": "fine",
+      "seed": 0,
+      "cells": 300,
+      "edges": 1574,
+      "touch_flagged": 589,
+      "flagged": 0,
+      "straddling_detected": 0
+    },
+    {
+      "setting": "fine",
+      "seed": 1,
+      "cells": 300,
+      "edges": 1564,
+      "touch_flagged": 561,
+      "flagged": 0,
+      "straddling_detected": 0
+    },
+    {
+      "setting": "fine",
+      "seed": 2,
+      "cells": 300,
+      "edges": 1581,
+      "touch_flagged": 581,
+      "flagged": 0,
+      "straddling_detected": 0
+    },
+    {
+      "setting": "coarse",
+      "seed": 0,
+      "cells": 30,
+      "edges": 162,
+      "touch_flagged": 83,
+      "flagged": 0,
+      "straddling_detected": 0
+    },
+    {
+      "setting": "coarse",
+      "seed": 1,
+      "cells": 30,
+      "edges": 161,
+      "touch_flagged": 81,
+      "flagged": 0,
+      "straddling_detected": 0
+    },
+    {
+      "setting": "coarse",
+      "seed": 2,
+      "cells": 30,
+      "edges": 163,
+      "touch_flagged": 84,
+      "flagged": 0,
+      "straddling_detected": 0
+    }
+  ]
+}

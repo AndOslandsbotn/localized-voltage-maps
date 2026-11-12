@@ -1,0 +1,92 @@
+{
+  "regions": {
+    "1": {
+      "regions": 1,
+      "cells_min_median_max": [
+        300,
+        300,
+        300
+      ],
+      "points_per_cell_median": 2880.0
+    },
+    "2": {
+      "regions": 12,
+      "cells_min_median_max": [
+        300,
+        300,
+        300
+      ],
+      "points_per_cell_median": 219.8
+    },
+    "3": {
+      "regions": 144,
+      "cells_min_median_max": [
+        41,
+        300,
+        300
+      ],
+      "points_per_cell_median": 16.301666666666666
+    }
+  },
+  "scores": {
+    "level-2 centres placed by level 1": {
+      "within level-2 region": 0.7723810101542787,
+      "whole all": 0.9795152601154735,
+      "whole close": 0.7745737729045743,
+      "whole middle": 0.8734602225158938,
+      "whole far": 0.97616764265733
+    },
+    "level-2 centres placed by level 2": {
+      "within level-2 region": 0.9746229827348161,
+      "whole all": 0.9795302176086329,
+      "whole close": 0.7795666065686618,
+      "whole middle": 0.8660262293750346,
+      "whole far": 0.9677776082611051
+    },
+    "level-3 centres placed by level 1": {
+      "within level-2 region": 0.7933583253926239,
+      "within level-3 region": 0.5762948518501122,
+      "whole all": 0.9794286737433201,
+      "whole close": 0.758884299746165,
+      "whole middle": 0.8849758973272629,
+      "whole far": 0.975213837071256
+    },
+    "level-3 centres placed by level 2": {
+      "within level-2 region": 0.9738638049056951,
+      "within level-3 region": 0.8457004117677059,
+      "whole all": 0.9789569275817169,
+      "whole close": 0.7605282907012718,
+      "whole middle": 0.8733887199706336,
+      "whole far": 0.9624349456637105
+    },
+    "level-3 centres placed by level 3": {
+      "within level-2 region": 0.9793890105271156,
+      "within level-3 region": 0.9724335227669342,
+      "whole all": 0.9790432147389456,
+      "whole close": 0.760962801953527,
+      "whole middle": 0.8740265770048858,
+      "whole far": 0.9625681408613365
+    }
+  },
+  "seed": 0,
+  "group_sample": 1500,
+  "whole_sample": 3000,
+  "fit_seconds": 112.72104915208183,
+  "config": {
+    "graph": {
+      "radius": {
+        "adaptive_per_cell": {
+          "k": 5
+        }
+      }
+    },
+    "landmarks": {
+      "count": {
+        "strategy": "fixed",
+        "fixed": {
+          "n": 12
+        }
+      }
+    }
+  }
+}

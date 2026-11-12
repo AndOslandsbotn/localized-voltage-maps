@@ -1,0 +1,104 @@
+{
+  "dataset": "mnist8m",
+  "n": 100000,
+  "queries": 2000,
+  "flagged_threshold": 0.02,
+  "rows": [
+    {
+      "seed": 0,
+      "method": "level1_300_within",
+      "chosen_cells": 300,
+      "default_flagged_share": 0.01237224314147391,
+      "recall": 0.4764000475406647,
+      "knn_accuracy": 0.9275000691413879
+    },
+    {
+      "seed": 0,
+      "method": "hierarchy_default",
+      "chosen_cells": 300,
+      "default_flagged_share": 0.01237224314147391,
+      "recall": 0.14980001747608185,
+      "knn_accuracy": 0.8945000171661377
+    },
+    {
+      "seed": 0,
+      "method": "hierarchy_chosen",
+      "chosen_cells": 300,
+      "default_flagged_share": 0.01237224314147391,
+      "recall": 0.14980001747608185,
+      "knn_accuracy": 0.8945000171661377
+    },
+    {
+      "seed": 0,
+      "method": "option_a",
+      "chosen_cells": 300,
+      "default_flagged_share": 0.01237224314147391,
+      "recall": 0.14980001747608185,
+      "knn_accuracy": 0.8945000171661377
+    },
+    {
+      "seed": 1,
+      "method": "level1_300_within",
+      "chosen_cells": 300,
+      "default_flagged_share": 0.017732401934443847,
+      "recall": 0.46640002727508545,
+      "knn_accuracy": 0.9255000352859497
+    },
+    {
+      "seed": 1,
+      "method": "hierarchy_default",
+      "chosen_cells": 300,
+      "default_flagged_share": 0.017732401934443847,
+      "recall": 0.14480000734329224,
+      "knn_accuracy": 0.8920000195503235
+    },
+    {
+      "seed": 1,
+      "method": "hierarchy_chosen",
+      "chosen_cells": 300,
+      "default_flagged_share": 0.017732401934443847,
+      "recall": 0.14480000734329224,
+      "knn_accuracy": 0.8920000195503235
+    },
+    {
+      "seed": 1,
+      "method": "option_a",
+      "chosen_cells": 300,
+      "default_flagged_share": 0.017732401934443847,
+      "recall": 0.14480000734329224,
+      "knn_accuracy": 0.8920000195503235
+    },
+    {
+      "seed": 2,
+      "method": "level1_300_within",
+      "chosen_cells": 300,
+      "default_flagged_share": 0.010187667560321715,
+      "recall": 0.4782000482082367,
+      "knn_accuracy": 0.921000063419342
+    },
+    {
+      "seed": 2,
+      "method": "hierarchy_default",
+      "chosen_cells": 300,
+      "default_flagged_share": 0.010187667560321715,
+      "recall": 0.15300001204013824,
+      "knn_accuracy": 0.8865000605583191
+    },
+    {
+      "seed": 2,
+      "method": "hierarchy_chosen",
+      "chosen_cells": 300,
+      "default_flagged_share": 0.010187667560321715,
+      "recall": 0.15300001204013824,
+      "knn_accuracy": 0.8865000605583191
+    },
+    {
+      "seed": 2,
+      "method": "option_a",
+      "chosen_cells": 300,
+      "default_flagged_share": 0.010187667560321715,
+      "recall": 0.15300001204013824,
+      "knn_accuracy": 0.8865000605583191
+    }
+  ]
+}

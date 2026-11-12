@@ -1,0 +1,244 @@
+{
+  "rows": [
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "test": "detour",
+      "edges": 90,
+      "true_shortcuts": 29,
+      "flagged": 29,
+      "recall": 1.0,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.0,
+      "seed": 0,
+      "test": "voltage",
+      "edges": 90,
+      "true_shortcuts": 29,
+      "flagged": 29,
+      "recall": 1.0,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "test": "detour",
+      "edges": 87,
+      "true_shortcuts": 29,
+      "flagged": 23,
+      "recall": 0.7931034482758621,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.0,
+      "seed": 1,
+      "test": "voltage",
+      "edges": 87,
+      "true_shortcuts": 29,
+      "flagged": 24,
+      "recall": 0.8275862068965517,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "test": "detour",
+      "edges": 87,
+      "true_shortcuts": 24,
+      "flagged": 24,
+      "recall": 1.0,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.0,
+      "seed": 2,
+      "test": "voltage",
+      "edges": 87,
+      "true_shortcuts": 24,
+      "flagged": 24,
+      "recall": 1.0,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "test": "detour",
+      "edges": 88,
+      "true_shortcuts": 29,
+      "flagged": 23,
+      "recall": 0.7931034482758621,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.3,
+      "seed": 0,
+      "test": "voltage",
+      "edges": 88,
+      "true_shortcuts": 29,
+      "flagged": 24,
+      "recall": 0.8275862068965517,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "test": "detour",
+      "edges": 87,
+      "true_shortcuts": 30,
+      "flagged": 21,
+      "recall": 0.7,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.3,
+      "seed": 1,
+      "test": "voltage",
+      "edges": 87,
+      "true_shortcuts": 30,
+      "flagged": 21,
+      "recall": 0.7,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "test": "detour",
+      "edges": 86,
+      "true_shortcuts": 31,
+      "flagged": 27,
+      "recall": 0.8709677419354839,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.3,
+      "seed": 2,
+      "test": "voltage",
+      "edges": 86,
+      "true_shortcuts": 31,
+      "flagged": 28,
+      "recall": 0.9032258064516129,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "test": "detour",
+      "edges": 91,
+      "true_shortcuts": 31,
+      "flagged": 30,
+      "recall": 0.967741935483871,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.6,
+      "seed": 0,
+      "test": "voltage",
+      "edges": 91,
+      "true_shortcuts": 31,
+      "flagged": 30,
+      "recall": 0.967741935483871,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "test": "detour",
+      "edges": 89,
+      "true_shortcuts": 32,
+      "flagged": 19,
+      "recall": 0.59375,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.6,
+      "seed": 1,
+      "test": "voltage",
+      "edges": 89,
+      "true_shortcuts": 32,
+      "flagged": 20,
+      "recall": 0.625,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "test": "detour",
+      "edges": 90,
+      "true_shortcuts": 31,
+      "flagged": 11,
+      "recall": 0.3548387096774194,
+      "precision": 1.0
+    },
+    {
+      "noise": 0.6,
+      "seed": 2,
+      "test": "voltage",
+      "edges": 90,
+      "true_shortcuts": 31,
+      "flagged": 14,
+      "recall": 0.45161290322580644,
+      "precision": 1.0
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "test": "detour",
+      "edges": 86,
+      "true_shortcuts": 29,
+      "flagged": 0,
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    {
+      "noise": 1.0,
+      "seed": 0,
+      "test": "voltage",
+      "edges": 86,
+      "true_shortcuts": 29,
+      "flagged": 0,
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "test": "detour",
+      "edges": 89,
+      "true_shortcuts": 31,
+      "flagged": 2,
+      "recall": 0.06451612903225806,
+      "precision": 1.0
+    },
+    {
+      "noise": 1.0,
+      "seed": 1,
+      "test": "voltage",
+      "edges": 89,
+      "true_shortcuts": 31,
+      "flagged": 2,
+      "recall": 0.06451612903225806,
+      "precision": 1.0
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "test": "detour",
+      "edges": 88,
+      "true_shortcuts": 29,
+      "flagged": 0,
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    {
+      "noise": 1.0,
+      "seed": 2,
+      "test": "voltage",
+      "edges": 88,
+      "true_shortcuts": 29,
+      "flagged": 0,
+      "recall": 0.0,
+      "precision": 0.0
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "dataset": "kuzushiji49",
+  "n": 100000,
+  "cap": 256,
+  "rows": [
+    {
+      "seed": 0,
+      "method": "root_cells",
+      "recall": 0.4474000334739685,
+      "knn_accuracy": 0.8010000586509705,
+      "recall_wide": 0.39372000098228455,
+      "global_rank": 0.3911307181086795
+    },
+    {
+      "seed": 0,
+      "method": "leaf_cells_extra0",
+      "recall": 0.3639000356197357,
+      "knn_accuracy": 0.7895000576972961,
+      "recall_wide": 0.26908499002456665,
+      "global_rank": 0.3374192711940678,
+      "streamed_kept": 0
+    },
+    {
+      "seed": 0,
+      "method": "leaf_cells_extra170912",
+      "recall": 0.35975000262260437,
+      "knn_accuracy": 0.7915000319480896,
+      "recall_wide": 0.26886001229286194,
+      "global_rank": 0.3371420987217747,
+      "streamed_kept": 159897
+    },
+    {
+      "seed": 1,
+      "method": "root_cells",
+      "recall": 0.4517500102519989,
+      "knn_accuracy": 0.7985000610351562,
+      "recall_wide": 0.3875100314617157,
+      "global_rank": 0.3368024142146036
+    },
+    {
+      "seed": 1,
+      "method": "leaf_cells_extra0",
+      "recall": 0.3615000247955322,
+      "knn_accuracy": 0.7740000486373901,
+      "recall_wide": 0.2531350255012512,
+      "global_rank": 0.28564797941099485,
+      "streamed_kept": 0
+    },
+    {
+      "seed": 1,
+      "method": "leaf_cells_extra170912",
+      "recall": 0.3556000292301178,
+      "knn_accuracy": 0.7760000228881836,
+      "recall_wide": 0.25261998176574707,
+      "global_rank": 0.28581706873901713,
+      "streamed_kept": 162831
+    },
+    {
+      "seed": 2,
+      "method": "root_cells",
+      "recall": 0.4501500427722931,
+      "knn_accuracy": 0.8025000095367432,
+      "recall_wide": 0.39244502782821655,
+      "global_rank": 0.3585533836010959
+    },
+    {
+      "seed": 2,
+      "method": "leaf_cells_extra0",
+      "recall": 0.3589000403881073,
+      "knn_accuracy": 0.7780000567436218,
+      "recall_wide": 0.24521999061107635,
+      "global_rank": 0.3307490538740135,
+      "streamed_kept": 0
+    },
+    {
+      "seed": 2,
+      "method": "leaf_cells_extra170912",
+      "recall": 0.35290002822875977,
+      "knn_accuracy": 0.7815000414848328,
+      "recall_wide": 0.2452249974012375,
+      "global_rank": 0.33056802636025656,
+      "streamed_kept": 167710
+    }
+  ]
+}

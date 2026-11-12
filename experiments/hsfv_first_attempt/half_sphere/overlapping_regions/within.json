@@ -1,0 +1,761 @@
+{
+  "dataset": "half_sphere",
+  "rows": [
+    {
+      "seed": 0,
+      "method": "coarse_level1",
+      "group": "all",
+      "rank": 0.838174162296088,
+      "relative_error": 0.19381067053466228
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1",
+      "group": "within",
+      "rank": 0.6812249475461435,
+      "relative_error": 0.3823370339502362
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1",
+      "group": "across",
+      "rank": 0.806043353925974,
+      "relative_error": 0.1744337801446139
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1",
+      "group": "short",
+      "rank": 0.4451264992158224,
+      "relative_error": 0.5358243381644741
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1",
+      "group": "middle",
+      "rank": 0.44674264288304355,
+      "relative_error": 0.11958233812883606
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1",
+      "group": "long",
+      "rank": 0.5088948140929804,
+      "relative_error": 0.1710910910645061
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2",
+      "group": "all",
+      "rank": 0.9042296219939879,
+      "relative_error": 0.18455260861337422
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2",
+      "group": "within",
+      "rank": 0.9548405278924206,
+      "relative_error": 0.220644527087515
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2",
+      "group": "across",
+      "rank": 0.8662126137652731,
+      "relative_error": 0.17716211348479133
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2",
+      "group": "short",
+      "rank": 0.6995589857767773,
+      "relative_error": 0.3359530880634216
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2",
+      "group": "middle",
+      "rank": 0.5390156297630103,
+      "relative_error": 0.09398160963559696
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2",
+      "group": "long",
+      "rank": 0.6017670854023309,
+      "relative_error": 0.20100118513834897
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1",
+      "group": "all",
+      "rank": 0.9486425362055352,
+      "relative_error": 0.10579691331301914
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1",
+      "group": "within",
+      "rank": 0.9338351840245607,
+      "relative_error": 0.16475138163959985
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1",
+      "group": "across",
+      "rank": 0.9275830946263672,
+      "relative_error": 0.09561806414940746
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1",
+      "group": "short",
+      "rank": 0.8529748941610561,
+      "relative_error": 0.1727221402774495
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1",
+      "group": "middle",
+      "rank": 0.6679563490874127,
+      "relative_error": 0.07754068229516112
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1",
+      "group": "long",
+      "rank": 0.761099056845614,
+      "relative_error": 0.09774779434657437
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1_cells",
+      "group": "all",
+      "rank": 0.8221496447343968,
+      "relative_error": 0.19591452139765506
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1_cells",
+      "group": "within",
+      "rank": 0.7658898227281739,
+      "relative_error": 0.37760001367700524
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1_cells",
+      "group": "across",
+      "rank": 0.7870449616572933,
+      "relative_error": 0.181036305458044
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1_cells",
+      "group": "short",
+      "rank": 0.4726401632362123,
+      "relative_error": 0.4797121606832071
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1_cells",
+      "group": "middle",
+      "rank": 0.4278711682617524,
+      "relative_error": 0.12864235835272322
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level1_cells",
+      "group": "long",
+      "rank": 0.43974330425421515,
+      "relative_error": 0.18894255623233014
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2_cells",
+      "group": "all",
+      "rank": 0.9043484164643798,
+      "relative_error": 0.18532036425494455
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2_cells",
+      "group": "within",
+      "rank": 0.956848294703964,
+      "relative_error": 0.2223347304621828
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2_cells",
+      "group": "across",
+      "rank": 0.8662126137652731,
+      "relative_error": 0.1777412410469462
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2_cells",
+      "group": "short",
+      "rank": 0.7017420336938123,
+      "relative_error": 0.3334664059142795
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2_cells",
+      "group": "middle",
+      "rank": 0.5392502011055808,
+      "relative_error": 0.09408174708462923
+    },
+    {
+      "seed": 0,
+      "method": "coarse_level2_cells",
+      "group": "long",
+      "rank": 0.6011666841242024,
+      "relative_error": 0.20238830565135635
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1_cells",
+      "group": "all",
+      "rank": 0.9523926914357421,
+      "relative_error": 0.10032523252808187
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1_cells",
+      "group": "within",
+      "rank": 0.9441436845467923,
+      "relative_error": 0.15409331467331
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1_cells",
+      "group": "across",
+      "rank": 0.9317261478349907,
+      "relative_error": 0.09031944819061083
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1_cells",
+      "group": "short",
+      "rank": 0.8716207228693231,
+      "relative_error": 0.15475879799574005
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1_cells",
+      "group": "middle",
+      "rank": 0.6875067388932405,
+      "relative_error": 0.07137453137384085
+    },
+    {
+      "seed": 0,
+      "method": "fine_level1_cells",
+      "group": "long",
+      "rank": 0.7684691918901294,
+      "relative_error": 0.09849000943992378
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1",
+      "group": "all",
+      "rank": 0.9043584974831699,
+      "relative_error": 0.1591536377046009
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1",
+      "group": "within",
+      "rank": 0.8120327164178018,
+      "relative_error": 0.27299286602564354
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1",
+      "group": "across",
+      "rank": 0.8990910835430342,
+      "relative_error": 0.1433874769382611
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1",
+      "group": "short",
+      "rank": 0.5773492178850788,
+      "relative_error": 0.39547450202228607
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1",
+      "group": "middle",
+      "rank": 0.5237517821599492,
+      "relative_error": 0.1260209909420918
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1",
+      "group": "long",
+      "rank": 0.7206500017355497,
+      "relative_error": 0.1193471517392749
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2",
+      "group": "all",
+      "rank": 0.915379722449824,
+      "relative_error": 0.14574051330584725
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2",
+      "group": "within",
+      "rank": 0.9624319718156062,
+      "relative_error": 0.12288919899996224
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2",
+      "group": "across",
+      "rank": 0.8920966782531722,
+      "relative_error": 0.15198323439813113
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2",
+      "group": "short",
+      "rank": 0.6546778481252739,
+      "relative_error": 0.26414283079469386
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2",
+      "group": "middle",
+      "rank": 0.5527605152678267,
+      "relative_error": 0.1099236293483867
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2",
+      "group": "long",
+      "rank": 0.7068018949457694,
+      "relative_error": 0.12769266686374975
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1",
+      "group": "all",
+      "rank": 0.9810398014447502,
+      "relative_error": 0.09816653934027325
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1",
+      "group": "within",
+      "rank": 0.9620093428816262,
+      "relative_error": 0.13732150797545317
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1",
+      "group": "across",
+      "rank": 0.9788298869040308,
+      "relative_error": 0.09074254491287814
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1",
+      "group": "short",
+      "rank": 0.8949107575243155,
+      "relative_error": 0.1758708488831942
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1",
+      "group": "middle",
+      "rank": 0.818130197072806,
+      "relative_error": 0.06566564826016082
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1",
+      "group": "long",
+      "rank": 0.9119495951995146,
+      "relative_error": 0.09216615200637712
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1_cells",
+      "group": "all",
+      "rank": 0.9181892948292197,
+      "relative_error": 0.14382879889450825
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1_cells",
+      "group": "within",
+      "rank": 0.8672879878073525,
+      "relative_error": 0.2121268937629157
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1_cells",
+      "group": "across",
+      "rank": 0.9080783252997122,
+      "relative_error": 0.1319258923614862
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1_cells",
+      "group": "short",
+      "rank": 0.6477108703708184,
+      "relative_error": 0.28094120159421937
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1_cells",
+      "group": "middle",
+      "rank": 0.5778875349487153,
+      "relative_error": 0.10641413424042805
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level1_cells",
+      "group": "long",
+      "rank": 0.690205987799838,
+      "relative_error": 0.12428822667677558
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2_cells",
+      "group": "all",
+      "rank": 0.9155172484774083,
+      "relative_error": 0.14579127241298093
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2_cells",
+      "group": "within",
+      "rank": 0.963671119810329,
+      "relative_error": 0.12226706205851065
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2_cells",
+      "group": "across",
+      "rank": 0.8920966782531722,
+      "relative_error": 0.1522410436920621
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2_cells",
+      "group": "short",
+      "rank": 0.6560322511811122,
+      "relative_error": 0.2589945205590338
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2_cells",
+      "group": "middle",
+      "rank": 0.5531517770588125,
+      "relative_error": 0.10938370727806757
+    },
+    {
+      "seed": 1,
+      "method": "coarse_level2_cells",
+      "group": "long",
+      "rank": 0.7066317704310234,
+      "relative_error": 0.12870720809478856
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1_cells",
+      "group": "all",
+      "rank": 0.9840051468820473,
+      "relative_error": 0.09462224495322609
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1_cells",
+      "group": "within",
+      "rank": 0.9683720469734962,
+      "relative_error": 0.1286905225533771
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1_cells",
+      "group": "across",
+      "rank": 0.9820925278515358,
+      "relative_error": 0.08779892092043691
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1_cells",
+      "group": "short",
+      "rank": 0.9130840021792673,
+      "relative_error": 0.16196578348245871
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1_cells",
+      "group": "middle",
+      "rank": 0.8401307558557904,
+      "relative_error": 0.059926635679705145
+    },
+    {
+      "seed": 1,
+      "method": "fine_level1_cells",
+      "group": "long",
+      "rank": 0.9222492676949066,
+      "relative_error": 0.09591327509504172
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1",
+      "group": "all",
+      "rank": 0.8880591125206581,
+      "relative_error": 0.17022400416483197
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1",
+      "group": "within",
+      "rank": 0.7245455181963588,
+      "relative_error": 0.32428964421672213
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1",
+      "group": "across",
+      "rank": 0.8668392998008407,
+      "relative_error": 0.1527829906027261
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1",
+      "group": "short",
+      "rank": 0.5252106956793141,
+      "relative_error": 0.3988435057493984
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1",
+      "group": "middle",
+      "rank": 0.5002867485753163,
+      "relative_error": 0.13708985023545023
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1",
+      "group": "long",
+      "rank": 0.6147687321721953,
+      "relative_error": 0.1262941452507571
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2",
+      "group": "all",
+      "rank": 0.9086578117722189,
+      "relative_error": 0.15611257756447236
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2",
+      "group": "within",
+      "rank": 0.937951991570122,
+      "relative_error": 0.17189086691442723
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2",
+      "group": "across",
+      "rank": 0.877559783460792,
+      "relative_error": 0.1529892031897031
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2",
+      "group": "short",
+      "rank": 0.6851001527414764,
+      "relative_error": 0.27451787454318904
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2",
+      "group": "middle",
+      "rank": 0.5172683778223975,
+      "relative_error": 0.11201854196308872
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2",
+      "group": "long",
+      "rank": 0.6346074345801085,
+      "relative_error": 0.14716747428623983
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1",
+      "group": "all",
+      "rank": 0.9781505988236028,
+      "relative_error": 0.09031709857404574
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1",
+      "group": "within",
+      "rank": 0.9567222119013413,
+      "relative_error": 0.14976691914364337
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1",
+      "group": "across",
+      "rank": 0.9719013716752242,
+      "relative_error": 0.0822509163569961
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1",
+      "group": "short",
+      "rank": 0.8985230862365967,
+      "relative_error": 0.15883694157607128
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1",
+      "group": "middle",
+      "rank": 0.8044950905008716,
+      "relative_error": 0.06575794916419458
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1",
+      "group": "long",
+      "rank": 0.8700615748546483,
+      "relative_error": 0.08144464940539511
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1_cells",
+      "group": "all",
+      "rank": 0.9038357943157141,
+      "relative_error": 0.15716873127586586
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1_cells",
+      "group": "within",
+      "rank": 0.8179987929789192,
+      "relative_error": 0.24116454929196324
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1_cells",
+      "group": "across",
+      "rank": 0.8816921035807906,
+      "relative_error": 0.14590646189196094
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1_cells",
+      "group": "short",
+      "rank": 0.5947575604290009,
+      "relative_error": 0.3171157646272721
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1_cells",
+      "group": "middle",
+      "rank": 0.5493269434478909,
+      "relative_error": 0.12030780838172073
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level1_cells",
+      "group": "long",
+      "rank": 0.5972868740550655,
+      "relative_error": 0.13329229656868985
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2_cells",
+      "group": "all",
+      "rank": 0.9088037220715883,
+      "relative_error": 0.15611728674737388
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2_cells",
+      "group": "within",
+      "rank": 0.9404150271896141,
+      "relative_error": 0.17032055990214587
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2_cells",
+      "group": "across",
+      "rank": 0.877559783460792,
+      "relative_error": 0.153346541165168
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2_cells",
+      "group": "short",
+      "rank": 0.6866997807075789,
+      "relative_error": 0.2711962388653845
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2_cells",
+      "group": "middle",
+      "rank": 0.5176036152162397,
+      "relative_error": 0.11172185759975041
+    },
+    {
+      "seed": 2,
+      "method": "coarse_level2_cells",
+      "group": "long",
+      "rank": 0.6345134180433902,
+      "relative_error": 0.1483072957852622
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1_cells",
+      "group": "all",
+      "rank": 0.9814553491053241,
+      "relative_error": 0.08375733445827127
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1_cells",
+      "group": "within",
+      "rank": 0.9669077347718301,
+      "relative_error": 0.1341273880194373
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1_cells",
+      "group": "across",
+      "rank": 0.9756261105678204,
+      "relative_error": 0.07661761228872858
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1_cells",
+      "group": "short",
+      "rank": 0.9175443795219717,
+      "relative_error": 0.14005844984657972
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1_cells",
+      "group": "middle",
+      "rank": 0.8297169770131767,
+      "relative_error": 0.05885914137339898
+    },
+    {
+      "seed": 2,
+      "method": "fine_level1_cells",
+      "group": "long",
+      "rank": 0.8796087007169745,
+      "relative_error": 0.07986583630345367
+    }
+  ]
+}

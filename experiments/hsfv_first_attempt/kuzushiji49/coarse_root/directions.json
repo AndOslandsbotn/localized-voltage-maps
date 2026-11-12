@@ -1,0 +1,439 @@
+{
+  "dataset": "kuzushiji49",
+  "n": 100000,
+  "queries": 2000,
+  "rows": [
+    {
+      "root_cells": 30,
+      "seed": 0,
+      "directions": "fixed",
+      "method": "level1",
+      "recall": 0.22745001316070557,
+      "knn_accuracy": 0.6965000033378601
+    },
+    {
+      "root_cells": 30,
+      "seed": 0,
+      "directions": "fixed",
+      "method": "level2",
+      "recall": 0.3123500347137451,
+      "knn_accuracy": 0.7760000228881836
+    },
+    {
+      "root_cells": 30,
+      "seed": 0,
+      "directions": "dimension",
+      "method": "level1",
+      "recall": 0.38985002040863037,
+      "knn_accuracy": 0.8010000586509705
+    },
+    {
+      "root_cells": 30,
+      "seed": 0,
+      "directions": "dimension",
+      "method": "level2",
+      "recall": 0.32290002703666687,
+      "knn_accuracy": 0.7760000228881836
+    },
+    {
+      "root_cells": 30,
+      "seed": 0,
+      "directions": "per_cell",
+      "method": "level1",
+      "recall": 0.32010000944137573,
+      "knn_accuracy": 0.7620000243186951
+    },
+    {
+      "root_cells": 30,
+      "seed": 0,
+      "directions": "per_cell",
+      "method": "level2",
+      "recall": 0.3280999958515167,
+      "knn_accuracy": 0.7830000519752502
+    },
+    {
+      "root_cells": 50,
+      "seed": 0,
+      "directions": "fixed",
+      "method": "level1",
+      "recall": 0.24545001983642578,
+      "knn_accuracy": 0.70250004529953
+    },
+    {
+      "root_cells": 50,
+      "seed": 0,
+      "directions": "fixed",
+      "method": "level2",
+      "recall": 0.31620001792907715,
+      "knn_accuracy": 0.7800000309944153
+    },
+    {
+      "root_cells": 50,
+      "seed": 0,
+      "directions": "dimension",
+      "method": "level1",
+      "recall": 0.40005001425743103,
+      "knn_accuracy": 0.7925000190734863
+    },
+    {
+      "root_cells": 50,
+      "seed": 0,
+      "directions": "dimension",
+      "method": "level2",
+      "recall": 0.33945003151893616,
+      "knn_accuracy": 0.7755000591278076
+    },
+    {
+      "root_cells": 50,
+      "seed": 0,
+      "directions": "per_cell",
+      "method": "level1",
+      "recall": 0.34245002269744873,
+      "knn_accuracy": 0.7700000405311584
+    },
+    {
+      "root_cells": 50,
+      "seed": 0,
+      "directions": "per_cell",
+      "method": "level2",
+      "recall": 0.336650013923645,
+      "knn_accuracy": 0.7740000486373901
+    },
+    {
+      "root_cells": 300,
+      "seed": 0,
+      "directions": "fixed",
+      "method": "level1",
+      "recall": 0.3301500380039215,
+      "knn_accuracy": 0.76500004529953
+    },
+    {
+      "root_cells": 300,
+      "seed": 0,
+      "directions": "fixed",
+      "method": "level2",
+      "recall": 0.3302000164985657,
+      "knn_accuracy": 0.7890000343322754
+    },
+    {
+      "root_cells": 300,
+      "seed": 0,
+      "directions": "dimension",
+      "method": "level1",
+      "recall": 0.4473000168800354,
+      "knn_accuracy": 0.8010000586509705
+    },
+    {
+      "root_cells": 300,
+      "seed": 0,
+      "directions": "dimension",
+      "method": "level2",
+      "recall": 0.3614000380039215,
+      "knn_accuracy": 0.781000018119812
+    },
+    {
+      "root_cells": 300,
+      "seed": 0,
+      "directions": "per_cell",
+      "method": "level1",
+      "recall": 0.40605002641677856,
+      "knn_accuracy": 0.8025000095367432
+    },
+    {
+      "root_cells": 300,
+      "seed": 0,
+      "directions": "per_cell",
+      "method": "level2",
+      "recall": 0.35965004563331604,
+      "knn_accuracy": 0.784000039100647
+    },
+    {
+      "root_cells": 30,
+      "seed": 1,
+      "directions": "fixed",
+      "method": "level1",
+      "recall": 0.22185002267360687,
+      "knn_accuracy": 0.6820000410079956
+    },
+    {
+      "root_cells": 30,
+      "seed": 1,
+      "directions": "fixed",
+      "method": "level2",
+      "recall": 0.30635005235671997,
+      "knn_accuracy": 0.7680000066757202
+    },
+    {
+      "root_cells": 30,
+      "seed": 1,
+      "directions": "dimension",
+      "method": "level1",
+      "recall": 0.3932500183582306,
+      "knn_accuracy": 0.7975000143051147
+    },
+    {
+      "root_cells": 30,
+      "seed": 1,
+      "directions": "dimension",
+      "method": "level2",
+      "recall": 0.3154500126838684,
+      "knn_accuracy": 0.7670000195503235
+    },
+    {
+      "root_cells": 30,
+      "seed": 1,
+      "directions": "per_cell",
+      "method": "level1",
+      "recall": 0.32500001788139343,
+      "knn_accuracy": 0.7490000128746033
+    },
+    {
+      "root_cells": 30,
+      "seed": 1,
+      "directions": "per_cell",
+      "method": "level2",
+      "recall": 0.32180002331733704,
+      "knn_accuracy": 0.7730000615119934
+    },
+    {
+      "root_cells": 50,
+      "seed": 1,
+      "directions": "fixed",
+      "method": "level1",
+      "recall": 0.24410001933574677,
+      "knn_accuracy": 0.6950000524520874
+    },
+    {
+      "root_cells": 50,
+      "seed": 1,
+      "directions": "fixed",
+      "method": "level2",
+      "recall": 0.3228500187397003,
+      "knn_accuracy": 0.7645000219345093
+    },
+    {
+      "root_cells": 50,
+      "seed": 1,
+      "directions": "dimension",
+      "method": "level1",
+      "recall": 0.3987500071525574,
+      "knn_accuracy": 0.7930000424385071
+    },
+    {
+      "root_cells": 50,
+      "seed": 1,
+      "directions": "dimension",
+      "method": "level2",
+      "recall": 0.3411000370979309,
+      "knn_accuracy": 0.7625000476837158
+    },
+    {
+      "root_cells": 50,
+      "seed": 1,
+      "directions": "per_cell",
+      "method": "level1",
+      "recall": 0.34425002336502075,
+      "knn_accuracy": 0.7710000276565552
+    },
+    {
+      "root_cells": 50,
+      "seed": 1,
+      "directions": "per_cell",
+      "method": "level2",
+      "recall": 0.3431500494480133,
+      "knn_accuracy": 0.7695000171661377
+    },
+    {
+      "root_cells": 300,
+      "seed": 1,
+      "directions": "fixed",
+      "method": "level1",
+      "recall": 0.33550000190734863,
+      "knn_accuracy": 0.7700000405311584
+    },
+    {
+      "root_cells": 300,
+      "seed": 1,
+      "directions": "fixed",
+      "method": "level2",
+      "recall": 0.330049991607666,
+      "knn_accuracy": 0.7745000123977661
+    },
+    {
+      "root_cells": 300,
+      "seed": 1,
+      "directions": "dimension",
+      "method": "level1",
+      "recall": 0.45170003175735474,
+      "knn_accuracy": 0.7985000610351562
+    },
+    {
+      "root_cells": 300,
+      "seed": 1,
+      "directions": "dimension",
+      "method": "level2",
+      "recall": 0.3460499942302704,
+      "knn_accuracy": 0.7745000123977661
+    },
+    {
+      "root_cells": 300,
+      "seed": 1,
+      "directions": "per_cell",
+      "method": "level1",
+      "recall": 0.41200003027915955,
+      "knn_accuracy": 0.7945000529289246
+    },
+    {
+      "root_cells": 300,
+      "seed": 1,
+      "directions": "per_cell",
+      "method": "level2",
+      "recall": 0.34755000472068787,
+      "knn_accuracy": 0.7770000100135803
+    },
+    {
+      "root_cells": 30,
+      "seed": 2,
+      "directions": "fixed",
+      "method": "level1",
+      "recall": 0.22415001690387726,
+      "knn_accuracy": 0.6895000338554382
+    },
+    {
+      "root_cells": 30,
+      "seed": 2,
+      "directions": "fixed",
+      "method": "level2",
+      "recall": 0.3096000552177429,
+      "knn_accuracy": 0.7800000309944153
+    },
+    {
+      "root_cells": 30,
+      "seed": 2,
+      "directions": "dimension",
+      "method": "level1",
+      "recall": 0.39000001549720764,
+      "knn_accuracy": 0.7945000529289246
+    },
+    {
+      "root_cells": 30,
+      "seed": 2,
+      "directions": "dimension",
+      "method": "level2",
+      "recall": 0.32055002450942993,
+      "knn_accuracy": 0.7680000066757202
+    },
+    {
+      "root_cells": 30,
+      "seed": 2,
+      "directions": "per_cell",
+      "method": "level1",
+      "recall": 0.3290000259876251,
+      "knn_accuracy": 0.7730000615119934
+    },
+    {
+      "root_cells": 30,
+      "seed": 2,
+      "directions": "per_cell",
+      "method": "level2",
+      "recall": 0.3256000280380249,
+      "knn_accuracy": 0.7750000357627869
+    },
+    {
+      "root_cells": 50,
+      "seed": 2,
+      "directions": "fixed",
+      "method": "level1",
+      "recall": 0.24700000882148743,
+      "knn_accuracy": 0.7130000591278076
+    },
+    {
+      "root_cells": 50,
+      "seed": 2,
+      "directions": "fixed",
+      "method": "level2",
+      "recall": 0.3157000243663788,
+      "knn_accuracy": 0.780500054359436
+    },
+    {
+      "root_cells": 50,
+      "seed": 2,
+      "directions": "dimension",
+      "method": "level1",
+      "recall": 0.40205004811286926,
+      "knn_accuracy": 0.8010000586509705
+    },
+    {
+      "root_cells": 50,
+      "seed": 2,
+      "directions": "dimension",
+      "method": "level2",
+      "recall": 0.33105000853538513,
+      "knn_accuracy": 0.7680000066757202
+    },
+    {
+      "root_cells": 50,
+      "seed": 2,
+      "directions": "per_cell",
+      "method": "level1",
+      "recall": 0.35245004296302795,
+      "knn_accuracy": 0.7735000252723694
+    },
+    {
+      "root_cells": 50,
+      "seed": 2,
+      "directions": "per_cell",
+      "method": "level2",
+      "recall": 0.3332500159740448,
+      "knn_accuracy": 0.7770000100135803
+    },
+    {
+      "root_cells": 300,
+      "seed": 2,
+      "directions": "fixed",
+      "method": "level1",
+      "recall": 0.3323500454425812,
+      "knn_accuracy": 0.768500030040741
+    },
+    {
+      "root_cells": 300,
+      "seed": 2,
+      "directions": "fixed",
+      "method": "level2",
+      "recall": 0.3242500126361847,
+      "knn_accuracy": 0.7780000567436218
+    },
+    {
+      "root_cells": 300,
+      "seed": 2,
+      "directions": "dimension",
+      "method": "level1",
+      "recall": 0.45000001788139343,
+      "knn_accuracy": 0.8025000095367432
+    },
+    {
+      "root_cells": 300,
+      "seed": 2,
+      "directions": "dimension",
+      "method": "level2",
+      "recall": 0.3358500599861145,
+      "knn_accuracy": 0.7755000591278076
+    },
+    {
+      "root_cells": 300,
+      "seed": 2,
+      "directions": "per_cell",
+      "method": "level1",
+      "recall": 0.41110002994537354,
+      "knn_accuracy": 0.7975000143051147
+    },
+    {
+      "root_cells": 300,
+      "seed": 2,
+      "directions": "per_cell",
+      "method": "level2",
+      "recall": 0.3394000232219696,
+      "knn_accuracy": 0.7765000462532043
+    }
+  ]
+}

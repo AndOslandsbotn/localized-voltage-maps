@@ -1,0 +1,174 @@
+##### half_sphere sigma 0 fit 2026-10-15 08:23:02
+===== restart with swiss seed 3 2026-10-15 08:27:29
+##### swiss_roll seed3_sigma0 fit 2026-10-15 08:27:31
+[guard] peak memory 3059 MB (limit 4000 MB)
+##### swiss_roll seed3_sigma0 score 2026-10-15 08:50:26
+[guard] peak memory 2881 MB (limit 4000 MB)
+== sigma 0.0: fit 1371 s
+   level 1: {'regions': 1, 'cells': 300, 'points_per_cell_median': 39112.5, 'cell_dimension_median': 1.951104271573976, 'region_dimension_quartiles': [1.951104271573976, 1.951104271573976, 1.951104271573976], 'library_dimension_mean': 1.972772263312004}
+   level 2: {'regions': 12, 'cells': 3600, 'points_per_cell_median': 3402.0, 'cell_dimension_median': 1.93598173551321, 'region_dimension_quartiles': [1.9357515956153541, 1.9407191322519028, 1.9461006027939902], 'library_dimension_mean': 1.97561396558973}
+   level 3: {'regions': 144, 'cells': 43200, 'points_per_cell_median': 246.0, 'cell_dimension_median': 1.9328817470382387, 'region_dimension_quartiles': [1.9234951374288185, 1.9319622810820674, 1.9373197276640575], 'library_dimension_mean': 1.976840088980657}
+   level 4: {'regions': 1728, 'cells': 460562, 'points_per_cell_median': 21.0, 'cell_dimension_median': 1.8599904845107178, 'region_dimension_quartiles': [1.7360381828295885, 1.8127555989000532, 1.8627272050173023], 'library_dimension_mean': 1.9638075761774214}
+   rule (share of points stopping at each level): {0.05: {1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0}, 0.1: {1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0}, 0.2: {1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0}}
+   level-2 centres by level 1     within level-2 region 0.818 | whole all 0.976 | whole close 0.689 | whole middle 0.889 | whole far 0.953
+   level-2 centres by level 2     within level-2 region 0.975 | whole all 0.977 | whole close 0.710 | whole middle 0.877 | whole far 0.952
+   level-3 centres by level 1     within level-2 region 0.844 | within level-3 region 0.574 | whole all 0.975 | whole close 0.677 | whole middle 0.878 | whole far 0.952
+   level-3 centres by level 2     within level-2 region 0.975 | within level-3 region 0.845 | whole all 0.976 | whole close 0.694 | whole middle 0.860 | whole far 0.952
+   level-3 centres by level 3     within level-2 region 0.980 | within level-3 region 0.974 | whole all 0.976 | whole close 0.694 | whole middle 0.861 | whole far 0.952
+   level-4 centres by level 1     within level-2 region 0.839 | within level-3 region 0.605 | within level-4 region 0.415 | whole all 0.977 | whole close 0.720 | whole middle 0.885 | whole far 0.957
+   level-4 centres by level 2     within level-2 region 0.974 | within level-3 region 0.860 | within level-4 region 0.600 | whole all 0.977 | whole close 0.734 | whole middle 0.864 | whole far 0.954
+   level-4 centres by level 3     within level-2 region 0.979 | within level-3 region 0.974 | within level-4 region 0.842 | whole all 0.977 | whole close 0.735 | whole middle 0.864 | whole far 0.954
+   level-4 centres by level 4     within level-2 region 0.979 | within level-3 region 0.979 | within level-4 region 0.972 | whole all 0.977 | whole close 0.735 | whole middle 0.864 | whole far 0.954
+##### half_sphere seed0_sigma0 fit 2026-10-15 09:01:44
+[guard] peak memory 3077 MB (limit 4000 MB)
+##### half_sphere seed0_sigma0 score 2026-10-15 09:25:10
+[guard] peak memory 2891 MB (limit 4000 MB)
+== sigma 0.0: fit 1403 s
+   level 1: {'regions': 1, 'cells': 300, 'points_per_cell_median': 40039.0, 'cell_dimension_median': 1.9497694693140146, 'region_dimension_quartiles': [1.9497694693140146, 1.9497694693140146, 1.9497694693140146], 'library_dimension_mean': 1.9923847336596843}
+   level 2: {'regions': 12, 'cells': 3600, 'points_per_cell_median': 3240.5, 'cell_dimension_median': 1.938072258460446, 'region_dimension_quartiles': [1.9364185741861009, 1.938334096384708, 1.9428607132267202], 'library_dimension_mean': 1.97716702521929}
+   level 3: {'regions': 144, 'cells': 43200, 'points_per_cell_median': 268.0, 'cell_dimension_median': 1.9351357647140883, 'region_dimension_quartiles': [1.9285541293774726, 1.9350318438912357, 1.938136809330396], 'library_dimension_mean': 1.9776644167247055}
+   level 4: {'regions': 1728, 'cells': 490980, 'points_per_cell_median': 22.0, 'cell_dimension_median': 1.8507624988593963, 'region_dimension_quartiles': [1.7707113040380316, 1.8289922967311902, 1.860341195967574], 'library_dimension_mean': 1.9682854776592837}
+   rule (share of points stopping at each level): {0.05: {1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0}, 0.1: {1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0}, 0.2: {1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0}}
+   level-2 centres by level 1     within level-2 region 0.823 | whole all 0.978 | whole close 0.877 | whole middle 0.795 | whole far 0.905
+   level-2 centres by level 2     within level-2 region 0.970 | whole all 0.976 | whole close 0.870 | whole middle 0.789 | whole far 0.888
+   level-3 centres by level 1     within level-2 region 0.842 | within level-3 region 0.595 | whole all 0.975 | whole close 0.873 | whole middle 0.774 | whole far 0.906
+   level-3 centres by level 2     within level-2 region 0.969 | within level-3 region 0.827 | whole all 0.973 | whole close 0.860 | whole middle 0.763 | whole far 0.885
+   level-3 centres by level 3     within level-2 region 0.975 | within level-3 region 0.970 | whole all 0.973 | whole close 0.862 | whole middle 0.766 | whole far 0.887
+   level-4 centres by level 1     within level-2 region 0.843 | within level-3 region 0.617 | within level-4 region 0.414 | whole all 0.975 | whole close 0.871 | whole middle 0.771 | whole far 0.904
+   level-4 centres by level 2     within level-2 region 0.969 | within level-3 region 0.839 | within level-4 region 0.602 | whole all 0.973 | whole close 0.859 | whole middle 0.766 | whole far 0.883
+   level-4 centres by level 3     within level-2 region 0.976 | within level-3 region 0.969 | within level-4 region 0.829 | whole all 0.973 | whole close 0.860 | whole middle 0.769 | whole far 0.885
+   level-4 centres by level 4     within level-2 region 0.976 | within level-3 region 0.976 | within level-4 region 0.970 | whole all 0.973 | whole close 0.861 | whole middle 0.769 | whole far 0.885
+##### swiss_roll seed3_sigma0.05 fit 2026-10-15 09:36:38
+[guard] peak memory 3074 MB (limit 4000 MB)
+##### swiss_roll seed3_sigma0.05 score 2026-10-15 10:00:14
+[guard] peak memory 2885 MB (limit 4000 MB)
+== sigma 0.05: fit 1412 s
+   level 1: {'regions': 1, 'cells': 300, 'points_per_cell_median': 38901.0, 'cell_dimension_median': 1.9666022268663936, 'region_dimension_quartiles': [1.9666022268663936, 1.9666022268663936, 1.9666022268663936], 'library_dimension_mean': 2.01777444124371}
+   level 2: {'regions': 12, 'cells': 3600, 'points_per_cell_median': 3405.0, 'cell_dimension_median': 2.0430502825746695, 'region_dimension_quartiles': [2.018583323304653, 2.058569357150697, 2.1023699088806795], 'library_dimension_mean': 2.271407643870087}
+   level 3: {'regions': 144, 'cells': 43200, 'points_per_cell_median': 263.0, 'cell_dimension_median': 2.723878034024932, 'region_dimension_quartiles': [2.67005053617501, 2.7888958932787666, 2.8624053863812344], 'library_dimension_mean': 2.8117783408457746}
+   level 4: {'regions': 1728, 'cells': 478496, 'points_per_cell_median': 21.0, 'cell_dimension_median': 2.6229055719271375, 'region_dimension_quartiles': [2.38405781491102, 2.548035424377242, 2.6472880738328586], 'library_dimension_mean': 2.9495663720388956}
+   rule (share of points stopping at each level): {0.05: {1: 1.0, 2: 0.0, 3: 0.0, 4: 0.0}, 0.1: {1: 0.0, 2: 1.0, 3: 0.0, 4: 0.0}, 0.2: {1: 0.0, 2: 1.0, 3: 0.0, 4: 0.0}}
+   level-2 centres by level 1     within level-2 region 0.770 | whole all 0.983 | whole close 0.735 | whole middle 0.918 | whole far 0.965
+   level-2 centres by level 2     within level-2 region 0.976 | whole all 0.981 | whole close 0.730 | whole middle 0.901 | whole far 0.957
+   level-3 centres by level 1     within level-2 region 0.786 | within level-3 region 0.561 | whole all 0.984 | whole close 0.732 | whole middle 0.931 | whole far 0.967
+   level-3 centres by level 2     within level-2 region 0.976 | within level-3 region 0.842 | whole all 0.982 | whole close 0.726 | whole middle 0.910 | whole far 0.959
+   level-3 centres by level 3     within level-2 region 0.981 | within level-3 region 0.975 | whole all 0.982 | whole close 0.726 | whole middle 0.910 | whole far 0.959
+   level-4 centres by level 1     within level-2 region 0.788 | within level-3 region 0.587 | within level-4 region 0.414 | whole all 0.983 | whole close 0.742 | whole middle 0.922 | whole far 0.968
+   level-4 centres by level 2     within level-2 region 0.975 | within level-3 region 0.855 | within level-4 region 0.591 | whole all 0.982 | whole close 0.737 | whole middle 0.899 | whole far 0.959
+   level-4 centres by level 3     within level-2 region 0.980 | within level-3 region 0.975 | within level-4 region 0.845 | whole all 0.982 | whole close 0.738 | whole middle 0.899 | whole far 0.960
+   level-4 centres by level 4     within level-2 region 0.980 | within level-3 region 0.980 | within level-4 region 0.968 | whole all 0.982 | whole close 0.738 | whole middle 0.899 | whole far 0.960
+##### half_sphere seed0_sigma0.003 fit 2026-10-15 10:11:31
+[guard] peak memory 3082 MB (limit 4000 MB)
+##### half_sphere seed0_sigma0.003 score 2026-10-15 10:35:11
+[guard] peak memory 2900 MB (limit 4000 MB)
+== sigma 0.003: fit 1415 s
+   level 1: {'regions': 1, 'cells': 300, 'points_per_cell_median': 39824.0, 'cell_dimension_median': 1.9626434380998814, 'region_dimension_quartiles': [1.9626434380998814, 1.9626434380998814, 1.9626434380998814], 'library_dimension_mean': 2.034886298645268}
+   level 2: {'regions': 12, 'cells': 3600, 'points_per_cell_median': 3155.5, 'cell_dimension_median': 2.0411601973948494, 'region_dimension_quartiles': [2.027570770311168, 2.0621059178745, 2.1032466850990206], 'library_dimension_mean': 2.2850013257000836}
+   level 3: {'regions': 144, 'cells': 43200, 'points_per_cell_median': 258.0, 'cell_dimension_median': 2.739949113677885, 'region_dimension_quartiles': [2.719317805819674, 2.7865899495137314, 2.868452031977924], 'library_dimension_mean': 2.8183441525143036}
+   level 4: {'regions': 1728, 'cells': 485802, 'points_per_cell_median': 21.0, 'cell_dimension_median': 2.6205223586348185, 'region_dimension_quartiles': [2.402067183210016, 2.557440073788511, 2.648629059027838], 'library_dimension_mean': 2.95356025713724}
+   rule (share of points stopping at each level): {0.05: {1: 1.0, 2: 0.0, 3: 0.0, 4: 0.0}, 0.1: {1: 0.0, 2: 1.0, 3: 0.0, 4: 0.0}, 0.2: {1: 0.0, 2: 1.0, 3: 0.0, 4: 0.0}}
+   level-2 centres by level 1     within level-2 region 0.826 | whole all 0.976 | whole close 0.871 | whole middle 0.780 | whole far 0.902
+   level-2 centres by level 2     within level-2 region 0.970 | whole all 0.974 | whole close 0.868 | whole middle 0.778 | whole far 0.873
+   level-3 centres by level 1     within level-2 region 0.838 | within level-3 region 0.599 | whole all 0.976 | whole close 0.868 | whole middle 0.782 | whole far 0.898
+   level-3 centres by level 2     within level-2 region 0.970 | within level-3 region 0.828 | whole all 0.973 | whole close 0.863 | whole middle 0.773 | whole far 0.871
+   level-3 centres by level 3     within level-2 region 0.977 | within level-3 region 0.970 | whole all 0.973 | whole close 0.864 | whole middle 0.776 | whole far 0.874
+   level-4 centres by level 1     within level-2 region 0.838 | within level-3 region 0.625 | within level-4 region 0.417 | whole all 0.975 | whole close 0.867 | whole middle 0.778 | whole far 0.898
+   level-4 centres by level 2     within level-2 region 0.968 | within level-3 region 0.840 | within level-4 region 0.602 | whole all 0.973 | whole close 0.860 | whole middle 0.774 | whole far 0.879
+   level-4 centres by level 3     within level-2 region 0.975 | within level-3 region 0.969 | within level-4 region 0.829 | whole all 0.974 | whole close 0.863 | whole middle 0.776 | whole far 0.881
+   level-4 centres by level 4     within level-2 region 0.975 | within level-3 region 0.976 | within level-4 region 0.967 | whole all 0.974 | whole close 0.863 | whole middle 0.776 | whole far 0.881
+##### swiss_roll seed3_sigma0.15 fit 2026-10-15 10:46:39
+[guard] peak memory 3065 MB (limit 4000 MB)
+##### swiss_roll seed3_sigma0.15 score 2026-10-15 11:10:11
+[guard] peak memory 2882 MB (limit 4000 MB)
+== sigma 0.15: fit 1407 s
+   level 1: {'regions': 1, 'cells': 300, 'points_per_cell_median': 39305.5, 'cell_dimension_median': 2.0347786504388554, 'region_dimension_quartiles': [2.0347786504388554, 2.0347786504388554, 2.0347786504388554], 'library_dimension_mean': 2.2004280355091717}
+   level 2: {'regions': 12, 'cells': 3600, 'points_per_cell_median': 2976.0, 'cell_dimension_median': 2.6408127678584794, 'region_dimension_quartiles': [2.5599004866553177, 2.8182807666190084, 2.919891519375291], 'library_dimension_mean': 2.7655239471227646}
+   level 3: {'regions': 144, 'cells': 43200, 'points_per_cell_median': 241.0, 'cell_dimension_median': 2.82871232263946, 'region_dimension_quartiles': [2.823173549194465, 2.8388320162010965, 2.849234223091283], 'library_dimension_mean': 2.971379847161421}
+   level 4: {'regions': 1728, 'cells': 485724, 'points_per_cell_median': 20.0, 'cell_dimension_median': 2.637561753322711, 'region_dimension_quartiles': [2.374601771113735, 2.5410570355144904, 2.654307733614697], 'library_dimension_mean': 2.9375095419660915}
+   rule (share of points stopping at each level): {0.05: {1: 1.0, 2: 0.0, 3: 0.0, 4: 0.0}, 0.1: {1: 1.0, 2: 0.0, 3: 0.0, 4: 0.0}, 0.2: {1: 1.0, 2: 0.0, 3: 0.0, 4: 0.0}}
+   level-2 centres by level 1     within level-2 region 0.784 | whole all 0.985 | whole close 0.799 | whole middle 0.924 | whole far 0.968
+   level-2 centres by level 2     within level-2 region 0.976 | whole all 0.985 | whole close 0.804 | whole middle 0.913 | whole far 0.962
+   level-3 centres by level 1     within level-2 region 0.795 | within level-3 region 0.568 | whole all 0.985 | whole close 0.795 | whole middle 0.926 | whole far 0.969
+   level-3 centres by level 2     within level-2 region 0.975 | within level-3 region 0.845 | whole all 0.984 | whole close 0.795 | whole middle 0.915 | whole far 0.964
+   level-3 centres by level 3     within level-2 region 0.981 | within level-3 region 0.974 | whole all 0.984 | whole close 0.795 | whole middle 0.915 | whole far 0.964
+   level-4 centres by level 1     within level-2 region 0.797 | within level-3 region 0.597 | within level-4 region 0.400 | whole all 0.985 | whole close 0.792 | whole middle 0.922 | whole far 0.968
+   level-4 centres by level 2     within level-2 region 0.973 | within level-3 region 0.854 | within level-4 region 0.587 | whole all 0.984 | whole close 0.791 | whole middle 0.908 | whole far 0.961
+   level-4 centres by level 3     within level-2 region 0.979 | within level-3 region 0.969 | within level-4 region 0.791 | whole all 0.984 | whole close 0.792 | whole middle 0.909 | whole far 0.961
+   level-4 centres by level 4     within level-2 region 0.980 | within level-3 region 0.974 | within level-4 region 0.909 | whole all 0.984 | whole close 0.792 | whole middle 0.909 | whole far 0.961
+##### half_sphere seed0_sigma0.01 fit 2026-10-15 11:21:30
+[guard] peak memory 3065 MB (limit 4000 MB)
+##### half_sphere seed0_sigma0.01 score 2026-10-15 11:45:26
+[guard] peak memory 2904 MB (limit 4000 MB)
+== sigma 0.01: fit 1432 s
+   level 1: {'regions': 1, 'cells': 300, 'points_per_cell_median': 40088.5, 'cell_dimension_median': 2.063671686955102, 'region_dimension_quartiles': [2.063671686955102, 2.063671686955102, 2.063671686955102], 'library_dimension_mean': 2.2540831584104306}
+   level 2: {'regions': 12, 'cells': 3600, 'points_per_cell_median': 3260.5, 'cell_dimension_median': 2.776433946867089, 'region_dimension_quartiles': [2.7179118184704762, 2.8381952765952914, 2.9238968585933183], 'library_dimension_mean': 2.8053216637381553}
+   level 3: {'regions': 144, 'cells': 43200, 'points_per_cell_median': 263.0, 'cell_dimension_median': 2.8491556163760428, 'region_dimension_quartiles': [2.837569728563266, 2.846198601533188, 2.855184028281767], 'library_dimension_mean': 2.975378315148153}
+   level 4: {'regions': 1728, 'cells': 497634, 'points_per_cell_median': 21.0, 'cell_dimension_median': 2.6225254441104195, 'region_dimension_quartiles': [2.4391051566783535, 2.5655278778962964, 2.650109234849576], 'library_dimension_mean': 2.937518657395294}
+   rule (share of points stopping at each level): {0.05: {1: 1.0, 2: 0.0, 3: 0.0, 4: 0.0}, 0.1: {1: 1.0, 2: 0.0, 3: 0.0, 4: 0.0}, 0.2: {1: 1.0, 2: 0.0, 3: 0.0, 4: 0.0}}
+   level-2 centres by level 1     within level-2 region 0.850 | whole all 0.974 | whole close 0.854 | whole middle 0.779 | whole far 0.901
+   level-2 centres by level 2     within level-2 region 0.972 | whole all 0.976 | whole close 0.854 | whole middle 0.794 | whole far 0.891
+   level-3 centres by level 1     within level-2 region 0.864 | within level-3 region 0.597 | whole all 0.972 | whole close 0.856 | whole middle 0.751 | whole far 0.900
+   level-3 centres by level 2     within level-2 region 0.972 | within level-3 region 0.837 | whole all 0.973 | whole close 0.848 | whole middle 0.766 | whole far 0.887
+   level-3 centres by level 3     within level-2 region 0.979 | within level-3 region 0.971 | whole all 0.974 | whole close 0.850 | whole middle 0.771 | whole far 0.890
+   level-4 centres by level 1     within level-2 region 0.863 | within level-3 region 0.619 | within level-4 region 0.397 | whole all 0.973 | whole close 0.856 | whole middle 0.773 | whole far 0.902
+   level-4 centres by level 2     within level-2 region 0.970 | within level-3 region 0.843 | within level-4 region 0.588 | whole all 0.974 | whole close 0.845 | whole middle 0.778 | whole far 0.885
+   level-4 centres by level 3     within level-2 region 0.977 | within level-3 region 0.965 | within level-4 region 0.775 | whole all 0.974 | whole close 0.847 | whole middle 0.782 | whole far 0.888
+   level-4 centres by level 4     within level-2 region 0.978 | within level-3 region 0.972 | within level-4 region 0.917 | whole all 0.974 | whole close 0.847 | whole middle 0.782 | whole far 0.888
+##### swiss_roll seed3_sigma0.015 fit 2026-10-15 11:57:11
+[guard] peak memory 3056 MB (limit 4000 MB)
+##### swiss_roll seed3_sigma0.015 score 2026-10-15 12:20:47
+[guard] peak memory 2842 MB (limit 4000 MB)
+== sigma 0.015: fit 1411 s
+   level 1: {'regions': 1, 'cells': 300, 'points_per_cell_median': 39182.0, 'cell_dimension_median': 1.9653771126265351, 'region_dimension_quartiles': [1.9653771126265351, 1.9653771126265351, 1.9653771126265351], 'library_dimension_mean': 1.978397159554541}
+   level 2: {'regions': 12, 'cells': 3600, 'points_per_cell_median': 3093.5, 'cell_dimension_median': 1.9476985266324935, 'region_dimension_quartiles': [1.9466588839986159, 1.952203565514158, 1.956014735525507], 'library_dimension_mean': 2.0306255059102747}
+   level 3: {'regions': 144, 'cells': 43200, 'points_per_cell_median': 235.0, 'cell_dimension_median': 2.034133194805861, 'region_dimension_quartiles': [2.021930087195833, 2.0757474184592537, 2.158864975096944], 'library_dimension_mean': 2.315596272094743}
+   level 4: {'regions': 1728, 'cells': 487917, 'points_per_cell_median': 20.0, 'cell_dimension_median': 2.4400955467062837, 'region_dimension_quartiles': [2.3399461181368184, 2.448203930271535, 2.524371206114858], 'library_dimension_mean': 2.719279117062856}
+   rule (share of points stopping at each level): {0.05: {1: 0.0, 2: 1.0, 3: 0.0, 4: 0.0}, 0.1: {1: 0.0, 2: 0.4362870833333333, 3: 0.5637129166666667, 4: 0.0}, 0.2: {1: 0.0, 2: 0.10565091666666666, 3: 0.8710383333333334, 4: 0.02331075}}
+   level-2 centres by level 1     within level-2 region 0.814 | whole all 0.980 | whole close 0.709 | whole middle 0.933 | whole far 0.966
+   level-2 centres by level 2     within level-2 region 0.976 | whole all 0.981 | whole close 0.731 | whole middle 0.922 | whole far 0.964
+   level-3 centres by level 1     within level-2 region 0.833 | within level-3 region 0.593 | whole all 0.979 | whole close 0.701 | whole middle 0.926 | whole far 0.961
+   level-3 centres by level 2     within level-2 region 0.976 | within level-3 region 0.848 | whole all 0.980 | whole close 0.718 | whole middle 0.911 | whole far 0.958
+   level-3 centres by level 3     within level-2 region 0.982 | within level-3 region 0.975 | whole all 0.980 | whole close 0.719 | whole middle 0.911 | whole far 0.958
+   level-4 centres by level 1     within level-2 region 0.833 | within level-3 region 0.623 | within level-4 region 0.412 | whole all 0.981 | whole close 0.717 | whole middle 0.929 | whole far 0.966
+   level-4 centres by level 2     within level-2 region 0.975 | within level-3 region 0.865 | within level-4 region 0.600 | whole all 0.981 | whole close 0.732 | whole middle 0.915 | whole far 0.961
+   level-4 centres by level 3     within level-2 region 0.980 | within level-3 region 0.974 | within level-4 region 0.844 | whole all 0.981 | whole close 0.733 | whole middle 0.916 | whole far 0.962
+   level-4 centres by level 4     within level-2 region 0.980 | within level-3 region 0.980 | within level-4 region 0.972 | whole all 0.981 | whole close 0.733 | whole middle 0.916 | whole far 0.962
+##### half_sphere seed0_sigma0.001 fit 2026-10-15 12:32:09
+[guard] peak memory 3078 MB (limit 4000 MB)
+##### half_sphere seed0_sigma0.001 score 2026-10-15 12:56:10
+[guard] peak memory 2857 MB (limit 4000 MB)
+== sigma 0.001: fit 1438 s
+   level 1: {'regions': 1, 'cells': 300, 'points_per_cell_median': 39764.0, 'cell_dimension_median': 1.9582830172534695, 'region_dimension_quartiles': [1.9582830172534695, 1.9582830172534695, 1.9582830172534695], 'library_dimension_mean': 1.9985541668132698}
+   level 2: {'regions': 12, 'cells': 3600, 'points_per_cell_median': 3149.5, 'cell_dimension_median': 1.9533159787835395, 'region_dimension_quartiles': [1.9486634996094205, 1.9560819708977906, 1.96227511269957], 'library_dimension_mean': 2.038302132825905}
+   level 3: {'regions': 144, 'cells': 43200, 'points_per_cell_median': 257.0, 'cell_dimension_median': 2.0693273144405215, 'region_dimension_quartiles': [2.059052376413474, 2.0970139721404446, 2.1605915123812047], 'library_dimension_mean': 2.343602927010299}
+   level 4: {'regions': 1728, 'cells': 499726, 'points_per_cell_median': 21.0, 'cell_dimension_median': 2.562691058561779, 'region_dimension_quartiles': [2.4398919866081865, 2.5598524909853673, 2.6200724732236758], 'library_dimension_mean': 2.7779230094220586}
+   rule (share of points stopping at each level): {0.05: {1: 0.0, 2: 1.0, 3: 0.0, 4: 0.0}, 0.1: {1: 0.0, 2: 0.6408558333333333, 3: 0.35790883333333334, 4: 0.0012353333333333333}, 0.2: {1: 0.0, 2: 0.09693333333333333, 3: 0.8766350833333333, 4: 0.026431583333333335}}
+   level-2 centres by level 1     within level-2 region 0.840 | whole all 0.976 | whole close 0.872 | whole middle 0.793 | whole far 0.897
+   level-2 centres by level 2     within level-2 region 0.970 | whole all 0.976 | whole close 0.872 | whole middle 0.796 | whole far 0.884
+   level-3 centres by level 1     within level-2 region 0.854 | within level-3 region 0.602 | whole all 0.975 | whole close 0.867 | whole middle 0.778 | whole far 0.896
+   level-3 centres by level 2     within level-2 region 0.970 | within level-3 region 0.821 | whole all 0.974 | whole close 0.862 | whole middle 0.781 | whole far 0.882
+   level-3 centres by level 3     within level-2 region 0.977 | within level-3 region 0.972 | whole all 0.975 | whole close 0.864 | whole middle 0.785 | whole far 0.885
+   level-4 centres by level 1     within level-2 region 0.852 | within level-3 region 0.624 | within level-4 region 0.415 | whole all 0.975 | whole close 0.868 | whole middle 0.782 | whole far 0.895
+   level-4 centres by level 2     within level-2 region 0.969 | within level-3 region 0.833 | within level-4 region 0.601 | whole all 0.975 | whole close 0.862 | whole middle 0.789 | whole far 0.883
+   level-4 centres by level 3     within level-2 region 0.976 | within level-3 region 0.971 | within level-4 region 0.831 | whole all 0.975 | whole close 0.864 | whole middle 0.792 | whole far 0.885
+   level-4 centres by level 4     within level-2 region 0.976 | within level-3 region 0.978 | within level-4 region 0.970 | whole all 0.975 | whole close 0.865 | whole middle 0.793 | whole far 0.886
+##### half_sphere seed0_sigma0.05 fit 2026-10-15 13:07:41
+[guard] peak memory 3060 MB (limit 4000 MB)
+##### half_sphere seed0_sigma0.05 score 2026-10-15 13:31:14
+[guard] peak memory 2856 MB (limit 4000 MB)
+== sigma 0.05: fit 1409 s
+   level 1: {'regions': 1, 'cells': 300, 'points_per_cell_median': 40424.0, 'cell_dimension_median': 2.908884324191448, 'region_dimension_quartiles': [2.908884324191448, 2.908884324191448, 2.908884324191448], 'library_dimension_mean': 2.9236266557089494}
+   level 2: {'regions': 12, 'cells': 3600, 'points_per_cell_median': 3184.0, 'cell_dimension_median': 2.8700377132153285, 'region_dimension_quartiles': [2.866235252637719, 2.8740555561424213, 2.8777693974970866], 'library_dimension_mean': 2.9816521189694094}
+   level 3: {'regions': 144, 'cells': 43200, 'points_per_cell_median': 266.0, 'cell_dimension_median': 2.8382181190828875, 'region_dimension_quartiles': [2.827363211920896, 2.8358062780884126, 2.84439875749677], 'library_dimension_mean': 2.936311276419976}
+   level 4: {'regions': 1728, 'cells': 490441, 'points_per_cell_median': 22.0, 'cell_dimension_median': 2.6150644453111878, 'region_dimension_quartiles': [2.420675109296326, 2.560072844691447, 2.6393330200830136], 'library_dimension_mean': 2.87898174700349}
+   rule (share of points stopping at each level): {0.05: {1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0}, 0.1: {1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0}, 0.2: {1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0}}
+   level-2 centres by level 1     within level-2 region 0.845 | whole all 0.973 | whole close 0.867 | whole middle 0.742 | whole far 0.906
+   level-2 centres by level 2     within level-2 region 0.972 | whole all 0.975 | whole close 0.863 | whole middle 0.772 | whole far 0.896
+   level-3 centres by level 1     within level-2 region 0.853 | within level-3 region 0.604 | whole all 0.973 | whole close 0.865 | whole middle 0.746 | whole far 0.907
+   level-3 centres by level 2     within level-2 region 0.967 | within level-3 region 0.776 | whole all 0.974 | whole close 0.856 | whole middle 0.767 | whole far 0.896
+   level-3 centres by level 3     within level-2 region 0.970 | within level-3 region 0.873 | whole all 0.974 | whole close 0.857 | whole middle 0.768 | whole far 0.897
+   level-4 centres by level 1     within level-2 region 0.850 | within level-3 region 0.600 | within level-4 region 0.312 | whole all 0.972 | whole close 0.861 | whole middle 0.736 | whole far 0.902
+   level-4 centres by level 2     within level-2 region 0.961 | within level-3 region 0.751 | within level-4 region 0.388 | whole all 0.973 | whole close 0.853 | whole middle 0.758 | whole far 0.890
+   level-4 centres by level 3     within level-2 region 0.964 | within level-3 region 0.843 | within level-4 region 0.512 | whole all 0.973 | whole close 0.854 | whole middle 0.759 | whole far 0.892
+   level-4 centres by level 4     within level-2 region 0.961 | within level-3 region 0.812 | within level-4 region 0.487 | whole all 0.973 | whole close 0.853 | whole middle 0.757 | whole far 0.891
+ALL DONE 2026-10-15 13:42:37

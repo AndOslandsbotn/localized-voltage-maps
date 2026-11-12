@@ -1,0 +1,116 @@
+{
+  "dataset": "mnist8m",
+  "n": 100000,
+  "queries": 2000,
+  "k": 10,
+  "rows": [
+    {
+      "seed": 0,
+      "method": "level1",
+      "recall": 0.06175000220537186,
+      "knn_accuracy": 0.8685000538825989
+    },
+    {
+      "seed": 0,
+      "method": "m1",
+      "recall": 0.15815001726150513,
+      "knn_accuracy": 0.9115000367164612
+    },
+    {
+      "seed": 0,
+      "method": "level1_cells",
+      "recall": 0.3938000500202179,
+      "knn_accuracy": 0.9220000505447388
+    },
+    {
+      "seed": 0,
+      "method": "m1_cells",
+      "recall": 0.3321000337600708,
+      "knn_accuracy": 0.9230000376701355
+    },
+    {
+      "seed": 0,
+      "method": "m2_weighted",
+      "recall": 0.1481499969959259,
+      "knn_accuracy": 0.9095000624656677
+    },
+    {
+      "seed": 0,
+      "method": "m2_weighted_cells",
+      "recall": 0.3094000220298767,
+      "knn_accuracy": 0.9225000143051147
+    },
+    {
+      "seed": 1,
+      "method": "level1",
+      "recall": 0.06025000289082527,
+      "knn_accuracy": 0.8560000658035278
+    },
+    {
+      "seed": 1,
+      "method": "m1",
+      "recall": 0.15745002031326294,
+      "knn_accuracy": 0.8975000381469727
+    },
+    {
+      "seed": 1,
+      "method": "level1_cells",
+      "recall": 0.38485002517700195,
+      "knn_accuracy": 0.9080000519752502
+    },
+    {
+      "seed": 1,
+      "method": "m1_cells",
+      "recall": 0.3206000328063965,
+      "knn_accuracy": 0.9135000705718994
+    },
+    {
+      "seed": 1,
+      "method": "m2_weighted",
+      "recall": 0.15220001339912415,
+      "knn_accuracy": 0.8970000147819519
+    },
+    {
+      "seed": 1,
+      "method": "m2_weighted_cells",
+      "recall": 0.31040000915527344,
+      "knn_accuracy": 0.9175000190734863
+    },
+    {
+      "seed": 2,
+      "method": "level1",
+      "recall": 0.06065000593662262,
+      "knn_accuracy": 0.8550000190734863
+    },
+    {
+      "seed": 2,
+      "method": "m1",
+      "recall": 0.16350001096725464,
+      "knn_accuracy": 0.8965000510215759
+    },
+    {
+      "seed": 2,
+      "method": "level1_cells",
+      "recall": 0.3921000361442566,
+      "knn_accuracy": 0.9095000624656677
+    },
+    {
+      "seed": 2,
+      "method": "m1_cells",
+      "recall": 0.3356500267982483,
+      "knn_accuracy": 0.9115000367164612
+    },
+    {
+      "seed": 2,
+      "method": "m2_weighted",
+      "recall": 0.15175001323223114,
+      "knn_accuracy": 0.8845000267028809
+    },
+    {
+      "seed": 2,
+      "method": "m2_weighted_cells",
+      "recall": 0.31070002913475037,
+      "knn_accuracy": 0.9045000672340393
+    }
+  ]
+}
