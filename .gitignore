@@ -12,4 +12,4 @@ papers/
 *.npz
 *.npy
 # fitted LVM models saved by experiment runs (large)
-experiments/sfv/**/models/
+experiments/**/models/
